@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Orlando · Day-by-Day</title>
+<style>
+  :root {
+    --bg: #0a0a0a; --card: #141414; --border: #222;
+    --text: #e0e0e0; --dim: #888; --accent: #ff6a00;
+    --green: #2ecc71; --blue: #3498db; --red: #e74c3c; --amber: #f39c12;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.55;
+    max-width: 520px; margin: 0 auto; padding: 20px 16px 64px;
+    -webkit-text-size-adjust: 100%;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  .masthead { text-align: center; padding: 18px 0 14px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+  .masthead h1 { font-size: 1.25rem; font-weight: 700; }
+  .masthead .tagline { font-size: 0.78rem; color: var(--dim); margin-top: 3px; font-style: italic; }
+  .nav { display: flex; gap: 8px; margin-bottom: 16px; }
+  .nav a { flex: 1; text-align: center; padding: 9px; border: 1px solid var(--border); border-radius: 9px; font-size: 0.8rem; font-weight: 600; background: var(--card); }
+  .now { background: rgba(255,106,0,.08); border: 1px solid rgba(255,106,0,.35); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.86rem; }
+  .now .lbl { font-size: 0.68rem; font-weight: 700; letter-spacing: .06em; color: var(--accent); text-transform: uppercase; }
+  .day { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 14px; }
+  .day.active { border-color: var(--accent); box-shadow: 0 0 0 1px rgba(255,106,0,.25); }
+  .day h2 { font-size: 0.98rem; font-weight: 700; margin-bottom: 2px; }
+  .day .date { font-size: 0.75rem; color: var(--dim); margin-bottom: 10px; }
+  .tl { list-style: none; }
+  .tl li { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px solid #1b1b1b; font-size: 0.85rem; }
+  .tl li:last-child { border-bottom: none; }
+  .tl .t { flex: 0 0 82px; color: var(--dim); font-variant-numeric: tabular-nums; font-size: 0.78rem; padding-top: 2px; }
+  .tl .e { flex: 1; }
+  .star { background: rgba(255,106,0,.07); border-radius: 6px; padding: 7px 8px !important; margin: 3px -8px !important; border-bottom: none !important; }
+  .alertrow { background: rgba(231,76,60,.09); border-radius: 6px; padding: 7px 8px !important; margin: 3px -8px !important; border-bottom: none !important; }
+  .z { font-size: 0.7rem; color: var(--dim); }
+  footer { text-align: center; font-size: 0.72rem; color: var(--dim); margin-top: 24px; line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <h1>🏛️ Orlando · Day-by-Day</h1>
+  <div class="tagline">Gartner IT Symposium/Xpo 2026 · Oct 18–22 · all times ET (Orlando = home +1 hr)</div>
+</div>
+
+<div class="nav">
+  <a href="index.html">📋 Full Briefing</a>
+  <a href="https://jarvisdanley.github.io/">← All Trips</a>
+</div>
+
+<div class="now" id="now"><span class="lbl">Status</span><br><span id="nowtext">Loading…</span></div>
+
+<!-- SUNDAY -->
+<div class="day" id="d-2026-10-18">
+  <h2>✈️ Sunday — Travel + Welcome Reception</h2>
+  <div class="date">October 18, 2026 · Kansas City → Orlando</div>
+  <ul class="tl">
+    <li><span class="t">5:45 AM</span><span class="e">🚗 Leave for MCI <span class="z">CT</span></span></li>
+    <li><span class="t">8:20 AM</span><span class="e">🛫 <strong>MCI → MCO nonstop</strong> <span class="z">CT · Southwest is the only nonstop carrier</span></span></li>
+    <li><span class="t">12:05 PM</span><span class="e">🛬 Arrive <strong>MCO Terminal A</strong> <span class="z">ET · gates 100–129 are behind the airside train</span></span></li>
+    <li><span class="t">~12:45 PM</span><span class="e">🚕 <strong>Rideshare to the Swan &amp; Dolphin</strong> — ~$32–55, ~30 min <span class="z">pickup: Level 1, Ground Transportation. Mears Connect shuttle is $16 but 45–75 min</span></span></li>
+    <li><span class="t">~1:30 PM</span><span class="e">🏨 Check in · <strong>bag drop</strong> · pick up your badge</span></li>
+    <li><span class="t">2:00 PM</span><span class="e">💻 Work block / settle in <span class="z">campus walk: sessions span BOTH the Swan and the Dolphin</span></span></li>
+    <li class="star"><span class="t">6:00 PM</span><span class="e">🎉 <strong>WELCOME RECEPTION</strong> — Industry Neighborhoods block party: networking, food, DJ <span class="z">→ 7:30 PM · the only scheduled item today</span></span></li>
+    <li><span class="t">7:30 PM</span><span class="e">🍽️ Dinner on campus — everything on Crescent Lake is walkable</span></li>
+  </ul>
+</div>
+
+<!-- MONDAY -->
+<div class="day" id="d-2026-10-19">
+  <h2>🎤 Monday — Opening Day</h2>
+  <div class="date">October 19, 2026 · Walt Disney World Swan &amp; Dolphin Resort</div>
+  <ul class="tl">
+    <li><span class="t">7:00 AM</span><span class="e">☕ Breakfast · registration verification · first pass at the IT Xpo</span></li>
+    <li class="star"><span class="t">10:00 AM</span><span class="e">🎤 <strong>GARTNER OPENING KEYNOTE</strong><br><em>Reaching Escape Velocity: Shaping an Effective Enterprise AI Economy</em> <span class="z">→ 10:45 AM · Daryl Plummer &amp; Kristin Moyer</span></span></li>
+    <li><span class="t">10:45 AM</span><span class="e">🏢 IT Xpo opens <span class="z">→ 7:15 PM</span></span></li>
+    <li><span class="t">11:30 AM</span><span class="e">🎤 <strong>Get Ready for Data and Analytics 2030</strong> — Rita Sallam<br><em>or</em> <strong>From Chaos to Control: How to Manage your Growing AI Costs</strong> — Robert Naegle</span></li>
+    <li><span class="t">12:30 PM</span><span class="e">🍽️ Lunch + Xpo floor</span></li>
+    <li><span class="t">1:30 PM</span><span class="e">🎤 Afternoon tracks — agentic AI / operating models</span></li>
+    <li><span class="t">3:45 PM</span><span class="e">🎤 <strong>Building the AI enterprise from the inside out — The Kraft Group</strong> <span class="z">→ 4:15 PM · Anurag Dhingra (Cisco) &amp; Michael Kraft Israel, CIO</span></span></li>
+    <li><span class="t">5:00 PM</span><span class="e">🥂 Exhibit Showcase reception <span class="z">networking, food — you don't drink, still work the room</span></span></li>
+    <li><span class="t">7:30 PM</span><span class="e">🍽️ Dinner</span></li>
+  </ul>
+</div>
+
+<!-- TUESDAY -->
+<div class="day" id="d-2026-10-20">
+  <h2>🎉 Tuesday — Full Day + Hollywood Studios</h2>
+  <div class="date">October 20, 2026 · the best night of the week</div>
+  <ul class="tl">
+    <li><span class="t">7:00 AM</span><span class="e">☕ Breakfast</span></li>
+    <li><span class="t">9:45 AM</span><span class="e">🏢 IT Xpo opens <span class="z">→ 6:15 PM</span></span></li>
+    <li><span class="t">morning</span><span class="e">🎤 Sessions — <strong>good slot for an Analyst 1:1</strong> <span class="z">book in Navigator → Info → Meetings</span></span></li>
+    <li><span class="t">afternoon</span><span class="e">🎤 AI-native development · agentic AI · <em>"Network teams using AgenticOps won't go back"</em> (3:45–4:15 PM, Cisco)</span></li>
+    <li class="alertrow"><span class="t">5:30 PM</span><span class="e">⚠️ <strong>Conflict:</strong> AI Club Cybersecurity Month starts now at home (4:30 PM CDT). You're in Orlando — delegate, dial in, or skip.</span></li>
+    <li><span class="t">6:15 PM</span><span class="e">🍽️ Early dinner near the resort — <strong>eat before the party</strong>, park food lines are long</span></li>
+    <li class="star"><span class="t">8:00 PM</span><span class="e">🎢 <strong>PRIVATE GARTNER BUYOUT — DISNEY'S HOLLYWOOD STUDIOS</strong> <span class="z">→ 11:00 PM · the park closes to the public at 5 PM just for this. Best networking of the week.</span></span></li>
+    <li><span class="t">11:30 PM</span><span class="e">🏨 Back to the hotel</span></li>
+  </ul>
+</div>
+
+<!-- WEDNESDAY -->
+<div class="day" id="d-2026-10-21">
+  <h2>🎤 Wednesday — Deep Dive</h2>
+  <div class="date">October 21, 2026 · analyst 1:1s, clinics, Xpo peak hours</div>
+  <ul class="tl">
+    <li><span class="t">7:00 AM</span><span class="e">☕ Breakfast</span></li>
+    <li class="star"><span class="t">10:00 AM</span><span class="e">🎤 <strong>The Secret Profit and Loss of AI</strong> — Seth Brickman, Splunk <span class="z">→ 10:20 AM · agent observability, tokenomics, guardrails</span></span></li>
+    <li><span class="t">10:45 AM</span><span class="e">🏢 IT Xpo opens <span class="z">→ 7:15 PM</span></span></li>
+    <li><span class="t">11:30 AM</span><span class="e">🎤 <strong>From reactive to resilient: a new operating model for cyber defense</strong> — Cisco <span class="z">→ 12:00 PM</span></span></li>
+    <li><span class="t">afternoon</span><span class="e">🎯 <strong>Use the entitlements:</strong> Consulting Clinic · roundtable · Ask The Experts <span class="z">2 Ask The Experts, 1 Roundtable, 2 Consulting Clinics were included</span></span></li>
+    <li><span class="t">evening</span><span class="e">🍽️ Dinner / networking <span class="z">hold this evening — it's the last free one</span></span></li>
+  </ul>
+</div>
+
+<!-- THURSDAY -->
+<div class="day" id="d-2026-10-22">
+  <h2>✈️ Thursday — Close &amp; Fly Home</h2>
+  <div class="date">October 22, 2026 · half day, then home the same evening</div>
+  <ul class="tl">
+    <li><span class="t">7:00 AM</span><span class="e">☕ Breakfast · pack and check out <span class="z">leave the bag with the bell desk if needed</span></span></li>
+    <li><span class="t">9:45 AM</span><span class="e">🏢 IT Xpo final hours <span class="z">→ 1:45 PM</span></span></li>
+    <li><span class="t">10:00 AM</span><span class="e">🎤 Closing sessions / closing guest keynote <span class="z">James Clear / Will Guidara expected — exact time still publishing</span></span></li>
+    <li><span class="t">11:30 AM</span><span class="e">🎤 Executive roundtable: Building Autonomous Operational Resilience</span></li>
+    <li class="alertrow"><span class="t">1:45 PM</span><span class="e">✅ <strong>Sessions end — IT Xpo closes.</strong> This is the confirmed end of the conference.</span></li>
+    <li><span class="t">2:15 PM</span><span class="e">🚕 Leave for MCO (~30 min, ~$32–55)</span></li>
+    <li><span class="t">2:45 PM</span><span class="e">🛫 Arrive <strong>MCO Terminal A</strong> — 2-hr buffer. Use <a href="https://www.flymco.com/security/">MCO Reserve</a> if booked.</span></li>
+    <li><span class="t">4:30 PM</span><span class="e">🛫 <strong>MCO → MCI nonstop</strong> <span class="z">ET · 7:10 PM is the zero-stress alternative</span></span></li>
+    <li><span class="t">6:25 PM</span><span class="e">🛬 Arrive Kansas City <span class="z">CT</span></span></li>
+    <li><span class="t">evening</span><span class="e">🏠 Home · 💸 send Atlas the receipts for the expense log</span></li>
+  </ul>
+</div>
+
+<div class="day">
+  <h2>📞 Numbers &amp; links</h2>
+  <ul class="tl">
+    <li><span class="t">Gartner</span><span class="e"><a href="tel:+18557619211">+1 855 761 9211</a> — hotel block, registration, anything conference</span></li>
+    <li><span class="t">Navigator</span><span class="e"><a href="https://cn.gartner.com/SYM36">cn.gartner.com/SYM36</a> — agenda building, analyst 1:1s, entitlements</span></li>
+    <li><span class="t">Venue</span><span class="e"><a href="https://www.google.com/maps/search/Walt+Disney+World+Swan+and+Dolphin+Resort+1500+Epcot+Resorts+Blvd">Swan &amp; Dolphin</a>, 1500 Epcot Resorts Blvd, Lake Buena Vista FL 32830</span></li>
+    <li><span class="t">Airline</span><span class="e">Southwest — <a href="https://www.southwest.com/airport-information/">MCO = Terminal A, gates 100–129</a></span></li>
+    <li><span class="t">Shuttle</span><span class="e"><a href="https://www.mearsconnect.com/pricing">Mears Connect</a> $16/adult one-way — the Magical Express successor</span></li>
+    <li><span class="t">Support</span><span class="e">Alyssa Popovits, Gartner · <a href="tel:+18153532317">+1 815-353-2317</a></span></li>
+  </ul>
+</div>
+
+<footer>
+  <div>Atlas · Travel Concierge</div>
+  <div>Last updated Sep 25, 2026</div>
+</footer>
+
+<script>
+(function () {
+  var days = [
+    { d: '2026-10-18', label: 'Sunday Oct 18 — Travel + Welcome Reception' },
+    { d: '2026-10-19', label: 'Monday Oct 19 — Opening Keynote' },
+    { d: '2026-10-20', label: 'Tuesday Oct 20 — Hollywood Studios buyout tonight' },
+    { d: '2026-10-21', label: 'Wednesday Oct 21 — Deep dive' },
+    { d: '2026-10-22', label: 'Thursday Oct 22 — Closing day, fly home' }
+  ];
+  var now = Date.now(), activeKey = null;
+  days.forEach(function (day) {
+    var start = Date.parse(day.d + 'T00:00:00-04:00');
+    if (now >= start && now < start + 86400000) activeKey = day.d;
+  });
+  var out = [];
+  if (activeKey) {
+    var el = document.getElementById('d-' + activeKey);
+    if (el) el.classList.add('active');
+    var info = days.filter(function (x) { return x.d === activeKey; })[0];
+    out.push('<strong>' + info.label + ' — in progress.</strong> Scroll for the full timeline.');
+  } else {
+    var first = Date.parse('2026-10-18T00:00:00-04:00');
+    var n = Math.ceil((first - now) / 86400000);
+    if (n > 0) {
+      out.push('<strong>T-' + n + ' to Orlando.</strong> Arrival Sunday Oct 18 — aim for the ~8:20 AM CT nonstop into MCO at 12:05 PM ET, ready for the 6:00 PM Welcome Reception.');
+    } else {
+      out.push('<strong>Trip complete.</strong> Hope Gartner was worth it — talk to Atlas about receipts.');
+    }
+  }
+  document.getElementById('nowtext').innerHTML = out.join(' ');
+})();
+</script>
+
+</body>
+</html>
