@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Boston · Day-by-Day</title>
+<style>
+  :root {
+    --bg: #0a0a0a; --card: #141414; --border: #222;
+    --text: #e0e0e0; --dim: #888; --accent: #ff6a00;
+    --green: #2ecc71; --blue: #3498db; --red: #e74c3c; --amber: #f39c12;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.55;
+    max-width: 520px; margin: 0 auto; padding: 20px 16px 64px;
+    -webkit-text-size-adjust: 100%;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  .masthead { text-align: center; padding: 18px 0 14px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+  .masthead h1 { font-size: 1.25rem; font-weight: 700; }
+  .masthead .tagline { font-size: 0.78rem; color: var(--dim); margin-top: 3px; font-style: italic; }
+  .nav { display: flex; gap: 8px; margin-bottom: 16px; }
+  .nav a { flex: 1; text-align: center; padding: 9px; border: 1px solid var(--border); border-radius: 9px; font-size: 0.8rem; font-weight: 600; background: var(--card); }
+  .now { background: rgba(255,106,0,.08); border: 1px solid rgba(255,106,0,.35); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.86rem; }
+  .now .lbl { font-size: 0.68rem; font-weight: 700; letter-spacing: .06em; color: var(--accent); text-transform: uppercase; }
+  .day { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 14px; }
+  .day.active { border-color: var(--accent); box-shadow: 0 0 0 1px rgba(255,106,0,.25); }
+  .day h2 { font-size: 0.98rem; font-weight: 700; margin-bottom: 2px; }
+  .day .date { font-size: 0.75rem; color: var(--dim); margin-bottom: 10px; }
+  .tl { list-style: none; }
+  .tl li { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px solid #1b1b1b; font-size: 0.85rem; }
+  .tl li:last-child { border-bottom: none; }
+  .tl .t { flex: 0 0 78px; color: var(--dim); font-variant-numeric: tabular-nums; font-size: 0.78rem; padding-top: 2px; }
+  .tl .e { flex: 1; }
+  .star { background: rgba(255,106,0,.07); border-radius: 6px; padding: 7px 8px !important; margin: 3px -8px !important; border-bottom: none !important; }
+  .alertrow { background: rgba(231,76,60,.09); border-radius: 6px; padding: 7px 8px !important; margin: 3px -8px !important; border-bottom: none !important; }
+  .z { font-size: 0.7rem; color: var(--dim); }
+  footer { text-align: center; font-size: 0.72rem; color: var(--dim); margin-top: 24px; line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <h1>🇺🇸 Boston · Day-by-Day</h1>
+  <div class="tagline">Sep 28–30, 2026 · all times local to Boston (EDT) unless noted</div>
+</div>
+
+<div class="nav">
+  <a href="index.html">📋 Full Briefing</a>
+  <a href="https://jarvisdanley.github.io/">← All Trips</a>
+</div>
+
+<div class="now" id="now"><span class="lbl">Now</span><br><span id="nowtext">Loading…</span></div>
+
+<!-- MONDAY -->
+<div class="day" id="d-2026-09-28">
+  <h2>✈️ Monday — Travel Day</h2>
+  <div class="date">September 28, 2026 · Kansas City → Chicago → Boston</div>
+  <ul class="tl">
+    <li><span class="t">1:45 PM</span><span class="e">Leave for MCI <span class="z">CDT</span></span></li>
+    <li><span class="t">3:45 PM</span><span class="e">🛫 <strong>WN 2604</strong> MCI → MDW <span class="z">CDT · seat 2D</span></span></li>
+    <li><span class="t">5:10 PM</span><span class="e">Arrive Chicago Midway — <strong>1h 20m</strong> <span class="z">CDT · single terminal</span><br><span class="z">Coffee: <a href="https://www.midwaypartnership.com/terminal-map/">Big Shoulders Coffee</a> (Conc. A) · Food: Mr. Beef, Home Run Inn (Conc. B)</span></span></li>
+    <li><span class="t">6:30 PM</span><span class="e">🛫 <strong>WN 1181</strong> MDW → BOS <span class="z">CDT · seat 2D</span></span></li>
+    <li class="alertrow"><span class="t">9:55 PM</span><span class="e">🛬 Arrive Boston Logan <strong>Terminal B, Pier A</strong> <span class="z">EDT</span><br><span class="z">🔴 92% rain + thunderstorms, runway 9-27 closed — expect this to slip past midnight</span></span></li>
+    <li><span class="t">~10:45 PM</span><span class="e">🚕 To the hotel — <a href="https://www.google.com/maps/dir/Boston+Logan+Airport+Terminal+B/821+Washington+St+Boston+MA">rideshare $30–45</a>, 15–25 min <span class="z">pickup: Terminal B Garage, Level 2</span></span></li>
+    <li><span class="t">~11:15 PM</span><span class="e">🏨 Check in — <a href="https://www.google.com/maps/search/DoubleTree+by+Hilton+Hotel+Boston+Downtown+821+Washington+St+Boston+MA">DoubleTree Downtown</a> <span class="z">2 nights · call <a href="tel:+16179567900">617-956-7900</a> if it slips</span></span></li>
+    <li><span class="t">late</span><span class="e">🍽️ Food if you need it: <a href="https://www.google.com/maps/search/South+Street+Diner+178+Kneeland+St+Boston">South Street Diner</a> — 24/7, 6 min walk</span></li>
+  </ul>
+</div>
+
+<!-- TUESDAY -->
+<div class="day" id="d-2026-09-29">
+  <h2>🎤 Tuesday — Summit Day</h2>
+  <div class="date">September 29, 2026 · <a href="https://www.hyatt.com/en-US/hotel/massachusetts/hyatt-regency-boston/bosrh">Hyatt Regency Boston</a>, One Avenue de Lafayette</div>
+  <ul class="tl">
+    <li><span class="t">6:45 AM</span><span class="e">☕ <a href="https://www.google.com/maps/search/George+Howell+Coffee+505+Washington+St+Boston">George Howell Coffee</a> — opens 6:30 AM, on the walk to the venue</span></li>
+    <li><span class="t">7:00 AM</span><span class="e">📋 Registration &amp; Networking <span class="z">~5–7 min walk from hotel</span></span></li>
+    <li><span class="t">7:45 AM</span><span class="e">Opening Remarks — AMG World, then chair Tim Buma</span></li>
+    <li><span class="t">8:00 AM</span><span class="e">AI-Powered Software Development — Blake Abbenante (Suffolk Construction)</span></li>
+    <li><span class="t">8:30 AM</span><span class="e">Next-Generation Built Environment: AI + Digital Twin Intelligence — Amr Raafat (Windover)</span></li>
+    <li><span class="t">9:00 AM</span><span class="e">Building the Data-Driven Enterprise</span></li>
+    <li><span class="t">9:30 AM</span><span class="e">Technology Demonstrations</span></li>
+    <li><span class="t">10:00 AM</span><span class="e">☕ Networking Break &amp; Exhibition</span></li>
+    <li><span class="t">10:30 AM</span><span class="e">Roundtables — Connecting the Modern Site · Human-Centred AI · AI Literacy · AI on the Jobsite</span></li>
+    <li><span class="t">12:30 PM</span><span class="e">🍽️ Networking Lunch &amp; Exhibition</span></li>
+    <li><span class="t">1:30 PM</span><span class="e">Roundtable: Build, Buy or Blend — Akira Togawa (CTO, Harris)</span></li>
+    <li><span class="t">2:00 PM</span><span class="e">Roundtables — TwinKnowledge · Closing the Data Gap · Unlocking Enterprise Data to Build Agents</span></li>
+    <li><span class="t">3:00 PM</span><span class="e">Technology Demonstrations</span></li>
+    <li><span class="t">3:30 PM</span><span class="e">☕ Networking Break — <strong>final prep</strong></span></li>
+    <li class="star"><span class="t">4:00 PM</span><span class="e">🎤 <strong>YOUR ROUNDTABLE — Track 1</strong><br><em>Reengineering Workflows: Integrating AI Across All Aspects of the Business</em></span></li>
+    <li><span class="t">5:00 PM</span><span class="e">Panel: Building the Business Case — Jeff Picoraro + panel</span></li>
+    <li><span class="t">5:45 PM</span><span class="e">Close &amp; Chair's Remarks</span></li>
+    <li><span class="t">5:50 PM</span><span class="e">🥂 Drinks Reception <span class="z">→ 7:00 PM · best networking hour</span></span></li>
+    <li class="star"><span class="t">7:00 PM</span><span class="e">🎸 <strong>DECISION:</strong> <a href="https://www.google.com/maps/search/House+of+Blues+Boston+15+Lansdowne+St">W.A.S.P. + KK's Priest, House of Blues</a>, doors 7 PM <span class="z">— leave the reception ~6:45 and ride to Fenway (~30 min)</span><br><em>or</em> 🍽️ <a href="https://www.google.com/maps/search/Grill+23+Bar+Boston+Berkeley+St">Grill 23 &amp; Bar</a> (~7:15 PM, closes 10) · <a href="https://www.google.com/maps/search/Ostra+Boston+Charles+Street+South">Ostra</a> (~7:30 PM, 7 min from venue)<br><em>or</em> 🚬 <a href="https://www.google.com/maps/search/Stanza+dei+Sigari+292+Hanover+St+Boston">Stanza dei Sigari</a> cigar lounge, North End, open to 1 AM</span></li>
+    <li><span class="t">11:00 PM</span><span class="e">🏨 Back to the hotel — <strong>set a 4:45 AM alarm</strong></span></li>
+  </ul>
+</div>
+
+<!-- WEDNESDAY -->
+<div class="day" id="d-2026-09-30">
+  <h2>✈️ Wednesday — Early Return</h2>
+  <div class="date">September 30, 2026 · Boston → Chicago → Kansas City</div>
+  <ul class="tl">
+    <li><span class="t">4:45 AM</span><span class="e">⏰ Up — final pack <span class="z">EDT</span></span></li>
+    <li class="alertrow"><span class="t">5:15 AM</span><span class="e">🚕 <strong>Rideshare to Logan</strong> — $30–45, 15–20 min<br><span class="z">⚠️ Do NOT rely on the T: first Orange Line 5:15 AM + first SL1 ~5:25 AM → Terminal B ~6:05 AM, only 80 min before departure</span></span></li>
+    <li><span class="t">5:45 AM</span><span class="e">Arrive <strong>Terminal B</strong> — ~1h 45m buffer <span class="z">⚠️ Terminal B/C roadway rehab Sep–Dec: allow curbside time</span></span></li>
+    <li><span class="t">7:30 AM</span><span class="e">🛫 <strong>WN 744</strong> BOS → MDW <span class="z">EDT · seat 3C</span></span></li>
+    <li><span class="t">9:05 AM</span><span class="e">Arrive Midway — <strong>1h 35m</strong> <span class="z">CDT</span><br><span class="z">✋ Window to join the tail of the KC Digital Drive Zoom (8:30–10:00 AM CDT) from the gate — last ~45 min</span></span></li>
+    <li><span class="t">10:40 AM</span><span class="e">🛫 <strong>WN 615</strong> MDW → MCI <span class="z">CDT · seat 1E</span></span></li>
+    <li><span class="t">12:05 PM</span><span class="e">🛬 Arrive Kansas City <span class="z">CDT · storms likely (74°F) — you beat the worst of it</span></span></li>
+    <li><span class="t">afternoon</span><span class="e">🏠 Home · 💸 <a href="https://jarvisdanley.github.io/">expense receipts</a> → Atlas</span></li>
+  </ul>
+</div>
+
+<div class="day">
+  <h2>📞 Numbers</h2>
+  <ul class="tl">
+    <li><span class="t">Hotel</span><span class="e"><a href="tel:+16179567900">617-956-7900</a> — DoubleTree Boston Downtown (24h desk)</span></li>
+    <li><span class="t">Venue</span><span class="e"><a href="https://www.google.com/maps/search/Hyatt+Regency+Boston+One+Avenue+de+Lafayette">Hyatt Regency Boston</a>, One Avenue de Lafayette</span></li>
+    <li><span class="t">Airline</span><span class="e">Southwest — <a href="tel:+18004359792">800-435-9792</a> · <a href="https://support.southwest.com/helpcenter/s/article/I-want-to-rebook-my-flight-due-to-a-delay-or-cancellation">rebooking</a></span></li>
+    <li><span class="t">Fallback</span><span class="e">Delta is the only BOS→MCI nonstop: ~6:10 AM (DL 675) · ~4:10 PM (DL 314)</span></li>
+  </ul>
+</div>
+
+<footer>
+  <div>Atlas · Travel Concierge</div>
+  <div>Last updated Sep 25, 2026</div>
+</footer>
+
+<script>
+(function () {
+  var days = [
+    { d: '2026-09-28', label: 'Monday Sep 28 — Travel Day', offset: 5 },  // CDT
+    { d: '2026-09-29', label: 'Tuesday Sep 29 — Summit Day', offset: 4 },  // EDT
+    { d: '2026-09-30', label: 'Wednesday Sep 30 — Return', offset: 4 }
+  ];
+  var now = new Date();
+  var out = [];
+  var activeKey = null;
+
+  // Convert "now" to each trip day's local clock to decide today's section.
+  days.forEach(function (day) {
+    var utcMidnight = Date.parse(day.d + 'T00:00:00Z');
+    var dayStart = utcMidnight - day.offset * 3600000;
+    var dayEnd = dayStart + 86400000;
+    if (now >= dayStart && now < dayEnd) activeKey = day.d;
+  });
+
+  if (activeKey) {
+    var el = document.getElementById('d-' + activeKey);
+    if (el) { el.classList.add('active'); }
+    var info = days.filter(function (x) { return x.d === activeKey; })[0];
+    out.push('<strong>' + info.label + ' — in progress.</strong> Scroll for the full timeline.');
+  } else if (now < Date.parse('2026-09-28T00:00:00Z') - 5 * 3600000) {
+    var daysOut = Math.ceil((Date.parse('2026-09-28T00:00:00Z') - 5 * 3600000 - now) / 86400000);
+    out.push('<strong>T-' + daysOut + ' to departure.</strong> Monday Sep 28: WN 2604 leaves MCI 3:45 PM CDT. Check-in opens Sun 3:45 PM CDT.');
+  } else {
+    out.push('<strong>Trip complete.</strong> Hope Boston was good — talk to Atlas about receipts and rating the recommendations.');
+  }
+  document.getElementById('nowtext').innerHTML = out.join(' ') +
+    ' <span class="z">(Device clock: ' + now.toString().replace(/\(.*\)/, '').trim() + ')</span>';
+})();
+</script>
+
+</body>
+</html>
