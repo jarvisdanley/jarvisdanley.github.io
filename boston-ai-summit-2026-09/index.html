@@ -55,6 +55,15 @@
   .hero { text-align: center; font-size: 0.8rem; color: var(--dim); margin-bottom: 14px; }
   .pick { background: rgba(255,106,0,.06); border: 1px solid rgba(255,106,0,.3); border-radius: 9px; padding: 11px; margin-bottom: 10px; }
   .pick .tag { font-size: 0.68rem; font-weight: 700; color: var(--accent); letter-spacing: .06em; }
+  .thumbs { display: flex; gap: 4px; margin-top: 8px; }
+  .thumbs button {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--dim); font-size: 0.9rem; padding: 3px 8px; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .thumbs button:hover { border-color: var(--accent); }
+  .thumbs button.voted-up { background: rgba(46,204,113,0.15); border-color: var(--green); color: var(--green); }
+  .thumbs button.voted-down { background: rgba(231,76,60,0.15); border-color: var(--red); color: var(--red); }
   footer { text-align: center; font-size: 0.72rem; color: var(--dim); margin-top: 28px; line-height: 1.8; }
 </style>
 </head>
@@ -75,11 +84,11 @@
 
 <!-- FLAGS -->
 <div class="card alert">
-  <h2>🚨 Four things to action</h2>
-  <p><strong>1. Call the hotel about Monday's late arrival.</strong> You land at Logan 9:55 PM — and <strong>Logan is digging out from the nor'easter</strong> (active FAA wind-driven ground delay program averaging 4 hours, 253 cancellations Saturday, Massport saying operations may not normalize until early next week). <a href="tel:+16179567900">617-956-7900</a> — tell them the ETA may slip past midnight so the room isn't released. The desk is 24-hour. <em>Still outstanding as of Sun Sep 27 — the highest-value two minutes left before you fly.</em></p>
-  <p><strong>2. Wednesday is a rideshare morning, not a train morning.</strong> First Orange Line train is 5:15 AM and the first SL1 toward Logan leaves South Station ~5:25–5:35 AM — chaining them puts you at Terminal B around <strong>6:05–6:10 AM</strong>, about 80 minutes before a 7:30 AM departure. Rideshare at 5:15 AM is ~15–20 min and <strong>$30–45</strong> with empty tunnels, landing you ~5:40 AM. Take the car.</p>
-  <p><strong>3. TODAY — Sunday 3:45 PM CDT, Southwest check-in opens.</strong> No Early Bird on this fare, so boarding position is first-come. Set an alarm.</p>
-  <p><strong>4. 🔴 Watch Logan tomorrow, hourly.</strong> The airport is clearing a weekend storm backlog: <strong>an active FAA ground delay program coded to wind — average 4h 03m, max 7h 06m</strong> — 253 cancellations Saturday, and Massport's line is <em>"operations may not return to normal until early next week,"</em> with passengers flying <strong>through Tuesday</strong> told to monitor status frequently. <strong>Check WN 2604 / WN 1181 at ~1:00 PM CDT Monday before you leave for MCI, and again on the Midway layover.</strong> <a href="https://nasstatus.faa.gov/list">FAA live feed</a> · <a href="https://www.southwest.com/air/flight-status/">Southwest status</a>.</p>
+  <h2>🚨 Travel day — four things, in order</h2>
+  <p><strong>1. Check WN 2604 + WN 1181 in the Southwest app before you leave the office (~1:00 PM CDT).</strong> Logan is under an <strong>active FAA Ground Delay Program coded to <em>runway construction</em> — average 5h 14m, maximum 8h 07m</strong> (FAA NAS feed, 6:00 AM CDT today). Massport's standing guidance is delays <em>afternoons and evenings</em> — exactly when WN 1181 lands. Already today at Logan: <strong>65 cancellations and 10 delays</strong> (WHDH, this morning), on top of ~340 cancellations and ~420 delays Sunday. <a href="https://nasstatus.faa.gov/list">FAA live feed</a> · <a href="https://www.southwest.com/air/flight-status/">Southwest status</a></p>
+  <p><strong>2. Call the hotel about the late arrival.</strong> 9:55 PM is the optimistic read, and the airport is working a backlog. <a href="tel:+16179567900">617-956-7900</a> — 24-hour desk. Tell them the ETA may slip past midnight so the room isn't released. <em>Still not done as of this morning; it is the highest-value two minutes left.</em></p>
+  <p><strong>3. Your two flying legs today are clean.</strong> Kansas City (partly sunny, 77°F, ~1%) and Midway (mostly sunny, 69°F, ~1%) are both dry. The exposure is entirely on the Boston end.</p>
+  <p><strong>4. Return check-in opens tomorrow, Tue Sep 29, 7:30 AM EDT</strong> — WN 744, BOS→MDW. And Wednesday stays a <strong>rideshare morning</strong>: chaining the T gets you to Terminal B only around 6:05 AM for a 7:30 departure.</p>
 </div>
 
 <!-- FLIGHTS -->
@@ -136,6 +145,10 @@
   <h3>Wednesday 5:15 AM → Logan</h3>
   <p><strong>Rideshare.</strong> The T technically runs but lands you too thin (see flags above).</p>
   <p class="meta">⚠️ Southwest now posts a blanket advisory: <em>"Runway construction: all carriers may experience delays due to runway construction"</em> at BOS. Terminal B/C alleyway rehab runs Sep–Dec 2026 — allow curbside time.</p>
+  <h3>Tuesday night → Fenway (House of Blues) — routing changed</h3>
+  <p class="meta">⚠️ <strong>Correction to what this page said yesterday: the Green Line is torn up.</strong> <strong>No trains between North Station and Kenmore (C + D branches) from Sep 26 to Oct 4</strong> — signal work in the central tunnel. Riders are told to allow <strong>at least 20 minutes extra</strong>. The old "Orange → Red → Green to Kenmore" routing no longer works as written.</p>
+  <p><strong>Better route:</strong> the <a href="https://www.mbta.com/schedules/CR-Worcester/line">Framingham/Worcester Commuter Rail</a> from <strong>South Station → Lansdowne</strong>, and it is <strong>FREE</strong> between those two stations for the duration of the work. <strong>Lansdowne is the stop for House of Blues and Fenway</strong> — about a 3-minute walk to the door. Walk or ride from the hotel to South Station (~15 min), then one train. Back-up: Orange Line to Back Bay, then the shuttle bus to Kenmore.</p>
+  <p class="meta">✅ The <strong>Orange Line itself is on normal service</strong> — verified on the MBTA alerts page this morning. The disruption is Green Line only, plus the long-standing State St elevator outage, which is not on your route.</p>
 </div>
 
 <!-- AGENDA -->
@@ -190,6 +203,10 @@
   <h3>Monday night — the honest answer</h3>
   <p>You land 9:55 PM and reach the hotel ~10:45. <strong>No steakhouse near you stays open past 10 PM</strong>, and <em>Boston Chops</em> — the nearest independent one — has permanently closed. Your realistic Monday options:</p>
   <p>→ <a href="https://www.google.com/maps/search/South+Street+Diner+178+Kneeland+St+Boston"><strong>South Street Diner</strong></a> — 178 Kneeland St, <strong>24/7</strong>, ~6 min walk, breakfast served all night, $10–20. Also your only pre-5 AM Wednesday option. Deliverable. Classic diner, not gourmet — but it's open, which is the whole point.</p>
+  <div class="thumbs">
+    <button onclick="vote('south-street-diner','up',this)" title="Loved it">👍</button>
+    <button onclick="vote('south-street-diner','down',this)" title="Not for me">👎</button>
+  </div>
 
   <h3>Tuesday — after the reception</h3>
   <div class="pick">
@@ -197,12 +214,20 @@
     <h3><a href="https://www.google.com/maps/search/Grill+23+Bar+Boston+Berkeley+St">Grill 23 &amp; Bar</a></h3>
     <p>161 Berkeley St · <strong>~14 min walk</strong> · $$$$ ($50–80 entrées) · <a href="https://www.grill23.com/">grill23.com</a> · Mon–Thu 5:00–10:00 PM</p>
     <p>Boston's long-running <strong>independent</strong> steakhouse since 1983 — prime dry-aged beef, strong seafood. Not a chain, and the closest proper steakhouse to you. <strong>Book ~7:15 PM Tuesday</strong> — it closes at 10, so it can't be a Monday-arrival dinner.</p>
+  <div class="thumbs">
+    <button onclick="vote('steak-grill23','up',this)" title="Loved it">👍</button>
+    <button onclick="vote('steak-grill23','down',this)" title="Not for me">👎</button>
+  </div>
   </div>
   <div class="pick">
     <div class="tag">★ SEAFOOD, CLOSEST TO THE VENUE</div>
     <h3><a href="https://www.google.com/maps/search/Ostra+Boston+Charles+Street+South">Ostra</a></h3>
     <p>1 Charles St South · <strong>~7 min from the venue</strong>, ~10 min from the hotel · $$$$ · <a href="https://www.ostraboston.com/">ostraboston.com</a> · Sun–Thu 5:30–9:00 PM (last seating 8:30)</p>
     <p>Contemporary Mediterranean seafood — oysters, crudo, whole fish. Local independent group (Chef/Owner Jamie Mammano). A 7:30 PM table slots cleanly after the 7:00 PM reception ends. Reserve.</p>
+  <div class="thumbs">
+    <button onclick="vote('seafood-ostra','up',this)" title="Loved it">👍</button>
+    <button onclick="vote('seafood-ostra','down',this)" title="Not for me">👎</button>
+  </div>
   </div>
   <p class="meta">Peanut-allergy note (for reference when Luke travels, and shared dining): Grill 23 low risk; <strong>Ostra is the one to flag</strong> — Mediterranean kitchens use tree nuts (romesco, pesto, nut crusts) routinely. South Street Diner is low peanut risk with normal fryer cross-contact caveats.</p>
 </div>
@@ -212,10 +237,22 @@
   <h2>☕ Specialty coffee</h2>
   <h3><a href="https://www.google.com/maps/search/George+Howell+Coffee+505+Washington+St+Boston">George Howell Coffee</a> <span class="badge b-time">on your route</span></h3>
   <p>505 Washington St, Downtown Crossing (Godfrey Hotel). Mon–Fri <strong>6:30 AM–6:30 PM</strong>. ~6 min from the hotel, <strong>~2 min from the venue</strong> — grab a pour-over ~6:45 AM on your walk to 7:00 AM registration. Third-wave Boston's most respected roaster. <a href="https://www.georgehowellcoffee.com/">Site</a></p>
+  <div class="thumbs">
+    <button onclick="vote('coffee-georgehowell','up',this)" title="Loved it">👍</button>
+    <button onclick="vote('coffee-georgehowell','down',this)" title="Not for me">👎</button>
+  </div>
   <h3><a href="https://www.google.com/maps/search/Gracenote+Coffee+108+Lincoln+St+Boston">Gracenote Coffee</a></h3>
   <p>108 Lincoln St, Leather District. Mon–Fri <strong>7:00 AM–4:00 PM</strong>. ~5 min from the hotel, roasts its own. Stand-only. <a href="https://www.gracenotecoffee.com/">Site</a></p>
+  <div class="thumbs">
+    <button onclick="vote('coffee-gracenote','up',this)" title="Loved it">👍</button>
+    <button onclick="vote('coffee-gracenote','down',this)" title="Not for me">👎</button>
+  </div>
   <h3><a href="https://www.google.com/maps/search/Ogawa+Coffee+10+Milk+St+Boston">Ogawa Coffee</a></h3>
   <p>10 Milk St, Downtown Crossing. ~7 AM–7 PM. Kyoto roaster's only international shop. ~6 min from the venue. <a href="https://www.ogawacoffeeusa.com/">Site</a></p>
+  <div class="thumbs">
+    <button onclick="vote('coffee-ogawa','up',this)" title="Loved it">👍</button>
+    <button onclick="vote('coffee-ogawa','down',this)" title="Not for me">👎</button>
+  </div>
   <p class="meta">⚠️ <strong>Wednesday 5:15 AM: nothing specialty is open.</strong> Earliest is George Howell at 6:30 AM. Plan hotel-lobby coffee, or eat at Logan post-security.</p>
 </div>
 
@@ -249,16 +286,17 @@
 
 <!-- WEATHER -->
 <div class="card">
-  <h2>🌤️ Weather</h2>
+  <h2>🌤️ Weather <span style="text-transform:none;font-weight:400;color:var(--dim);">— live NWS, refetched Mon Sep 28, 7:00 AM CDT</span></h2>
   <table>
     <tr><th>Day</th><th>High/Low</th><th>Conditions</th></tr>
-    <tr><td>Mon Sep 28 <span class="badge b-urgent">travel</span></td><td>61°F / 52°F</td><td>Rain showers — <strong>80%</strong> (down from 90%). NE wind <strong>12 mph, gusts 23</strong> — the gale has gone. <em>The weather improved; the airport did not.</em> ⚠️</td></tr>
-    <tr><td>Tue Sep 29 <span class="badge b-booked">speaking</span></td><td>64°F / 53°F</td><td>Slight chance before 8 AM, then mostly cloudy — <strong>20%, essentially dry</strong>. Good walking weather for your day ✅</td></tr>
-    <tr><td>Wed Sep 30 <span class="badge b-time">return</span></td><td>71°F / 55°F</td><td>Mostly sunny in Boston, calm for the 5:15 AM ride ✅ — <strong>but Midway has a chance of showers/storms and Kansas City is 70% thunderstorms</strong> ⚠️</td></tr>
+    <tr><td>Mon Sep 28 <span class="badge b-urgent">travel</span></td><td>60°F / 53°F</td><td><strong>Rain showers, 100%</strong> — NE wind down to 8–13 mph, so the gale is gone. Rain through the Boston evening, patchy fog after. <em>The sky is calm; the airport is not.</em> ⚠️</td></tr>
+    <tr><td>Tue Sep 29 <span class="badge b-booked">speaking</span></td><td>65°F / 53°F</td><td>Patchy fog before 8 AM, then cloudy — <strong>7%, effectively dry</strong> ✅ clean speaking day</td></tr>
+    <tr><td>Wed Sep 30 <span class="badge b-time">return</span></td><td>71°F / 54°F</td><td>Boston partly sunny, 0% ✅ — <strong>but Midway turns showery (15%) and Kansas City is 53% thunderstorms</strong> ⚠️</td></tr>
   </table>
-  <p class="meta">🧥 Light jacket, umbrella, layers. Low-60s°F afternoons, mid-to-high 50s nights.</p>
-  <p class="meta">Chicago Midway Monday: mostly sunny, 68°F, ~0% — <strong>the outbound connection is clean</strong>. Kansas City Wednesday: thunderstorms likely, 79°F, <strong>70%</strong> — the return destination is still the least reliable segment.</p>
-  <p class="meta">🌪️ <strong>Nor'easter Sep 25–27 — it has broken Logan.</strong> Boston's high-wind warning ran through Sunday with gusts to 47 mph. <strong>253 flights were cancelled at Logan on Saturday alone</strong>, Delta warned of <em>"a significant number of cancellations"</em> at BOS on Sunday, and Massport's guidance is that <em>"operations may not return to normal until early next week."</em> The storm clears Sunday night — <strong>your flying day is the calm tail, but the airport spends Monday clearing the backlog.</strong></p>
+  <p class="meta">🧥 Light jacket, umbrella, layers. Low-60s°F afternoons, low-50s°F nights. You'll want the umbrella on the Logan curb tonight.</p>
+  <p class="meta"><strong>Today, leg by leg:</strong> Kansas City — partly sunny <strong>77°F, ~1%</strong> ✅ · Chicago Midway this afternoon — mostly sunny <strong>69°F, ~1%</strong> ✅ (tonight: patchy fog, harmless at a 6:30 PM departure) · <strong>Boston Logan tonight — rain showers, 100% through the evening, ~55°F.</strong></p>
+  <p class="meta">🌪️ <strong>Nor'easter Sep 25–27 — it broke Logan, and Logan is still limping.</strong> ~340 cancellations and ~420 delays at BOS on Sunday, a wind ground stop, and a 4-hour wind-driven delay program through the weekend. The storm itself is gone — <strong>Monday's Boston forecast is the calm tail. The bill for it is the backlog, and the binding constraint today is the closed runway, not the sky.</strong></p>
+  <p class="meta">📉 <strong>Patchy fog before 8 AM Tuesday is the only soft spot left</strong> — it could slow Tuesday's first arrivals into Logan, but WN 1181 lands the night before. Your speaking day looks clean.</p>
 </div>
 
 <!-- CONTINGENCY -->
@@ -270,14 +308,54 @@
   <p>Southwest auto-rebooks the next available BOS→MDW→MCI at no cost (<a href="https://support.southwest.com/helpcenter/s/article/I-want-to-rebook-my-flight-due-to-a-delay-or-cancellation">rebooking policy</a>). Runway/weather delays aren't compensation-eligible, but rebooking is free.</p>
   <p><strong>Fallback:</strong> Delta is the <em>only</em> carrier flying BOS→MCI nonstop this season — ~6:10 AM (DL 675) and ~4:10 PM (DL 314). JetBlue ended it; American's doesn't start until December. A missed morning means buying a new ticket or waiting for the 4:10 PM.</p>
   <h3>Airport status</h3>
-  <p>Runway 9-27 closed since Aug 31 for EMAS work, reopening before Thanksgiving. The FAA ran BOS Ground Delay Programs coded to <em>runway construction</em> on Sep 22 (avg 81 min) and Sep 24 (avg 67 min, max 6h30m). ✅ <strong>Checked Sat Sep 26, 7:00 AM CDT: no active BOS ground delay program.</strong> 🔴 <strong>Then Sun Sep 27, 7:00 AM CDT: BOS under an ACTIVE ground delay program — reason wind, average 4h 03m, max 7h 06m</strong> (after a weekend ground stop), with JFK, EWR, LGA, PHL, DCA and IAD all hit by the same system. Southwest's nor'easter waiver (<a href="https://www.southwest.com/travel-advisory/">advisory page</a>) covers BOS but only for <strong>Fri–Sun travel</strong> — your Monday leg sits outside it, so no free-change option. Standard delay/cancellation rebooking is still free. <a href="https://nasstatus.faa.gov/list">Check the live feed</a> before each leg.</p>
+  <p>🔴 <strong>Mon Sep 28, 6:00 AM CDT (FAA NAS status feed): BOS is under an ACTIVE Ground Delay Program coded to <em>runway construction</em> — average 5h 14m, maximum 8h 07m.</strong> That is the runway capacity cut, not weather: <strong>Runway 9-27 has been closed since Aug 31 for EMAS work</strong> (75 days, reopening before Thanksgiving), and Massport warns of delays <strong>afternoons and evenings</strong> — which is exactly when WN 1181 arrives. For scale: the Sep 22 construction program averaged 81 min (max 4h 31m) and Sep 24 averaged 67 min (max 6h 30m); <strong>today's 5h 14m average is the worst of the month.</strong> Already today Logan shows <strong>65 cancellations and 10 delays</strong> (WHDH), against ~340 cancellations and ~420 delays on Sunday.</p>
+  <p class="meta">💰 <strong>No waiver reaches you.</strong> Southwest's advisory page (<a href="https://www.southwest.com/travel-advisory/">travel-advisory</a>) currently carries only a Hawaii (LIH) notice — <strong>nothing for BOS</strong>. Delta's <em>BOS Weather Flexibility</em> waiver covers travel Sep 26–29 but only for tickets issued on or before Sep 25 <em>on Delta</em>, so it is not a remedy Jeff holds. The practical upside: <strong>if Southwest cancels, rebooking is free anyway.</strong> A delay program is not a cancellation — <strong>plan for a hold, not a rebooking.</strong></p>
   <p class="meta">✅ Labor watch clears: the Encore Boston Harbor strike (UNITE HERE Local 26 + Teamsters 25) is now in its fourth week but remains confined to that Everett casino — <strong>no action at the DoubleTree or the Hyatt Regency</strong>. ✅ MBTA Orange Line shows no service alerts for Sep 30; the only outages are escalators/elevators at <em>State</em>, off your route. No downtown protests or road closures on your dates.</p>
 </div>
 
 <footer>
   <div>Atlas · Travel Concierge</div>
-  <div>Last updated Sep 27, 2026 · <a href="https://jarvisdanley.github.io/">all trips</a></div>
+  <div>Last updated Sep 28, 2026 · <a href="https://jarvisdanley.github.io/">all trips</a></div>
 </footer>
 
+
+<script>
+function vote(id, dir, btn) {
+  var key = 'atlas_vote_' + id;
+  var current = localStorage.getItem(key);
+  var data = current ? JSON.parse(current) : {up:0, down:0, voted: null};
+  var container = btn.parentElement;
+  var upBtn = container.children[0];
+  var downBtn = container.children[1];
+
+  if (data.voted === dir) {
+    data[dir] = Math.max(0, data[dir] - 1);
+    data.voted = null;
+    upBtn.classList.remove('voted-up');
+    downBtn.classList.remove('voted-down');
+  } else {
+    if (data.voted) { data[data.voted] = Math.max(0, data[data.voted] - 1); }
+    data[dir] = (data[dir] || 0) + 1;
+    data.voted = dir;
+    upBtn.classList.toggle('voted-up', dir === 'up');
+    downBtn.classList.toggle('voted-down', dir === 'down');
+  }
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+(function(){
+  var els = document.querySelectorAll('.thumbs');
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    var btn = el.querySelector('button');
+    if (!btn) continue;
+    var match = btn.getAttribute('onclick').match(/vote\('([^']+)'/);
+    if (!match) continue;
+    var data = JSON.parse(localStorage.getItem('atlas_vote_' + match[1]) || '{"up":0,"down":0,"voted":null}');
+    if (data.voted === 'up') el.children[0].classList.add('voted-up');
+    if (data.voted === 'down') el.children[1].classList.add('voted-down');
+  }
+})();
+</script>
 </body>
 </html>
