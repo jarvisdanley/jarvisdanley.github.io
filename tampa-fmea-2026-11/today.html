@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Today · Tampa — FMEA Energy Connections</title>
+<style>
+  :root {
+    --bg: #0a0a0a; --card: #141414; --border: #222;
+    --text: #e0e0e0; --dim: #888; --accent: #ff6a00;
+    --green: #2ecc71; --red: #e74c3c; --blue: #3498db;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.5;
+    max-width: 480px; margin: 0 auto; padding: 16px 16px 40px;
+    -webkit-text-size-adjust: 100%;
+  }
+  .header { text-align: center; padding: 16px 0 12px; border-bottom: 1px solid var(--border); margin-bottom: 12px; }
+  .header .day-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; }
+  .header h1 { font-size: 1.3rem; font-weight: 700; margin: 4px 0; }
+  .header .date { color: var(--dim); font-size: 0.85rem; }
+  .status-bar { display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; }
+  .status-pill { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 4px 10px; font-size: 0.72rem; white-space: nowrap; flex-shrink: 0; }
+  .status-pill.good { border-color: var(--green); color: var(--green); }
+  .status-pill.warn { border-color: var(--accent); color: var(--accent); }
+  .section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+  .section h2 { font-size: 0.95rem; margin-bottom: 8px; }
+  .weather-row { display: flex; gap: 8px; overflow-x: auto; }
+  .weather-day { background: var(--bg); border-radius: 8px; padding: 8px 12px; text-align: center; min-width: 80px; flex-shrink: 0; }
+  .weather-day .day { font-size: 0.65rem; color: var(--dim); text-transform: uppercase; }
+  .weather-day .hi { font-weight: 700; font-size: 1.1rem; }
+  .weather-day .lo { font-size: 0.7rem; color: var(--dim); }
+  .weather-day .rain { font-size: 0.65rem; color: var(--blue); }
+  .event { padding: 8px 10px; background: var(--bg); border-radius: 6px; margin-bottom: 4px; font-size: 0.85rem; }
+  .event .time { font-weight: 600; color: var(--accent); }
+  .rec-card { padding: 10px; background: var(--bg); border-radius: 8px; margin-bottom: 6px; position: relative; }
+  .rec-card .name { font-weight: 600; }
+  .rec-card .meta { font-size: 0.72rem; color: var(--dim); margin-top: 2px; }
+  .tip { font-size: 0.8rem; padding: 8px 12px; background: rgba(52,152,219,0.08); border-radius: 8px; margin-bottom: 6px; }
+  .tip strong { color: var(--blue); }
+  .warn-tip { font-size: 0.8rem; padding: 8px 12px; background: rgba(255,106,0,0.08); border-radius: 8px; margin-bottom: 6px; }
+  .warn-tip strong { color: var(--accent); }
+  .thumbs { display: flex; gap: 4px; margin-top: 6px; }
+  .thumbs button {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--dim); font-size: 0.85rem; padding: 2px 6px; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .thumbs button:hover { border-color: var(--accent); }
+  .thumbs button.voted-up { background: rgba(46,204,113,0.15); border-color: var(--green); color: var(--green); }
+  .thumbs button.voted-down { background: rgba(231,76,60,0.15); border-color: var(--red); color: var(--red); }
+  .footer { text-align: center; font-size: 0.65rem; color: var(--dim); margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="day-label" id="day-label">Loading...</div>
+  <h1>Tampa — FMEA Energy Connections</h1>
+  <div class="date" id="day-date"></div>
+</div>
+
+<div class="status-bar" id="status-bar"></div>
+
+<div class="section" id="warn-section" style="display:none">
+  <div class="warn-tip" id="warn-content"></div>
+</div>
+
+<div class="section" id="weather-section">
+  <h2>🌤️ Weather <span style="font-size:0.65rem;color:var(--dim);font-weight:400">· seasonal normals until T-7</span></h2>
+  <div class="weather-row" id="weather-content"></div>
+</div>
+
+<div class="section" id="timeline-section">
+  <h2>📅 Today</h2>
+  <div id="timeline-content"></div>
+</div>
+
+<div class="section" id="food-section">
+  <h2>🥩 Eat &amp; Drink</h2>
+  <div id="food-content"></div>
+</div>
+
+<div class="section" id="transit-section" style="display:none">
+  <h2>🚊 Getting Around</h2>
+  <div id="transit-content"></div>
+</div>
+
+<div class="section" id="tip-section">
+  <h2>💡 Atlas's Tip</h2>
+  <div class="tip" id="tip-content"></div>
+</div>
+
+<div class="footer">
+  Atlas Travel Concierge · <a href="index.html">📍 Full Briefing</a> · <a href="https://jarvisdanley.github.io">🏠 All Trips</a>
+</div>
+
+<script>
+var TRIP = {
+  start: '2026-11-02',
+  end: '2026-11-03',
+  days: [
+    {
+      date: '2026-11-02',
+      label: 'Monday · KC → Tampa',
+      weather: { hi: 81, lo: 64, icon: '☀️', rain: 10 },
+      pills: [
+        { text: '✈️ WN 1369 2:40pm', cls: 'good' },
+        { text: '🏨 Grand Hyatt check-in', cls: 'good' },
+        { text: '🍽️ Dinner w/ Rich Zinser', cls: 'good' }
+      ],
+      timeline: [
+        { time: '2:40 PM CST', text: 'Depart MCI on WN 1369 (seat 4D) — nonstop, 2h 30m' },
+        { time: '6:10 PM EST', text: 'Land TPA — remember the +1h timezone jump' },
+        { time: '~7:00 PM', text: '🏨 Check in at the Grand Hyatt Tampa Bay, 2900 Bayport Dr' },
+        { time: 'Evening', text: 'Dinner with Rich Zinser' }
+      ],
+      transit: [
+        'MCI: arrive ~1h40m early for the 2:40 PM departure',
+        'TPA → Grand Hyatt: ~2 mi / 5 min — the airport district is next door',
+        'Timezone: Tampa is 1h ahead of KC (EST)'
+      ],
+      tip: 'A short travel day. You land at 6:10 PM EST and the hotel is ~2 mi from the airport, so dinner is comfortably doable by 7:30. <strong>Bern\u2019s Steak House is closed Mondays</strong> — if steak is the call, Charley\u2019s is the one that\u2019s open. Oystercatchers is on property and means no second drive after a travel day.',
+      food: [
+        { name: 'Oystercatchers', meta: '📍 On property at the Grand Hyatt · waterfront seafood since 1986 · dinner till 9 PM · oystercatchersrestaurant.com', id: 'today-oystercatchers', url: 'https://www.google.com/maps/search/Oystercatchers+2900+Bayport+Dr+Tampa+FL+33607' },
+        { name: 'Charley\u2019s Steak House', meta: '📍 4444 W Cypress St · Prime/Angus over a 1,200° citrus-oak pit · Sun–Thu till 9:30 PM · open Mondays', id: 'today-charleys', url: 'https://www.google.com/maps/search/Charleys+Steak+House+4444+W+Cypress+St+Tampa+FL+33607' },
+        { name: 'Whiskey Joe\u2019s Bar & Grill', meta: '📍 7720 W Courtney Campbell Causeway · the grouper sandwich · sunset deck · till 10:30 PM', id: 'today-whiskeyjoes', url: 'https://www.google.com/maps/search/Whiskey+Joes+Bar+and+Grill+7720+W+Courtney+Campbell+Causeway+Tampa+FL+33607' },
+        { name: 'Bahama Breeze', meta: '📍 3045 N Rocky Point Dr E · Caribbean island grille · open till midnight — late-arrival fallback', id: 'today-bahamabreeze', url: 'https://www.google.com/maps/search/Bahama+Breeze+3045+N+Rocky+Point+Dr+E+Tampa+FL+33607' }
+      ]
+    },
+    {
+      date: '2026-11-03',
+      label: 'Tuesday · Speak → Fly Home',
+      weather: { hi: 81, lo: 64, icon: '⛅', rain: 15 },
+      pills: [
+        { text: '🎤 Speak 10:15am EST', cls: 'good' },
+        { text: '✈️ WN 4966 home', cls: 'good' },
+        { text: '⏭️ Skips Nov 3 afternoon', cls: 'warn' }
+      ],
+      warn: 'You\u2019re on stage at 10:15 AM, off by 11:00, and flying out early afternoon. The return is booked for Nov 3 on purpose — that means skipping the Nov 3 afternoon breakouts, the trade show (4:30–6:30 PM) and the 7–9 PM networking dinner, and not being there for Day 2 (Nov 4). Not a problem, just the plan.',
+      timeline: [
+        { time: '9:00 AM EST', text: 'Day 1 general sessions open — Grand Hyatt Tampa Bay' },
+        { time: '10:15 AM', text: '🎤 JEFF SPEAKS — 10:15–11:00 AM EST' },
+        { time: '11:00 AM', text: 'Off stage' },
+        { time: '2:10 PM EST', text: 'WN 4966 departs TPA (seat 2F)' },
+        { time: '4:05 PM CST', text: 'Land MCI — home' }
+      ],
+      transit: [
+        'Grand Hyatt → TPA: ~2 mi / 5–10 min — a short rideshare',
+        'Back at the airport ~1h40m before the 2:10 PM departure',
+        'Timezone: you gain the hour back (arrive 4:05 PM CST)'
+      ],
+      tip: 'The whole day is in one building until you leave for the airport. Coffee early (Buddy Brew opens 6 AM, ~1 mi away), then the 9 AM block, then you\u2019re on at 10:15. Off stage at 11:00 leaves a comfortable ~3 hours before the 2:10 PM departure \u2014 a ~2 mi hop to TPA and a single nonstop home, no rush. Keep it carry-on so there\u2019s nothing to wait for at bag claim.',
+      food: [
+        { name: 'Buddy Brew Coffee — Current Hotel', meta: '📍 2545 N Rocky Point Dr · closest real coffee to the hotel · opens 6 AM', id: 'today-buddybrew', url: 'https://www.google.com/maps/search/Buddy+Brew+Coffee+2545+N+Rocky+Point+Dr+Tampa+FL+33607' },
+        { name: 'Kahwa Coffee — Kennedy Blvd', meta: '📍 2802 W Kennedy Blvd · Tampa small-batch roaster · drive-thru', id: 'today-kahwa', url: 'https://www.google.com/maps/search/Kahwa+Coffee+2802+W+Kennedy+Blvd+Tampa+FL+33609' },
+        { name: 'Oystercatchers', meta: '📍 On property · lunch Mon–Sat 11:30 AM–2:30 PM — a sit-down before the airport if the schedule allows', id: 'today-oystercatchers-2', url: 'https://www.google.com/maps/search/Oystercatchers+2900+Bayport+Dr+Tampa+FL+33607' }
+      ]
+    }
+  ]
+};
+
+function getToday() {
+  var now = new Date();
+  var tripStart = new Date(TRIP.start + 'T00:00:00-05:00');
+  var tripEnd = new Date(TRIP.end + 'T23:59:59-05:00');
+
+  if (now < tripStart) {
+    return { day: TRIP.days[0], idx: 0, mode: 'pre-trip' };
+  }
+  if (now > tripEnd) {
+    return { day: TRIP.days[TRIP.days.length-1], idx: TRIP.days.length-1, mode: 'post-trip' };
+  }
+
+  for (var i = 0; i < TRIP.days.length; i++) {
+    var dayStart = new Date(TRIP.days[i].date + 'T00:00:00-05:00');
+    var dayEnd = new Date(TRIP.days[i].date + 'T23:59:59-05:00');
+    if (now >= dayStart && now <= dayEnd) {
+      return { day: TRIP.days[i], idx: i, mode: 'active' };
+    }
+  }
+
+  return { day: TRIP.days[0], idx: 0, mode: 'pre-trip' };
+}
+
+function render(d) {
+  var day = d || getToday().day;
+  var mode = d ? 'active' : getToday().mode;
+
+  document.getElementById('day-label').textContent = mode === 'pre-trip' ? 'NEXT UP · ' + day.label : day.label;
+  document.getElementById('day-date').textContent = day.date;
+
+  var pills = '';
+  day.pills.forEach(function(p) {
+    pills += '<span class="status-pill ' + p.cls + '">' + p.text + '</span>';
+  });
+  document.getElementById('status-bar').innerHTML = pills;
+
+  if (day.warn) {
+    document.getElementById('warn-content').innerHTML = day.warn;
+    document.getElementById('warn-section').style.display = '';
+  } else {
+    document.getElementById('warn-section').style.display = 'none';
+  }
+
+  var weatherRows = '';
+  TRIP.days.forEach(function(dd) {
+    var active = dd.date === day.date ? ' style="border:1px solid var(--accent)"' : '';
+    weatherRows += '<div class="weather-day"' + active + '>' +
+      '<div class="day">' + new Date(dd.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}) + '</div>' +
+      '<div class="hi">' + dd.weather.hi + '°F</div>' +
+      '<div class="lo">' + dd.weather.lo + '°F</div>' +
+      '<div class="rain">' + dd.weather.icon + ' ' + dd.weather.rain + '%</div>' +
+    '</div>';
+  });
+  document.getElementById('weather-content').innerHTML = weatherRows;
+
+  var timeline = '';
+  day.timeline.forEach(function(e) {
+    timeline += '<div class="event"><span class="time">' + e.time + '</span> ' + e.text + '</div>';
+  });
+  document.getElementById('timeline-content').innerHTML = timeline;
+
+  var food = '';
+  day.food.forEach(function(f) {
+    var nameHtml = f.url
+      ? '<a href="' + f.url + '" style="color:inherit;text-decoration:none" target="_blank">' + f.name + '</a>'
+      : f.name;
+    food += '<div class="rec-card">' +
+      '<div class="name">' + nameHtml + '</div>' +
+      '<div class="meta">' + f.meta + '</div>' +
+      '<div class="thumbs"><button onclick="vote(\''+f.id+'\',\'up\',this)" title="Loved it">👍</button><button onclick="vote(\''+f.id+'\',\'down\',this)" title="Not for me">👎</button></div>' +
+    '</div>';
+  });
+  document.getElementById('food-content').innerHTML = food;
+
+  if (day.transit) {
+    var transit = '';
+    day.transit.forEach(function(x) {
+      transit += '<div class="event">' + x + '</div>';
+    });
+    document.getElementById('transit-content').innerHTML = transit;
+    document.getElementById('transit-section').style.display = '';
+  } else {
+    document.getElementById('transit-section').style.display = 'none';
+  }
+
+  document.getElementById('tip-content').innerHTML = day.tip;
+}
+
+function vote(id, dir, btn) {
+  var key = 'atlas_vote_' + id;
+  var current = localStorage.getItem(key);
+  var data = current ? JSON.parse(current) : {up:0, down:0, voted: null};
+  var container = btn.parentElement;
+  var upBtn = container.children[0];
+  var downBtn = container.children[1];
+  if (data.voted === dir) {
+    data[dir] = Math.max(0, data[dir] - 1);
+    data.voted = null;
+    upBtn.classList.remove('voted-up');
+    downBtn.classList.remove('voted-down');
+  } else {
+    if (data.voted) { data[data.voted] = Math.max(0, data[data.voted] - 1); }
+    data[dir] = (data[dir] || 0) + 1;
+    data.voted = dir;
+    upBtn.classList.toggle('voted-up', dir === 'up');
+    downBtn.classList.toggle('voted-down', dir === 'down');
+  }
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+(function(){
+  document.querySelectorAll('.thumbs').forEach(function(el){
+    var btn = el.querySelector('button');
+    if (!btn) return;
+    var match = btn.getAttribute('onclick').match(/vote\('([^']+)'/);
+    if (!match) return;
+    var id = match[1];
+    var data = JSON.parse(localStorage.getItem('atlas_vote_' + id) || '{"up":0,"down":0,"voted":null}');
+    if (data.voted === 'up') el.children[0].classList.add('voted-up');
+    if (data.voted === 'down') el.children[1].classList.add('voted-down');
+  });
+})();
+
+render();
+</script>
+
+</body>
+</html>

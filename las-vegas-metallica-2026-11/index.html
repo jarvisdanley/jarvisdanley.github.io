@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Las Vegas · Metallica at Sphere · Nov 5–8, 2026</title>
+<style>
+  :root {
+    --bg: #0a0a0a; --card: #141414; --border: #222;
+    --text: #e0e0e0; --dim: #888; --accent: #ff6a00;
+    --green: #2ecc71; --red: #e74c3c; --blue: #3498db;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.5;
+    max-width: 480px; margin: 0 auto; padding: 16px 16px 40px;
+    -webkit-text-size-adjust: 100%;
+  }
+  .header { text-align: center; padding: 20px 0 12px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+  .header h1 { font-size: 1.5rem; font-weight: 700; }
+  .header .dates { color: var(--dim); font-size: 0.9rem; margin-top: 4px; }
+  .header .emoji { font-size: 2.5rem; display: block; margin-bottom: 4px; }
+  .status-bar { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; }
+  .status-pill { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 0.8rem; white-space: nowrap; flex-shrink: 0; }
+  .status-pill.good { border-color: var(--green); color: var(--green); }
+  .status-pill.warn { border-color: var(--accent); color: var(--accent); }
+  .section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 14px; }
+  .section h2 { font-size: 1rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .section h2 .icon { font-size: 1.2rem; }
+  .update { padding: 10px; background: rgba(255,106,0,0.08); border-radius: 8px; margin-bottom: 8px; font-size: 0.85rem; }
+  .update .time { color: var(--accent); font-weight: 600; }
+  .flight-row { display: grid; grid-template-columns: 48px 1fr; gap: 8px; align-items: start; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .flight-row:last-child { border-bottom: none; }
+  .flight-icon { background: var(--bg); border-radius: 8px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .flight-info .route { font-weight: 600; font-size: 0.9rem; }
+  .flight-info .detail { font-size: 0.78rem; color: var(--dim); }
+  .day-block { margin-bottom: 14px; }
+  .day-block:last-child { margin-bottom: 0; }
+  .day-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; margin-bottom: 4px; }
+  .day-event { padding: 8px 10px; background: var(--bg); border-radius: 6px; margin-bottom: 4px; font-size: 0.85rem; }
+  .day-event .time { font-weight: 600; color: var(--accent); }
+  .rec-card { padding: 12px; background: var(--bg); border-radius: 8px; margin-bottom: 8px; position: relative; }
+  .rec-card .name { font-weight: 600; }
+  .rec-card .desc { font-size: 0.8rem; color: var(--dim); margin-top: 4px; }
+  .rec-card .meta { font-size: 0.75rem; color: var(--dim); margin-top: 4px; }
+  .rec-card .badge { position: absolute; top: 10px; right: 12px; font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+  .badge.top { background: rgba(255,106,0,0.2); color: var(--accent); }
+  .badge.near { background: rgba(52,152,219,0.2); color: var(--blue); }
+  .badge.award { background: rgba(46,204,113,0.2); color: var(--green); }
+  .badge.nut { background: rgba(231,76,60,0.2); color: var(--red); }
+  .tip { font-size: 0.82rem; padding: 8px 12px; background: rgba(52,152,219,0.08); border-radius: 8px; margin-bottom: 6px; }
+  .tip strong { color: var(--blue); }
+  .warn-tip { font-size: 0.82rem; padding: 8px 12px; background: rgba(255,106,0,0.08); border-radius: 8px; margin-bottom: 6px; }
+  .warn-tip strong { color: var(--accent); }
+  .countdown { text-align: center; padding: 10px; font-size: 0.9rem; }
+  .countdown .num { font-size: 2rem; font-weight: 800; color: var(--accent); }
+  .footer { text-align: center; font-size: 0.7rem; color: var(--dim); margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+  .footer a { color: var(--accent); }
+  .thumbs { display: flex; gap: 4px; margin-top: 8px; }
+  .thumbs button {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--dim); font-size: 0.9rem; padding: 3px 8px; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .thumbs button:hover { border-color: var(--accent); }
+  .thumbs button.voted-up { background: rgba(46,204,113,0.15); border-color: var(--green); color: var(--green); }
+  .thumbs button.voted-down { background: rgba(231,76,60,0.15); border-color: var(--red); color: var(--red); }
+  .grp { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--dim); font-weight: 700; margin: 12px 0 6px; }
+  .grp:first-child { margin-top: 0; }
+  .alert-box { font-size: 0.85rem; padding: 10px 12px; background: rgba(231,76,60,0.10); border: 1px solid rgba(231,76,60,0.35); border-radius: 8px; margin-bottom: 10px; }
+  .alert-box strong { color: var(--red); }
+  .section ul { margin: 0 0 4px 20px; }
+  .section ul li { font-size: 0.82rem; color: var(--dim); margin-bottom: 6px; }
+  .section ul li strong { color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="emoji">🎸</span>
+  <h1>Las Vegas · Metallica at Sphere</h1>
+  <div class="dates">Nov 5–8, 2026 · Jeff + Lee · MCI ⇄ LAS</div>
+</div>
+
+<div class="status-bar">
+  <span class="status-pill good">✈️ 2 Flights Booked</span>
+  <span class="status-pill good">🏨 Harrah's Confirmed</span>
+  <span class="status-pill warn">🎫 Tickets w/ Lee</span>
+  <span class="status-pill good">🚬 Cigars Fri Nov 6</span>
+  <span class="status-pill warn">⏰ Early Nov 8 Departure</span>
+  <span class="status-pill warn">🏋️ No PF Within 2 mi</span>
+</div>
+
+<!-- ATLAS UPDATES -->
+<div class="section">
+  <h2><span class="icon">🤖</span> Atlas Updates</h2>
+  <div class="update">
+    <div class="time">Mon Oct 5 — 11:30 AM CT</div>
+    Everything on this trip is now locked. Southwest confirmation <strong>B94WSS</strong> covers both legs — <strong>WN 474</strong> out (Nov 5) and <strong>WN 2427</strong> back (Nov 8) — booked as one round trip. Harrah's <strong>XYC2Z</strong> is confirmed for 3 nights, Valley Deluxe 2 Queens. The Sphere tickets are with <strong>Lee</strong> (mobile-only) — the wallet handoff before doors is the one coordination item. Cigar plan added: <strong>Rob Dietrich "Smoke &amp; Metal"</strong> at Eight Lounge, Fri Nov 6 (reservations required), plus the <strong>BLACKENED Cigar Happy Hour</strong> at Davidoff on both show days.
+  </div>
+  <div class="update">
+    <div class="time">Thu Oct 1 — all day</div>
+    Trip page built. Both Metallica nights — <strong>Night 3</strong> (Thu Nov 5) and <strong>Night 4</strong> (Sat Nov 7) — are the No Repeat Weekend pair: completely different set lists, nothing repeats across the two nights.
+  </div>
+  <div class="update">
+    <div class="time">Oct 1 — contest windows</div>
+    The <strong>Snake Pit</strong> and <strong>Meet &amp; Greet</strong> contest entries open <strong>Wed Oct 28 at 10 AM PT</strong> and close <strong>Tue Nov 3 at 10 AM PT</strong>. Fifth Member account required, one entry per person.
+  </div>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="section">
+  <h2><span class="icon">⏱️</span> Countdown</h2>
+  <div class="countdown">
+    <div class="num" id="countdown-days">X</div>
+    <div id="countdown-label">days until departure</div>
+    <div style="margin-top:6px;font-size:0.75rem;color:var(--dim)">
+      First show in <span id="countdown-event" style="color:var(--accent);font-weight:600">X</span> <span id="countdown-event-label">days</span>
+    </div>
+  </div>
+</div>
+
+<!-- FLIGHTS -->
+<div class="section">
+  <h2><span class="icon">✈️</span> Flights</h2>
+
+  <div class="flight-row">
+    <div class="flight-icon">🛫</div>
+    <div class="flight-info">
+      <div class="route">Thu Nov 5 · Southwest MCI → LAS</div>
+      <div class="detail">
+        <strong>WN 474</strong> · MCI 11:40 AM CST → LAS 12:45 PM PST · nonstop<br>
+        Conf <strong>B94WSS</strong> (Southwest round trip)
+      </div>
+    </div>
+  </div>
+
+  <div class="flight-row">
+    <div class="flight-icon">🛬</div>
+    <div class="flight-info">
+      <div class="route">Sun Nov 8 · Southwest LAS → MCI</div>
+      <div class="detail">
+        <strong>WN 2427</strong> · LAS 8:20 AM PST → MCI 1:05 PM CST · nonstop<br>
+        Conf <strong>B94WSS</strong> (same round-trip reservation)
+      </div>
+    </div>
+  </div>
+  <div class="warn-tip"><strong>Seats not selected on either leg.</strong> Pick seats before travel — the Basic fare allows no free changes later.</div>
+  <div class="warn-tip"><strong>The 8:20 AM departure is the morning after the final show.</strong> The Sat Nov 7 set ends late — you're looking at leaving the hotel around 6 AM against the 11 AM checkout, roughly five hours after the Sphere lets out.</div>
+</div>
+
+<!-- ITINERARY -->
+<div class="section">
+  <h2><span class="icon">📅</span> Itinerary</h2>
+
+  <div class="day-block">
+    <div class="day-label">Thu Nov 5 — KC → Vegas · Night 3 🎸</div>
+    <div class="day-event"><span class="time">11:40 AM CST</span> — WN 474 departs MCI</div>
+    <div class="day-event"><span class="time">12:45 PM PT</span> — Land LAS</div>
+    <div class="day-event"><span class="time">4:00 PM PT</span> — 🏨 Check in at <a href="https://www.caesars.com/harrahs-las-vegas" style="color:var(--blue)" target="_blank">Harrah's Las Vegas</a></div>
+    <div class="day-event"><span class="time">7:00 PM PT</span> — 🎪 Doors @ <a href="https://www.google.com/maps/search/Sphere+255+Sands+Ave+Las+Vegas+NV+89169" style="color:var(--blue)" target="_blank">Sphere</a> (walkable from the hotel)</div>
+    <div class="day-event"><span class="time">8:30 PM PT</span> — 🎸 <strong>METALLICA — Night 3</strong></div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label">Fri Nov 6 — Vegas · no show · cigar day</div>
+    <div class="day-event"><span class="time">Afternoon</span> — 🎡 <a href="https://www.caesars.com/linq/things-to-do/attractions/high-roller" style="color:var(--blue)" target="_blank">The High Roller</a> at <a href="https://www.google.com/maps/search/High+Roller+3545+S+Las+Vegas+Blvd+Las+Vegas+NV+89109" style="color:var(--blue)" target="_blank">The LINQ</a> — a five-minute walk from the room</div>
+    <div class="day-event"><span class="time">4:00–7:00 PM PT</span> — 🚬 <strong>Rob Dietrich "Smoke &amp; Metal"</strong> @ <a href="https://www.rwlasvegas.com/dining/eight-cigar-lounge/" style="color:var(--blue)" target="_blank">Eight Lounge</a> (Resorts World) — 21+, reservations required</div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label">Sat Nov 7 — Vegas · Night 4 🎸</div>
+    <div class="day-event"><span class="time">2:00–8:00 PM PT</span> — 🚬 <strong>BLACKENED Cigar Happy Hour</strong> @ <a href="https://davidoffcigarbarlv.com/" style="color:var(--blue)" target="_blank">Davidoff of Geneva Cigar Bar</a> (Fashion Show Mall) — show-day hours</div>
+    <div class="day-event"><span class="time">7:00 PM PT</span> — 🎪 Doors @ <a href="https://www.google.com/maps/search/Sphere+255+Sands+Ave+Las+Vegas+NV+89169" style="color:var(--blue)" target="_blank">Sphere</a></div>
+    <div class="day-event"><span class="time">8:30 PM PT</span> — 🎸 <strong>METALLICA — Night 4</strong> (different set list from Thursday)</div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label">Sun Nov 8 — Vegas → KC</div>
+    <div class="day-event"><span class="time">~6:00 AM PT</span> — Check out, head to <a href="https://www.google.com/maps/search/Las+Vegas+Harry+Reid+International+Airport+LAS+5757+Wayne+Newton+Blvd" style="color:var(--blue)" target="_blank">LAS</a></div>
+    <div class="day-event"><span class="time">8:20 AM PST</span> — WN 2427 departs LAS</div>
+    <div class="day-event"><span class="time">1:05 PM CST</span> — Land MCI, home</div>
+  </div>
+</div>
+
+<!-- EVENT -->
+<div class="section">
+  <h2><span class="icon">🎸</span> The Event</h2>
+  <div class="rec-card">
+    <div class="badge top">ANCHOR</div>
+    <div class="name"><a href="https://www.thesphere.com/shows/metallica" style="color:inherit;text-decoration:none" target="_blank">🎸 Metallica — Life Burns Faster</a></div>
+    <div class="desc">The No Repeat Weekend — Thursday and Saturday play completely different set lists. You hold two shows: <strong>Night 3</strong> (Thu Nov 5) and <strong>Night 4</strong> (Sat Nov 7).</div>
+    <div class="meta"><strong>8:30 PM PT · doors 7:00 PM</strong> · <a href="https://www.google.com/maps/search/Sphere+255+Sands+Ave+Las+Vegas+NV+89169" style="color:var(--blue)" target="_blank">Sphere, 255 Sands Ave</a> · <a href="https://www.metallica.com/tour/2026-11-05-las-vegas-nevada.html" style="color:var(--blue)" target="_blank">metallica.com</a></div>
+    <div class="meta">🎫 <strong>Tickets are held by Lee</strong> — mobile-only entry, so get them into a phone wallet before doors. No pro cameras, monopods or selfie sticks.</div>
+  </div>
+  <div class="tip"><strong>Transit:</strong> the Sphere is a short walk north of Harrah's (~10–15 min) — no car, no rideshare on show nights. Doors are 90 minutes before showtime.</div>
+  <div class="tip"><strong>The shows:</strong> seat haptics, movement, fog, scent, wind and intense strobing at high volume — the Sphere is as much a ride as a concert.</div>
+</div>
+
+<!-- HOTEL -->
+<div class="section">
+  <h2><span class="icon">🏨</span> Hotel</h2>
+  <div class="rec-card">
+    <div class="badge award">CONFIRMED</div>
+    <div class="name"><a href="https://www.caesars.com/harrahs-las-vegas" style="color:inherit;text-decoration:none" target="_blank">🏨 Harrah's Las Vegas — Valley Deluxe 2 Queens</a></div>
+    <div class="desc">One room, 2 adults, 3 nights. Reservation <strong>XYC2Z</strong>.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Harrah's+Las+Vegas+3475+S+Las+Vegas+Blvd+Las+Vegas+NV+89109" style="color:var(--blue)" target="_blank">3475 S Las Vegas Blvd</a> · check-in <strong>Thu Nov 5, 4 PM</strong> · out <strong>Sun Nov 8, 11 AM</strong></div>
+    <div class="meta">🗓️ Free cancellation until ~Tue Nov 3 — later or no-show is the first night. Hotel <a href="tel:18002149110" style="color:var(--blue)">800-214-9110</a></div>
+    <div class="meta">💳 An incidental hold goes on the card at check-in · self-parking available</div>
+  </div>
+  <div class="tip"><strong>Location:</strong> Harrah's shares the promenade with <a href="https://www.caesars.com/linq" style="color:var(--blue)" target="_blank">The LINQ</a> — the <a href="https://www.caesars.com/linq/things-to-do/attractions/high-roller" style="color:var(--blue)" target="_blank">High Roller</a> is a five-minute walk from the room.</div>
+</div>
+
+<!-- CIGARS -->
+<div class="section">
+  <h2><span class="icon">🚬</span> Cigars — Welcome on This Trip</h2>
+  <div class="tip"><strong>Cigars are in.</strong> Both lounges are north on the Strip from Harrah's — an easy rideshare.</div>
+
+  <div class="rec-card">
+    <div class="badge top">FRI NOV 6</div>
+    <div class="name"><a href="https://www.rwlasvegas.com/dining/eight-cigar-lounge/" style="color:inherit;text-decoration:none" target="_blank">🚬 Rob Dietrich "Smoke &amp; Metal" — Eight Lounge</a></div>
+    <div class="desc">Rob Dietrich — Blackened master distiller and longtime Metallica collaborator — hosts "Smoke &amp; Metal" at Eight Cigar Lounge inside Resorts World. <strong>Fri Nov 6, 4–7 PM PT · 21+ · reservations required</strong> (not yet booked).</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Eight+Cigar+Lounge+Resorts+World+3000+S+Las+Vegas+Blvd+Las+Vegas+NV+89109" style="color:var(--blue)" target="_blank">3000 S Las Vegas Blvd</a> (Resorts World) · (702) 676-7405 · <a href="https://www.rwlasvegas.com/dining/eight-cigar-lounge/" style="color:var(--blue)" target="_blank">rwlasvegas.com</a></div>
+  </div>
+
+  <div class="rec-card">
+    <div class="badge near">SHOW DAYS 2–8 PM</div>
+    <div class="name"><a href="https://davidoffcigarbarlv.com/" style="color:inherit;text-decoration:none" target="_blank">🚬 BLACKENED Cigar Happy Hour (Drew Estate)</a></div>
+    <div class="desc">Drew Estate's BLACKENED Cigar Happy Hour at the Davidoff of Geneva Cigar Bar — <strong>2–8 PM on Life Burns Faster show days</strong> (Nov 5 and Nov 7), which lines up with both of your nights at the Sphere.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Davidoff+of+Geneva+Cigar+Bar+3200+S+Las+Vegas+Blvd+%231245+Las+Vegas+NV+89109" style="color:var(--blue)" target="_blank">3200 S Las Vegas Blvd #1245</a>, Fashion Show Mall · (702) 473-5001 · <a href="https://davidoffcigarbarlv.com/" style="color:var(--blue)" target="_blank">davidoffcigarbarlv.com</a></div>
+  </div>
+</div>
+
+<!-- CONTESTS -->
+<div class="section">
+  <h2><span class="icon">🎫</span> Contests — Snake Pit &amp; Meet &amp; Greet</h2>
+  <div class="rec-card">
+    <div class="badge top">ENTER BOTH</div>
+    <div class="name"><a href="https://www.metallica.com/contests" style="color:inherit;text-decoration:none" target="_blank">🐍 Snake Pit + Meet &amp; Greet</a></div>
+    <div class="desc">Two contests run on the same schedule for the Nov 5 and Nov 7 shows. <strong>Fifth Member account required</strong> (free) and <strong>one entry per person</strong>.</div>
+    <div class="meta">🗓️ Opens <strong>Wed Oct 28, 10 AM PT</strong> · closes <strong>Tue Nov 3, 10 AM PT</strong> · winners emailed by end of day Nov 3 PT · <a href="https://www.metallica.com/contests" style="color:var(--blue)" target="_blank">metallica.com/contests</a></div>
+  </div>
+  <div class="warn-tip"><strong>Awkward timing:</strong> the window opens Oct 28 and closes Nov 3 — squarely inside your travel stretch. Enter on Oct 28 before you fly, or from the road — don't leave it to Nov 3.</div>
+</div>
+
+<!-- RESTAURANTS -->
+<div class="section">
+  <h2><span class="icon">🥩</span> Restaurants</h2>
+  <div class="tip"><strong>Dining notes:</strong> the steakhouses book out on show nights — reserve ahead. The Venetian/Palazzo complex is ~0.4 mi from Harrah's, a few minutes' walk.</div>
+
+  <div class="grp">Las Vegas · near Harrah's</div>
+
+  <div class="rec-card">
+    <div class="badge top">TOP PICK</div>
+    <div class="name"><a href="https://www.venetianlasvegas.com/dining/restaurants/cut-by-wolfgang-puck.html" style="color:inherit;text-decoration:none" target="_blank">🥩 CUT by Wolfgang Puck</a></div>
+    <div class="desc">Wolfgang Puck's flagship steakhouse — AAA Four Diamond. USDA Prime 35-day dry-aged and A5 wagyu. The 40 oz bone-in tomahawk is the headline.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/CUT+by+Wolfgang+Puck+The+Palazzo+Las+Vegas" style="color:var(--blue)" target="_blank">The Palazzo</a> · venetianlasvegas.com · reserve ahead</div>
+    <div class="thumbs">
+      <button onclick="vote('rest-cut','up',this)" title="Loved it">👍</button>
+      <button onclick="vote('rest-cut','down',this)" title="Not for me">👎</button>
+    </div>
+  </div>
+
+  <div class="rec-card">
+    <div class="name"><a href="https://www.venetianlasvegas.com/dining/restaurants/delmonico-steakhouse.html" style="color:inherit;text-decoration:none" target="_blank">🥩 Delmonico Steakhouse</a></div>
+    <div class="desc">Emeril Lagasse's Vegas institution. Classic steakhouse with a New Orleans accent — Wine Spectator Grand Award winner. Chateaubriand carved tableside.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Delmonico+Steakhouse+The+Venetian+Las+Vegas" style="color:var(--blue)" target="_blank">The Venetian</a> · venetianlasvegas.com</div>
+    <div class="thumbs">
+      <button onclick="vote('rest-delmonico','up',this)" title="Loved it">👍</button>
+      <button onclick="vote('rest-delmonico','down',this)" title="Not for me">👎</button>
+    </div>
+  </div>
+
+  <div class="rec-card">
+    <div class="badge near">SEAFOOD</div>
+    <div class="name"><a href="https://www.venetianlasvegas.com/dining/restaurants/estiatorio-milos.html" style="color:inherit;text-decoration:none" target="_blank">🐟 estiatorio Milos</a></div>
+    <div class="desc">Market-fresh Mediterranean seafood with a signature fish market. Their three-course prix fixe is widely called the best lunch deal on the Strip — the smart play before a show.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/estiatorio+Milos+The+Venetian+Las+Vegas" style="color:var(--blue)" target="_blank">The Venetian</a> · venetianlasvegas.com</div>
+    <div class="thumbs">
+      <button onclick="vote('rest-milos','up',this)" title="Loved it">👍</button>
+      <button onclick="vote('rest-milos','down',this)" title="Not for me">👎</button>
+    </div>
+  </div>
+
+  <div class="rec-card">
+    <div class="name"><a href="https://www.google.com/maps/search/Mott+32+The+Venetian+Las+Vegas" style="color:inherit;text-decoration:none" target="_blank">🥢 Mott 32</a></div>
+    <div class="desc">The most distinctive table on property — Cantonese, applewood-roasted Peking duck and Iberico pork. Not a steakhouse, but the one dinner that feels like an event.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Mott+32+The+Venetian+Las+Vegas" style="color:var(--blue)" target="_blank">The Venetian</a></div>
+    <div class="thumbs">
+      <button onclick="vote('rest-mott32','up',this)" title="Loved it">👍</button>
+      <button onclick="vote('rest-mott32','down',this)" title="Not for me">👎</button>
+    </div>
+  </div>
+
+  <div class="rec-card">
+    <div class="name"><a href="https://www.google.com/maps/search/Bouchon+Bistro+The+Venetian+Las+Vegas" style="color:inherit;text-decoration:none" target="_blank">🥐 Bouchon Bistro</a></div>
+    <div class="desc">Thomas Keller's French bistro. The breakfast/lunch pick — and Bouchon Bakery next door is the easiest good coffee on property.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Bouchon+Bistro+The+Venetian+Las+Vegas" style="color:var(--blue)" target="_blank">The Venetian, 10th floor</a></div>
+    <div class="thumbs">
+      <button onclick="vote('rest-bouchon','up',this)" title="Loved it">👍</button>
+      <button onclick="vote('rest-bouchon','down',this)" title="Not for me">👎</button>
+    </div>
+  </div>
+
+  <div class="rec-card">
+    <div class="badge award">OLD VEGAS</div>
+    <div class="name"><a href="https://goldensteer.com/" style="color:inherit;text-decoration:none" target="_blank">🥩 The Golden Steer Steakhouse</a></div>
+    <div class="desc">The oldest steakhouse in Las Vegas, serving since 1958 — and the best atmosphere in the city for a steak man. Red leather booths named for Sinatra, Elvis and Ali, tuxedoed servers, Caesar salad made tableside, bananas Foster flambéed at the table. Prime aged beef, wet-aged 35 days.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Golden+Steer+Steakhouse+308+W+Sahara+Ave+Las+Vegas+NV+89102" style="color:var(--blue)" target="_blank">308 W Sahara Ave</a> · ~1 mi from Harrah's · goldensteer.com · <strong>reserve early, it books out</strong></div>
+    <div class="thumbs">
+      <button onclick="vote('rest-goldensteer','up',this)" title="Loved it">👍</button>
+      <button onclick="vote('rest-goldensteer','down',this)" title="Not for me">👎</button>
+    </div>
+  </div>
+</div>
+
+<!-- COFFEE -->
+<div class="section">
+  <h2><span class="icon">☕</span> Coffee</h2>
+  <div class="tip"><strong>On-property fallback:</strong> Bouchon Bakery at The Venetian is the best cup inside the resort. Starbucks is on the casino floor when nothing else is open.</div>
+
+  <div class="grp">Las Vegas</div>
+
+  <div class="rec-card">
+    <div class="badge near">NEAREST</div>
+    <div class="name"><a href="https://www.google.com/maps/search/Aroma+Barista+Bar+300+W+Sahara+Ave+Las+Vegas" style="color:inherit;text-decoration:none" target="_blank">☕ Aroma Barista Bar</a></div>
+    <div class="desc">The closest real espresso bar to Harrah's — about a mile up Sahara. Open 6 AM–6 PM daily, which makes it the one that works before an early call.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Aroma+Barista+Bar+300+W+Sahara+Ave+Las+Vegas" style="color:var(--blue)" target="_blank">300 W Sahara Ave</a></div>
+    <div class="thumbs">
+      <button onclick="vote('coffee-aroma','up',this)" title="Loved it">👍</button>
+      <button onclick="vote('coffee-aroma','down',this)" title="Not for me">👎</button>
+    </div>
+  </div>
+
+  <div class="rec-card">
+    <div class="badge award">BEST CUP</div>
+    <div class="name"><a href="https://www.google.com/maps/search/Vesta+Coffee+Roasters+1114+S+Casino+Center+Blvd+Las+Vegas" style="color:inherit;text-decoration:none" target="_blank">☕ Vesta Coffee Roasters</a></div>
+    <div class="desc">Arts District roastery and the most consistently recommended specialty shop in town — excellent pour-over, direct farm relationships.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Vesta+Coffee+Roasters+1114+S+Casino+Center+Blvd+Las+Vegas" style="color:var(--blue)" target="_blank">1114 S Casino Center Blvd #1</a></div>
+    <div class="thumbs">
+      <button onclick="vote('coffee-vesta','up',this)" title="Loved it">👍</button>
+      <button onclick="vote('coffee-vesta','down',this)" title="Not for me">👎</button>
+    </div>
+  </div>
+
+  <div class="rec-card">
+    <div class="name"><a href="https://www.google.com/maps/search/Yaw+Farm+Coffee+Roaster+7034+W+Charleston+Blvd+Las+Vegas" style="color:inherit;text-decoration:none" target="_blank">☕ Yaw Farm Coffee Roaster</a></div>
+    <div class="desc">Micro-farm beans roasted in house, Wush Wush and Gesha on the menu. Take-out only — a craft-coffee detour, not a sit-down.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Yaw+Farm+Coffee+Roaster+7034+W+Charleston+Blvd+Las+Vegas" style="color:var(--blue)" target="_blank">7034 W Charleston Blvd</a> · Tue–Sat 8 AM–2 PM, closed Sun–Mon</div>
+    <div class="thumbs">
+      <button onclick="vote('coffee-yaw','up',this)" title="Loved it">👍</button>
+      <button onclick="vote('coffee-yaw','down',this)" title="Not for me">👎</button>
+    </div>
+  </div>
+</div>
+
+<!-- RECORDS & VINYL -->
+<div class="section">
+  <h2><span class="icon">🎸</span> Records &amp; Vinyl</h2>
+
+  <div class="rec-card">
+    <div class="badge top">VINYL</div>
+    <div class="name"><a href="https://www.ziarecords.com/" style="color:inherit;text-decoration:none" target="_blank">💿 Zia Records</a></div>
+    <div class="desc">The Southwest's indie record institution since 1980 — new and used vinyl, listening stations, deep metal section. Open 10 AM–10 PM every day.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Zia+Records+1216+S+Rainbow+Blvd+Las+Vegas+NV+89146" style="color:var(--blue)" target="_blank">1216 S Rainbow Blvd</a> · ziarecords.com</div>
+  </div>
+
+  <div class="rec-card">
+    <div class="name"><a href="https://www.11thstreetrecords.net/" style="color:inherit;text-decoration:none" target="_blank">💿 11th Street Records</a></div>
+    <div class="desc">Downtown shop with a recording studio in the back — buy, sell, trade, and in-store sessions. Closed Monday and Tuesday, so Friday or Saturday only.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/11th+Street+Records+1023+E+Fremont+St+Las+Vegas" style="color:var(--blue)" target="_blank">1023 E Fremont St</a> · 11thstreetrecords.net</div>
+  </div>
+</div>
+
+<!-- GYM -->
+<div class="section">
+  <h2><span class="icon">🏋️</span> Gym — Planet Fitness</h2>
+  <div class="warn-tip"><strong>Standing check from Harrah's (3475 S Las Vegas Blvd):</strong> nothing within 2 miles. Nearest is <a href="https://www.google.com/maps/search/Planet+Fitness+4001+S+Decatur+Blvd+Las+Vegas+NV+89103" style="color:var(--blue)" target="_blank">4001 S Decatur Blvd</a> — <strong>2.13 mi</strong> (open &amp; staffed 24/7). Next: 1700 E Flamingo Rd, 2.31 mi · 4780 W Sahara Ave, 2.69 mi.</div>
+  <div class="tip"><strong>Use the hotel instead:</strong> the Harrah's fitness centre is the default on a two-show trip. The 24/7 Decatur club is the fallback if you want a full Planet Fitness session.</div>
+</div>
+
+<!-- LOCAL INTEL -->
+<div class="section">
+  <h2><span class="icon">💡</span> Local Intel</h2>
+  <div class="tip"><strong>Sphere access:</strong> a short walk north of Harrah's (~10–15 min). No car needed for either show.</div>
+  <div class="tip"><strong>High Roller:</strong> the wheel behind the Flamingo — 550 ft, tallest observation wheel in North America. A five-minute walk from the room; ride after dark for the neon.</div>
+  <div class="tip"><strong>Mobile tickets:</strong> the Sphere is mobile-ticket only. The tickets are with Lee — get them loaded into a phone wallet before doors.</div>
+  <div class="tip"><strong>Early exit:</strong> the Nov 8 8:20 AM flight means a ~6 AM hotel departure the morning after the final show. Pack the night before.</div>
+  <div class="tip"><strong>Ongoing:</strong> 🚫 no alcohol — bars and lounges are for atmosphere, food and music, never for drinks. All temps °F.</div>
+</div>
+
+<div class="footer">
+  Atlas Travel Concierge · Auto-refreshes with live updates<br>
+  Last updated: Mon Oct 5, 2026 · <a href="today.html">📍 Today View</a> · <a href="#" onclick="location.reload()">Tap to refresh</a>
+</div>
+
+<script>
+(function() {
+  const depart = new Date('2026-11-05T11:40:00-06:00');
+  const event  = new Date('2026-11-05T20:30:00-08:00');
+  function update() {
+    const now = new Date();
+    const tripStarted = now >= depart;
+    const d = Math.max(0, Math.ceil((depart - now) / 86400000));
+    document.getElementById('countdown-days').textContent = tripStarted ? '🟢' : d;
+    document.getElementById('countdown-label').textContent = tripStarted ? 'TRIP IN PROGRESS' : 'days until departure';
+    document.getElementById('countdown-event').textContent = Math.max(0, Math.ceil((event - now) / 86400000));
+    if (tripStarted) {
+      document.getElementById('countdown-event-label').textContent = 'until the first show';
+    }
+  }
+  update();
+  setInterval(update, 60000);
+})();
+
+function vote(id, dir, btn) {
+  var key = 'atlas_vote_' + id;
+  var current = localStorage.getItem(key);
+  var data = current ? JSON.parse(current) : {up:0, down:0, voted: null};
+  var container = btn.parentElement;
+  var upBtn = container.children[0];
+  var downBtn = container.children[1];
+
+  if (data.voted === dir) {
+    data[dir] = Math.max(0, data[dir] - 1);
+    data.voted = null;
+    upBtn.classList.remove('voted-up');
+    downBtn.classList.remove('voted-down');
+  } else {
+    if (data.voted) {
+      data[data.voted] = Math.max(0, data[data.voted] - 1);
+    }
+    data[dir] = (data[dir] || 0) + 1;
+    data.voted = dir;
+    upBtn.classList.toggle('voted-up', dir === 'up');
+    downBtn.classList.toggle('voted-down', dir === 'down');
+  }
+
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+(function(){
+  document.querySelectorAll('.thumbs').forEach(function(el){
+    var btn = el.querySelector('button');
+    if (!btn) return;
+    var match = btn.getAttribute('onclick').match(/vote\('([^']+)'/);
+    if (!match) return;
+    var id = match[1];
+    var data = JSON.parse(localStorage.getItem('atlas_vote_' + id) || '{"up":0,"down":0,"voted":null}');
+    if (data.voted === 'up') el.children[0].classList.add('voted-up');
+    if (data.voted === 'down') el.children[1].classList.add('voted-down');
+  });
+})();
+</script>
+
+</body>
+</html>

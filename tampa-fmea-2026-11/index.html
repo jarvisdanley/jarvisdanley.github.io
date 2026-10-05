@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tampa — FMEA Energy Connections · Nov 2–3, 2026</title>
+<style>
+  :root {
+    --bg: #0a0a0a; --card: #141414; --border: #222;
+    --text: #e0e0e0; --dim: #888; --accent: #ff6a00;
+    --green: #2ecc71; --red: #e74c3c; --blue: #3498db;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.5;
+    max-width: 480px; margin: 0 auto; padding: 16px 16px 40px;
+    -webkit-text-size-adjust: 100%;
+  }
+  .header { text-align: center; padding: 20px 0 12px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+  .header h1 { font-size: 1.5rem; font-weight: 700; }
+  .header .dates { color: var(--dim); font-size: 0.9rem; margin-top: 4px; }
+  .header .emoji { font-size: 2.5rem; display: block; margin-bottom: 4px; }
+  .status-bar { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; }
+  .status-pill { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 0.8rem; white-space: nowrap; flex-shrink: 0; }
+  .status-pill.good { border-color: var(--green); color: var(--green); }
+  .status-pill.warn { border-color: var(--accent); color: var(--accent); }
+  .section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 14px; }
+  .section h2 { font-size: 1rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .section h2 .icon { font-size: 1.2rem; }
+  .section.spotlight { border-color: var(--accent); background: linear-gradient(180deg, rgba(255,106,0,0.06), var(--card)); }
+  .update { padding: 10px; background: rgba(255,106,0,0.08); border-radius: 8px; margin-bottom: 8px; font-size: 0.85rem; }
+  .update .time { color: var(--accent); font-weight: 600; }
+  .flight-row { display: grid; grid-template-columns: 48px 1fr; gap: 8px; align-items: start; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .flight-row:last-child { border-bottom: none; }
+  .flight-icon { background: var(--bg); border-radius: 8px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .flight-info .route { font-weight: 600; font-size: 0.9rem; }
+  .flight-info .detail { font-size: 0.78rem; color: var(--dim); }
+  .day-block { margin-bottom: 14px; }
+  .day-block:last-child { margin-bottom: 0; }
+  .day-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; margin-bottom: 4px; }
+  .day-event { padding: 8px 10px; background: var(--bg); border-radius: 6px; margin-bottom: 4px; font-size: 0.85rem; }
+  .day-event .time { font-weight: 600; color: var(--accent); }
+  .rec-card { padding: 12px; background: var(--bg); border-radius: 8px; margin-bottom: 8px; position: relative; }
+  .rec-card .name { font-weight: 600; }
+  .rec-card .desc { font-size: 0.8rem; color: var(--dim); margin-top: 4px; }
+  .rec-card .meta { font-size: 0.75rem; color: var(--dim); margin-top: 4px; }
+  .rec-card .badge { position: absolute; top: 10px; right: 12px; font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+  .badge.top { background: rgba(255,106,0,0.2); color: var(--accent); }
+  .badge.near { background: rgba(52,152,219,0.2); color: var(--blue); }
+  .badge.award { background: rgba(46,204,113,0.2); color: var(--green); }
+  .badge.nut { background: rgba(231,76,60,0.2); color: var(--red); }
+  .tip { font-size: 0.82rem; padding: 8px 12px; background: rgba(52,152,219,0.08); border-radius: 8px; margin-bottom: 6px; }
+  .tip strong { color: var(--blue); }
+  .warn-tip { font-size: 0.82rem; padding: 8px 12px; background: rgba(255,106,0,0.08); border-radius: 8px; margin-bottom: 6px; }
+  .warn-tip strong { color: var(--accent); }
+  .countdown { text-align: center; padding: 10px; font-size: 0.9rem; }
+  .countdown .num { font-size: 2rem; font-weight: 800; color: var(--accent); }
+  .footer { text-align: center; font-size: 0.7rem; color: var(--dim); margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+  .footer a { color: var(--accent); }
+  .thumbs { display: flex; gap: 4px; margin-top: 8px; }
+  .thumbs button {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--dim); font-size: 0.9rem; padding: 3px 8px; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .thumbs button:hover { border-color: var(--accent); }
+  .thumbs button.voted-up { background: rgba(46,204,113,0.15); border-color: var(--green); color: var(--green); }
+  .thumbs button.voted-down { background: rgba(231,76,60,0.15); border-color: var(--red); color: var(--red); }
+  .grp { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--dim); font-weight: 700; margin: 12px 0 6px; }
+  .grp:first-child { margin-top: 0; }
+  .section ul { margin: 0 0 4px 20px; }
+  .section ul li { font-size: 0.82rem; color: var(--dim); margin-bottom: 6px; }
+  .section ul li strong { color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="emoji">🎤</span>
+  <h1>Tampa — FMEA Energy Connections</h1>
+  <div class="dates">Nov 2–3, 2026 · KC → TPA → KC</div>
+</div>
+
+<div class="status-bar">
+  <span class="status-pill good">✈️ 2 Flights Booked</span>
+  <span class="status-pill good">🏨 Grand Hyatt 1 Night</span>
+  <span class="status-pill good">🎤 Speaking Tue 10:15 AM</span>
+  <span class="status-pill warn">⏭️ Skips Nov 3 afternoon</span>
+  <span class="status-pill warn">🏋️ No PF Within 2 mi</span>
+</div>
+
+<!-- ATLAS UPDATES -->
+<div class="section">
+  <h2><span class="icon">🤖</span> Atlas Updates</h2>
+  <div class="update">
+    <div class="time">Mon Oct 5</div>
+    Everything booked through <strong>Acendas / Burns &amp; McDonnell</strong> — outbound <strong>WN 1369</strong>, the <strong>Grand Hyatt Tampa Bay</strong> (1 night), and home on <strong>WN 4966</strong>. Session date corrected to <strong>Tue Nov 3</strong>.
+  </div>
+  <div class="update">
+    <div class="time">Fri Oct 2</div>
+    Scope settled: this leg is its <strong>own trip</strong>, separate from the Minneapolis–Vegas run. One night in Tampa is correct — the booking matches the schedule, not a gap in it.
+  </div>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="section">
+  <h2><span class="icon">⏱️</span> Countdown</h2>
+  <div class="countdown">
+    <div class="num" id="countdown-days">X</div>
+    <div id="countdown-label">days until departure</div>
+    <div style="margin-top:6px;font-size:0.75rem;color:var(--dim)">
+      You speak in <span id="countdown-event" style="color:var(--accent);font-weight:600">X</span> <span id="countdown-event-label">days</span>
+    </div>
+  </div>
+</div>
+
+<!-- SPEAKING -->
+<div class="section spotlight">
+  <h2><span class="icon">🎤</span> Your Session — Tuesday 10:15 AM</h2>
+  <div class="rec-card">
+    <div class="badge top">CENTERPIECE</div>
+    <div class="name"><a href="https://www.flpublicpower.com/events/2026-fmea-energy-connections-conference-and-trade-show" style="color:inherit;text-decoration:none" target="_blank">🎤 FMEA Energy Connections — Jeff Speaks</a></div>
+    <div class="desc">Jeff presents on behalf of <strong>Burns &amp; McDonnell</strong> — <strong>Tue Nov 3, 10:15–11:00 AM EST</strong>, inside the Day 1 general-session block (9:00 AM–12:00 PM). This is the reason for the trip.</div>
+    <div class="meta">📍 Venue: <a href="https://www.google.com/maps/search/Grand+Hyatt+Tampa+Bay+2900+Bayport+Dr+Tampa+FL+33607" style="color:var(--blue)" target="_blank">Grand Hyatt Tampa Bay, 2900 Bayport Dr</a> — the conference hotel is the venue · <a href="https://www.flpublicpower.com/" style="color:var(--blue)" target="_blank">flpublicpower.com</a></div>
+    <div class="meta">🗓️ Conference runs <strong>Nov 3–4</strong> · Day 1: 9 AM–12 PM general sessions · 12–2 PM Awards Luncheon · 2–4 PM breakouts · 4:30–6:30 PM trade show · 7–9 PM networking dinner</div>
+  </div>
+  <div class="warn-tip"><strong>Schedule note (not a problem):</strong> your return is booked for Nov 3 right after your session, so you'll miss the Nov 3 afternoon breakouts, the trade show and the 7–9 PM networking dinner, and you won't be there for Day 2 (Nov 4). That's the intended plan — just flagging it so there are no surprises.</div>
+  <div class="tip"><strong>Day 1 AM block:</strong> you're inside the 9:00 AM–12:00 PM general session. Arrive with time to settle — registration and the conference floor are all under the same roof as the hotel. Off stage at 11:00 AM leaves a comfortable ~3 hours before the 2:10 PM departure.</div>
+</div>
+
+<!-- FLIGHTS -->
+<div class="section">
+  <h2><span class="icon">✈️</span> Flights</h2>
+
+  <div class="flight-row">
+    <div class="flight-icon">🛫</div>
+    <div class="flight-info">
+      <div class="route">Mon Nov 2 · Southwest <a href="https://www.google.com/maps/search/Kansas+City+International+Airport+MCI" style="color:inherit;text-decoration:underline" target="_blank">MCI</a> → <a href="https://www.google.com/maps/search/Tampa+International+Airport+TPA" style="color:inherit;text-decoration:underline" target="_blank">TPA</a></div>
+      <div class="detail">
+        <strong>WN 1369</strong> · nonstop, 2h 30m · Boeing 7S7 · Wanna Get Away<br>
+        MCI 2:40 PM CST → TPA 6:10 PM EST · <strong>seat 4D</strong> · Conf <strong>BYMMAX</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="flight-row">
+    <div class="flight-icon">🛬</div>
+    <div class="flight-info">
+      <div class="route">Tue Nov 3 · Southwest <a href="https://www.google.com/maps/search/Tampa+International+Airport+TPA" style="color:inherit;text-decoration:underline" target="_blank">TPA</a> → <a href="https://www.google.com/maps/search/Kansas+City+International+Airport+MCI" style="color:inherit;text-decoration:underline" target="_blank">MCI</a></div>
+      <div class="detail">
+        <strong>WN 4966</strong> · 2h 55m · Boeing 7M8 · <strong>seat 2F</strong> · Conf <strong>BYMMAX</strong><br>
+        TPA 2:10 PM EST → <strong>Kansas City 4:05 PM CST</strong>
+      </div>
+    </div>
+  </div>
+  <div class="tip"><strong>Timezone:</strong> Tampa runs an hour ahead of KC. Eastbound you lose an hour (land 6:10 PM EST); westbound you gain it back (arrive MCI 4:05 PM CST).</div>
+  <div class="tip"><strong>Airport:</strong> the Grand Hyatt sits in the Rocky Point / airport district, ~2 mi from <a href="https://www.google.com/maps/search/Tampa+International+Airport+TPA" style="color:var(--blue)" target="_blank">TPA</a> — a short rideshare either way.</div>
+</div>
+
+<!-- ITINERARY -->
+<div class="section">
+  <h2><span class="icon">📅</span> Itinerary</h2>
+
+  <div class="day-block">
+    <div class="day-label">Mon Nov 2 — KC → Tampa</div>
+    <div class="day-event"><span class="time">2:40 PM CST</span> — WN 1369 departs <a href="https://www.google.com/maps/search/Kansas+City+International+Airport+MCI" style="color:var(--blue)" target="_blank">MCI</a> (seat 4D)</div>
+    <div class="day-event"><span class="time">6:10 PM EST</span> — Land <a href="https://www.google.com/maps/search/Tampa+International+Airport+TPA" style="color:var(--blue)" target="_blank">TPA</a></div>
+    <div class="day-event"><span class="time">~7:00 PM</span> — 🏨 Check in at the <a href="https://www.google.com/maps/search/Grand+Hyatt+Tampa+Bay+2900+Bayport+Dr+Tampa+FL+33607" style="color:var(--blue)" target="_blank">Grand Hyatt Tampa Bay</a></div>
+    <div class="day-event"><span class="time">Evening</span> — Dinner with Rich Zinser</div>
+  </div>
+
+  <div class="day-block">
+    <div class="day-label">Tue Nov 3 — Speak → Fly Home</div>
+    <div class="day-event"><span class="time">9:00 AM EST</span> — Day 1 general sessions open, <a href="https://www.google.com/maps/search/Grand+Hyatt+Tampa+Bay+2900+Bayport+Dr+Tampa+FL+33607" style="color:var(--blue)" target="_blank">Grand Hyatt Tampa Bay</a></div>
+    <div class="day-event"><span class="time">10:15 AM</span> — 🎤 <strong>JEFF SPEAKS</strong> (10:15–11:00 AM EST)</div>
+    <div class="day-event"><span class="time">11:00 AM</span> — Off stage</div>
+    <div class="day-event"><span class="time">2:10 PM EST</span> — WN 4966 departs <a href="https://www.google.com/maps/search/Tampa+International+Airport+TPA" style="color:var(--blue)" target="_blank">TPA</a> (seat 2F)</div>
+    <div class="day-event"><span class="time">4:05 PM CST</span> — Land <a href="https://www.google.com/maps/search/Kansas+City+International+Airport+MCI" style="color:var(--blue)" target="_blank">MCI</a>, home</div>
+  </div>
+</div>
+
+<!-- HOTEL -->
+<div class="section">
+  <h2><span class="icon">🏨</span> Hotel</h2>
+  <div class="rec-card">
+    <div class="badge award">CONFIRMED</div>
+    <div class="name"><a href="https://www.hyatt.com/en-US/hotel/florida/grand-hyatt-tampa-bay/tparw" style="color:inherit;text-decoration:none" target="_blank">🏨 Grand Hyatt Tampa Bay</a></div>
+    <div class="desc">The conference hotel — and the venue, so you never leave the building. 1 King Bay View · 1 night · 1 guest. Reservation <strong>151199RA052928-</strong>.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Grand+Hyatt+Tampa+Bay+2900+Bayport+Dr+Tampa+FL+33607" style="color:var(--blue)" target="_blank">2900 Bayport Dr, Tampa FL 33607</a> · check-in <strong>Mon Nov 2</strong> · out <strong>Tue Nov 3</strong></div>
+    <div class="meta">📞 <a href="tel:18138741234" style="color:var(--blue)">813-874-1234</a> · <a href="https://www.hyatt.com/en-US/hotel/florida/grand-hyatt-tampa-bay/tparw" style="color:var(--blue)" target="_blank">hyatt.com</a></div>
+    <div class="meta">🗓️ Cancel at least <strong>3 days before arrival</strong> (by Fri Oct 30) or the penalty is one night incl. tax and fees.</div>
+  </div>
+  <div class="tip"><strong>Location:</strong> Bayport Dr is the Rocky Point / airport district — ~2 mi from TPA, on the bay, not downtown. The drive from the airport is the shortest leg of the trip.</div>
+</div>
+
+<!-- RESTAURANTS -->
+<div class="section">
+  <h2><span class="icon">🥩</span> Restaurants</h2>
+  <div class="tip"><strong>Dining notes:</strong> Monday is the one dinner night. Bern's Steak House (the famous one) is <strong>closed Mondays</strong> — Charley's is the steakhouse that's actually open. Oystercatchers is on property, so it wins on zero travel.</div>
+
+  <div class="rec-card">
+    <div class="badge top">ON PROPERTY</div>
+    <div class="name"><a href="https://www.oystercatchersrestaurant.com/" style="color:inherit;text-decoration:none" target="_blank">🦪 Oystercatchers</a></div>
+    <div class="desc">Waterfront seafood on the hotel's own bay shore since 1986 — Gulf Coast oysters, line-caught fish, sunset decks. The one dinner that requires no car.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Oystercatchers+2900+Bayport+Dr+Tampa+FL+33607" style="color:var(--blue)" target="_blank">2900 Bayport Dr (at the Grand Hyatt)</a> · lunch Mon–Sat 11:30 AM–2:30 PM · dinner Mon–Thu &amp; Sun 5:30–9 PM, Fri–Sat till 10 PM · <a href="https://www.oystercatchersrestaurant.com/" style="color:var(--blue)" target="_blank">oystercatchersrestaurant.com</a></div>
+    <div class="thumbs">
+      <button onclick="vote('rest-oystercatchers','up',this)" title="Loved it">👍</button>
+      <button onclick="vote('rest-oystercatchers','down',this)" title="Not for me">👎</button>
+    </div>
+  </div>
+
+  <div class="rec-card">
+    <div class="badge award">STEAK · OPEN MONDAY</div>
+    <div class="name"><a href="https://www.charleyssteakhouse.com/location-tampa/" style="color:inherit;text-decoration:none" target="_blank">🥩 Charley's Steak House</a></div>
+    <div class="desc">USDA Prime and Choice Angus, hand-cut and aged in-house, grilled over a 1,200° wood pit fired with Florida citrus and oak. The Westshore steakhouse that's actually open on a Monday night.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Charleys+Steak+House+4444+W+Cypress+St+Tampa+FL+33607" style="color:var(--blue)" target="_blank">4444 W Cypress St, Tampa FL 33607</a> · Sun–Thu 5–9:30 PM, Fri–Sat 5–10 PM · ~4 mi from the hotel · <a href="https://www.charleyssteakhouse.com/location-tampa/" style="color:var(--blue)" target="_blank">charleyssteakhouse.com</a></div>
+    <div class="thumbs">
+      <button onclick="vote('rest-charleys','up',this)" title="Loved it">👍</button>
+      <button onclick="vote('rest-charleys','down',this)" title="Not for me">👎</button>
+    </div>
+  </div>
+
+  <div class="rec-card">
+    <div class="badge near">CASUAL · WATERFRONT</div>
+    <div class="name"><a href="https://www.thewhiskeyjoes.com/whiskey-joes-tampa-fl" style="color:inherit;text-decoration:none" target="_blank">🍤 Whiskey Joe's Bar &amp; Grill</a></div>
+    <div class="desc">Tampa's beach-bar institution on the Courtney Campbell Causeway — the grouper sandwich is the signature, with sand, sunset decks and live music.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Whiskey+Joes+Bar+and+Grill+7720+W+Courtney+Campbell+Causeway+Tampa+FL+33607" style="color:var(--blue)" target="_blank">7720 W Courtney Campbell Causeway, Tampa FL 33607</a> · Mon–Thu &amp; Sun 11 AM–10:30 PM, Fri–Sat till 12 AM · ~1 mi from the hotel · <a href="https://www.thewhiskeyjoes.com/whiskey-joes-tampa-fl" style="color:var(--blue)" target="_blank">thewhiskeyjoes.com</a></div>
+    <div class="thumbs">
+      <button onclick="vote('rest-whiskeyjoes','up',this)" title="Loved it">👍</button>
+      <button onclick="vote('rest-whiskeyjoes','down',this)" title="Not for me">👎</button>
+    </div>
+  </div>
+
+  <div class="rec-card">
+    <div class="name"><a href="https://www.bahamabreeze.com/locations/fl/tampa/tampa/3004" style="color:inherit;text-decoration:none" target="_blank">🌴 Bahama Breeze Island Grille</a></div>
+    <div class="desc">Caribbean island grille on Rocky Point — jerk chicken, seafood, tropical drinks and a big waterfront deck. Open till midnight, so it's the late-arrival fallback on Monday.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Bahama+Breeze+3045+N+Rocky+Point+Dr+E+Tampa+FL+33607" style="color:var(--blue)" target="_blank">3045 N Rocky Point Dr E, Tampa FL 33607</a> · Mon–Thu &amp; Sun 11 AM–12 AM, Fri–Sat till 2 AM · ~1 mi from the hotel · <a href="https://www.bahamabreeze.com/locations/fl/tampa/tampa/3004" style="color:var(--blue)" target="_blank">bahamabreeze.com</a></div>
+    <div class="thumbs">
+      <button onclick="vote('rest-bahamabreeze','up',this)" title="Loved it">👍</button>
+      <button onclick="vote('rest-bahamabreeze','down',this)" title="Not for me">👎</button>
+    </div>
+  </div>
+</div>
+
+<!-- COFFEE -->
+<div class="section">
+  <h2><span class="icon">☕</span> Coffee</h2>
+  <div class="tip"><strong>Tuesday morning is the play:</strong> coffee before the 9 AM block, then you're on stage at 10:15. Buddy Brew at the Current Hotel is the closest real cup and opens at 6 AM.</div>
+
+  <div class="rec-card">
+    <div class="badge near">NEAREST</div>
+    <div class="name"><a href="https://www.buddybrew.com/" style="color:inherit;text-decoration:none" target="_blank">☕ Buddy Brew Coffee — Current Hotel</a></div>
+    <div class="desc">The closest specialty coffee to the Grand Hyatt, tucked in the Current Hotel lobby. Opens 6 AM, so it works before the 9 AM block.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Buddy+Brew+Coffee+2545+N+Rocky+Point+Dr+Tampa+FL+33607" style="color:var(--blue)" target="_blank">2545 N Rocky Point Dr, Tampa FL 33607</a> · ~1 mi from the hotel · <a href="https://www.buddybrew.com/" style="color:var(--blue)" target="_blank">buddybrew.com</a></div>
+    <div class="thumbs">
+      <button onclick="vote('coffee-buddybrew','up',this)" title="Loved it">👍</button>
+      <button onclick="vote('coffee-buddybrew','down',this)" title="Not for me">👎</button>
+    </div>
+  </div>
+
+  <div class="rec-card">
+    <div class="badge award">TAMPA ROASTER</div>
+    <div class="name"><a href="https://kahwacoffee.com/" style="color:inherit;text-decoration:none" target="_blank">☕ Kahwa Coffee — Kennedy Blvd</a></div>
+    <div class="desc">Tampa's small-batch roaster, served fresh — with a drive-thru, so it's the grab-and-go option on the way to or from the hotel.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/Kahwa+Coffee+2802+W+Kennedy+Blvd+Tampa+FL+33609" style="color:var(--blue)" target="_blank">2802 W Kennedy Blvd, Tampa FL 33609</a> · drive-thru · <a href="https://kahwacoffee.com/" style="color:var(--blue)" target="_blank">kahwacoffee.com</a></div>
+    <div class="thumbs">
+      <button onclick="vote('coffee-kahwa','up',this)" title="Loved it">👍</button>
+      <button onclick="vote('coffee-kahwa','down',this)" title="Not for me">👎</button>
+    </div>
+  </div>
+</div>
+
+<!-- GYM -->
+<div class="section">
+  <h2><span class="icon">🏋️</span> Gym — Planet Fitness</h2>
+  <div class="warn-tip"><strong>Standing check, run from the booked hotel (2900 Bayport Dr):</strong> nothing within 2 miles. Nearest is <a href="https://www.google.com/maps/search/Planet+Fitness+10055+W+Hillsborough+Ave+Tampa+FL+33615" style="color:var(--blue)" target="_blank">10055 W Hillsborough Ave, Tampa FL 33615</a> (Town 'N' Country) — <strong>~2.9 mi straight-line</strong>, ~10 min by car. Hours: Mon–Thu 24h, Fri till 9 PM, Sat–Sun 7 AM–7 PM · <a href="https://www.planetfitness.com/gyms/tampa-town-n-country-fl" style="color:var(--blue)" target="_blank">planetfitness.com</a>.</div>
+  <div class="tip"><strong>Use the hotel instead:</strong> the Grand Hyatt has its own on-site fitness center, and on a one-night stay with a 10:15 AM session there's no realistic window to drive to a club anyway. The 24-hour Monday window only matters if you want a late-night session after dinner.</div>
+</div>
+
+<!-- LOCAL INTEL -->
+<div class="section">
+  <h2><span class="icon">💡</span> Local Intel</h2>
+  <div class="tip"><strong>Timezone:</strong> Tampa is Eastern (EST). Your 2:40 PM CST departure lands as 6:10 PM EST — build the +1h into Monday's dinner timing.</div>
+  <div class="tip"><strong>Dress:</strong> this is a business trip — you're presenting on behalf of Burns &amp; McDonnell. Business attire for the session.</div>
+  <div class="tip"><strong>One building:</strong> the hotel, the conference and Oystercatchers are all under the same roof. The only time you leave the property is for dinner Monday and the airport Tuesday.</div>
+  <div class="tip"><strong>Ongoing:</strong> 🚫 no alcohol — bars are for atmosphere and food. All temps °F.</div>
+</div>
+
+<div class="footer">
+  Atlas Travel Concierge · Auto-refreshes with live updates<br>
+  Last updated: Mon Oct 5, 2026 · <a href="#" onclick="location.reload()">Tap to refresh</a>
+</div>
+
+<script>
+(function() {
+  const depart = new Date('2026-11-02T14:40:00-06:00');
+  const event  = new Date('2026-11-03T10:15:00-05:00');
+  function update() {
+    const now = new Date();
+    const tripStarted = now >= depart;
+    const d = Math.max(0, Math.ceil((depart - now) / 86400000));
+    document.getElementById('countdown-days').textContent = tripStarted ? '🟢' : d;
+    document.getElementById('countdown-label').textContent = tripStarted ? 'TRIP IN PROGRESS' : 'days until departure';
+    document.getElementById('countdown-event').textContent = Math.max(0, Math.ceil((event - now) / 86400000));
+    if (tripStarted) {
+      document.getElementById('countdown-event-label').textContent = 'until you speak';
+    }
+  }
+  update();
+  setInterval(update, 60000);
+})();
+
+function vote(id, dir, btn) {
+  var key = 'atlas_vote_' + id;
+  var current = localStorage.getItem(key);
+  var data = current ? JSON.parse(current) : {up:0, down:0, voted: null};
+  var container = btn.parentElement;
+  var upBtn = container.children[0];
+  var downBtn = container.children[1];
+
+  if (data.voted === dir) {
+    data[dir] = Math.max(0, data[dir] - 1);
+    data.voted = null;
+    upBtn.classList.remove('voted-up');
+    downBtn.classList.remove('voted-down');
+  } else {
+    if (data.voted) {
+      data[data.voted] = Math.max(0, data[data.voted] - 1);
+    }
+    data[dir] = (data[dir] || 0) + 1;
+    data.voted = dir;
+    upBtn.classList.toggle('voted-up', dir === 'up');
+    downBtn.classList.toggle('voted-down', dir === 'down');
+  }
+
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+(function(){
+  document.querySelectorAll('.thumbs').forEach(function(el){
+    var btn = el.querySelector('button');
+    if (!btn) return;
+    var match = btn.getAttribute('onclick').match(/vote\('([^']+)'/);
+    if (!match) return;
+    var id = match[1];
+    var data = JSON.parse(localStorage.getItem('atlas_vote_' + id) || '{"up":0,"down":0,"voted":null}');
+    if (data.voted === 'up') el.children[0].classList.add('voted-up');
+    if (data.voted === 'down') el.children[1].classList.add('voted-down');
+  });
+})();
+</script>
+
+</body>
+</html>

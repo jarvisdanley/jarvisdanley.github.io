@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Today · Las Vegas — Metallica at Sphere</title>
+<style>
+  :root {
+    --bg: #0a0a0a; --card: #141414; --border: #222;
+    --text: #e0e0e0; --dim: #888; --accent: #ff6a00;
+    --green: #2ecc71; --red: #e74c3c; --blue: #3498db;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.5;
+    max-width: 480px; margin: 0 auto; padding: 16px 16px 40px;
+    -webkit-text-size-adjust: 100%;
+  }
+  .header { text-align: center; padding: 16px 0 12px; border-bottom: 1px solid var(--border); margin-bottom: 12px; }
+  .header .day-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; }
+  .header h1 { font-size: 1.3rem; font-weight: 700; margin: 4px 0; }
+  .header .date { color: var(--dim); font-size: 0.85rem; }
+  .status-bar { display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; }
+  .status-pill { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 4px 10px; font-size: 0.72rem; white-space: nowrap; flex-shrink: 0; }
+  .status-pill.good { border-color: var(--green); color: var(--green); }
+  .status-pill.warn { border-color: var(--accent); color: var(--accent); }
+  .section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+  .section h2 { font-size: 0.95rem; margin-bottom: 8px; }
+  .weather-row { display: flex; gap: 8px; overflow-x: auto; }
+  .weather-day { background: var(--bg); border-radius: 8px; padding: 8px 12px; text-align: center; min-width: 80px; flex-shrink: 0; }
+  .weather-day .day { font-size: 0.65rem; color: var(--dim); text-transform: uppercase; }
+  .weather-day .hi { font-weight: 700; font-size: 1.1rem; }
+  .weather-day .lo { font-size: 0.7rem; color: var(--dim); }
+  .weather-day .rain { font-size: 0.65rem; color: var(--blue); }
+  .event { padding: 8px 10px; background: var(--bg); border-radius: 6px; margin-bottom: 4px; font-size: 0.85rem; }
+  .event .time { font-weight: 600; color: var(--accent); }
+  .rec-card { padding: 10px; background: var(--bg); border-radius: 8px; margin-bottom: 6px; }
+  .rec-card .name { font-weight: 600; }
+  .rec-card .meta { font-size: 0.72rem; color: var(--dim); margin-top: 2px; }
+  .tip { font-size: 0.8rem; padding: 8px 12px; background: rgba(52,152,219,0.08); border-radius: 8px; margin-bottom: 6px; }
+  .tip strong { color: var(--blue); }
+  .warn-tip { font-size: 0.8rem; padding: 8px 12px; background: rgba(255,106,0,0.08); border-radius: 8px; margin-bottom: 6px; }
+  .warn-tip strong { color: var(--accent); }
+  .thumbs { display: flex; gap: 4px; margin-top: 6px; }
+  .thumbs button {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--dim); font-size: 0.85rem; padding: 2px 6px; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .thumbs button:hover { border-color: var(--accent); }
+  .thumbs button.voted-up { background: rgba(46,204,113,0.15); border-color: var(--green); color: var(--green); }
+  .thumbs button.voted-down { background: rgba(231,76,60,0.15); border-color: var(--red); color: var(--red); }
+  .footer { text-align: center; font-size: 0.65rem; color: var(--dim); margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="day-label" id="day-label">Loading...</div>
+  <h1>Las Vegas — Metallica at Sphere</h1>
+  <div class="date" id="day-date"></div>
+</div>
+
+<div class="status-bar" id="status-bar"></div>
+
+<div class="section" id="warn-section" style="display:none">
+  <div class="warn-tip" id="warn-content"></div>
+</div>
+
+<div class="section" id="weather-section">
+  <h2>🌤️ Weather <span style="font-size:0.65rem;color:var(--dim);font-weight:400">· seasonal normals until T-7</span></h2>
+  <div class="weather-row" id="weather-content"></div>
+</div>
+
+<div class="section" id="timeline-section">
+  <h2>📅 Today</h2>
+  <div id="timeline-content"></div>
+</div>
+
+<div class="section" id="food-section">
+  <h2>🥩 Eat &amp; Drink</h2>
+  <div id="food-content"></div>
+</div>
+
+<div class="section" id="transit-section" style="display:none">
+  <h2>🚊 Getting Around</h2>
+  <div id="transit-content"></div>
+</div>
+
+<div class="section" id="tip-section">
+  <h2>💡 Atlas's Tip</h2>
+  <div class="tip" id="tip-content"></div>
+</div>
+
+<div class="footer">
+  Atlas Travel Concierge · <a href="index.html">📍 Full Briefing</a> · <a href="https://jarvisdanley.github.io">🏠 All Trips</a>
+</div>
+
+<script>
+var TRIP = {
+  start: '2026-11-05',
+  end: '2026-11-08',
+  days: [
+    {
+      date: '2026-11-05',
+      label: 'Thursday · KC → Vegas · Night 3 🎸',
+      weather: { hi: 68, lo: 48, icon: '☀️', rain: 5 },
+      pills: [
+        { text: '✈️ WN 474 11:40am', cls: 'good' },
+        { text: '🏨 Check-in 4pm', cls: 'good' },
+        { text: '🎫 Tix w/ Lee', cls: 'warn' },
+        { text: '🎸 Night 3 8:30pm', cls: 'good' }
+      ],
+      warn: 'The Sphere is <strong>mobile-ticket only</strong> and the tickets are with <strong>Lee</strong>. Coordinate the wallet handoff before doors tonight.',
+      timeline: [
+        { time: '11:40 AM', text: 'Depart MCI on WN 474 (nonstop)' },
+        { time: '12:45 PM PT', text: 'Land LAS' },
+        { time: '4:00 PM PT', text: '🏨 Check in at Harrah\'s (Valley Deluxe 2 Queens)' },
+        { time: '7:00 PM PT', text: '🎪 Doors @ Sphere — walkable, ~10–15 min north' },
+        { time: '8:30 PM PT', text: '🎸 METALLICA — Life Burns Faster, Night 3' }
+      ],
+      transit: [
+        'LAS → Harrah\'s: ~2 mi · taxi or rideshare',
+        'Harrah\'s → Sphere: ~10–15 min walk, no car needed',
+        'Doors are 90 minutes before showtime'
+      ],
+      tip: 'You land at 12:45 PM PT, which clears the 4 PM check-in and 7 PM doors with room to spare. The Sphere is a short walk north of Harrah\'s, so tonight is walkable both ways — no rideshare on a show night. Get the mobile tickets (with Lee) into a phone wallet before you leave.',
+      food: [
+        { name: 'Bouchon Bistro', url: 'https://www.google.com/maps/search/Bouchon+Bistro+The+Venetian+Las+Vegas', meta: '📍 The Venetian, 10th floor · Thomas Keller · the easy, excellent pre-show meal', id: 'today-lv-bouchon' },
+        { name: 'estiatorio Milos', url: 'https://www.venetianlasvegas.com/dining/restaurants/estiatorio-milos.html', meta: '📍 The Venetian · market-fresh seafood · best prix fixe lunch on the Strip', id: 'today-lv-milos' },
+        { name: 'Aroma Barista Bar', url: 'https://www.google.com/maps/search/Aroma+Barista+Bar+300+W+Sahara+Ave+Las+Vegas', meta: '📍 300 W Sahara Ave · closest espresso bar · 6 AM–6 PM', id: 'today-lv-aroma' }
+      ]
+    },
+    {
+      date: '2026-11-06',
+      label: 'Friday · Vegas · no show · cigar day',
+      weather: { hi: 67, lo: 47, icon: '☀️', rain: 5 },
+      pills: [
+        { text: '🚬 Smoke & Metal 4–7pm', cls: 'good' },
+        { text: '🎡 High Roller', cls: 'good' },
+        { text: '🎫 No show tonight', cls: 'good' }
+      ],
+      warn: 'Reservations are <strong>required</strong> for "Smoke & Metal" at Eight Lounge and it is <strong>not yet booked</strong>. Book before the Life Burns Faster weekend fills it.',
+      timeline: [
+        { time: 'Afternoon', text: '🎡 High Roller at The LINQ — a five-minute walk from the room' },
+        { time: '4:00–7:00 PM PT', text: '🚬 Rob Dietrich "Smoke & Metal" @ Eight Lounge, Resorts World — 21+, reservations required' }
+      ],
+      transit: [
+        'Eight Lounge (Resorts World) is north on the Strip — an easy rideshare from Harrah\'s',
+        'High Roller at The LINQ is a 5-min walk'
+      ],
+      tip: 'Your one show-free day. The High Roller at The LINQ is a five-minute walk from the room — ride it after dark for the neon. Then the main event: <strong>Rob Dietrich\'s "Smoke &amp; Metal"</strong> at Eight Lounge in Resorts World, 4–7 PM. It is 21+ and reservations are required, so book it. Both cigar spots are north on the Strip.',
+      food: [
+        { name: 'The Golden Steer Steakhouse', url: 'https://goldensteer.com/', meta: '📍 308 W Sahara Ave · oldest steakhouse in Vegas, since 1958 · reserve early', id: 'today-lv-goldensteer' },
+        { name: 'CUT by Wolfgang Puck', url: 'https://www.venetianlasvegas.com/dining/restaurants/cut-by-wolfgang-puck.html', meta: '📍 The Palazzo · AAA Four Diamond · the 40 oz tomahawk is the headline', id: 'today-lv-cut' },
+        { name: 'Vesta Coffee Roasters', url: 'https://www.google.com/maps/search/Vesta+Coffee+Roasters+1114+S+Casino+Center+Blvd+Las+Vegas', meta: '📍 1114 S Casino Center Blvd · Arts District pour-over', id: 'today-lv-vesta' }
+      ]
+    },
+    {
+      date: '2026-11-07',
+      label: 'Saturday · Vegas · Night 4 🎸',
+      weather: { hi: 67, lo: 47, icon: '☀️', rain: 5 },
+      pills: [
+        { text: '🚬 BLACKENED 2–8pm', cls: 'good' },
+        { text: '🎸 Night 4 8:30pm', cls: 'good' },
+        { text: '⏰ Pack tonight', cls: 'warn' }
+      ],
+      warn: 'Set lists are <strong>completely different from Thursday</strong> — that is the No Repeat Weekend draw. Doors are 7:00 PM.',
+      timeline: [
+        { time: '2:00–8:00 PM PT', text: '🚬 BLACKENED Cigar Happy Hour @ Davidoff of Geneva (Fashion Show Mall) — show-day hours' },
+        { time: '7:00 PM PT', text: '🎪 Doors @ Sphere' },
+        { time: '8:30 PM PT', text: '🎸 METALLICA — Life Burns Faster, Night 4' }
+      ],
+      transit: [
+        'Davidoff (Fashion Show Mall) is north on the Strip — easy rideshare',
+        'Sphere is walkable from Harrah\'s'
+      ],
+      tip: 'Second show, different set list — nothing repeats from Thursday. The <strong>BLACKENED Cigar Happy Hour</strong> at Davidoff runs 2–8 PM today (show-day hours), so you can hit it before doors. Note the Sunday flight leaves at <strong>8:20 AM</strong> — the morning after this show lets out late — so pack tonight.',
+      food: [
+        { name: 'Delmonico Steakhouse', url: 'https://www.venetianlasvegas.com/dining/restaurants/delmonico-steakhouse.html', meta: '📍 The Venetian · Emeril Lagasse · chateaubriand carved tableside', id: 'today-lv-delmonico' },
+        { name: 'Mott 32', url: 'https://www.google.com/maps/search/Mott+32+The+Venetian+Las+Vegas', meta: '📍 The Venetian · Cantonese, applewood-roasted Peking duck', id: 'today-lv-mott32' },
+        { name: 'Yaw Farm Coffee Roaster', url: 'https://www.google.com/maps/search/Yaw+Farm+Coffee+Roaster+7034+W+Charleston+Blvd+Las+Vegas', meta: '📍 7034 W Charleston Blvd · micro-farm beans roasted in house', id: 'today-lv-yaw' }
+      ]
+    },
+    {
+      date: '2026-11-08',
+      label: 'Sunday · Vegas → KC',
+      weather: { hi: 66, lo: 46, icon: '☀️', rain: 5 },
+      pills: [
+        { text: '✈️ WN 2427 8:20am', cls: 'good' },
+        { text: '⏰ ~6am checkout', cls: 'warn' }
+      ],
+      warn: 'The 8:20 AM departure is the morning after the final show — you leave the hotel around 6 AM against the 11 AM checkout, roughly five hours after the Sphere let out.',
+      timeline: [
+        { time: '~6:00 AM PT', text: 'Check out, head to LAS' },
+        { time: '8:20 AM PST', text: 'Depart LAS on WN 2427 (nonstop)' },
+        { time: '1:05 PM CST', text: 'Land MCI · home' }
+      ],
+      transit: [
+        'Harrah\'s → LAS: ~2 mi / 10–15 min',
+        'Arrive at LAS ~2h before an 8:20 AM departure'
+      ],
+      tip: 'An early one — the show ended late last night and the bag drag starts around 6 AM. Nothing else to manage: it is a single nonstop home. Pack the night before so the morning is just checkout and a cab.',
+      food: [
+        { name: 'Aroma Barista Bar', url: 'https://www.google.com/maps/search/Aroma+Barista+Bar+300+W+Sahara+Ave+Las+Vegas', meta: '📍 300 W Sahara Ave · opens 6 AM · works before an early call', id: 'today-lv-aroma-2' },
+        { name: 'Bouchon Bistro', url: 'https://www.google.com/maps/search/Bouchon+Bistro+The+Venetian+Las+Vegas', meta: '📍 The Venetian, 10th floor · breakfast before the airport', id: 'today-lv-bouchon-2' }
+      ]
+    }
+  ]
+};
+
+function getToday() {
+  var now = new Date();
+  var tripStart = new Date(TRIP.start + 'T00:00:00-06:00');
+  var tripEnd = new Date(TRIP.end + 'T23:59:59-06:00');
+
+  if (now < tripStart) {
+    return { day: TRIP.days[0], idx: 0, mode: 'pre-trip' };
+  }
+  if (now > tripEnd) {
+    return { day: TRIP.days[TRIP.days.length-1], idx: TRIP.days.length-1, mode: 'post-trip' };
+  }
+
+  for (var i = 0; i < TRIP.days.length; i++) {
+    var dayStart = new Date(TRIP.days[i].date + 'T00:00:00-06:00');
+    var dayEnd = new Date(TRIP.days[i].date + 'T23:59:59-06:00');
+    if (now >= dayStart && now <= dayEnd) {
+      return { day: TRIP.days[i], idx: i, mode: 'active' };
+    }
+  }
+
+  return { day: TRIP.days[0], idx: 0, mode: 'pre-trip' };
+}
+
+function render(dayOverride) {
+  var t = getToday();
+  if (dayOverride) {
+    t = { day: dayOverride, idx: TRIP.days.indexOf(dayOverride), mode: 'active' };
+  }
+  var d = t.day;
+
+  document.getElementById('day-label').textContent = t.mode === 'pre-trip' ? 'NEXT UP · ' + d.label : d.label;
+  document.getElementById('day-date').textContent = d.date;
+
+  var pills = '';
+  d.pills.forEach(function(p) {
+    pills += '<span class="status-pill ' + p.cls + '">' + p.text + '</span>';
+  });
+  document.getElementById('status-bar').innerHTML = pills;
+
+  if (d.warn) {
+    document.getElementById('warn-content').innerHTML = d.warn;
+    document.getElementById('warn-section').style.display = '';
+  } else {
+    document.getElementById('warn-section').style.display = 'none';
+  }
+
+  var weatherRows = '';
+  TRIP.days.forEach(function(day) {
+    var active = day.date === d.date ? ' style="border:1px solid var(--accent)"' : '';
+    weatherRows += '<div class="weather-day"' + active + '>' +
+      '<div class="day">' + new Date(day.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}) + '</div>' +
+      '<div class="hi">' + day.weather.hi + '°F</div>' +
+      '<div class="lo">' + day.weather.lo + '°F</div>' +
+      '<div class="rain">' + day.weather.icon + ' ' + day.weather.rain + '%</div>' +
+    '</div>';
+  });
+  document.getElementById('weather-content').innerHTML = weatherRows;
+
+  var timeline = '';
+  d.timeline.forEach(function(e) {
+    timeline += '<div class="event"><span class="time">' + e.time + '</span> ' + e.text + '</div>';
+  });
+  document.getElementById('timeline-content').innerHTML = timeline;
+
+  var food = '';
+  d.food.forEach(function(f) {
+    food += '<div class="rec-card">' +
+      '<div class="name"><a href="' + f.url + '" target="_blank" style="color:inherit;text-decoration:none">' + f.name + '</a></div>' +
+      '<div class="meta">' + f.meta + '</div>' +
+      '<div class="thumbs"><button onclick="vote(\'' + f.id + '\',\'up\',this)" title="Loved it">👍</button><button onclick="vote(\'' + f.id + '\',\'down\',this)" title="Not for me">👎</button></div>' +
+    '</div>';
+  });
+  document.getElementById('food-content').innerHTML = food;
+
+  if (d.transit) {
+    var transit = '';
+    d.transit.forEach(function(x) {
+      transit += '<div class="event">' + x + '</div>';
+    });
+    document.getElementById('transit-content').innerHTML = transit;
+    document.getElementById('transit-section').style.display = '';
+  } else {
+    document.getElementById('transit-section').style.display = 'none';
+  }
+
+  document.getElementById('tip-content').innerHTML = d.tip;
+}
+
+function vote(id, dir, btn) {
+  var key = 'atlas_vote_' + id;
+  var current = localStorage.getItem(key);
+  var data = current ? JSON.parse(current) : {up:0, down:0, voted: null};
+  var container = btn.parentElement;
+  var upBtn = container.children[0];
+  var downBtn = container.children[1];
+  if (data.voted === dir) {
+    data[dir] = Math.max(0, data[dir] - 1);
+    data.voted = null;
+    upBtn.classList.remove('voted-up');
+    downBtn.classList.remove('voted-down');
+  } else {
+    if (data.voted) { data[data.voted] = Math.max(0, data[data.voted] - 1); }
+    data[dir] = (data[dir] || 0) + 1;
+    data.voted = dir;
+    upBtn.classList.toggle('voted-up', dir === 'up');
+    downBtn.classList.toggle('voted-down', dir === 'down');
+  }
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+(function(){
+  document.querySelectorAll('.thumbs').forEach(function(el){
+    var btn = el.querySelector('button');
+    if (!btn) return;
+    var match = btn.getAttribute('onclick').match(/vote\('([^']+)'/);
+    if (!match) return;
+    var id = match[1];
+    var data = JSON.parse(localStorage.getItem('atlas_vote_' + id) || '{"up":0,"down":0,"voted":null}');
+    if (data.voted === 'up') el.children[0].classList.add('voted-up');
+    if (data.voted === 'down') el.children[1].classList.add('voted-down');
+  });
+})();
+
+render();
+</script>
+
+</body>
+</html>

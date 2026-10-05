@@ -19,32 +19,59 @@
   }
   a { color: var(--accent); text-decoration: none; }
   .masthead { text-align: center; padding: 18px 0 14px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+  .masthead .icon { font-size: 1.8rem; display: block; margin-bottom: 4px; }
   .masthead h1 { font-size: 1.25rem; font-weight: 700; }
   .masthead .tagline { font-size: 0.78rem; color: var(--dim); margin-top: 3px; font-style: italic; }
-  .nav { display: flex; gap: 8px; margin-bottom: 16px; }
+  .nav { display: flex; gap: 8px; margin-bottom: 14px; }
   .nav a { flex: 1; text-align: center; padding: 9px; border: 1px solid var(--border); border-radius: 9px; font-size: 0.8rem; font-weight: 600; background: var(--card); }
-  .now { background: rgba(255,106,0,.08); border: 1px solid rgba(255,106,0,.35); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 0.86rem; }
-  .now .lbl { font-size: 0.68rem; font-weight: 700; letter-spacing: .06em; color: var(--accent); text-transform: uppercase; }
-  .day { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 14px; }
-  .day.active { border-color: var(--accent); box-shadow: 0 0 0 1px rgba(255,106,0,.25); }
-  .day h2 { font-size: 0.98rem; font-weight: 700; margin-bottom: 2px; }
-  .day .date { font-size: 0.75rem; color: var(--dim); margin-bottom: 10px; }
-  .tl { list-style: none; }
-  .tl li { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px solid #1b1b1b; font-size: 0.85rem; }
-  .tl li:last-child { border-bottom: none; }
-  .tl .t { flex: 0 0 82px; color: var(--dim); font-variant-numeric: tabular-nums; font-size: 0.78rem; padding-top: 2px; }
-  .tl .e { flex: 1; }
-  .star { background: rgba(255,106,0,.07); border-radius: 6px; padding: 7px 8px !important; margin: 3px -8px !important; border-bottom: none !important; }
-  .alertrow { background: rgba(231,76,60,.09); border-radius: 6px; padding: 7px 8px !important; margin: 3px -8px !important; border-bottom: none !important; }
-  .z { font-size: 0.7rem; color: var(--dim); }
+  .status-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .status-pill { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 5px 11px; font-size: 0.72rem; white-space: nowrap; }
+  .status-pill.good { border-color: var(--green); color: var(--green); }
+  .status-pill.warn { border-color: var(--amber); color: var(--amber); }
+  .section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+  .section h2 { font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--accent); }
+  .day-head { background: rgba(255,106,0,.07); border: 1px solid rgba(255,106,0,.3); border-radius: 10px; padding: 12px; margin-bottom: 14px; }
+  .day-head .lbl { font-size: 0.68rem; font-weight: 700; letter-spacing: .06em; color: var(--accent); text-transform: uppercase; }
+  .day-head h2 { font-size: 1.05rem; font-weight: 700; margin: 2px 0; }
+  .day-head .date { font-size: 0.75rem; color: var(--dim); }
+  .weather-row { display: flex; gap: 8px; overflow-x: auto; }
+  .weather-day { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; text-align: center; min-width: 76px; flex-shrink: 0; }
+  .weather-day.active { border-color: var(--accent); }
+  .weather-day .day { font-size: 0.62rem; color: var(--dim); text-transform: uppercase; }
+  .weather-day .hi { font-weight: 700; font-size: 1.05rem; }
+  .weather-day .lo { font-size: 0.68rem; color: var(--dim); }
+  .weather-day .rain { font-size: 0.62rem; color: var(--blue); }
+  .event { padding: 8px 10px; background: var(--bg); border-radius: 6px; margin-bottom: 5px; font-size: 0.85rem; }
+  .event .time { font-weight: 700; color: var(--accent); }
+  .rec-card { padding: 11px; background: var(--bg); border: 1px solid #1c1c1c; border-radius: 9px; margin-bottom: 8px; }
+  .rec-card .name { font-weight: 700; }
+  .rec-card .name a { color: inherit; }
+  .rec-card .meta { font-size: 0.73rem; color: var(--dim); margin-top: 3px; }
+  .tip { font-size: 0.82rem; padding: 9px 12px; background: rgba(52,152,219,.08); border-radius: 8px; margin-bottom: 8px; }
+  .tip strong { color: var(--blue); }
+  .warn-tip { font-size: 0.82rem; padding: 9px 12px; background: rgba(243,156,18,.08); border-radius: 8px; margin-bottom: 8px; }
+  .warn-tip strong { color: var(--amber); }
+  .thumbs { display: flex; gap: 6px; margin-top: 7px; }
+  .thumbs button {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--dim); font-size: 0.85rem; padding: 2px 8px; cursor: pointer; transition: all 0.15s;
+  }
+  .thumbs button:hover { border-color: var(--accent); }
+  .thumbs button.voted-up { background: rgba(46,204,113,.15); border-color: var(--green); color: var(--green); }
+  .thumbs button.voted-down { background: rgba(231,76,60,.15); border-color: var(--red); color: var(--red); }
+  .links-list { list-style: none; font-size: 0.85rem; }
+  .links-list li { display: flex; gap: 10px; padding: 6px 0; border-bottom: 1px solid #1b1b1b; }
+  .links-list li:last-child { border-bottom: none; }
+  .links-list .t { flex: 0 0 74px; color: var(--dim); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; padding-top: 2px; }
   footer { text-align: center; font-size: 0.72rem; color: var(--dim); margin-top: 24px; line-height: 1.8; }
 </style>
 </head>
 <body>
 
 <div class="masthead">
-  <h1>🏛️ Orlando · Day-by-Day</h1>
-  <div class="tagline">Gartner IT Symposium/Xpo 2026 · Oct 18–22 · all times ET (Orlando = home +1 hr)</div>
+  <span class="icon">🏛️</span>
+  <h1>Orlando · Day-by-Day</h1>
+  <div class="tagline">Gartner IT Symposium/Xpo 2026 · Oct 18–22 · all times ET (Orlando = KC +1 hr)</div>
 </div>
 
 <div class="nav">
@@ -52,137 +79,328 @@
   <a href="https://jarvisdanley.github.io/">← All Trips</a>
 </div>
 
-<div class="now" id="now"><span class="lbl">Status</span><br><span id="nowtext">Loading…</span></div>
-
-<!-- SUNDAY -->
-<div class="day" id="d-2026-10-18">
-  <h2>✈️ Sunday — Travel + Welcome Reception</h2>
-  <div class="date">October 18, 2026 · Kansas City → Orlando</div>
-  <ul class="tl">
-    <li><span class="t">5:45 AM</span><span class="e">🚗 Leave for MCI <span class="z">CT</span></span></li>
-    <li><span class="t">8:20 AM</span><span class="e">🛫 <strong>MCI → MCO nonstop</strong> <span class="z">CT · Southwest is the only nonstop carrier</span></span></li>
-    <li><span class="t">12:05 PM</span><span class="e">🛬 Arrive <strong>MCO Terminal A</strong> <span class="z">ET · gates 100–129 are behind the airside train</span></span></li>
-    <li><span class="t">~12:45 PM</span><span class="e">🚕 <strong>Rideshare to the Swan &amp; Dolphin</strong> — ~$32–55, ~30 min <span class="z">pickup: Level 1, Ground Transportation. Mears Connect shuttle is $16 but 45–75 min</span></span></li>
-    <li><span class="t">~1:30 PM</span><span class="e">🏨 Check in · <strong>bag drop</strong> · pick up your badge</span></li>
-    <li><span class="t">2:00 PM</span><span class="e">💻 Work block / settle in <span class="z">campus walk: sessions span BOTH the Swan and the Dolphin</span></span></li>
-    <li class="star"><span class="t">6:00 PM</span><span class="e">🎉 <strong>WELCOME RECEPTION</strong> — Industry Neighborhoods block party: networking, food, DJ <span class="z">→ 7:30 PM · the only scheduled item today</span></span></li>
-    <li><span class="t">7:30 PM</span><span class="e">🍽️ Dinner on campus — everything on Crescent Lake is walkable</span></li>
-  </ul>
+<div class="day-head" id="day-head">
+  <div class="lbl" id="day-lbl">Loading…</div>
+  <h2 id="day-title"></h2>
+  <div class="date" id="day-date"></div>
 </div>
 
-<!-- MONDAY -->
-<div class="day" id="d-2026-10-19">
-  <h2>🎤 Monday — Opening Day</h2>
-  <div class="date">October 19, 2026 · Walt Disney World Swan &amp; Dolphin Resort</div>
-  <ul class="tl">
-    <li><span class="t">7:00 AM</span><span class="e">☕ Breakfast · registration verification · first pass at the IT Xpo</span></li>
-    <li class="star"><span class="t">10:00 AM</span><span class="e">🎤 <strong>GARTNER OPENING KEYNOTE</strong><br><em>Reaching Escape Velocity: Shaping an Effective Enterprise AI Economy</em> <span class="z">→ 10:45 AM · Daryl Plummer &amp; Kristin Moyer</span></span></li>
-    <li><span class="t">10:45 AM</span><span class="e">🏢 IT Xpo opens <span class="z">→ 7:15 PM</span></span></li>
-    <li><span class="t">11:30 AM</span><span class="e">🎤 <strong>Get Ready for Data and Analytics 2030</strong> — Rita Sallam<br><em>or</em> <strong>From Chaos to Control: How to Manage your Growing AI Costs</strong> — Robert Naegle</span></li>
-    <li><span class="t">12:30 PM</span><span class="e">🍽️ Lunch + Xpo floor</span></li>
-    <li><span class="t">1:30 PM</span><span class="e">🎤 Afternoon tracks — agentic AI / operating models</span></li>
-    <li><span class="t">3:45 PM</span><span class="e">🎤 <strong>Building the AI enterprise from the inside out — The Kraft Group</strong> <span class="z">→ 4:15 PM · Anurag Dhingra (Cisco) &amp; Michael Kraft Israel, CIO</span></span></li>
-    <li><span class="t">5:00 PM</span><span class="e">🥂 Exhibit Showcase reception <span class="z">networking, food — you don't drink, still work the room</span></span></li>
-    <li><span class="t">7:30 PM</span><span class="e">🍽️ Dinner</span></li>
-  </ul>
+<div class="status-bar" id="status-bar"></div>
+
+<div class="section" id="warn-section" style="display:none">
+  <div class="warn-tip" id="warn-content"></div>
 </div>
 
-<!-- TUESDAY -->
-<div class="day" id="d-2026-10-20">
-  <h2>🎉 Tuesday — Full Day + Hollywood Studios</h2>
-  <div class="date">October 20, 2026 · the best night of the week</div>
-  <ul class="tl">
-    <li><span class="t">7:00 AM</span><span class="e">☕ Breakfast</span></li>
-    <li><span class="t">9:45 AM</span><span class="e">🏢 IT Xpo opens <span class="z">→ 6:15 PM</span></span></li>
-    <li><span class="t">morning</span><span class="e">🎤 Sessions — <strong>good slot for an Analyst 1:1</strong> <span class="z">book in Navigator → Info → Meetings</span></span></li>
-    <li><span class="t">afternoon</span><span class="e">🎤 AI-native development · agentic AI · <em>"Network teams using AgenticOps won't go back"</em> (3:45–4:15 PM, Cisco)</span></li>
-    <li class="alertrow"><span class="t">5:30 PM</span><span class="e">⚠️ <strong>Conflict:</strong> AI Club Cybersecurity Month starts now at home (4:30 PM CDT). You're in Orlando — delegate, dial in, or skip.</span></li>
-    <li><span class="t">6:15 PM</span><span class="e">🍽️ Early dinner near the resort — <strong>eat before the party</strong>, park food lines are long</span></li>
-    <li class="star"><span class="t">8:00 PM</span><span class="e">🎢 <strong>PRIVATE GARTNER BUYOUT — DISNEY'S HOLLYWOOD STUDIOS</strong> <span class="z">→ 11:00 PM · the park closes to the public at 5 PM just for this. Best networking of the week.</span></span></li>
-    <li><span class="t">11:30 PM</span><span class="e">🏨 Back to the hotel</span></li>
-  </ul>
+<div class="section" id="weather-section">
+  <h2>🌤️ Weather <span style="font-size:0.62rem;color:var(--dim);font-weight:400">· seasonal normals until T-7</span></h2>
+  <div class="weather-row" id="weather-content"></div>
 </div>
 
-<!-- WEDNESDAY -->
-<div class="day" id="d-2026-10-21">
-  <h2>🎤 Wednesday — Deep Dive</h2>
-  <div class="date">October 21, 2026 · analyst 1:1s, clinics, Xpo peak hours</div>
-  <ul class="tl">
-    <li><span class="t">7:00 AM</span><span class="e">☕ Breakfast</span></li>
-    <li class="star"><span class="t">10:00 AM</span><span class="e">🎤 <strong>The Secret Profit and Loss of AI</strong> — Seth Brickman, Splunk <span class="z">→ 10:20 AM · agent observability, tokenomics, guardrails</span></span></li>
-    <li><span class="t">10:45 AM</span><span class="e">🏢 IT Xpo opens <span class="z">→ 7:15 PM</span></span></li>
-    <li><span class="t">11:30 AM</span><span class="e">🎤 <strong>From reactive to resilient: a new operating model for cyber defense</strong> — Cisco <span class="z">→ 12:00 PM</span></span></li>
-    <li><span class="t">afternoon</span><span class="e">🎯 <strong>Use the entitlements:</strong> Consulting Clinic · roundtable · Ask The Experts <span class="z">2 Ask The Experts, 1 Roundtable, 2 Consulting Clinics were included</span></span></li>
-    <li><span class="t">evening</span><span class="e">🍽️ Dinner / networking <span class="z">hold this evening — it's the last free one</span></span></li>
-  </ul>
+<div class="section" id="timeline-section">
+  <h2>📅 Today</h2>
+  <div id="timeline-content"></div>
 </div>
 
-<!-- THURSDAY -->
-<div class="day" id="d-2026-10-22">
-  <h2>✈️ Thursday — Close &amp; Fly Home</h2>
-  <div class="date">October 22, 2026 · half day, then home the same evening</div>
-  <ul class="tl">
-    <li><span class="t">7:00 AM</span><span class="e">☕ Breakfast · pack and check out <span class="z">leave the bag with the bell desk if needed</span></span></li>
-    <li><span class="t">9:45 AM</span><span class="e">🏢 IT Xpo final hours <span class="z">→ 1:45 PM</span></span></li>
-    <li><span class="t">10:00 AM</span><span class="e">🎤 Closing sessions / closing guest keynote <span class="z">James Clear / Will Guidara expected — exact time still publishing</span></span></li>
-    <li><span class="t">11:30 AM</span><span class="e">🎤 Executive roundtable: Building Autonomous Operational Resilience</span></li>
-    <li class="alertrow"><span class="t">1:45 PM</span><span class="e">✅ <strong>Sessions end — IT Xpo closes.</strong> This is the confirmed end of the conference.</span></li>
-    <li><span class="t">2:15 PM</span><span class="e">🚕 Leave for MCO (~30 min, ~$32–55)</span></li>
-    <li><span class="t">2:45 PM</span><span class="e">🛫 Arrive <strong>MCO Terminal A</strong> — 2-hr buffer. Use <a href="https://www.flymco.com/security/">MCO Reserve</a> if booked.</span></li>
-    <li><span class="t">4:30 PM</span><span class="e">🛫 <strong>MCO → MCI nonstop</strong> <span class="z">ET · 7:10 PM is the zero-stress alternative</span></span></li>
-    <li><span class="t">6:25 PM</span><span class="e">🛬 Arrive Kansas City <span class="z">CT</span></span></li>
-    <li><span class="t">evening</span><span class="e">🏠 Home · 💸 send Atlas the receipts for the expense log</span></li>
-  </ul>
+<div class="section" id="food-section">
+  <h2>🥩 Eat &amp; Drink</h2>
+  <div id="food-content"></div>
 </div>
 
-<div class="day">
+<div class="section" id="transit-section" style="display:none">
+  <h2>🚗 Getting Around</h2>
+  <div id="transit-content"></div>
+</div>
+
+<div class="section" id="tip-section">
+  <h2>💡 Atlas's Tip</h2>
+  <div class="tip" id="tip-content"></div>
+</div>
+
+<div class="section">
   <h2>📞 Numbers &amp; links</h2>
-  <ul class="tl">
+  <ul class="links-list">
     <li><span class="t">Gartner</span><span class="e"><a href="tel:+18557619211">+1 855 761 9211</a> — hotel block, registration, anything conference</span></li>
-    <li><span class="t">Navigator</span><span class="e"><a href="https://cn.gartner.com/SYM36">cn.gartner.com/SYM36</a> — agenda building, analyst 1:1s, entitlements</span></li>
-    <li><span class="t">Venue</span><span class="e"><a href="https://www.google.com/maps/search/Walt+Disney+World+Swan+and+Dolphin+Resort+1500+Epcot+Resorts+Blvd">Swan &amp; Dolphin</a>, 1500 Epcot Resorts Blvd, Lake Buena Vista FL 32830</span></li>
-    <li><span class="t">Airline</span><span class="e">Southwest — <a href="https://www.southwest.com/airport-information/">MCO = Terminal A, gates 100–129</a></span></li>
-    <li><span class="t">Shuttle</span><span class="e"><a href="https://www.mearsconnect.com/pricing">Mears Connect</a> $16/adult one-way — the Magical Express successor</span></li>
+    <li><span class="t">Navigator</span><span class="e"><a href="https://cn.gartner.com/SYM36" target="_blank">cn.gartner.com/SYM36</a> — agenda, analyst 1:1s, entitlements</span></li>
+    <li><span class="t">Venue</span><span class="e"><a href="https://www.google.com/maps/search/Walt+Disney+World+Swan+and+Dolphin+Resort+1500+Epcot+Resorts+Blvd" target="_blank">Swan &amp; Dolphin</a>, 1500 Epcot Resorts Blvd, Lake Buena Vista FL 32830</span></li>
+    <li><span class="t">Hotel</span><span class="e"><a href="https://www.google.com/maps/search/Embassy+Suites+Orlando+Lake+Buena+Vista+South+4955+Kyngs+Heath+Rd+Kissimmee+FL+34746" target="_blank">Embassy Suites</a>, 4955 Kyngs Heath Rd · <a href="tel:14075974000">(407) 597-4000</a></span></li>
+    <li><span class="t">Car</span><span class="e"><a href="https://www.nationalcar.com/" target="_blank">National</a> @ MCO, 1 Jeff Fuqua Blvd</span></li>
+    <li><span class="t">Airline</span><span class="e">Southwest — <a href="https://www.southwest.com/airport-information/" target="_blank">MCO = Terminal A, gates 100–129</a></span></li>
+    <li><span class="t">Security</span><span class="e"><a href="https://www.flymco.com/security/" target="_blank">MCO Reserve</a> — free timeslot, skip the line</span></li>
     <li><span class="t">Support</span><span class="e">Alyssa Popovits, Gartner · <a href="tel:+18153532317">+1 815-353-2317</a></span></li>
   </ul>
 </div>
 
 <footer>
   <div>Atlas · Travel Concierge</div>
-  <div>Last updated Sep 25, 2026</div>
+  <div>Last updated Oct 5, 2026 · <a href="https://jarvisdanley.github.io/">all trips</a></div>
 </footer>
 
 <script>
-(function () {
-  var days = [
-    { d: '2026-10-18', label: 'Sunday Oct 18 — Travel + Welcome Reception' },
-    { d: '2026-10-19', label: 'Monday Oct 19 — Opening Keynote' },
-    { d: '2026-10-20', label: 'Tuesday Oct 20 — Hollywood Studios buyout tonight' },
-    { d: '2026-10-21', label: 'Wednesday Oct 21 — Deep dive' },
-    { d: '2026-10-22', label: 'Thursday Oct 22 — Closing day, fly home' }
-  ];
-  var now = Date.now(), activeKey = null;
-  days.forEach(function (day) {
-    var start = Date.parse(day.d + 'T00:00:00-04:00');
-    if (now >= start && now < start + 86400000) activeKey = day.d;
-  });
-  var out = [];
-  if (activeKey) {
-    var el = document.getElementById('d-' + activeKey);
-    if (el) el.classList.add('active');
-    var info = days.filter(function (x) { return x.d === activeKey; })[0];
-    out.push('<strong>' + info.label + ' — in progress.</strong> Scroll for the full timeline.');
-  } else {
-    var first = Date.parse('2026-10-18T00:00:00-04:00');
-    var n = Math.ceil((first - now) / 86400000);
-    if (n > 0) {
-      out.push('<strong>T-' + n + ' to Orlando.</strong> Arrival Sunday Oct 18 — aim for the ~8:20 AM CT nonstop into MCO at 12:05 PM ET, ready for the 6:00 PM Welcome Reception.');
-    } else {
-      out.push('<strong>Trip complete.</strong> Hope Gartner was worth it — talk to Atlas about receipts.');
+var TRIP = {
+  start: '2026-10-18',
+  end: '2026-10-22',
+  days: [
+    {
+      date: '2026-10-18',
+      label: 'Sunday · Travel + Welcome Reception',
+      weather: { hi: 85, lo: 68, icon: '⛅', rain: 40 },
+      pills: [
+        { text: '✈️ WN 2661 11:40a', cls: 'good' },
+        { text: '🚗 National pickup', cls: 'good' },
+        { text: '🎉 Welcome 6:00p', cls: 'good' },
+        { text: '🏨 Check-in Embassy Suites', cls: 'good' }
+      ],
+      timeline: [
+        { time: '9:40 AM', text: '🚗 Leave for MCI <span style="color:var(--dim)">CT · 2h before an 11:40 AM departure</span>' },
+        { time: '11:40 AM', text: '🛫 <strong>WN 2661</strong> departs MCI, seat 5F <span style="color:var(--dim)">CT · nonstop, 2h 40m</span>' },
+        { time: '3:20 PM', text: '🛬 Land <strong>MCO Terminal A</strong> <span style="color:var(--dim)">ET · gates 100–129 behind the airside train</span>' },
+        { time: '~4:00 PM', text: '🚗 <strong>National pickup</strong> <span style="color:var(--dim)">Level 1 counter, car on Level 2</span>' },
+        { time: '~4:30 PM', text: '🏨 Check in — <strong>Embassy Suites</strong>, 4955 Kyngs Heath Rd <span style="color:var(--dim)">~25 min from MCO</span>' },
+        { time: '~5:30 PM', text: '🚗 Drive to the <strong>Swan &amp; Dolphin</strong> <span style="color:var(--dim)">~20 min</span>' },
+        { time: '6:00 PM', text: '🎉 <strong>WELCOME RECEPTION</strong> — Industry Neighborhoods block party <span style="color:var(--dim)">→ 7:30 PM · the only scheduled item today</span>' }
+      ],
+      transit: [
+        'MCO → Embassy Suites: ~22 mi / ~25 min, mostly SR-417',
+        'Embassy Suites → Swan & Dolphin: ~12 mi / ~20 min',
+        'Southwest at MCO = Terminal A, gates 100–129 (airside train)'
+      ],
+      tip: 'Travel day with the car handoff in the middle. You land at 3:20 PM against a 6:00 PM reception — tight but workable: grab the <strong>National</strong> car, drop bags at the Embassy Suites, and head straight to the Swan &amp; Dolphin for badge pickup before the block party. Dinner after the reception is in Celebration, minutes from the hotel, not on the Strip-style drive back.',
+      food: [
+        { name: 'Charley\'s Steak House', meta: '📍 2901 Parkway Blvd, Kissimmee · USDA Prime wood-fired · ~7 min from the hotel', id: 'today-charleys', url: 'https://www.google.com/maps/search/Charleys+Steak+House+2901+Parkway+Blvd+Kissimmee+FL+34747' },
+        { name: 'Columbia Restaurant', meta: '📍 649 Front St, Celebration · Spanish-Cuban, Florida\'s oldest (est. 1905) · ~10 min', id: 'today-columbia', url: 'https://www.google.com/maps/search/Columbia+Restaurant+649+Front+St+Celebration+FL+34747' },
+        { name: 'Foxtail Coffee Co. — Celebration at 192', meta: '📍 6059 W Irlo Bronson Memorial Hwy · specialty roaster · ~5 min', id: 'today-foxtail', url: 'https://www.google.com/maps/search/Foxtail+Coffee+6059+W+Irlo+Bronson+Memorial+Hwy+Kissimmee+FL+34747' }
+      ]
+    },
+    {
+      date: '2026-10-19',
+      label: 'Monday · Opening Keynote',
+      weather: { hi: 85, lo: 68, icon: '⛅', rain: 45 },
+      pills: [
+        { text: '🎤 Keynote 10:00a', cls: 'good' },
+        { text: '🏢 IT Xpo 10:45a–7:15p', cls: 'good' },
+        { text: '🚗 20-min drive in', cls: 'good' }
+      ],
+      timeline: [
+        { time: '7:45 AM', text: '🚗 ~20 min drive from the hotel to the venue <span style="color:var(--dim)">breakfast on the way</span>' },
+        { time: '10:00 AM', text: '🎤 <strong>GARTNER OPENING KEYNOTE</strong> — <em>Reaching Escape Velocity: Shaping an Effective Enterprise AI Economy</em> <span style="color:var(--dim)">→ 10:45 AM · Daryl Plummer &amp; Kristin Moyer</span>' },
+        { time: '10:45 AM', text: '🏢 IT Xpo opens <span style="color:var(--dim)">→ 7:15 PM</span>' },
+        { time: '11:30 AM', text: '🎤 <strong>Get Ready for Data and Analytics 2030</strong> — Rita Sallam <em>or</em> <strong>From Chaos to Control: AI Costs</strong> — Robert Naegle' },
+        { time: '1:30 PM', text: '🎤 Afternoon tracks — agentic AI / operating models' },
+        { time: '3:45 PM', text: '🎤 <strong>Building the AI enterprise from the inside out — The Kraft Group</strong> <span style="color:var(--dim)">→ 4:15 PM · Anurag Dhingra (Cisco) &amp; Michael Israel (CIO, Kraft)</span>' },
+        { time: 'evening', text: '🍽️ Dinner — stay at the Swan &amp; Dolphin (Bourbon Steak / bluezoo) or drive back to Celebration' }
+      ],
+      transit: [
+        'Embassy Suites → Swan & Dolphin: ~20 min each way',
+        'Parking on-site at the venue; the campus spans both the Swan and the Dolphin'
+      ],
+      tip: 'The <strong>opening keynote</strong> is the conference thesis — be in the room, not in the car. Leave the hotel by ~8:45 AM to beat the morning toll traffic. The 1:30–3:30 PM block is the agentic-AI window you are here for; the 3:45 Kraft Group session is the one real-adoption story worth staying for.',
+      food: [
+        { name: 'Bourbon Steak by Michael Mina', meta: '📍 1500 Epcot Resorts Blvd (the Dolphin) · signature steakhouse · on-site', id: 'today-bourbonsteak', url: 'https://www.google.com/maps/search/Bourbon+Steak+Michael+Mina+Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd' },
+        { name: 'Todd English\'s bluezoo', meta: '📍 1500 Epcot Resorts Blvd (the Dolphin) · seafood · on-site', id: 'today-bluezoo', url: 'https://www.google.com/maps/search/Todd+Englishs+bluezoo+Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd' },
+        { name: 'Foxtail Coffee Co. — Celebration at 192', meta: '📍 6059 W Irlo Bronson Memorial Hwy · opens early · on the drive in', id: 'today-foxtail', url: 'https://www.google.com/maps/search/Foxtail+Coffee+6059+W+Irlo+Bronson+Memorial+Hwy+Kissimmee+FL+34747' }
+      ]
+    },
+    {
+      date: '2026-10-20',
+      label: 'Tuesday · Full Day + Hollywood Studios',
+      weather: { hi: 86, lo: 68, icon: '⛈️', rain: 50 },
+      pills: [
+        { text: '🎉 Hollywood Studios 8–11p', cls: 'good' },
+        { text: '⚠️ AI Club conflict 5:30p ET', cls: 'warn' },
+        { text: '🏢 IT Xpo 9:45a–6:15p', cls: 'good' }
+      ],
+      warn: '<strong>AI Club — Cybersecurity Month</strong> starts 4:30 PM CDT = 5:30 PM ET, right between the last session and the 8 PM Hollywood Studios party. You cannot attend in person — delegate, dial in, or skip.',
+      timeline: [
+        { time: '7:00 AM', text: '☕ Breakfast' },
+        { time: '9:45 AM', text: '🏢 IT Xpo opens <span style="color:var(--dim)">→ 6:15 PM</span>' },
+        { time: 'morning', text: '🎤 Sessions — <strong>good slot for an Analyst 1:1</strong> <span style="color:var(--dim)">book in Navigator → Info → Meetings</span>' },
+        { time: 'afternoon', text: '🎤 AI-native development · agentic AI · <em>"Network teams using AgenticOps won\'t go back"</em> (3:45–4:15 PM, Cisco)' },
+        { time: '6:15 PM', text: '🍽️ Early dinner — eat before the party, park food lines are long' },
+        { time: '8:00 PM', text: '🎢 <strong>PRIVATE GARTNER BUYOUT — DISNEY\'S HOLLYWOOD STUDIOS</strong> <span style="color:var(--dim)">→ 11:00 PM · park closes to the public at 5 PM just for this. Best networking of the week.</span>' }
+      ],
+      transit: [
+        'The buyout is at Hollywood Studios — you can drive from the venue or use the resort\'s water-taxi/walk path from the Swan &amp; Dolphin',
+        'Plan the late drive back to Kissimmee (~20 min) after 11 PM'
+      ],
+      tip: 'Protect this night — the Hollywood Studios buyout is the best networking event of the week and the park is empty of the public just for Gartner. Eat a real dinner before 8 PM, and sort the AI Club conflict during the day so it is not hanging over the evening.',
+      food: [
+        { name: 'Bourbon Steak by Michael Mina', meta: '📍 1500 Epcot Resorts Blvd (the Dolphin) · on-site steak before the party', id: 'today-bourbonsteak', url: 'https://www.google.com/maps/search/Bourbon+Steak+Michael+Mina+Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd' },
+        { name: 'Columbia Restaurant', meta: '📍 649 Front St, Celebration · Spanish-Cuban · ~10 min from the hotel', id: 'today-columbia', url: 'https://www.google.com/maps/search/Columbia+Restaurant+649+Front+St+Celebration+FL+34747' },
+        { name: 'Foxtail Coffee Co. — Celebration at 192', meta: '📍 6059 W Irlo Bronson Memorial Hwy · for the morning run', id: 'today-foxtail', url: 'https://www.google.com/maps/search/Foxtail+Coffee+6059+W+Irlo+Bronson+Memorial+Hwy+Kissimmee+FL+34747' }
+      ]
+    },
+    {
+      date: '2026-10-21',
+      label: 'Wednesday · Deep Dive',
+      weather: { hi: 85, lo: 67, icon: '⛅', rain: 40 },
+      pills: [
+        { text: '🎯 Analyst 1:1s', cls: 'good' },
+        { text: '🏢 IT Xpo 10:45a–7:15p', cls: 'good' },
+        { text: '🎤 Secret P&amp;L of AI 10a', cls: 'good' }
+      ],
+      timeline: [
+        { time: '7:00 AM', text: '☕ Breakfast' },
+        { time: '10:00 AM', text: '🎤 <strong>The Secret Profit and Loss of AI</strong> — Seth Brickman, Splunk <span style="color:var(--dim)">→ 10:20 AM · agent observability, tokenomics, guardrails</span>' },
+        { time: '10:45 AM', text: '🏢 IT Xpo opens <span style="color:var(--dim)">→ 7:15 PM</span>' },
+        { time: '11:30 AM', text: '🎤 <strong>From reactive to resilient: a new operating model for cyber defense</strong> — Cisco <span style="color:var(--dim)">→ 12:00 PM</span>' },
+        { time: 'afternoon', text: '🎯 <strong>Use the entitlements:</strong> Consulting Clinic · roundtable · Ask The Experts <span style="color:var(--dim)">2 Ask The Experts, 1 Roundtable, 2 Consulting Clinics included</span>' },
+        { time: 'evening', text: '🍽️ Dinner / networking <span style="color:var(--dim)">hold this evening — the last free one</span>' }
+      ],
+      transit: [
+        'Same ~20 min drive in; consider leaving the car at the venue and walking the resort campus'
+      ],
+      tip: 'This is the last full day — spend it on the <strong>Analyst 1:1</strong> (the highest-value 30 minutes of the week) and the remaining entitlements, not on back-to-back track sessions. The evening is free: Charley\'s or a Celebration dinner is the low-friction close to a deep day.',
+      food: [
+        { name: 'Charley\'s Steak House', meta: '📍 2901 Parkway Blvd, Kissimmee · USDA Prime · ~7 min from the hotel', id: 'today-charleys', url: 'https://www.google.com/maps/search/Charleys+Steak+House+2901+Parkway+Blvd+Kissimmee+FL+34747' },
+        { name: 'Todd English\'s bluezoo', meta: '📍 1500 Epcot Resorts Blvd (the Dolphin) · seafood · on-site', id: 'today-bluezoo', url: 'https://www.google.com/maps/search/Todd+Englishs+bluezoo+Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd' },
+        { name: 'Lineage Coffee Roasting', meta: '📍 3201 Corrine Dr, Orlando · Orlando\'s best roaster · ~25 min detour', id: 'today-lineage', url: 'https://www.google.com/maps/search/Lineage+Coffee+Roasting+3201+Corrine+Dr+Orlando+FL+32803' }
+      ]
+    },
+    {
+      date: '2026-10-22',
+      label: 'Thursday · Close & Fly Home',
+      weather: { hi: 84, lo: 66, icon: '⛅', rain: 35 },
+      pills: [
+        { text: '✈️ WN 2685 4:05p', cls: 'good' },
+        { text: '✈️ WN 611 6:55p → MCI', cls: 'good' },
+        { text: '⚠️ 3:05p car drop', cls: 'warn' }
+      ],
+      warn: '<strong>The National drop-off is booked for 3:05 PM against a 4:05 PM flight.</strong> Sessions end 1:45 PM — leave the venue right at close and return the car by ~2:45 PM so you have a real security buffer.',
+      timeline: [
+        { time: '7:00 AM', text: '☕ Breakfast · pack and check out <span style="color:var(--dim)">leave the bag in the car, not the bell desk</span>' },
+        { time: '9:45 AM', text: '🏢 IT Xpo final hours <span style="color:var(--dim)">→ 1:45 PM</span>' },
+        { time: '10:00 AM', text: '🎤 Closing sessions / closing guest keynote <span style="color:var(--dim)">James Clear / Will Guidara expected — exact time still publishing</span>' },
+        { time: '1:45 PM', text: '✅ <strong>Sessions end — IT Xpo closes.</strong> Confirmed end of the conference.' },
+        { time: '~2:00 PM', text: '🚗 Leave the venue, ~25 min to MCO' },
+        { time: '~2:45 PM', text: '🚗 Return the <strong>National</strong> car <span style="color:var(--dim)">drop-off booked 3:05 PM — do it early</span>' },
+        { time: '4:05 PM', text: '🛫 <strong>WN 2685</strong> MCO → BNA, seat 12A <span style="color:var(--dim)">ET</span>' },
+        { time: '6:55 PM', text: '🛫 <strong>WN 611</strong> BNA → MCI, seat 8A <span style="color:var(--dim)">CT · 1h 45m connection in Nashville</span>' },
+        { time: '8:40 PM', text: '🛬 Land MCI · 🏠 home' }
+      ],
+      transit: [
+        'Swan & Dolphin → MCO: ~22 mi / ~25 min',
+        'Return the car to the terminal your flight departs from (Southwest = Terminal A)',
+        'MCO Reserve is the free security-timeslot if you book it ahead'
+      ],
+      tip: 'The whole day hinges on the car return. Sessions end 1:45 PM and the flight is 4:05 PM — that buffer is thin, so be out the door at close and aim to hand the car back by ~2:45 PM. It is a one-connection route home through Nashville (1h 45m), landing MCI at 8:40 PM CT.',
+      food: [
+        { name: 'Foxtail Coffee Co. — Celebration at 192', meta: '📍 6059 W Irlo Bronson Memorial Hwy · grab coffee before the drive in', id: 'today-foxtail', url: 'https://www.google.com/maps/search/Foxtail+Coffee+6059+W+Irlo+Bronson+Memorial+Hwy+Kissimmee+FL+34747' }
+      ]
     }
+  ]
+};
+
+function getToday() {
+  var now = new Date();
+  var tripStart = new Date(TRIP.start + 'T00:00:00-04:00');
+  var tripEnd = new Date(TRIP.end + 'T23:59:59-04:00');
+  if (now < tripStart) return { day: TRIP.days[0], idx: 0, mode: 'pre-trip' };
+  if (now > tripEnd) return { day: TRIP.days[TRIP.days.length - 1], idx: TRIP.days.length - 1, mode: 'post-trip' };
+  for (var i = 0; i < TRIP.days.length; i++) {
+    var s = new Date(TRIP.days[i].date + 'T00:00:00-04:00');
+    var e = new Date(TRIP.days[i].date + 'T23:59:59-04:00');
+    if (now >= s && now <= e) return { day: TRIP.days[i], idx: i, mode: 'active' };
   }
-  document.getElementById('nowtext').innerHTML = out.join(' ');
+  return { day: TRIP.days[0], idx: 0, mode: 'pre-trip' };
+}
+
+function render(day) {
+  var t = day ? { day: day, idx: TRIP.days.indexOf(day), mode: 'active' } : getToday();
+  var d = t.day;
+
+  document.getElementById('day-lbl').textContent = t.mode === 'pre-trip' ? 'NEXT UP · ' + d.label : d.label;
+  document.getElementById('day-title').textContent = d.label;
+  document.getElementById('day-date').textContent = d.date;
+
+  var pills = '';
+  d.pills.forEach(function (p) {
+    pills += '<span class="status-pill ' + p.cls + '">' + p.text + '</span>';
+  });
+  document.getElementById('status-bar').innerHTML = pills;
+
+  if (d.warn) {
+    document.getElementById('warn-content').innerHTML = d.warn;
+    document.getElementById('warn-section').style.display = '';
+  } else {
+    document.getElementById('warn-section').style.display = 'none';
+  }
+
+  var w = '';
+  TRIP.days.forEach(function (day) {
+    var active = day.date === d.date ? ' active' : '';
+    w += '<div class="weather-day' + active + '">' +
+      '<div class="day">' + new Date(day.date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + '</div>' +
+      '<div class="hi">' + day.weather.hi + '°F</div>' +
+      '<div class="lo">' + day.weather.lo + '°F</div>' +
+      '<div class="rain">' + day.weather.icon + ' ' + day.weather.rain + '%</div>' +
+    '</div>';
+  });
+  document.getElementById('weather-content').innerHTML = w;
+
+  var tl = '';
+  d.timeline.forEach(function (e) {
+    tl += '<div class="event"><span class="time">' + e.time + '</span> — ' + e.text + '</div>';
+  });
+  document.getElementById('timeline-content').innerHTML = tl;
+
+  var food = '';
+  d.food.forEach(function (f) {
+    food += '<div class="rec-card">' +
+      '<div class="name"><a href="' + f.url + '" target="_blank">' + f.name + '</a></div>' +
+      '<div class="meta">' + f.meta + '</div>' +
+      '<div class="thumbs"><button onclick="vote(\'' + f.id + '\',\'up\',this)" title="Loved it">👍</button><button onclick="vote(\'' + f.id + '\',\'down\',this)" title="Not for me">👎</button></div>' +
+    '</div>';
+  });
+  document.getElementById('food-content').innerHTML = food;
+
+  if (d.transit) {
+    var tr = '';
+    d.transit.forEach(function (x) { tr += '<div class="event">' + x + '</div>'; });
+    document.getElementById('transit-content').innerHTML = tr;
+    document.getElementById('transit-section').style.display = '';
+  } else {
+    document.getElementById('transit-section').style.display = 'none';
+  }
+
+  document.getElementById('tip-content').innerHTML = d.tip;
+}
+
+function vote(id, dir, btn) {
+  var key = 'atlas_vote_' + id;
+  var current = localStorage.getItem(key);
+  var data = current ? JSON.parse(current) : { up: 0, down: 0, voted: null };
+  var container = btn.parentElement;
+  var upBtn = container.children[0];
+  var downBtn = container.children[1];
+  if (data.voted === dir) {
+    data[dir] = Math.max(0, data[dir] - 1);
+    data.voted = null;
+    upBtn.classList.remove('voted-up');
+    downBtn.classList.remove('voted-down');
+  } else {
+    if (data.voted) { data[data.voted] = Math.max(0, data[data.voted] - 1); }
+    data[dir] = (data[dir] || 0) + 1;
+    data.voted = dir;
+    upBtn.classList.toggle('voted-up', dir === 'up');
+    downBtn.classList.toggle('voted-down', dir === 'down');
+  }
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+(function () {
+  document.querySelectorAll('.thumbs').forEach(function (el) {
+    var btn = el.querySelector('button');
+    if (!btn) return;
+    var match = btn.getAttribute('onclick').match(/vote\('([^']+)'/);
+    if (!match) return;
+    var id = match[1];
+    var data = JSON.parse(localStorage.getItem('atlas_vote_' + id) || '{"up":0,"down":0,"voted":null}');
+    if (data.voted === 'up') el.children[0].classList.add('voted-up');
+    if (data.voted === 'down') el.children[1].classList.add('voted-down');
+  });
 })();
+
+render();
 </script>
 
 </body>
