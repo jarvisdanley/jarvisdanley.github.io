@@ -53,6 +53,11 @@
   .thumbs button.voted-down { background: rgba(231,76,60,0.15); border-color: var(--red); color: var(--red); }
   .footer { text-align: center; font-size: 0.65rem; color: var(--dim); margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
   .footer a { color: var(--accent); }
+  .day-tabs { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 14px; padding-bottom: 2px; -webkit-overflow-scrolling: touch; }
+  .day-tabs button { flex: 0 0 auto; background: var(--card); border: 1px solid var(--border); border-radius: 9px; color: var(--text); font-size: 0.74rem; font-weight: 600; padding: 8px 11px; cursor: pointer; line-height: 1.25; text-align: center; -webkit-tap-highlight-color: transparent; }
+  .day-tabs button small { display: block; color: var(--dim); font-weight: 400; font-size: 0.66rem; }
+  .day-tabs button.on { border-color: var(--accent); background: rgba(255,106,0,.12); color: var(--accent); }
+  .weather-day { cursor: pointer; }
 </style>
 </head>
 <body>
@@ -62,6 +67,8 @@
   <h1>Las Vegas — Metallica at Sphere</h1>
   <div class="date" id="day-date"></div>
 </div>
+
+<div class="day-tabs" id="day-tabs"></div>
 
 <div class="status-bar" id="status-bar"></div>
 
@@ -245,7 +252,7 @@ function render(dayOverride) {
   document.getElementById('day-date').textContent = d.date;
 
   var pills = '';
-  d.pills.forEach(function(p) {
+  (d.pills || []).forEach(function(p) {
     pills += '<span class="status-pill ' + p.cls + '">' + p.text + '</span>';
   });
   document.getElementById('status-bar').innerHTML = pills;
@@ -270,13 +277,13 @@ function render(dayOverride) {
   document.getElementById('weather-content').innerHTML = weatherRows;
 
   var timeline = '';
-  d.timeline.forEach(function(e) {
+  (d.timeline || []).forEach(function(e) {
     timeline += '<div class="event"><span class="time">' + e.time + '</span> ' + e.text + '</div>';
   });
   document.getElementById('timeline-content').innerHTML = timeline;
 
   var food = '';
-  d.food.forEach(function(f) {
+  (d.food || []).forEach(function(f) {
     food += '<div class="rec-card">' +
       '<div class="name"><a href="' + f.url + '" target="_blank" style="color:inherit;text-decoration:none">' + f.name + '</a></div>' +
       '<div class="meta">' + f.meta + '</div>' +
@@ -337,5 +344,33 @@ function vote(id, dir, btn) {
 render();
 </script>
 
+<script>
+/* Atlas day picker: tap a day tab (or a weather card) to view that day */
+(function () {
+  var bar = document.getElementById('day-tabs');
+  if (!bar || typeof TRIP === 'undefined') return;
+  function show(i) {
+    render(TRIP.days[i]);
+    [].forEach.call(bar.children, function (b, j) { b.classList.toggle('on', j === i); });
+    var b = bar.children[i]; if (b && b.scrollIntoView) b.scrollIntoView({ block: 'nearest', inline: 'center' });
+  }
+  TRIP.days.forEach(function (d, i) {
+    var dt = new Date(d.date + 'T12:00:00');
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.innerHTML = dt.toLocaleDateString('en-US', { weekday: 'short' }) + '<small>' + dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + '</small>';
+    btn.addEventListener('click', function () { show(i); });
+    bar.appendChild(btn);
+  });
+  var t = getToday(); var start = Math.max(0, TRIP.days.indexOf(t.day));
+  [].forEach.call(bar.children, function (b, j) { b.classList.toggle('on', j === start); });
+  document.addEventListener('click', function (ev) {
+    var w = ev.target.closest && ev.target.closest('.weather-day');
+    if (!w || !w.parentElement) return;
+    var i = [].indexOf.call(w.parentElement.children, w);
+    if (i >= 0 && i < TRIP.days.length) show(i);
+  });
+})();
+</script>
 </body>
 </html>

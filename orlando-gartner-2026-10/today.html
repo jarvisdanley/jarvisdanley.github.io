@@ -64,6 +64,11 @@
   .links-list li:last-child { border-bottom: none; }
   .links-list .t { flex: 0 0 74px; color: var(--dim); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; padding-top: 2px; }
   footer { text-align: center; font-size: 0.72rem; color: var(--dim); margin-top: 24px; line-height: 1.8; }
+  .day-tabs { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 14px; padding-bottom: 2px; -webkit-overflow-scrolling: touch; }
+  .day-tabs button { flex: 0 0 auto; background: var(--card); border: 1px solid var(--border); border-radius: 9px; color: var(--text); font-size: 0.74rem; font-weight: 600; padding: 8px 11px; cursor: pointer; line-height: 1.25; text-align: center; -webkit-tap-highlight-color: transparent; }
+  .day-tabs button small { display: block; color: var(--dim); font-weight: 400; font-size: 0.66rem; }
+  .day-tabs button.on { border-color: var(--accent); background: rgba(255,106,0,.12); color: var(--accent); }
+  .weather-day { cursor: pointer; }
 </style>
 </head>
 <body>
@@ -78,6 +83,8 @@
   <a href="index.html">📋 Full Briefing</a>
   <a href="https://jarvisdanley.github.io/">← All Trips</a>
 </div>
+
+<div class="day-tabs" id="day-tabs"></div>
 
 <div class="day-head" id="day-head">
   <div class="lbl" id="day-lbl">Loading…</div>
@@ -322,7 +329,7 @@ function render(day) {
   document.getElementById('day-date').textContent = d.date;
 
   var pills = '';
-  d.pills.forEach(function (p) {
+  (d.pills || []).forEach(function (p) {
     pills += '<span class="status-pill ' + p.cls + '">' + p.text + '</span>';
   });
   document.getElementById('status-bar').innerHTML = pills;
@@ -347,13 +354,13 @@ function render(day) {
   document.getElementById('weather-content').innerHTML = w;
 
   var tl = '';
-  d.timeline.forEach(function (e) {
+  (d.timeline || []).forEach(function (e) {
     tl += '<div class="event"><span class="time">' + e.time + '</span> — ' + e.text + '</div>';
   });
   document.getElementById('timeline-content').innerHTML = tl;
 
   var food = '';
-  d.food.forEach(function (f) {
+  (d.food || []).forEach(function (f) {
     food += '<div class="rec-card">' +
       '<div class="name"><a href="' + f.url + '" target="_blank">' + f.name + '</a></div>' +
       '<div class="meta">' + f.meta + '</div>' +
@@ -412,5 +419,33 @@ function vote(id, dir, btn) {
 render();
 </script>
 
+<script>
+/* Atlas day picker: tap a day tab (or a weather card) to view that day */
+(function () {
+  var bar = document.getElementById('day-tabs');
+  if (!bar || typeof TRIP === 'undefined') return;
+  function show(i) {
+    render(TRIP.days[i]);
+    [].forEach.call(bar.children, function (b, j) { b.classList.toggle('on', j === i); });
+    var b = bar.children[i]; if (b && b.scrollIntoView) b.scrollIntoView({ block: 'nearest', inline: 'center' });
+  }
+  TRIP.days.forEach(function (d, i) {
+    var dt = new Date(d.date + 'T12:00:00');
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.innerHTML = dt.toLocaleDateString('en-US', { weekday: 'short' }) + '<small>' + dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + '</small>';
+    btn.addEventListener('click', function () { show(i); });
+    bar.appendChild(btn);
+  });
+  var t = getToday(); var start = Math.max(0, TRIP.days.indexOf(t.day));
+  [].forEach.call(bar.children, function (b, j) { b.classList.toggle('on', j === start); });
+  document.addEventListener('click', function (ev) {
+    var w = ev.target.closest && ev.target.closest('.weather-day');
+    if (!w || !w.parentElement) return;
+    var i = [].indexOf.call(w.parentElement.children, w);
+    if (i >= 0 && i < TRIP.days.length) show(i);
+  });
+})();
+</script>
 </body>
 </html>
