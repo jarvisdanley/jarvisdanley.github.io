@@ -79,6 +79,12 @@
   .tip strong { color: var(--blue); }
   .warn-tip { font-size: 0.82rem; padding: 9px 12px; background: rgba(243,156,18,.08); border-radius: 8px; margin-bottom: 8px; }
   .warn-tip strong { color: var(--amber); }
+  details.sess { background: var(--bg); border: 1px solid #1c1c1c; border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
+  details.sess summary { cursor: pointer; font-size: 0.86rem; list-style: none; }
+  details.sess summary::-webkit-details-marker { display: none; }
+  details.sess summary .st { color: var(--accent); font-weight: 700; font-size: 0.76rem; }
+  details.sess[open] summary { margin-bottom: 8px; }
+  details.sess .sbody p { font-size: 0.82rem; margin-bottom: 6px; }
   footer { text-align: center; font-size: 0.72rem; color: var(--dim); margin-top: 28px; line-height: 1.8; }
 </style>
 </head>
@@ -100,6 +106,7 @@
   <span class="status-pill good">🏨 Embassy Suites Confirmed</span>
   <span class="status-pill good">🚗 National @ MCO</span>
   <span class="status-pill good">🎟️ Gartner Registered</span>
+  <span class="status-pill good">🎤 24 Sessions Booked</span>
   <span class="status-pill warn">⚠️ 1h45m BNA Connection</span>
   <span class="status-pill warn">🏋️ No PF Within 2 mi</span>
 </div>
@@ -109,6 +116,10 @@
 <!-- ATLAS UPDATES -->
 <div class="card">
   <h2>🤖 Atlas Updates</h2>
+  <div class="update">
+    <div class="time">Tue Oct 6, 2026</div>
+    <strong>Final agenda is in</strong> — 24 registered sessions across Mon–Thu, each with room, speakers, abstract and session link (same detail as your calendar invites). Tap any session in <em>My Agenda</em> below. Thursday's last session ends 1:00 PM, which gives the car return a real buffer.
+  </div>
   <div class="update">
     <div class="time">Mon Oct 5, 2026</div>
     The trip is now <strong>fully booked</strong> — no longer in planning. Flights, hotel and a rental car all confirmed in the mailbox via the new TripIt share. <strong>WN 2661</strong> out (MCI 11:40 AM → MCO 3:20 PM), <strong>Embassy Suites Lake Buena Vista South</strong> in Kissimmee (4 nights), <strong>National</strong> at MCO for the full stay, and home on <strong>WN 2685 → WN 611</strong> through Nashville, landing MCI 8:40 PM Thursday. The 11:40 AM outbound is exactly the nonstop the research had been pointing at.
@@ -122,7 +133,7 @@
 <div class="count">
   <div><span class="n" id="cd-days">—</span><span class="l">days out</span></div>
   <div><span class="n">4</span><span class="l">nights</span></div>
-  <div><span class="n">350+</span><span class="l">sessions</span></div>
+  <div><span class="n">24</span><span class="l">my sessions</span></div>
 </div>
 <div style="height:14px"></div>
 
@@ -175,43 +186,241 @@
   <table>
     <tr><th>Date</th><th>What happens</th></tr>
     <tr><td><strong>Sun Oct 18</strong><br><span class="meta">arrival</span></td><td>WN 2661 lands MCO 3:20 PM. National pickup, ~25 min to the Embassy Suites, badge pickup. <strong>Welcome Reception 6:00–7:30 PM ET</strong> — the only scheduled item (Industry Neighborhoods block party)</td></tr>
-    <tr><td><strong>Mon Oct 19</strong></td><td><strong>Opening Keynote 10:00–10:45 AM</strong> — <em>"Reaching Escape Velocity: Shaping an Effective Enterprise AI Economy"</em>. Track sessions from 11:30 AM. IT Xpo 10:45 AM–7:15 PM</td></tr>
-    <tr><td><strong>Tue Oct 20</strong></td><td>Full session day. IT Xpo 9:45 AM–6:15 PM. <strong>🎉 8:00–11:00 PM: private Gartner buyout of Disney's Hollywood Studios</strong> (the park closes to the public at 5 PM just for this)</td></tr>
-    <tr><td><strong>Wed Oct 21</strong></td><td>Sessions from 10:00 AM · Analyst 1:1s · IT Xpo 10:45 AM–7:15 PM</td></tr>
-    <tr><td><strong>Thu Oct 22</strong><br><span class="meta">departure</span></td><td>✅ <strong>Half day — IT Xpo closes 1:45 PM.</strong> Closing sessions, return the car, fly home the same evening via BNA</td></tr>
+    <tr><td><strong>Mon Oct 19</strong></td><td>7:30 AM government CIO breakfast · <strong>Opening Keynote 10:00–10:45 AM</strong> — <em>"Shaping Momentum: Compounding Value and Risk for the Next Success Horizon"</em> · 7 more sessions · T-Mobile reception 7:15 PM</td></tr>
+    <tr><td><strong>Tue Oct 20</strong></td><td><strong>Serena Williams keynote 9:00 AM</strong> · 6 agentic-AI sessions through 5:15 PM · <strong>🎉 8:00–11:00 PM: private Gartner buyout of Disney's Hollywood Studios</strong></td></tr>
+    <tr><td><strong>Wed Oct 21</strong></td><td>5 sessions 10:30 AM–5:45 PM — domain agents, AI coding MQ, AI business cases, build vs buy, CEO mindset</td></tr>
+    <tr><td><strong>Thu Oct 22</strong><br><span class="meta">departure</span></td><td>3 sessions 8:00 AM–1:00 PM, then straight to MCO — the last session ends 1:00 PM, so the car return is no longer tight</td></tr>
   </table>
   <p class="meta">✅ <strong>Thursday's end time is confirmed at 1:45 PM ET</strong> — no extra Friday night is needed.</p>
   <p class="meta" style="color:var(--amber);">⚠️ Protect <strong>Tuesday night</strong>. The Hollywood Studios buyout is the best networking event of the week and it runs to 11 PM.</p>
 </div>
 
 <!-- AGENDA -->
-<div class="card">
-  <h2>🎤 Agenda — the sessions that matter</h2>
-  <p class="meta">Built for an enterprise-AI innovation leader, not a CIO. <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions" target="_blank">All 350+ sessions</a> · <a href="https://cn.gartner.com/SYM36" target="_blank">Conference Navigator</a></p>
-  <table>
-    <tr><th>Day / time (ET)</th><th>Session</th></tr>
-    <tr><td>Mon 10:00–10:45 AM</td><td><strong>Gartner Opening Keynote: Reaching Escape Velocity</strong> — Daryl Plummer &amp; Kristin Moyer</td></tr>
-    <tr><td>Mon 11:30 AM</td><td><strong>Get Ready for Data and Analytics 2030</strong> — Rita Sallam</td></tr>
-    <tr><td>Mon 11:30 AM</td><td><strong>From Chaos to Control: How to Manage your Growing AI Costs</strong> — Robert Naegle</td></tr>
-    <tr><td>Mon 3:45–4:15 PM</td><td><strong>Building the AI enterprise from the inside out — The Kraft Group</strong> — Anurag Dhingra (Cisco) &amp; Michael Israel (CIO, Kraft)</td></tr>
-    <tr><td>Tue 3:45–4:15 PM</td><td><em>"Network teams using AgenticOps won't go back"</em> — Cisco</td></tr>
-    <tr><td>Wed 10:00–10:20 AM</td><td><strong>The Secret Profit and Loss of AI</strong> — Seth Brickman (Splunk)</td></tr>
-    <tr><td>Wed 11:30 AM–12:00 PM</td><td><strong>From reactive to resilient: a new operating model for cyber defense</strong> — Cisco</td></tr>
-    <tr><td>TBC</td><td><strong>AI-Native Development: From Vibe Coding to Teams of Coding Agents</strong></td></tr>
-    <tr><td>TBC</td><td><strong>Agents Aren't Apps: Rethinking How IT Works for the AI Era</strong></td></tr>
-    <tr><td>TBC</td><td><strong>The New Build vs Buy Framework for AI in Enterprise Applications</strong></td></tr>
-    <tr><td>TBC</td><td><strong>Decision Intelligence: Getting Value From AI Agents and Multiagent Systems</strong></td></tr>
-    <tr><td>TBC</td><td><strong>How to Build Reliable AI Agents Out of Unreliable AI Parts?</strong></td></tr>
-    <tr><td>TBC</td><td><strong>Signature Series: Top Strategic Technology Trends for 2027</strong></td></tr>
-    <tr><td>TBC</td><td><strong>Signature Series: The 2027 CIO &amp; Tech Executive Agenda</strong></td></tr>
-  </table>
-
-  <h3>Guest keynotes</h3>
-  <p><strong>James Clear</strong> (<em>Atomic Habits</em>) · <strong>Will Guidara</strong> (<em>Unreasonable Hospitality</em>) · <strong>Serena Williams</strong> (interviewed by Soledad O'Brien) · <strong>Ian Bremmer</strong> · <strong>Sinead Bovell</strong> · <strong>Evy Poumpouras</strong> — days/times still publishing</p>
-
-  <h3>⏳ Still bookable — use them or lose them</h3>
-  <p><strong>2 Ask The Experts · 1 Roundtable · 2 Consulting Clinics · 2 Analyst 1:1.</strong> General booking opened Sep 21; the 2 workshops were Priority-1 only and are likely gone.</p>
-  <p class="meta">👉 The <strong>Analyst 1:1</strong> is the highest-value 30 minutes of the week — scheduled in Navigator → <em>Info</em> → <em>Meetings</em>, first-come on analyst popularity. Pick deliberately and book early.</p>
+<div class="card good">
+  <h2>🎤 My Agenda — final · 24 sessions</h2>
+  <p class="meta">Registered in Conference Navigator and synced to your calendar. All times <strong>ET</strong>. Tap any session for the room, speakers, abstract and link. <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">Open My Agenda in Navigator</a></p>
+  <div class="grp">Mon Oct 19 — Opening Day · 9 sessions</div>
+  <details class="sess">
+    <summary><span class="st">7:30 AM–9:00 AM</span> <strong>State and Local Government Networking Breakfast &amp; CIO Panel: No Spin: A Candid Conversation About Government AI Challenges and Successes</strong><br><span class="meta">📍 Newport East, Disney&#x27;s Yacht &amp; Beach Resort</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Disney%27s+Yacht+Club+Resort+1700+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Newport East, Disney&#x27;s Yacht &amp; Beach Resort</a></p>
+      <p class="meta">🗣️ Rafael Mena, Chief Information Officer, Orange County Government<br>🗣️ Chris Given, CIO, State of CA<br>🗣️ <a href="https://www.linkedin.com/in/elyse-rosenberg-4ab541a" target="_blank">Elyse Rosenberg, CIO, City of Portland, OR</a><br>🗣️ <a href="https://www.linkedin.com/in/jimfinwick" target="_blank">Jim Finwick, Sr Executive Partner, Gartner</a><br>🗣️ <a href="https://www.linkedin.com/in/annette-dunn-76682923" target="_blank">Annette Dunn, Sr Executive Partner, Gartner</a></p>
+      <p>Join technology leaders from the State of California, State of Utah, City of Portland, City of Raleigh, and Orange County for an honest discussion on the realities of AI in government. Panelists will share lessons learned, successful and unsuccessful initiatives, approaches to governance and risk, workforce impacts, and their outlook on the future of AI across the public sector. Expect practical insights, candid perspectives, and real-world advice from peers leading AI transformation in their organizations.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4963751-State-and-Local-Government-Networking-Breakfast-CIO-Panel-No-Spin-A-Candid-Conversation-About-Government-AI-Challenges-and-Successes" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">10:00 AM–10:45 AM</span> <strong>Gartner Opening Keynote: Shaping Momentum: Compounding Value and Risk for the Next Success Horizon</strong><br><span class="meta">📍 Live: Hemisphere Ballroom, WDW Dolphin Hotel | Remote: Upper Peninsula, WDW Swan Hotel, Yacht &amp; Beach Resort</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Disney%27s+Yacht+Club+Resort+1700+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Live: Hemisphere Ballroom, WDW Dolphin Hotel | Remote: Upper Peninsula, WDW Swan Hotel, Yacht &amp; Beach Resort</a></p>
+      <p class="meta">🗣️ <a href="https://www.linkedin.com/in/krmoyer" target="_blank">Kristin Moyer, Distinguished VP Analyst, Gartner</a><br>🗣️ <a href="https://www.linkedin.com/in/darylplummer" target="_blank">Daryl Plummer, Distinguished VP Analyst, Gartner</a></p>
+      <p>AI continues to be embedded in everything the enterprise does. AI value is growing but AI risk is compounding. In Gartner&#x27;s Opening Keynote, discover how CIOs and IT leaders can build a flywheel of good AI momentum and balance value against compounding risk using good drag that mitigates it. In the end, continuous positive returns can be found to compound your success.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4924070-Gartner-Opening-Keynote-Shaping-Momentum-Compounding-Value-and-Risk-for-the-Next-Success-Horizon" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">11:30 AM–12:15 PM</span> <strong>Roundtable: How to Supercharge Your Competitive Advantage: Strategically Partner With Forward-Deployed AI Native Startups</strong><br><span class="meta">📍 Toucan 2, WDW Swan Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Swan+1200+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Toucan 2, WDW Swan Hotel</a></p>
+      <p class="meta">🗣️ Annemarie Roussel, Sr Director Analyst, Gartner<br>🗣️ <a href="https://www.linkedin.com/in/jorge-lopez-aaa28" target="_blank">Jorge Lopez, Distinguished VP Analyst, Gartner</a></p>
+      <p>Executive leaders in the AI Native era face new market realities: the models and metrics that defined success for the last decade are now inhibitors to success. Join the conversation to explore how the disruption created by fast-moving startups on the bleeding edge of AI innovation can be leveraged and turned into action to beat your competitors.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6802127-Roundtable-How-to-Supercharge-Your-Competitive-Advantage-Strategically-Partner-With-Forward-Deployed-AI-Native-Startups" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">12:30 PM–1:00 PM</span> <strong>Process Orchestration and AI Agents - Aspirations and Reality</strong><br><span class="meta">📍 Upper Peninsula 3, WDW Dolphin Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Upper Peninsula 3, WDW Dolphin Hotel</a></p>
+      <p class="meta">🗣️ <a href="https://www.linkedin.com/in/marckerremans" target="_blank">Marc Kerremans, VP Analyst, Gartner</a></p>
+      <p>Discover how integrating agent and workflow technologies can revolutionize your business. Unlock new levels of automation, adaptability and efficiency while reducing manual effort. Join this session to explore practical strategies and real-world value that can give your enterprise a powerful competitive edge.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4967034-Process-Orchestration-and-AI-Agents-Aspirations-and-Reality" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">1:45 PM–2:15 PM</span> <strong>Lenovo: FIFA World Cup ‘26: The Ultimate Proving Ground for Enterprise AI</strong><br><span class="meta">📍 Upper Peninsula 3, WDW Dolphin Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Upper Peninsula 3, WDW Dolphin Hotel</a></p>
+      
+      <p>An inside look at the AI technology that elevated the world&#x27;s largest sporting event—and what enterprises can learn about resilience, scale and innovation.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6198359-Lenovo-FIFA-World-Cup-26-The-Ultimate-Proving-Ground-for-Enterprise-AI" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">2:20 PM–2:40 PM</span> <strong>ControlUp: How AI Is Reshaping the Digital Workplace - And How IT Leaders Can Thrive</strong><br><span class="meta">📍 Stage 4, IT Xpo, Pacific Terrace, WDW Dolphin Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Stage 4, IT Xpo, Pacific Terrace, WDW Dolphin Hotel</a></p>
+      <p class="meta">🗣️ <a href="https://www.linkedin.com/in/mcalef" target="_blank">Marcel Calef, Field Cto, ControlUp</a></p>
+      <p>From threats and governance to cost and modernization, AI is raising the stakes for IT teams — all while you&#x27;re expected to deliver more with flat budgets and headcount. With real-time data, AI-driven intelligence, and automated remediation, we&#x27;re reinventing how IT operations run. Join us to explore how leaders can cut through complexity, reduce risk, and thrive in this new era of IT.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6187711-ControlUp-How-AI-Is-Reshaping-the-Digital-Workplace-And-How-IT-Leaders-Can-Thrive" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">2:45 PM–3:05 PM</span> <strong>AI Executive Partner Insights: Ask Me Anything</strong><br><span class="meta">📍 Stage 2, IT Xpo, Atlantic Hall, WDW Dolphin Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Stage 2, IT Xpo, Atlantic Hall, WDW Dolphin Hotel</a></p>
+      <p class="meta">🗣️ <a href="https://www.linkedin.com/in/madina-kassengaliyeva" target="_blank">Madina Kassengaliyeva, Executive Partner, Domains, Gartner</a><br>🗣️ <a href="https://www.linkedin.com/in/rebeccaygonzales" target="_blank">Rebecca Gonzales, Executive Partner, Gartner</a></p>
+      <p>Bring your most pressing AI questions to this interactive, Q&amp;A style session with Gartner’s AI Executive Partners. Receive guidance on real-world AI challenges and opportunities. Experience firsthand the value of working with a Gartner Executive Partner. Open to all attendees — no question is too big or small.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6224823-AI-Executive-Partner-Insights-Ask-Me-Anything" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">3:45 PM–4:15 PM</span> <strong>T-Mobile: Gary Vaynerchuk on Innovation AI &amp; What Winning Organizations Do Differently</strong><br><span class="meta">📍 Grand Harbor North &amp; South, Disney&#x27;s Yacht &amp; Beach Resort</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Disney%27s+Yacht+Club+Resort+1700+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Grand Harbor North &amp; South, Disney&#x27;s Yacht &amp; Beach Resort</a></p>
+      <p class="meta">🗣️ <a href="https://www.linkedin.com/in/garyvaynerchuk" target="_blank">Gary Vaynerchuk, CEO of VaynerMedia, VaynerMedia</a></p>
+      <p>Technology is the foundation of competitive advantage.  The organizations that win pair it with the right people, culture, and execution. Gary Vaynerchuk shares why winning organizations embrace change, move faster, and create lasting value, then moderates a discussion with leaders whose organizations were recognized through the T-Mobile for Business Innovate Awards for delivering measurable business outcomes through technology innovation.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6187455-T-Mobile-Gary-Vaynerchuk-on-Innovation-AI-What-Winning-Organizations-Do-Differently" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">7:15 PM–10:00 PM</span> <strong>Networking Reception hosted by T-Mobile USA, Inc.</strong><br><span class="meta">📍 Cabana Deck, WDW Dolphin Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Cabana Deck, WDW Dolphin Hotel</a></p>
+      
+      <p>Details still to be published by Gartner.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6309685-Networking-Reception-hosted-by-T-Mobile-USA-Inc" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <div class="grp">Tue Oct 20 — Agentic Day + Hollywood Studios · 7 sessions</div>
+  <details class="sess">
+    <summary><span class="st">9:00 AM–9:45 AM</span> <strong>Guest Keynote: Reinvention and Impact with Serena Williams</strong><br><span class="meta">📍 Live: Hemisphere Ballroom, WDW Dolphin Hotel | Remote: Upper Peninsula, WDW Swan Hotel, Yacht &amp; Beach Resort</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Disney%27s+Yacht+Club+Resort+1700+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Live: Hemisphere Ballroom, WDW Dolphin Hotel | Remote: Upper Peninsula, WDW Swan Hotel, Yacht &amp; Beach Resort</a></p>
+      
+      <p>Join Serena Williams, global sports icon, entrepreneur, investor, and advocate, for a compelling keynote interview led by award-winning journalist Soledad O’Brien. Serena will share the lessons behind her extraordinary success on and off the court, from performing at the highest level under pressure to building businesses, championing change, and redefining what leadership looks like. Their conversation will offer fresh perspectives on resilience, ambition, and transformation, with insights you can apply as you navigate change, drive growth, and create lasting impact.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4589368-Guest-Keynote-Reinvention-and-Impact-with-Serena-Williams" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">10:00 AM–10:20 AM</span> <strong>Profisee: The Agentic Leap: From AI Recommending to Acting and Delivering on the ROI Promise</strong><br><span class="meta">📍 Stage 2, IT Xpo, Atlantic Hall, WDW Dolphin Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Stage 2, IT Xpo, Atlantic Hall, WDW Dolphin Hotel</a></p>
+      <p class="meta">🗣️ <a href="https://www.linkedin.com/in/len-finkle-9465b22" target="_blank">Len Finkle, CEO, Profisee</a></p>
+      <p>Enterprise AI has always had a human in the middle, reading the recommendation and quietly correcting what was wrong. That human layer was invisible, unmeasured, and load-bearing.  Agents remove it; that is the power! This session examines what changes when advice becomes action: where autonomy gets capped, what an agent has to be certain of before it can act, and what Is required to make this promise a reality.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6712011-Profisee-The-Agentic-Leap-From-AI-Recommending-to-Acting-and-Delivering-on-the-ROI-Promise" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">10:30 AM–11:00 AM</span> <strong>Decision Intelligence: Getting Value From AI Agents and Multiagent Systems</strong><br><span class="meta">📍 Upper Peninsula 2, WDW Dolphin Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Upper Peninsula 2, WDW Dolphin Hotel</a></p>
+      <p class="meta">🗣️ <a href="https://www.linkedin.com/in/brethenoux" target="_blank">Erick Brethenoux, Distinguished VP Analyst, Gartner</a></p>
+      <p>The AI operationalization phase is giving way to the next evolution of AI software based on composite AI and AI agents. AI agents need an enterprise view and a bigger picture to organize their collaborations. To build adaptable and resilient systems, organizations should explore this evolution — based on the decision intelligence discipline — to maximize the benefits brought by the AI agent wave. Join this session to learn more.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4963777-Decision-Intelligence-Getting-Value-From-AI-Agents-and-Multiagent-Systems" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">11:30 AM–12:00 PM</span> <strong>Boomi: Stop Buying Agents. Start Building Agentic Systems</strong><br><span class="meta">📍 Upper Peninsula 2, WDW Dolphin Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Upper Peninsula 2, WDW Dolphin Hotel</a></p>
+      <p class="meta">🗣️ <a href="https://www.linkedin.com/in/michaelbachmanphilly" target="_blank">Michael Bachman, Head Of Research And Emerging Technolog, Boomi</a></p>
+      <p>Agents dazzle in demos and fail in production, because an agent is not a system. Transformation lives or dies with agentic systems: a probabilistic engine fused with a deterministic frame, fed data fit for autonomous action. Learn when agents earn their place, when automation should run instead, and how the four Cs and governed memory make the whole system trustworthy</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6197837-Boomi-Stop-Buying-Agents-Start-Building-Agentic-Systems" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">12:30 PM–1:00 PM</span> <strong>Where Agentic AI Works, Will Soon Work and May Never Work</strong><br><span class="meta">📍 Southern Hemisphere I-II, WDW Dolphin Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Southern Hemisphere I-II, WDW Dolphin Hotel</a></p>
+      <p class="meta">🗣️ Danielle Casey, Sr Director Analyst, Gartner</p>
+      <p>The AI market is rapidly innovating forwards, yet many enterprises are still struggling to get value out. Join this session to learn about the top Agentic AI use cases and business outcomes, the emerging technologies unlocking the next generation of expert agents, and the key challenges that the market must solve to realize scale.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4875741-Where-Agentic-AI-Works-Will-Soon-Work-and-May-Never-Work" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">2:45 PM–3:15 PM</span> <strong>AI-Infused Strategy Execution: Unlocking Sustainable Competitive Advantage</strong><br><span class="meta">📍 Northern Hemisphere Ballroom, WDW Dolphin Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Northern Hemisphere Ballroom, WDW Dolphin Hotel</a></p>
+      <p class="meta">🗣️ <a href="https://www.linkedin.com/in/monika-sinha-952553" target="_blank">Monika Sinha, VP Analyst, Gartner</a></p>
+      <p>Learn how organizations are embedding AI into strategy execution, from real-time monitoring and adaptive decision making to dynamic resource allocation. Discover actionable steps for CIOs to leverage AI for continuous alignment between strategy and execution, enabling faster adaptation to market shifts and measurable value creation.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4903239-AI-Infused-Strategy-Execution-Unlocking-Sustainable-Competitive-Advantage" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">4:45 PM–5:15 PM</span> <strong>What Does an AI Program Really Cost in 2026?</strong><br><span class="meta">📍 Upper Peninsula 4, WDW Dolphin Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Upper Peninsula 4, WDW Dolphin Hotel</a></p>
+      <p class="meta">🗣️ <a href="https://www.linkedin.com/in/nsuda" target="_blank">Nate Suda, VP Analyst, Gartner</a></p>
+      <p>AI investment is now material, not experimental. Yet few enterprises clearly understand total AI program economics. Join us to explore the full cost stack of enterprise AI in 2026: infrastructure, licensing, integration, governance, talent, model operations and run-cost volatility. We examine how agentic systems affect cost predictability and how hidden integration overhead can exceed model expenses. Using aggregated budget data and deployment case analysis, we provide benchmarks for AI program scale and cost distribution. We also explore how shifting from variable labor to semi-fixed technology is changing operating leverage.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4903237-What-Does-an-AI-Program-Really-Cost-in-2026" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <div class="grp">Wed Oct 21 — Build, Buy &amp; Business Case · 5 sessions</div>
+  <details class="sess">
+    <summary><span class="st">10:30 AM–11:00 AM</span> <strong>Adopt Domain-Specific Agentic AI to Unleash Enterprise Innovation</strong><br><span class="meta">📍 Swan Ballroom 10, WDW Swan Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Swan+1200+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Swan Ballroom 10, WDW Swan Hotel</a></p>
+      <p class="meta">🗣️ <a href="https://www.linkedin.com/in/tsuneofujiwara" target="_blank">Tsuneo Fujiwara, Distinguished VP Analyst, Gartner</a></p>
+      <p>Everyone&#x27;s experimenting with AI agents, but missing an opportunity to develop domain-specific agents that can deliver real value for enterprise AI use cases. This session advises CIOs on how to use domain-specific models, which use contextually relevant business function and industry data, to exploit agentic AI innovation that delivers crucial knowledge insights and competitive differentiation.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4903195-Adopt-Domain-Specific-Agentic-AI-to-Unleash-Enterprise-Innovation" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">12:30 PM–1:00 PM</span> <strong>Magic Quadrant Power Session: Enterprise AI Coding Agents and AI Application Development Platforms</strong><br><span class="meta">📍 Southern Hemisphere III, WDW Dolphin Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Southern Hemisphere III, WDW Dolphin Hotel</a></p>
+      <p class="meta">🗣️ C.A. Swan, Sr Director Analyst, Gartner<br>🗣️ Philip Walsh, Sr Director Analyst, Gartner</p>
+      <p>The use of AI is now ubiquitous in software engineering and enabling faster delivery of higher quality products. We discuss findings from Gartner&#x27;s Magic Quadrants for Enterprise AI Coding Agents and AI Application Development Platforms. Learn how Gartner defines these markets, the mandatory and common product features, the best vendors for your organization, the main use cases, and how complementary these solutions are.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/5575663-Magic-Quadrant-Power-Session-Enterprise-AI-Coding-Agents-and-AI-Application-Development-Platforms" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">2:15 PM–2:45 PM</span> <strong>Five Approaches CIOs Can Use to Build Winning Cases for AI Investment</strong><br><span class="meta">📍 Upper Peninsula 2, WDW Dolphin Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Upper Peninsula 2, WDW Dolphin Hotel</a></p>
+      <p class="meta">🗣️ <a href="https://www.linkedin.com/in/brook-selassie-85064333" target="_blank">Brook Selassie, Distinguished VP Analyst, Gartner</a></p>
+      <p>AI funding faces unclear value, high failure rates and rising scrutiny. This session presents five specific approaches, each designed to address a distinct funding roadblock, helping CIOs navigate executive psychology, risk aversion and competing priorities to position AI investments with the credibility and strategic balance needed to win scarce funding.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4967068-Five-Approaches-CIOs-Can-Use-to-Build-Winning-Cases-for-AI-Investment" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">4:15 PM–4:45 PM</span> <strong>The New Build vs. Buy Framework for AI in Enterprise Applications</strong><br><span class="meta">📍 Northern Hemisphere Ballroom, WDW Dolphin Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Northern Hemisphere Ballroom, WDW Dolphin Hotel</a></p>
+      <p class="meta">🗣️ <a href="https://www.linkedin.com/in/tad-travis-120108" target="_blank">Tad Travis, VP Analyst, Gartner</a></p>
+      <p>46% of organizations believe that they can replace most of their applications with custom AI. This complicates the traditional perspective on build versus buy. Enterprise application vendors and AI platform vendors are in a race towards the same finish line but are starting from two different points. Join this session to learn the latest practices and recommendations.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4927359-The-New-Build-vs-Buy-Framework-for-AI-in-Enterprise-Applications" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">5:15 PM–5:45 PM</span> <strong>Inside the CEO Mindset on AI: The Fears, Dreams and Pressures CIOs Must Navigate</strong><br><span class="meta">📍 Northern Hemisphere Ballroom, WDW Dolphin Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Northern Hemisphere Ballroom, WDW Dolphin Hotel</a></p>
+      <p class="meta">🗣️ <a href="https://www.linkedin.com/in/davidfurlonger" target="_blank">David Furlonger, Distinguished VP Analyst, Gartner</a></p>
+      <p>Your CEO has an AI agenda — just not the one they’re telling you. Our annual CEO survey reveals hidden pressures around competition, headcount and credibility that are quietly shaping their expectations. In this session, you’ll learn how to surface these unspoken drivers and use them to strengthen alignment, guide expectations and elevate your partnership with your CEO.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4963766-Inside-the-CEO-Mindset-on-AI-The-Fears-Dreams-and-Pressures-CIOs-Must-Navigate" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <div class="grp">Thu Oct 22 — Close &amp; Fly Home · 3 sessions</div>
+  <details class="sess">
+    <summary><span class="st">8:00 AM–8:30 AM</span> <strong>Executive Story: Stop Talking About AI. Start Doing It: How We Operationalized AI in 90 Days</strong><br><span class="meta">📍 Upper Peninsula 4, WDW Dolphin Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Upper Peninsula 4, WDW Dolphin Hotel</a></p>
+      <p class="meta">🗣️ <a href="https://www.linkedin.com/in/johntziortzis" target="_blank">John Tziortzis, Associate Vice President, Strategy, Innovation, and Assurance &amp; Chief Information Security Officer, Centennial College</a></p>
+      <p>AI isn&#x27;t failing because of technology. It&#x27;s failing because organizations struggle to move from discussion to execution. Learn how Centennial College rapidly deployed AI across student engagement, voice services, IT operations, and enterprise productivity while navigating governance, privacy, and cultural resistance. This session shares practical lessons, leadership challenges, and hard-earned insights from turning AI ambition into operational reality.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4862277-Executive-Story-Stop-Talking-About-AI-Start-Doing-It-How-We-Operationalized-AI-in-90-Days" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">10:30 AM–10:50 AM</span> <strong>Hype Cycle for Agentic AI 2026 (Repeat)</strong><br><span class="meta">📍 Stage 3, IT Xpo, Pacific Hall, WDW Dolphin Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Stage 3, IT Xpo, Pacific Hall, WDW Dolphin Hotel</a></p>
+      <p class="meta">🗣️ <a href="https://www.linkedin.com/in/rajeshkan" target="_blank">Rajesh Kandaswamy, Distinguished VP Analyst, Gartner</a></p>
+      <p>This session will introduce the innovation in AI agents and agentic AI using the inaugural Hype Cycle for Agentic AI.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6224821-Hype-Cycle-for-Agentic-AI-2026-Repeat" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <details class="sess">
+    <summary><span class="st">12:30 PM–1:00 PM</span> <strong>Reduce Opex and AI Token Costs With Platform Engineering</strong><br><span class="meta">📍 Swan Ballroom 6, WDW Swan Hotel</span></summary>
+    <div class="sbody">
+      <p class="meta">📍 <a href="https://www.google.com/maps/search/Walt+Disney+World+Swan+1200+Epcot+Resorts+Blvd+Lake+Buena+Vista+FL" target="_blank">Swan Ballroom 6, WDW Swan Hotel</a></p>
+      <p class="meta">🗣️ <a href="https://www.linkedin.com/in/billblosen" target="_blank">Bill Blosen, VP Analyst, Gartner</a></p>
+      <p>AI’s explosive growth — especially agentic AI — has unleashed a new era of opex volatility, outpacing the predictability we achieved with cloud FinOps. Unlike cloud, AI’s inference and token costs are elusive, often blindsiding organizations as adoption accelerates. This results in chaotic, runaway expenses. Platform engineering must make cost control a first-class citizen, embedding financial accountability into every paved road to harness AI’s power without losing control of the bottom line.</p>
+      <p class="meta"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4967051-Reduce-Opex-and-AI-Token-Costs-With-Platform-Engineering" target="_blank">Session page on gartner.com ↗</a> · <a href="https://cn.gartner.com/SYM36/myagenda" target="_blank">My Agenda in Navigator ↗</a></p>
+    </div>
+  </details>
+  <h3>Not registered — decision blocks on your calendar</h3>
+  <p class="meta">🏗️ <a href="https://www.procore.com/groundbreak" target="_blank">Procore Groundbreak 2026</a> (AI in construction) · Orange County Convention Center · overlaps Tue–Thu.<br>🖥️ <a href="https://www.vmug.com/" target="_blank">VMUG Connect Orlando</a> (AI track) · Caribe Royale · Wed–Thu · <strong>registration closes Tue Oct 20</strong>.</p>
 </div>
 
 <!-- ITINERARY -->
@@ -224,42 +433,54 @@
     <li>11:40 AM CT — ✈️ <strong>WN 2661</strong> departs MCI (seat 5F)</li>
     <li>3:20 PM ET — 🛬 land MCO <strong>Terminal A</strong> → <strong>National pickup</strong> (Level 1 counter, car on Level 2)</li>
     <li>~4:30 PM — 🚗 ~25 min drive → check in at the <strong>Embassy Suites</strong></li>
-    <li>~5:30 PM — 🚗 ~20 min drive to the Swan &amp; Dolphin</li>
-    <li><strong>6:00–7:30 PM — Welcome Reception</strong> (Industry Neighborhoods block party — networking, food, DJ)</li>
-    <li>evening — dinner in Celebration, minutes from the hotel</li>
+    <li>~5:30 PM — 🚗 ~20 min drive to the Swan &amp; Dolphin · badge pickup</li>
+    <li><strong>6:00–7:30 PM — Welcome Reception</strong> (Industry Neighborhoods block party)</li>
   </ul>
 
   <h3>Mon Oct 19 — Opening Day</h3>
   <ul>
-    <li>~7:45 AM — 🚗 ~20 min drive from the hotel to the venue, breakfast on the way</li>
-    <li><strong>10:00–10:45 AM — Opening Keynote</strong></li>
-    <li>11:30 AM — <em>Data and Analytics 2030</em> or <em>AI Costs</em></li>
-    <li>1:30–3:30 PM — agentic-AI / operating-model tracks</li>
-    <li>3:45–4:15 PM — <em>Building the AI enterprise — The Kraft Group</em></li>
+    <li>~6:50 AM — 🚗 leave the hotel (breakfast panel starts 7:30 at the Yacht &amp; Beach Club)</li>
+    <li><strong>7:30 AM–9:00 AM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4963751-State-and-Local-Government-Networking-Breakfast-CIO-Panel-No-Spin-A-Candid-Conversation-About-Government-AI-Challenges-and-Successes" target="_blank">State and Local Government Networking Breakfast &amp; CIO Panel: No Spin: A Candid Conversation About Government AI Challenges and Successes</a> <span class="meta">· Newport East, Disney&#x27;s Yacht &amp; Beach Resort</span></li>
+    <li><strong>10:00 AM–10:45 AM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4924070-Gartner-Opening-Keynote-Shaping-Momentum-Compounding-Value-and-Risk-for-the-Next-Success-Horizon" target="_blank">Gartner Opening Keynote: Shaping Momentum: Compounding Value and Risk for the Next Success Horizon</a> <span class="meta">· Hemisphere Ballroom, WDW Dolphin Hotel</span></li>
+    <li><strong>11:30 AM–12:15 PM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6802127-Roundtable-How-to-Supercharge-Your-Competitive-Advantage-Strategically-Partner-With-Forward-Deployed-AI-Native-Startups" target="_blank">Roundtable: How to Supercharge Your Competitive Advantage: Strategically Partner With Forward-Deployed AI Native Startups</a> <span class="meta">· Toucan 2, WDW Swan Hotel</span></li>
+    <li><strong>12:30 PM–1:00 PM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4967034-Process-Orchestration-and-AI-Agents-Aspirations-and-Reality" target="_blank">Process Orchestration and AI Agents - Aspirations and Reality</a> <span class="meta">· Upper Peninsula 3, WDW Dolphin Hotel</span></li>
+    <li><strong>1:45 PM–2:15 PM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6198359-Lenovo-FIFA-World-Cup-26-The-Ultimate-Proving-Ground-for-Enterprise-AI" target="_blank">Lenovo: FIFA World Cup ‘26: The Ultimate Proving Ground for Enterprise AI</a> <span class="meta">· Upper Peninsula 3, WDW Dolphin Hotel</span></li>
+    <li><strong>2:20 PM–2:40 PM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6187711-ControlUp-How-AI-Is-Reshaping-the-Digital-Workplace-And-How-IT-Leaders-Can-Thrive" target="_blank">ControlUp: How AI Is Reshaping the Digital Workplace - And How IT Leaders Can Thrive</a> <span class="meta">· Stage 4, IT Xpo, Pacific Terrace, WDW Dolphin Hotel</span></li>
+    <li><strong>2:45 PM–3:05 PM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6224823-AI-Executive-Partner-Insights-Ask-Me-Anything" target="_blank">AI Executive Partner Insights: Ask Me Anything</a> <span class="meta">· Stage 2, IT Xpo, Atlantic Hall, WDW Dolphin Hotel</span></li>
+    <li><strong>3:45 PM–4:15 PM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6187455-T-Mobile-Gary-Vaynerchuk-on-Innovation-AI-What-Winning-Organizations-Do-Differently" target="_blank">T-Mobile: Gary Vaynerchuk on Innovation AI &amp; What Winning Organizations Do Differently</a> <span class="meta">· Grand Harbor North &amp; South, Disney&#x27;s Yacht &amp; Beach Resort</span></li>
+    <li><strong>7:15 PM–10:00 PM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6309685-Networking-Reception-hosted-by-T-Mobile-USA-Inc" target="_blank">Networking Reception hosted by T-Mobile USA, Inc.</a> <span class="meta">· Cabana Deck, WDW Dolphin Hotel</span></li>
   </ul>
 
-  <h3>Tue Oct 20 — Full Day + Hollywood Studios 🎉</h3>
+  <h3>Tue Oct 20 — Agentic Day + Hollywood Studios 🎉</h3>
   <ul>
-    <li>Morning — sessions + <strong>Analyst 1:1</strong> (good slot for it)</li>
-    <li>Afternoon — AI-native development / agentic tracks</li>
+    <li><strong>9:00 AM–9:45 AM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4589368-Guest-Keynote-Reinvention-and-Impact-with-Serena-Williams" target="_blank">Guest Keynote: Reinvention and Impact with Serena Williams</a> <span class="meta">· Hemisphere Ballroom, WDW Dolphin Hotel</span></li>
+    <li><strong>10:00 AM–10:20 AM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6712011-Profisee-The-Agentic-Leap-From-AI-Recommending-to-Acting-and-Delivering-on-the-ROI-Promise" target="_blank">Profisee: The Agentic Leap: From AI Recommending to Acting and Delivering on the ROI Promise</a> <span class="meta">· Stage 2, IT Xpo, Atlantic Hall, WDW Dolphin Hotel</span></li>
+    <li><strong>10:30 AM–11:00 AM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4963777-Decision-Intelligence-Getting-Value-From-AI-Agents-and-Multiagent-Systems" target="_blank">Decision Intelligence: Getting Value From AI Agents and Multiagent Systems</a> <span class="meta">· Upper Peninsula 2, WDW Dolphin Hotel</span></li>
+    <li><strong>11:30 AM–12:00 PM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6197837-Boomi-Stop-Buying-Agents-Start-Building-Agentic-Systems" target="_blank">Boomi: Stop Buying Agents. Start Building Agentic Systems</a> <span class="meta">· Upper Peninsula 2, WDW Dolphin Hotel</span></li>
+    <li><strong>12:30 PM–1:00 PM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4875741-Where-Agentic-AI-Works-Will-Soon-Work-and-May-Never-Work" target="_blank">Where Agentic AI Works, Will Soon Work and May Never Work</a> <span class="meta">· Southern Hemisphere I-II, WDW Dolphin Hotel</span></li>
+    <li><strong>2:45 PM–3:15 PM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4903239-AI-Infused-Strategy-Execution-Unlocking-Sustainable-Competitive-Advantage" target="_blank">AI-Infused Strategy Execution: Unlocking Sustainable Competitive Advantage</a> <span class="meta">· Northern Hemisphere Ballroom, WDW Dolphin Hotel</span></li>
+    <li><strong>4:45 PM–5:15 PM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4903237-What-Does-an-AI-Program-Really-Cost-in-2026" target="_blank">What Does an AI Program Really Cost in 2026?</a> <span class="meta">· Upper Peninsula 4, WDW Dolphin Hotel</span></li>
     <li><strong>8:00–11:00 PM — private Gartner buyout, Disney's Hollywood Studios</strong></li>
   </ul>
 
-  <h3>Wed Oct 21 — Deep Dive</h3>
+  <h3>Wed Oct 21 — Build, Buy &amp; Business Case</h3>
   <ul>
-    <li>10:00 AM — <em>The Secret Profit and Loss of AI</em></li>
-    <li>11:30 AM — cyber-defense operating model</li>
-    <li>Afternoon — Consulting Clinic / roundtable entitlements · IT Xpo peak</li>
+    <li><strong>10:30 AM–11:00 AM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4903195-Adopt-Domain-Specific-Agentic-AI-to-Unleash-Enterprise-Innovation" target="_blank">Adopt Domain-Specific Agentic AI to Unleash Enterprise Innovation</a> <span class="meta">· Swan Ballroom 10, WDW Swan Hotel</span></li>
+    <li><strong>12:30 PM–1:00 PM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/5575663-Magic-Quadrant-Power-Session-Enterprise-AI-Coding-Agents-and-AI-Application-Development-Platforms" target="_blank">Magic Quadrant Power Session: Enterprise AI Coding Agents and AI Application Development Platforms</a> <span class="meta">· Southern Hemisphere III, WDW Dolphin Hotel</span></li>
+    <li><strong>2:15 PM–2:45 PM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4967068-Five-Approaches-CIOs-Can-Use-to-Build-Winning-Cases-for-AI-Investment" target="_blank">Five Approaches CIOs Can Use to Build Winning Cases for AI Investment</a> <span class="meta">· Upper Peninsula 2, WDW Dolphin Hotel</span></li>
+    <li><strong>4:15 PM–4:45 PM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4927359-The-New-Build-vs-Buy-Framework-for-AI-in-Enterprise-Applications" target="_blank">The New Build vs. Buy Framework for AI in Enterprise Applications</a> <span class="meta">· Northern Hemisphere Ballroom, WDW Dolphin Hotel</span></li>
+    <li><strong>5:15 PM–5:45 PM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4963766-Inside-the-CEO-Mindset-on-AI-The-Fears-Dreams-and-Pressures-CIOs-Must-Navigate" target="_blank">Inside the CEO Mindset on AI: The Fears, Dreams and Pressures CIOs Must Navigate</a> <span class="meta">· Northern Hemisphere Ballroom, WDW Dolphin Hotel</span></li>
   </ul>
 
   <h3>Thu Oct 22 — Close &amp; Fly Home</h3>
   <ul>
-    <li>9:45 AM–1:45 PM — closing sessions · IT Xpo final hours</li>
-    <li>~2:00 PM — 🚗 leave the venue, ~25 min to MCO</li>
-    <li>~2:45 PM — return the National car (drop-off booked 3:05 PM, flight 4:05 PM)</li>
-    <li>4:05 PM ET — ✈️ <strong>WN 2685</strong> MCO → BNA</li>
-    <li>6:55 PM CT — ✈️ <strong>WN 611</strong> BNA → MCI</li>
-    <li>8:40 PM CT — 🏠 home</li>
+    <li>~7:20 AM — 🚗 check out, leave the hotel (bag stays in the car)</li>
+    <li><strong>8:00 AM–8:30 AM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4862277-Executive-Story-Stop-Talking-About-AI-Start-Doing-It-How-We-Operationalized-AI-in-90-Days" target="_blank">Executive Story: Stop Talking About AI. Start Doing It: How We Operationalized AI in 90 Days</a> <span class="meta">· Upper Peninsula 4, WDW Dolphin Hotel</span></li>
+    <li><strong>10:30 AM–10:50 AM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6224821-Hype-Cycle-for-Agentic-AI-2026-Repeat" target="_blank">Hype Cycle for Agentic AI 2026 (Repeat)</a> <span class="meta">· Stage 3, IT Xpo, Pacific Hall, WDW Dolphin Hotel</span></li>
+    <li><strong>12:30 PM–1:00 PM</strong> — <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4967051-Reduce-Opex-and-AI-Token-Costs-With-Platform-Engineering" target="_blank">Reduce Opex and AI Token Costs With Platform Engineering</a> <span class="meta">· Swan Ballroom 6, WDW Swan Hotel</span></li>
+    <li>~1:15 PM — 🚗 leave the venue, ~25 min to MCO</li>
+    <li>~2:00–2:45 PM — return the National car (drop-off booked 3:05 PM)</li>
+    <li>4:05 PM ET — ✈️ <strong>WN 2685</strong> MCO → BNA · 6:55 PM CT ✈️ <strong>WN 611</strong> BNA → MCI · 8:40 PM 🏠 home</li>
   </ul>
 </div>
 
@@ -355,8 +576,8 @@
 <!-- GYM -->
 <div class="card">
   <h2>🏋️ Gym — Planet Fitness</h2>
-  <div class="warn-tip"><strong>Nothing within 2 miles of the Embassy Suites.</strong> Measured from the hotel's own address (4955 Kyngs Heath Rd) — US-192 is a big-box-gym dead zone, and Kissimmee has only two Planet Fitness clubs. Nearest is <a href="https://www.google.com/maps/search/Planet+Fitness+3107+W+Vine+St+Kissimmee+FL+34741" target="_blank">Planet Fitness, 3107 W Vine St, Kissimmee, FL 34741</a> — <strong>~3.7 mi straight / ~4.5 mi drive (~10 min)</strong>, <strong>open &amp; staffed 24/7</strong>, (407) 483-9898. ⚠️ <a href="https://www.google.com/maps/search/Planet+Fitness+3214+John+Young+Pkwy+Kissimmee+FL+34741" target="_blank">The Loop club (3214 John Young Pkwy)</a> is <strong>not open yet — pre-grand-opening only. Do not drive to it.</strong> Next open club: <a href="https://www.google.com/maps/search/Planet+Fitness+12471+South+Orange+Blossom+Trail+Orlando+FL+32837" target="_blank">Hunters Creek, 12471 S Orange Blossom Trail</a>, ~5.9 mi.</div>
-  <div class="tip"><strong>Use the hotel gym instead.</strong> The Embassy Suites has an on-site fitness center, free to guests — on a Gartner day with a 10 AM keynote and an evening event, a 10-minute each-way drive to a big-box gym isn't worth it. Work out on property. If he does want a full PF session, 3107 W Vine St is 24/7, so a 5 AM slot works before the keynote.</div>
+  <div class="warn-tip"><strong>Nothing within 2 miles of the Embassy Suites.</strong> This stretch of US-192 is the same big-box-gym dead zone as the rest of the resort corridor. Nearest club is <a href="https://www.google.com/maps/search/Planet+Fitness+3107+W+Vine+St+Kissimmee+FL+34741" target="_blank">Planet Fitness, 3107 W Vine St, Kissimmee, FL 34741</a> — <strong>~3.6 mi straight / ~4.5 mi drive (~12 min)</strong>, open 24h. Next: <a href="https://www.google.com/maps/search/Planet+Fitness+3214+John+Young+Pkwy+Kissimmee+FL+34741" target="_blank">3214 John Young Pkwy (The Loop)</a>, ~4.0 mi.</div>
+  <div class="tip"><strong>Use the hotel gym instead.</strong> The Embassy Suites has an on-site fitness center, free to guests — on a Gartner day with a 10 AM keynote and an evening event, a 12-minute each-way drive to a big-box gym isn't worth it. Work out on property.</div>
 </div>
 
 <!-- LOCAL INTEL -->
@@ -371,7 +592,7 @@
 
 <footer>
   <div>Atlas · Travel Concierge</div>
-  <div>Last updated Oct 5, 2026 · <a href="https://jarvisdanley.github.io/">all trips</a></div>
+  <div>Last updated Oct 6, 2026 · <a href="https://jarvisdanley.github.io/">all trips</a></div>
 </footer>
 
 <script>
