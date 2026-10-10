@@ -1,297 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Atlas · Travel Concierge</title>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#E9E9EF"><meta name="robots" content="noindex">
+<title>Trips · Atlas</title>
 <style>
-  :root {
-    --bg: #0a0a0a; --card: #141414; --border: #222;
-    --text: #e0e0e0; --dim: #888; --accent: #ff6a00;
-    --green: #2ecc71; --blue: #3498db; --red: #e74c3c; --amber: #f39c12;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    background: var(--bg); color: var(--text); line-height: 1.6;
-    max-width: 520px; margin: 0 auto; padding: 24px 16px 48px;
-    -webkit-text-size-adjust: 100%;
-  }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif;background:#E9E9EF;color:#1C1C1E;-webkit-font-smoothing:antialiased;padding:max(20px,env(safe-area-inset-top)) 16px 40px;max-width:560px;margin:0 auto}
+a{color:#007AFF;text-decoration:none}
+.big{padding:18px 4px 6px}
+.big .eyebrow{font-size:13px;font-weight:600;color:#8E8E93;text-transform:uppercase;letter-spacing:.04em}
+.big h1{font-size:34px;font-weight:700;letter-spacing:-.02em;margin-top:2px}
+.seg{display:flex;background:#DCDCE2;border-radius:9px;padding:2px;margin:14px 0 22px}
+.seg a{flex:1;text-align:center;font-size:13px;font-weight:600;padding:7px;border-radius:7px;color:#1C1C1E}
+.seg a.on{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.card{background:#fff;border-radius:24px;border:1px solid rgba(0,0,0,.07);box-shadow:0 1px 3px rgba(0,0,0,.08),0 12px 32px rgba(0,0,0,.10);overflow:hidden;margin-bottom:26px}
+.hero{background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;padding:18px 20px 20px}
+.hero-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.tag{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;opacity:.85}
+.cd{font-size:12px;font-weight:600;background:rgba(255,255,255,.22);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding:5px 11px;border-radius:20px}
+.hero h2{font-size:28px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.hero p{font-size:15px;opacity:.92;margin-top:4px}
+.hero-meta{font-size:13px;opacity:.8;margin-top:10px;font-weight:500}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px}
+.w{background:#F4F4F8;border:1px solid #E1E1E8;border-radius:16px;padding:14px 15px;min-width:0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+.w-full{grid-column:1/-1}
+.w-h{font-size:12px;font-weight:600;color:#8E8E93;text-transform:uppercase;letter-spacing:.04em;margin-bottom:9px}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.fl{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #E1E1E8}
+.w-h + .fl{border-top:none;padding-top:0}
+.fl-l{font-size:14px;font-weight:600;white-space:nowrap}
+.fl-r{font-size:13px;color:#3C3C43;text-align:right}
+.st-n{font-size:16px;font-weight:600;line-height:1.3}
+.st-n a{color:#1C1C1E}
+.st-d{font-size:13px;color:#8E8E93;margin:2px 0 10px}
+.st-d:last-child{margin-bottom:0}
+.st-d .todo{color:#FF3B30;font-weight:600}
+.hl,.todo{list-style:none}
+.hl li{display:flex;gap:10px;font-size:14px;line-height:1.4;padding:4px 0}
+.hl .ic{width:18px;text-align:center;flex:0 0 18px}
+.warn .w-h{color:#FF3B30}
+.todo li{font-size:13px;line-height:1.4;padding:3px 0 3px 12px;position:relative;color:#3C3C43}
+.todo li:before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:#C7C7CC}
+.w-sm{font-size:13px;line-height:1.4;color:#3C3C43}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px 16px}
+.act{display:block;text-align:center;font-size:15px;font-weight:600;padding:13px;border-radius:14px;background:#F4F4F8;border:1px solid #E1E1E8;color:#007AFF}
+.act.pri{border-color:transparent}
+.act.pri{color:#fff}
+.act.dis{grid-column:1/-1;color:#8E8E93}
+.past{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:14px;padding:15px 18px;font-size:16px;color:#1C1C1E;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.past span{color:#C7C7CC;font-size:20px}
+.foot{text-align:center;font-size:12px;color:#8E8E93;margin-top:26px}
+@media (max-width:380px){.fl{flex-direction:column;gap:1px}.fl-r{text-align:left}}
+</style></head><body>
+<div class="big"><div class="eyebrow" id="today">Atlas</div><h1>Trips</h1></div>
+<div class="seg"><a class="on" href="https://jarvisdanley.github.io/">Upcoming</a><a href="https://jarvisdanley.github.io/past.html">Past</a></div>
 
-  .masthead {
-    text-align: center; padding: 32px 0 24px;
-    border-bottom: 1px solid var(--border); margin-bottom: 24px;
-  }
-  .masthead .icon { font-size: 2.5rem; display: block; margin-bottom: 8px; }
-  .masthead h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; }
-  .masthead .tagline {
-    font-size: 0.85rem; color: var(--dim); margin-top: 4px;
-    font-style: italic;
-  }
-
-  .trip-card {
-    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-    padding: 20px; margin-bottom: 14px;
-    transition: border-color 0.2s, transform 0.15s;
-    position: relative; overflow: hidden;
-  }
-  .trip-card:hover { border-color: var(--accent); }
-  .trip-card.active { border-color: var(--green); }
-  .trip-card.upcoming { border-color: var(--blue); }
-
-  .trip-card .status-dot {
-    position: absolute; top: 20px; right: 20px;
-    width: 10px; height: 10px; border-radius: 50%;
-  }
-  .status-dot.live { background: var(--green); box-shadow: 0 0 8px rgba(46,204,113,0.4); }
-  .status-dot.soon { background: var(--accent); box-shadow: 0 0 8px rgba(255,106,0,0.4); }
-  .status-dot.planning { background: var(--blue); box-shadow: 0 0 8px rgba(52,152,219,0.4); }
-
-  .trip-card .destination { font-size: 1.15rem; font-weight: 700; margin-bottom: 2px; }
-  .trip-card .dates { font-size: 0.8rem; color: var(--dim); margin-bottom: 8px; }
-  .trip-card .event { 
-    font-size: 0.85rem; color: var(--accent); margin-bottom: 10px;
-    display: flex; align-items: center; gap: 4px;
-  }
-  .trip-card .event .emoji { font-size: 1rem; }
-  .trip-card .detail {
-    font-size: 0.78rem; color: var(--dim); margin-bottom: 12px;
-    line-height: 1.5;
-  }
-
-  .rows { list-style: none; margin: 4px 0 14px; }
-  .rows li { display: flex; gap: 10px; padding: 7px 0; border-top: 1px solid #2c2c2c; font-size: 0.84rem; line-height: 1.45; }
-  .rows li:first-child { border-top: none; }
-  .rows .k { flex: 0 0 20px; text-align: center; }
-  .rows a { color: var(--accent); text-decoration: none; }
-  .btn {
-    display: inline-block; padding: 8px 20px; border-radius: 20px;
-    font-size: 0.82rem; font-weight: 600; text-decoration: none;
-    transition: all 0.15s; cursor: pointer;
-    border: 1px solid var(--accent);
-    background: transparent; color: var(--accent);
-  }
-  .btn:hover { background: var(--accent); color: #000; }
-  .btn.disabled {
-    border-color: var(--border); color: var(--dim);
-    pointer-events: none; cursor: default;
-  }
-  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
-
-  .divider {
-    text-align: center; padding: 16px 0; color: var(--dim);
-    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
-  }
-
-  .past-link { display:block; text-align:center; padding:12px; border:1px solid var(--border); border-radius:12px; background:var(--card); color:var(--accent); font-size:0.85rem; font-weight:600; text-decoration:none; margin-top:6px; }
-  .section-h { font-size: 0.7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); font-weight: 700; margin: 0 4px 12px; }
-  .trip-card { padding: 18px 18px 16px; margin-bottom: 18px; }
-  .trip-card.upcoming { border-color: #1f3a52; }
-  .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
-  .trip-card .destination { font-size: 1.3rem; font-weight: 750; letter-spacing: -0.01em; line-height: 1.25; }
-  .sub { font-size: 0.82rem; color: var(--accent); margin-top: 2px; }
-  .chip { flex: 0 0 auto; background: rgba(52,152,219,.14); color: #6cb6ea; font-size: 0.74rem; font-weight: 700; padding: 5px 10px; border-radius: 20px; white-space: nowrap; }
-  .meta { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 0.74rem; color: var(--dim); margin: 10px 0 4px; }
-  .meta .ok { color: var(--green); }
-  .meta .tag { border: 1px solid var(--border); border-radius: 10px; padding: 0 7px; }
-  .body { border-top: 1px solid var(--border); margin-top: 10px; }
-  .sec { padding: 14px 0 4px; } .sec + .sec { border-top: 1px solid #1d1d1d; }
-  .lbl { font-size: 0.64rem; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); font-weight: 700; margin-bottom: 6px; }
-  .r { padding: 6px 0; }
-  .r .a { font-size: 0.84rem; font-weight: 650; color: var(--text); }
-  .r .b { font-size: 0.8rem; color: #a6a6a6; }
-  .h { display: flex; gap: 9px; font-size: 0.84rem; padding: 4px 0; }
-  .h span:first-child { flex: 0 0 18px; text-align: center; }
-  .body a { color: inherit; text-decoration: underline; text-decoration-color: rgba(255,106,0,.55); text-underline-offset: 3px; }
-  .todo { color: var(--amber, #f39c12); font-weight: 650; }
-  .heads { background: rgba(243,156,18,.05); border-left: 3px solid rgba(243,156,18,.6); border-radius: 6px; padding: 9px 12px; margin: 14px 0 4px; font-size: 0.8rem; line-height: 1.55; }
-  .heads .lbl { color: #f39c12; }
-  .gym { font-size: 0.76rem; color: var(--dim); padding: 10px 0 2px; }
-  .btn-row { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .btn-row .btn { text-align: center; padding: 10px 8px; border-radius: 10px; }
-  .btn-row .btn.alt { border-color: var(--border); color: var(--text); background: #1b1b1b; }
-  .btn-row .btn.disabled { grid-column: 1 / -1; }
-  .footer {
-    text-align: center; padding: 32px 0 0; font-size: 0.75rem; color: var(--dim);
-    border-top: 1px solid var(--border); margin-top: 24px;
-  }
-  .footer .sig { color: var(--accent); font-style: italic; }
-</style>
-</head>
-<body>
-
-<div class="masthead">
-  <span class="icon">🌎</span>
-  <h1>Atlas · Travel Concierge</h1>
-  <div class="tagline">Your travel, brilliantly orchestrated.</div>
-</div>
-
-<div class="section-h">Current &amp; Upcoming</div>
-
-<!-- ORLANDO -->
-<div class="trip-card upcoming">
-  <div class="top">
-    <div>
-      <div class="destination">🏛️ Orlando</div>
-      <div class="sub">Gartner IT Symposium/Xpo 2026</div>
-    </div>
-    <div class="chip" data-countdown="2026-10-18" data-countdown-end="2026-10-22">—</div>
+<article class="card">
+  <header class="hero" style="--c1:#FF9500;--c2:#FF5E3A">
+    <div class="hero-top"><span class="tag">Work</span><span class="cd" data-countdown="2026-10-18" data-countdown-end="2026-10-22">—</span></div>
+    <h2>Orlando</h2>
+    <p>Gartner IT Symposium/Xpo 2026</p>
+    <div class="hero-meta">Oct 18 – 22, 2026 · All booked</div>
+  </header>
+  <div class="grid">
+    <div class="w w-full"><div class="w-h">Flights</div><div class="fl"><div class="fl-l">Out · Sun Oct 18</div><div class="fl-r">WN 2661 · MCI 11:40a → MCO 3:20p</div></div><div class="fl"><div class="fl-l">Home · Thu Oct 22</div><div class="fl-r">WN 2685 + 611 via BNA · lands 8:40p</div></div><div class="fl"><div class="fl-l">Car</div><div class="fl-r">National at MCO</div></div></div>
+    <div class="w w-full"><div class="w-h">Stay</div><div class="st-n"><a href="https://www.google.com/maps/search/Embassy+Suites+Orlando+Lake+Buena+Vista+South+4955+Kyngs+Heath+Rd+Kissimmee+FL">Embassy Suites Lake Buena Vista South</a></div><div class="st-d">Kissimmee · 4 nights · 20 min to venue</div></div>
+    <div class="w w-full"><div class="w-h">Highlights</div><ul class="hl"><li><span class="ic">🎤</span><span>24 sessions booked, Mon–Thu</span></li><li><span class="ic">🎉</span><span>Hollywood Studios buyout · Tue 8–11p</span></li></ul></div>
+    <div class="w warn"><div class="w-h">To Do</div><ul class="todo"><li>AI Club meeting collides Tue Oct 20</li></ul></div><div class="w"><div class="w-h">Fitness</div><div class="w-sm">No PF within 2 mi · nearest 12 min</div></div>
   </div>
-  <div class="meta"><span>📅 Oct 18 – 22, 2026</span><span class="ok">● All booked</span><span class="tag">Work</span></div>
-  <div class="body">
-    <div class="sec"><div class="lbl">Travel</div>
-      <div class="r"><div class="a">Out · Sun Oct 18</div><div class="b">WN 2661 · MCI 11:40a → MCO 3:20p</div></div>
-      <div class="r"><div class="a">Home · Thu Oct 22</div><div class="b">WN 2685 + 611 via BNA · lands 8:40p</div></div>
-      <div class="r"><div class="a">Car</div><div class="b">National at MCO</div></div>
-    </div>
-    <div class="sec"><div class="lbl">Stay</div>
-      <div class="r"><div class="a"><a href="https://www.google.com/maps/search/Embassy+Suites+Orlando+Lake+Buena+Vista+South+4955+Kyngs+Heath+Rd+Kissimmee+FL">Embassy Suites Lake Buena Vista South</a></div><div class="b">Kissimmee · 4 nights · 20 min to venue</div></div>
-    </div>
-    <div class="sec"><div class="lbl">Highlights</div>
-      <div class="h"><span>🎤</span><span>24 sessions booked, Mon–Thu</span></div>
-      <div class="h"><span>🎉</span><span>Hollywood Studios buyout · Tue 8–11p</span></div>
-    </div>
-    <div class="heads"><div class="lbl">Needs attention</div>
-      <div>⚠️ AI Club meeting collides Tue Oct 20</div>
-    </div>
-    <div class="gym">🏋️ No PF within 2 mi · nearest 12 min</div>
+  <div class="acts"><a class="act pri" style="background:#FF9500" href="https://jarvisdanley.github.io/orlando-gartner-2026-10/">Full Briefing</a><a class="act" href="https://jarvisdanley.github.io/orlando-gartner-2026-10/today.html">Day by Day</a></div>
+</article>
+<article class="card">
+  <header class="hero" style="--c1:#5856D6;--c2:#AF52DE">
+    <div class="hero-top"><span class="tag">Work + Personal</span><span class="cd" data-countdown="2026-10-28" data-countdown-end="2026-11-01">—</span></div>
+    <h2>Minneapolis → Las Vegas</h2>
+    <p>Keynote + Metallica at Sphere ×2 · with Luke</p>
+    <div class="hero-meta">Oct 28 – Nov 1, 2026 · Booked</div>
+  </header>
+  <div class="grid">
+    <div class="w w-full"><div class="w-h">Flights</div><div class="fl"><div class="fl-l">Wed Oct 28</div><div class="fl-r">WN 391 + 2635 via DEN · MCI 3:30p → MSP 8:00p</div></div><div class="fl"><div class="fl-l">Thu Oct 29</div><div class="fl-r">F9 3749 · MSP 12:10p → LAS 1:45p</div></div><div class="fl"><div class="fl-l">Home · Sun Nov 1</div><div class="fl-r">WN 2427 · LAS 8:20a → MCI 1:05p</div></div></div>
+    <div class="w w-full"><div class="w-h">Stay</div><div class="st-n">Minneapolis · Oct 28</div><div class="st-d"><span class="todo">Not booked yet</span></div><div class="st-n">The Palazzo, Las Vegas</div><div class="st-d">Two Queen Suite · 3 nights</div></div>
+    <div class="w w-full"><div class="w-h">Highlights</div><ul class="hl"><li><span class="ic">🎤</span><span>Your keynote · Thu Oct 29, 9:15a · <a href="https://www.minnesotaitsymposium.com/agenda">MN IT Symposium</a></span></li><li><span class="ic">🎸</span><span>Sphere · Thu Oct 29 + Sat Oct 31 (Halloween)</span></li></ul></div>
+    <div class="w warn"><div class="w-h">To Do</div><ul class="todo"><li>Book the Minneapolis hotel</li><li>Cancel backup DL 1542 before 3:20p CT Oct 29</li><li>Palazzo free cancellation ends Oct 26</li></ul></div><div class="w"><div class="w-h">Fitness</div><div class="w-sm">No PF within 2 mi of the Palazzo</div></div>
   </div>
-  <div class="btn-row"><a href="https://jarvisdanley.github.io/orlando-gartner-2026-10/" class="btn">📍 Full Briefing</a><a href="https://jarvisdanley.github.io/orlando-gartner-2026-10/today.html" class="btn alt">📅 Day-by-Day</a></div>
-</div>
-
-<!-- KC → MINNEAPOLIS -->
-<div class="trip-card upcoming">
-  <div class="top">
-    <div>
-      <div class="destination">🎸 Minneapolis → Las Vegas</div>
-      <div class="sub">Keynote + Metallica at Sphere ×2 · with Luke</div>
-    </div>
-    <div class="chip" data-countdown="2026-10-28" data-countdown-end="2026-11-01">—</div>
+  <div class="acts"><a class="act pri" style="background:#5856D6" href="https://jarvisdanley.github.io/minneapolis-vegas-2026-10/">Full Briefing</a><a class="act" href="https://jarvisdanley.github.io/minneapolis-vegas-2026-10/today.html">Day by Day</a></div>
+</article>
+<article class="card">
+  <header class="hero" style="--c1:#34C759;--c2:#30B0C7">
+    <div class="hero-top"><span class="tag">Work</span><span class="cd" data-countdown="2026-11-02" data-countdown-end="2026-11-03">—</span></div>
+    <h2>Tampa</h2>
+    <p>FMEA Energy Connections · speaking</p>
+    <div class="hero-meta">Nov 2 – 3, 2026 · All booked</div>
+  </header>
+  <div class="grid">
+    <div class="w w-full"><div class="w-h">Flights</div><div class="fl"><div class="fl-l">Out · Mon Nov 2</div><div class="fl-r">WN 1369 · MCI 2:40p → TPA 6:10p</div></div><div class="fl"><div class="fl-l">Home · Tue Nov 3</div><div class="fl-r">WN 4966 · TPA 2:10p → MCI 4:05p</div></div></div>
+    <div class="w w-full"><div class="w-h">Stay</div><div class="st-n"><a href="https://www.google.com/maps/search/Grand+Hyatt+Tampa+Bay+2900+Bayport+Dr+Tampa+FL">Grand Hyatt Tampa Bay</a></div><div class="st-d">1 night</div></div>
+    <div class="w w-full"><div class="w-h">Highlights</div><ul class="hl"><li><span class="ic">🎤</span><span>You speak · Tue Nov 3, 10:15a ET</span></li><li><span class="ic">🍽️</span><span>Dinner with Rich Zinser · Mon Nov 2</span></li></ul></div>
+    <div class="w warn"><div class="w-h">To Do</div><ul class="todo"><li>Hotel: cancel by Oct 30 or pay 1 night</li></ul></div><div class="w"><div class="w-h">Fitness</div><div class="w-sm">No PF within 2 mi · nearest 10 min</div></div>
   </div>
-  <div class="meta"><span>📅 Oct 28 – Nov 1, 2026</span><span class="ok">● Booked</span><span class="tag">Work + Personal</span></div>
-  <div class="body">
-    <div class="sec"><div class="lbl">Travel</div>
-      <div class="r"><div class="a">Wed Oct 28</div><div class="b">WN 391 + 2635 via DEN · MCI 3:30p → MSP 8:00p</div></div>
-      <div class="r"><div class="a">Thu Oct 29</div><div class="b">F9 3749 · MSP 12:10p → LAS 1:45p</div></div>
-      <div class="r"><div class="a">Home · Sun Nov 1</div><div class="b">WN 2427 · LAS 8:20a → MCI 1:05p</div></div>
-    </div>
-    <div class="sec"><div class="lbl">Stay</div>
-      <div class="r"><div class="a">Minneapolis · Oct 28</div><div class="b"><span class="todo">Not booked yet</span></div></div>
-      <div class="r"><div class="a">The Palazzo, Las Vegas</div><div class="b">Two Queen Suite · 3 nights</div></div>
-    </div>
-    <div class="sec"><div class="lbl">Highlights</div>
-      <div class="h"><span>🎤</span><span>Your keynote · Thu Oct 29, 9:15a · <a href="https://www.minnesotaitsymposium.com/agenda">MN IT Symposium</a></span></div>
-      <div class="h"><span>🎸</span><span>Sphere · Thu Oct 29 + Sat Oct 31 (Halloween)</span></div>
-    </div>
-    <div class="heads"><div class="lbl">Needs attention</div>
-      <div>⚠️ Book the Minneapolis hotel</div>
-      <div>⚠️ Cancel backup DL 1542 before 3:20p CT Oct 29</div>
-      <div>⚠️ Palazzo free cancellation ends Oct 26</div>
-    </div>
-    <div class="gym">🏋️ No PF within 2 mi of the Palazzo</div>
+  <div class="acts"><a class="act pri" style="background:#34C759" href="https://jarvisdanley.github.io/tampa-fmea-2026-11/">Full Briefing</a><a class="act" href="https://jarvisdanley.github.io/tampa-fmea-2026-11/today.html">Day by Day</a></div>
+</article>
+<article class="card">
+  <header class="hero" style="--c1:#FF2D55;--c2:#FF6482">
+    <div class="hero-top"><span class="tag">Personal</span><span class="cd" data-countdown="2026-11-05" data-countdown-end="2026-11-08">—</span></div>
+    <h2>Las Vegas</h2>
+    <p>Metallica at Sphere · shows #3 & #4 · with Lee</p>
+    <div class="hero-meta">Nov 5 – 8, 2026 · Booked</div>
+  </header>
+  <div class="grid">
+    <div class="w w-full"><div class="w-h">Flights</div><div class="fl"><div class="fl-l">Out · Thu Nov 5</div><div class="fl-r">WN 474 · MCI 11:40a → LAS 12:45p</div></div><div class="fl"><div class="fl-l">Home · Sun Nov 8</div><div class="fl-r">WN 2427 · LAS 8:20a → MCI 1:05p</div></div></div>
+    <div class="w w-full"><div class="w-h">Stay</div><div class="st-n"><a href="https://www.google.com/maps/search/Harrahs+Las+Vegas+3475+S+Las+Vegas+Blvd">Harrah's Las Vegas</a></div><div class="st-d">3 nights · 10 min walk to Sphere</div></div>
+    <div class="w w-full"><div class="w-h">Highlights</div><ul class="hl"><li><span class="ic">🎸</span><span><a href="https://www.google.com/maps/search/Sphere+255+Sands+Ave+Las+Vegas">Sphere</a> · Thu Nov 5 + Sat Nov 7 · doors 7p</span></li><li><span class="ic">🚬</span><span>Smoke &amp; Metal w/ Rob Dietrich · Fri 4–7p</span></li><li><span class="ic">🏆</span><span><a href="https://www.metallica.com/contests">Meet &amp; Greet contest</a> · Oct 28 – Nov 3</span></li></ul></div>
+    <div class="w warn"><div class="w-h">To Do</div><ul class="todo"><li>Pick seats · confirm Lee's flights</li><li>Reserve Smoke &amp; Metal</li></ul></div><div class="w"><div class="w-h">Fitness</div><div class="w-sm">No PF within 2 mi · nearest 2.1 mi, 24/7</div></div>
   </div>
-  <div class="btn-row"><a href="https://jarvisdanley.github.io/minneapolis-vegas-2026-10/" class="btn">📍 Full Briefing</a><a href="https://jarvisdanley.github.io/minneapolis-vegas-2026-10/today.html" class="btn alt">📅 Day-by-Day</a></div>
-</div>
-
-<!-- TAMPA -->
-<div class="trip-card upcoming">
-  <div class="top">
-    <div>
-      <div class="destination">⚡ Tampa</div>
-      <div class="sub">FMEA Energy Connections · speaking</div>
-    </div>
-    <div class="chip" data-countdown="2026-11-02" data-countdown-end="2026-11-03">—</div>
+  <div class="acts"><a class="act pri" style="background:#FF2D55" href="https://jarvisdanley.github.io/las-vegas-metallica-2026-11/">Full Briefing</a><a class="act" href="https://jarvisdanley.github.io/las-vegas-metallica-2026-11/today.html">Day by Day</a></div>
+</article>
+<article class="card">
+  <header class="hero" style="--c1:#007AFF;--c2:#5AC8FA">
+    <div class="hero-top"><span class="tag">Work</span><span class="cd" data-countdown="2027-01-05" data-countdown-end="2027-01-08">—</span></div>
+    <h2>Las Vegas</h2>
+    <p>CES 2027</p>
+    <div class="hero-meta">Jan 5 – 8, 2027 · Booked</div>
+  </header>
+  <div class="grid">
+    <div class="w w-full"><div class="w-h">Flights</div><div class="fl"><div class="fl-l">Out · Tue Jan 5</div><div class="fl-r">WN 428 · MCI 11:50a → LAS 12:55p</div></div><div class="fl"><div class="fl-l">Home · Fri Jan 8</div><div class="fl-r">WN 422 · LAS 8:15a → MCI 1:00p</div></div></div>
+    <div class="w w-full"><div class="w-h">Stay</div><div class="st-n">MGM Grand</div><div class="st-d">3 nights · CES housing</div></div>
+    <div class="w w-full"><div class="w-h">Highlights</div><ul class="hl"><li><span class="ic">🎟️</span><span>Registered · Industry Attendee</span></li></ul></div>
+    <div class="w w-full warn"><div class="w-h">To Do</div><ul class="todo"><li>8:15a return skips CES's last day (Jan 9)</li></ul></div>
   </div>
-  <div class="meta"><span>📅 Nov 2 – 3, 2026</span><span class="ok">● All booked</span><span class="tag">Work</span></div>
-  <div class="body">
-    <div class="sec"><div class="lbl">Travel</div>
-      <div class="r"><div class="a">Out · Mon Nov 2</div><div class="b">WN 1369 · MCI 2:40p → TPA 6:10p</div></div>
-      <div class="r"><div class="a">Home · Tue Nov 3</div><div class="b">WN 4966 · TPA 2:10p → MCI 4:05p</div></div>
-    </div>
-    <div class="sec"><div class="lbl">Stay</div>
-      <div class="r"><div class="a"><a href="https://www.google.com/maps/search/Grand+Hyatt+Tampa+Bay+2900+Bayport+Dr+Tampa+FL">Grand Hyatt Tampa Bay</a></div><div class="b">1 night</div></div>
-    </div>
-    <div class="sec"><div class="lbl">Highlights</div>
-      <div class="h"><span>🎤</span><span>You speak · Tue Nov 3, 10:15a ET</span></div>
-      <div class="h"><span>🍽️</span><span>Dinner with Rich Zinser · Mon Nov 2</span></div>
-    </div>
-    <div class="heads"><div class="lbl">Needs attention</div>
-      <div>⚠️ Hotel: cancel by Oct 30 or pay 1 night</div>
-    </div>
-    <div class="gym">🏋️ No PF within 2 mi · nearest 10 min</div>
-  </div>
-  <div class="btn-row"><a href="https://jarvisdanley.github.io/tampa-fmea-2026-11/" class="btn">📍 Full Briefing</a><a href="https://jarvisdanley.github.io/tampa-fmea-2026-11/today.html" class="btn alt">📅 Day-by-Day</a></div>
-</div>
-
-<!-- LAS VEGAS — METALLICA -->
-<div class="trip-card upcoming">
-  <div class="top">
-    <div>
-      <div class="destination">🎸 Las Vegas</div>
-      <div class="sub">Metallica at Sphere · shows #3 & #4 · with Lee</div>
-    </div>
-    <div class="chip" data-countdown="2026-11-05" data-countdown-end="2026-11-08">—</div>
-  </div>
-  <div class="meta"><span>📅 Nov 5 – 8, 2026</span><span class="ok">● Booked</span><span class="tag">Personal</span></div>
-  <div class="body">
-    <div class="sec"><div class="lbl">Travel</div>
-      <div class="r"><div class="a">Out · Thu Nov 5</div><div class="b">WN 474 · MCI 11:40a → LAS 12:45p</div></div>
-      <div class="r"><div class="a">Home · Sun Nov 8</div><div class="b">WN 2427 · LAS 8:20a → MCI 1:05p</div></div>
-    </div>
-    <div class="sec"><div class="lbl">Stay</div>
-      <div class="r"><div class="a"><a href="https://www.google.com/maps/search/Harrahs+Las+Vegas+3475+S+Las+Vegas+Blvd">Harrah's Las Vegas</a></div><div class="b">3 nights · 10 min walk to Sphere</div></div>
-    </div>
-    <div class="sec"><div class="lbl">Highlights</div>
-      <div class="h"><span>🎸</span><span><a href="https://www.google.com/maps/search/Sphere+255+Sands+Ave+Las+Vegas">Sphere</a> · Thu Nov 5 + Sat Nov 7 · doors 7p</span></div>
-      <div class="h"><span>🚬</span><span>Smoke &amp; Metal w/ Rob Dietrich · Fri 4–7p</span></div>
-      <div class="h"><span>🏆</span><span><a href="https://www.metallica.com/contests">Meet &amp; Greet contest</a> · Oct 28 – Nov 3</span></div>
-    </div>
-    <div class="heads"><div class="lbl">Needs attention</div>
-      <div>⚠️ Pick seats · confirm Lee's flights</div>
-      <div>⚠️ Reserve Smoke &amp; Metal</div>
-    </div>
-    <div class="gym">🏋️ No PF within 2 mi · nearest 2.1 mi, 24/7</div>
-  </div>
-  <div class="btn-row"><a href="https://jarvisdanley.github.io/las-vegas-metallica-2026-11/" class="btn">📍 Full Briefing</a><a href="https://jarvisdanley.github.io/las-vegas-metallica-2026-11/today.html" class="btn alt">📅 Day-by-Day</a></div>
-</div>
-
-<!-- LAS VEGAS / CES -->
-<div class="trip-card upcoming">
-  <div class="top">
-    <div>
-      <div class="destination">🤖 Las Vegas</div>
-      <div class="sub">CES 2027</div>
-    </div>
-    <div class="chip" data-countdown="2027-01-05" data-countdown-end="2027-01-08">—</div>
-  </div>
-  <div class="meta"><span>📅 Jan 5 – 8, 2027</span><span class="ok">● Booked</span><span class="tag">Work</span></div>
-  <div class="body">
-    <div class="sec"><div class="lbl">Travel</div>
-      <div class="r"><div class="a">Out · Tue Jan 5</div><div class="b">WN 428 · MCI 11:50a → LAS 12:55p</div></div>
-      <div class="r"><div class="a">Home · Fri Jan 8</div><div class="b">WN 422 · LAS 8:15a → MCI 1:00p</div></div>
-    </div>
-    <div class="sec"><div class="lbl">Stay</div>
-      <div class="r"><div class="a">MGM Grand</div><div class="b">3 nights · CES housing</div></div>
-    </div>
-    <div class="sec"><div class="lbl">Highlights</div>
-      <div class="h"><span>🎟️</span><span>Registered · Industry Attendee</span></div>
-    </div>
-    <div class="heads"><div class="lbl">Needs attention</div>
-      <div>⚠️ 8:15a return skips CES's last day (Jan 9)</div>
-    </div>
-  </div>
-  <div class="btn-row"><a class="btn disabled">Trip page coming soon</a></div>
-</div>
-
-<a class="past-link" href="https://jarvisdanley.github.io/past.html">🗂️ Past Trips →</a>
-
-<div class="divider">···</div>
-
-<div class="footer">
-  <p>Powered by <span class="sig">Atlas</span> — your world-class travel concierge.</p>
-  <p style="margin-top:4px">Anticipation over reaction. Authenticity over performance. Adventure over sitting in a hotel room.</p>
-</div>
-
+  <div class="acts"><span class="act dis">Trip page coming soon</span></div>
+</article>
+<a class="past" href="https://jarvisdanley.github.io/past.html">Past Trips<span>›</span></a>
+<div class="foot">Atlas · <a href="https://jarvisdanley.github.io/dark.html">Dark version</a></div>
 <script>
 /* Live countdown — computed in the browser so the T-numbers never go stale
    between page refreshes. Fallback text in the HTML is the build-date value. */
@@ -307,21 +147,20 @@
     if (isNaN(start.getTime())) continue;
     var days = Math.round((start - today) / 86400000);
     if (end && today > end) {
-      el.textContent = '✅ Complete';
+      el.textContent = 'Complete';
       /* trip is over: hide its card here — it lives on the Past Trips page */
-      var card = el.closest('.trip-card'); if (card) card.style.display = 'none';
+      var card = el.closest('.card'); if (card) card.style.display = 'none';
     } else if (days > 1) {
       el.textContent = 'in ' + days + ' days';
     } else if (days === 1) {
       el.textContent = 'Tomorrow';
     } else if (days === 0) {
-      el.textContent = '🟢 Today';
+      el.textContent = 'Today';
     } else {
-      el.textContent = '🟢 In progress';
+      el.textContent = 'Now';
     }
   }
 })();
 </script>
-
-</body>
-</html>
+<script>document.getElementById('today').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});</script>
+</body></html>
