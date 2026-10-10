@@ -9,6 +9,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display"
 a{color:#007AFF;text-decoration:none}
 .big{padding:18px 4px 6px}
 .big .eyebrow{font-size:13px;font-weight:600;color:#8E8E93;text-transform:uppercase;letter-spacing:.04em}
+.ttlrow{display:flex;justify-content:space-between;align-items:center}
+.game{font-size:13px;font-weight:600;color:#1C1C1E;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:20px;padding:7px 13px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.game:active{transform:scale(.97)}
 .big h1{font-size:34px;font-weight:700;letter-spacing:-.02em;margin-top:2px}
 .seg{display:flex;background:#DCDCE2;border-radius:9px;padding:2px;margin:14px 0 22px}
 .seg a{flex:1;text-align:center;font-size:13px;font-weight:600;padding:7px;border-radius:7px;color:#1C1C1E}
@@ -52,7 +55,7 @@ a{color:#007AFF;text-decoration:none}
 .foot{text-align:center;font-size:12px;color:#8E8E93;margin-top:26px}
 @media (max-width:380px){.fl{flex-direction:column;gap:1px}.fl-r{text-align:left}}
 </style></head><body>
-<div class="big"><div class="eyebrow" id="today">Atlas</div><h1>Trips</h1></div>
+<div class="big"><div class="eyebrow" id="today">Atlas</div><div class="ttlrow"><h1>Trips</h1><a class="game" href="https://jarvisdanley.github.io/arcade.html" aria-label="Switch to Game Mode">🎮 Game Mode</a></div></div>
 <div class="seg"><a class="on" href="https://jarvisdanley.github.io/">Upcoming</a><a href="https://jarvisdanley.github.io/past.html">Past</a></div>
 
 <article class="card">
