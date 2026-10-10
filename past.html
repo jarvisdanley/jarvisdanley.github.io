@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Atlas · Past Trips</title>
+<style>
+  :root {
+    --bg: #0a0a0a; --card: #141414; --border: #222;
+    --text: #e0e0e0; --dim: #888; --accent: #ff6a00;
+    --green: #2ecc71; --blue: #3498db; --red: #e74c3c;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.6;
+    max-width: 520px; margin: 0 auto; padding: 24px 16px 48px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .masthead {
+    text-align: center; padding: 32px 0 24px;
+    border-bottom: 1px solid var(--border); margin-bottom: 24px;
+  }
+  .masthead .icon { font-size: 2.5rem; display: block; margin-bottom: 8px; }
+  .masthead h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; }
+  .masthead .tagline {
+    font-size: 0.85rem; color: var(--dim); margin-top: 4px;
+    font-style: italic;
+  }
+
+  .trip-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    padding: 20px; margin-bottom: 14px;
+    transition: border-color 0.2s, transform 0.15s;
+    position: relative; overflow: hidden;
+  }
+  .trip-card:hover { border-color: var(--accent); }
+  .trip-card.active { border-color: var(--green); }
+  .trip-card.upcoming { border-color: var(--blue); }
+
+  .trip-card .status-dot {
+    position: absolute; top: 20px; right: 20px;
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+  .status-dot.live { background: var(--green); box-shadow: 0 0 8px rgba(46,204,113,0.4); }
+  .status-dot.soon { background: var(--accent); box-shadow: 0 0 8px rgba(255,106,0,0.4); }
+  .status-dot.planning { background: var(--blue); box-shadow: 0 0 8px rgba(52,152,219,0.4); }
+
+  .trip-card .destination { font-size: 1.15rem; font-weight: 700; margin-bottom: 2px; }
+  .trip-card .dates { font-size: 0.8rem; color: var(--dim); margin-bottom: 8px; }
+  .trip-card .event { 
+    font-size: 0.85rem; color: var(--accent); margin-bottom: 10px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .trip-card .event .emoji { font-size: 1rem; }
+  .trip-card .detail {
+    font-size: 0.78rem; color: var(--dim); margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .btn {
+    display: inline-block; padding: 8px 20px; border-radius: 20px;
+    font-size: 0.82rem; font-weight: 600; text-decoration: none;
+    transition: all 0.15s; cursor: pointer;
+    border: 1px solid var(--accent);
+    background: transparent; color: var(--accent);
+  }
+  .btn:hover { background: var(--accent); color: #000; }
+  .btn.disabled {
+    border-color: var(--border); color: var(--dim);
+    pointer-events: none; cursor: default;
+  }
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .divider {
+    text-align: center; padding: 16px 0; color: var(--dim);
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+
+  .nav { display:flex; gap:8px; margin-bottom:18px; }
+  .nav a { flex:1; text-align:center; padding:9px; border:1px solid var(--border); border-radius:9px; font-size:0.8rem; font-weight:600; background:var(--card); color:var(--accent); text-decoration:none; }
+  .footer {
+    text-align: center; padding: 32px 0 0; font-size: 0.75rem; color: var(--dim);
+    border-top: 1px solid var(--border); margin-top: 24px;
+  }
+  .footer .sig { color: var(--accent); font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <span class="icon">🗂️</span>
+  <h1>Past Trips</h1>
+  <div class="tagline">Completed trips, newest first — kept for reference.</div>
+</div>
+
+<div class="nav"><a href="https://jarvisdanley.github.io/">← Current &amp; Upcoming Trips</a></div>
+
+<!-- BOSTON — COMPLETE / ARCHIVED -->
+<div class="trip-card">
+  <span class="status-dot" style="background:var(--dim)"></span>
+  <div class="destination">🇺🇸 Boston, Massachusetts</div>
+  <div class="dates">September 28–30, 2026 · ✅ Complete</div>
+  <div class="event"><span class="emoji">🎤</span> AI &amp; Data Transformation in Construction Summit · Hyatt Regency Boston</div>
+  <div class="detail">✅ <strong>Two sessions delivered back-to-back on Tue Sep 29</strong> — the 3:15 PM roundtable (<em>Reengineering Workflows</em>, Stream 3 · Track 1) and the 4:15 PM panel (<em>Building the Business Case</em>) — two straight hours on stage, times taken from the event app because the organizer's website was wrong on both. 🎸 Tuesday night: <strong><a href="https://www.google.com/maps/search/House+of+Blues+Boston+15+Lansdowne+St">W.A.S.P. + KK's Priest at the House of Blues</a></strong>, 28 songs across two sets; <a href="https://www.boston.com/culture/concert-reviews/2026/09/30/review-setlist-w-a-s-p-stings-boston-with-an-electrifying-set-at-house-of-blues/">boston.com reviewed it</a>. ✈️ Home Wed 12:05 PM, both return legs on time. ⚠️ <strong>The one cost was Monday's arrival:</strong> Logan landed him at <strong>~2:18 AM</strong> instead of 9:55 PM — a runway-construction ground delay program (FAA avg 5h 14m) over a storm backlog. 🧾 Expense report filed and closed. 🏋️ Planet Fitness 17 Winter St was 0.5 mi from the hotel, 24 hrs Mon–Thu.</div>
+  <div class="btn-row">
+    <a href="https://jarvisdanley.github.io/boston-ai-summit-2026-09/" class="btn">📂 Archive</a>
+    <a href="https://jarvisdanley.github.io/boston-ai-summit-2026-09/today.html" class="btn">✅ Trip Recap</a>
+  </div>
+</div>
+
+<!-- ST. LOUIS — COMPLETE -->
+<div class="trip-card">
+  <span class="status-dot" style="background:var(--dim)"></span>
+  <div class="destination">🇺🇸 St. Louis, Missouri</div>
+  <div class="dates">July 16–17, 2026 · ✅ Complete</div>
+  <div class="event"><span class="emoji">⚽</span> Sporting KC at St. Louis City SC · Energizer Park — STL wins 3-2 (86' PK)</div>
+  <div class="detail">Boys trip with Ben & Luke. Amtrak Missouri River Runner. Fairfield Inn Downtown. Thrilling match — SKC fought back from 2-0 down, lost on late penalty.</div>
+  <div class="btn-row">
+    <a href="https://jarvisdanley.github.io/stl-skC-2026-07/" class="btn">📂 Archive</a>
+  </div>
+</div>
+
+<!-- NASHVILLE — COMPLETE -->
+<div class="trip-card">
+  <span class="status-dot" style="background:var(--dim)"></span>
+  <div class="destination">🇺🇸 Nashville, Tennessee</div>
+  <div class="dates">June 26–29, 2026 · ✅ Complete</div>
+  <div class="event"><span class="emoji">🎤</span> Alan Jackson: Last Call — The Finale · Nissan Stadium</div>
+  <div class="detail">With Marcie. 25-song farewell, George Strait surprise duet, lightning delay drama, fireworks finale. 🔥 Witnessed Rhett Akins receive his Opry invitation live on stage. Grand Ole Opry '90s Country night. NBC filming. Drift Nashville.</div>
+  <div class="btn-row">
+    <a href="https://jarvisdanley.github.io/nashville-alan-jackson-2026-06/" class="btn">📂 Archive</a>
+  </div>
+</div>
+
+<!-- DUBLIN — ARCHIVED -->
+<div class="trip-card">
+  <span class="status-dot" style="background:var(--dim)"></span>
+  <div class="destination">🇮🇪 Dublin, Ireland</div>
+  <div class="dates">June 17–22, 2026 · ✅ Complete</div>
+  <div class="event"><span class="emoji">🎸</span> Metallica M72 · Aviva Stadium — Night 1: Pantera &amp; Avatar · Night 2: Gojira &amp; Knocked Loose</div>
+  <div class="detail">Snake Pit package. Hyatt Centric The Liberties. Tenters Gastropub, La Cosa Nostra. Record stores + Pokemon spots for Jacob.</div>
+  <div class="btn-row">
+    <a href="https://jarvisdanley.github.io/dublin-m72/" class="btn">📂 Archive</a>
+  </div>
+</div>
+
+<!-- FRANKFURT — ARCHIVED -->
+<div class="trip-card">
+  <span class="status-dot" style="background:var(--dim)"></span>
+  <div class="destination">🇩🇪 Frankfurt am Main</div>
+  <div class="dates">May 20–25, 2026 · ✅ Complete</div>
+  <div class="event"><span class="emoji">🎸</span> Metallica M72 No Repeat Weekend · Deutsche Bank Park</div>
+  <div class="detail">Two-night stand. Gojira, Knocked Loose, Pantera, Avatar. LUME Boutique Hotel. Wäldchestag folk festival.</div>
+  <div class="btn-row">
+    <a href="https://jarvisdanley.github.io/frankfurt-trip/" class="btn">📂 Archive</a>
+  </div>
+</div>
+
+<!-- MINNEAPOLIS — COMPLETE (backdated to Day 2) -->
+<div class="trip-card">
+  <span class="status-dot" style="background:var(--dim)"></span>
+  <div class="destination">🇺🇸 Minneapolis, Minnesota</div>
+  <div class="dates">April 10–12, 2026 · ✅ Complete</div>
+  <div class="event"><span class="emoji">🎤</span> Morgan Wallen — Still The Problem Tour · U.S. Bank Stadium</div>
+  <div class="detail">With Marcie. Two-night stand; HARDY opened night 2. Marriott City Center. Manny's, Murray's, Matt's Bar, Spoon and Stable. Page backdated to Day 2 (Sat Apr 11).</div>
+  <div class="btn-row">
+    <a href="https://jarvisdanley.github.io/minneapolis-trip/" class="btn">📅 Day 2 · Apr 11</a>
+  </div>
+</div>
+
+<div class="divider">···</div>
+
+<div class="footer">
+  <p>Powered by <span class="sig">Atlas</span> — your world-class travel concierge.</p>
+</div>
+
+</body>
+</html>
