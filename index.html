@@ -8,7 +8,7 @@
   :root {
     --bg: #0a0a0a; --card: #141414; --border: #222;
     --text: #e0e0e0; --dim: #888; --accent: #ff6a00;
-    --green: #2ecc71; --blue: #3498db; --red: #e74c3c;
+    --green: #2ecc71; --blue: #3498db; --red: #e74c3c; --amber: #f39c12;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -84,6 +84,33 @@
   }
 
   .past-link { display:block; text-align:center; padding:12px; border:1px solid var(--border); border-radius:12px; background:var(--card); color:var(--accent); font-size:0.85rem; font-weight:600; text-decoration:none; margin-top:6px; }
+  .section-h { font-size: 0.7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); font-weight: 700; margin: 0 4px 12px; }
+  .trip-card { padding: 18px 18px 16px; margin-bottom: 18px; }
+  .trip-card.upcoming { border-color: #1f3a52; }
+  .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .trip-card .destination { font-size: 1.3rem; font-weight: 750; letter-spacing: -0.01em; line-height: 1.25; }
+  .sub { font-size: 0.82rem; color: var(--accent); margin-top: 2px; }
+  .chip { flex: 0 0 auto; background: rgba(52,152,219,.14); color: #6cb6ea; font-size: 0.74rem; font-weight: 700; padding: 5px 10px; border-radius: 20px; white-space: nowrap; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 0.74rem; color: var(--dim); margin: 10px 0 4px; }
+  .meta .ok { color: var(--green); }
+  .meta .tag { border: 1px solid var(--border); border-radius: 10px; padding: 0 7px; }
+  .body { border-top: 1px solid var(--border); margin-top: 10px; }
+  .sec { padding: 14px 0 4px; } .sec + .sec { border-top: 1px solid #1d1d1d; }
+  .lbl { font-size: 0.64rem; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); font-weight: 700; margin-bottom: 6px; }
+  .r { padding: 6px 0; }
+  .r .a { font-size: 0.84rem; font-weight: 650; color: var(--text); }
+  .r .b { font-size: 0.8rem; color: #a6a6a6; }
+  .h { display: flex; gap: 9px; font-size: 0.84rem; padding: 4px 0; }
+  .h span:first-child { flex: 0 0 18px; text-align: center; }
+  .body a { color: inherit; text-decoration: underline; text-decoration-color: rgba(255,106,0,.55); text-underline-offset: 3px; }
+  .todo { color: var(--amber, #f39c12); font-weight: 650; }
+  .heads { background: rgba(243,156,18,.05); border-left: 3px solid rgba(243,156,18,.6); border-radius: 6px; padding: 9px 12px; margin: 14px 0 4px; font-size: 0.8rem; line-height: 1.55; }
+  .heads .lbl { color: #f39c12; }
+  .gym { font-size: 0.76rem; color: var(--dim); padding: 10px 0 2px; }
+  .btn-row { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .btn-row .btn { text-align: center; padding: 10px 8px; border-radius: 10px; }
+  .btn-row .btn.alt { border-color: var(--border); color: var(--text); background: #1b1b1b; }
+  .btn-row .btn.disabled { grid-column: 1 / -1; }
   .footer {
     text-align: center; padding: 32px 0 0; font-size: 0.75rem; color: var(--dim);
     border-top: 1px solid var(--border); margin-top: 24px;
@@ -99,111 +126,161 @@
   <div class="tagline">Your travel, brilliantly orchestrated.</div>
 </div>
 
-<!-- ORLANDO — FULLY BOOKED (flights + hotel + rental car) -->
+<div class="section-h">Current &amp; Upcoming</div>
+
+<!-- ORLANDO -->
 <div class="trip-card upcoming">
-  <span class="status-dot soon"></span>
-  <div class="destination">🇺🇸 Orlando, Florida</div>
-  <div class="dates">October 18–22, 2026 · 🟢 All Booked · <strong data-countdown="2026-10-18" data-countdown-end="2026-10-22">T-13</strong></div>
-  <div class="event"><span class="emoji">🏛️</span> Gartner IT Symposium/Xpo™ 2026 · Walt Disney World Swan &amp; Dolphin Resort</div>
-  <ul class="rows">
-    <li><span class="k">✈️</span><span><strong>Out Sun Oct 18</strong> · WN 2661 · MCI 11:40 AM → MCO 3:20 PM</span></li>
-    <li><span class="k">✈️</span><span><strong>Home Thu Oct 22</strong> · WN 2685 + WN 611 via Nashville · lands MCI 8:40 PM</span></li>
-    <li><span class="k">🏨</span><span><a href="https://www.google.com/maps/search/Embassy+Suites+Orlando+Lake+Buena+Vista+South+4955+Kyngs+Heath+Rd+Kissimmee+FL">Embassy Suites Lake Buena Vista South</a>, Kissimmee · 4 nights · ~20 min drive to the venue</span></li>
-    <li><span class="k">🚗</span><span>National rental at MCO, Oct 18–22</span></li>
-    <li><span class="k">🎤</span><span><strong>Final agenda: 24 sessions</strong>, Mon–Thu · opening keynote Mon 10:00 AM</span></li>
-    <li><span class="k">🎉</span><span>Tue Oct 20 · private Gartner buyout of Disney's Hollywood Studios, 8–11 PM</span></li>
-    <li><span class="k">⚠️</span><span>AI Club Cybersecurity Month meeting collides Tue Oct 20</span></li>
-    <li><span class="k">🏋️</span><span>No Planet Fitness within 2 mi · nearest 3107 W Vine St, ~12 min drive</span></li>
-  </ul>
-  <div class="btn-row">
-    <a href="https://jarvisdanley.github.io/orlando-gartner-2026-10/" class="btn">📍 Full Briefing</a>
-    <a href="https://jarvisdanley.github.io/orlando-gartner-2026-10/today.html" class="btn">📅 Day-by-Day</a>
+  <div class="top">
+    <div>
+      <div class="destination">🏛️ Orlando</div>
+      <div class="sub">Gartner IT Symposium/Xpo 2026</div>
+    </div>
+    <div class="chip" data-countdown="2026-10-18" data-countdown-end="2026-10-22">—</div>
   </div>
+  <div class="meta"><span>📅 Oct 18 – 22, 2026</span><span class="ok">● All booked</span><span class="tag">Work</span></div>
+  <div class="body">
+    <div class="sec"><div class="lbl">Travel</div>
+      <div class="r"><div class="a">Out · Sun Oct 18</div><div class="b">WN 2661 · MCI 11:40a → MCO 3:20p</div></div>
+      <div class="r"><div class="a">Home · Thu Oct 22</div><div class="b">WN 2685 + 611 via BNA · lands 8:40p</div></div>
+      <div class="r"><div class="a">Car</div><div class="b">National at MCO</div></div>
+    </div>
+    <div class="sec"><div class="lbl">Stay</div>
+      <div class="r"><div class="a"><a href="https://www.google.com/maps/search/Embassy+Suites+Orlando+Lake+Buena+Vista+South+4955+Kyngs+Heath+Rd+Kissimmee+FL">Embassy Suites Lake Buena Vista South</a></div><div class="b">Kissimmee · 4 nights · 20 min to venue</div></div>
+    </div>
+    <div class="sec"><div class="lbl">Highlights</div>
+      <div class="h"><span>🎤</span><span>24 sessions booked, Mon–Thu</span></div>
+      <div class="h"><span>🎉</span><span>Hollywood Studios buyout · Tue 8–11p</span></div>
+    </div>
+    <div class="heads"><div class="lbl">Needs attention</div>
+      <div>⚠️ AI Club meeting collides Tue Oct 20</div>
+    </div>
+    <div class="gym">🏋️ No PF within 2 mi · nearest 12 min</div>
+  </div>
+  <div class="btn-row"><a href="https://jarvisdanley.github.io/orlando-gartner-2026-10/" class="btn">📍 Full Briefing</a><a href="https://jarvisdanley.github.io/orlando-gartner-2026-10/today.html" class="btn alt">📅 Day-by-Day</a></div>
 </div>
 
-<!-- KC → MINNEAPOLIS → LAS VEGAS — ALL BOOKED, TRIP PAGE LIVE -->
+<!-- KC → MINNEAPOLIS -->
 <div class="trip-card upcoming">
-  <span class="status-dot soon"></span>
-  <div class="destination">🇺🇸 Kansas City → Minneapolis → Las Vegas</div>
-  <div class="dates">October 28 – November 1, 2026 · 🟢 All Booked · <strong data-countdown="2026-10-28" data-countdown-end="2026-11-01">T-25</strong></div>
-  <div class="event"><span class="emoji">🎸</span> Minnesota IT Symposium Keynote · Metallica "Life Burns Faster" ×2 at Sphere — incl. Halloween</div>
-  <ul class="rows">
-    <li><span class="k">🎤</span><span><strong>Thu Oct 29, 9:15 AM</strong> · Jeff's keynote at the <a href="https://www.minnesotaitsymposium.com/agenda">Minnesota IT Symposium</a>, Marriott Southwest, Minnetonka</span></li>
-    <li><span class="k">✈️</span><span><strong>Wed Oct 28</strong> · WN 391 + WN 2635 via Denver · MCI 3:30 PM → MSP 8:00 PM</span></li>
-    <li><span class="k">✈️</span><span><strong>Thu Oct 29</strong> · F9 3749 · MSP 12:10 PM → LAS 1:45 PM</span></li>
-    <li><span class="k">🛡️</span><span>Backup DL 1542 (refundable) · cancel before 3:20 PM CT once Frontier is airborne</span></li>
-    <li><span class="k">🎸</span><span>Metallica at Sphere · <strong>Thu Oct 29 + Sat Oct 31 (Halloween)</strong> · doors 7:00, show 8:30</span></li>
-    <li><span class="k">🏨</span><span>The Palazzo, Two Queen Suite · 3 nights · free cancellation until Oct 26</span></li>
-    <li><span class="k">⚠️</span><span>Minneapolis hotel for Oct 28 not booked yet</span></li>
-    <li><span class="k">✈️</span><span><strong>Home Sun Nov 1</strong> · WN 2427 · LAS 8:20 AM → MCI 1:05 PM</span></li>
-    <li><span class="k">👦</span><span>Luke on the trip · Companion Pass on the Southwest legs</span></li>
-    <li><span class="k">🏋️</span><span>No Planet Fitness within 2 mi of the Palazzo · nearest 4001 S Decatur Blvd, 2.35 mi</span></li>
-  </ul>
-  <div class="btn-row">
-    <a href="https://jarvisdanley.github.io/minneapolis-vegas-2026-10/" class="btn">📍 Full Briefing</a>
-    <a href="https://jarvisdanley.github.io/minneapolis-vegas-2026-10/today.html" class="btn">📅 Day-by-Day</a>
+  <div class="top">
+    <div>
+      <div class="destination">🎸 Minneapolis → Las Vegas</div>
+      <div class="sub">Keynote + Metallica at Sphere ×2 · with Luke</div>
+    </div>
+    <div class="chip" data-countdown="2026-10-28" data-countdown-end="2026-11-01">—</div>
   </div>
+  <div class="meta"><span>📅 Oct 28 – Nov 1, 2026</span><span class="ok">● Booked</span><span class="tag">Work + Personal</span></div>
+  <div class="body">
+    <div class="sec"><div class="lbl">Travel</div>
+      <div class="r"><div class="a">Wed Oct 28</div><div class="b">WN 391 + 2635 via DEN · MCI 3:30p → MSP 8:00p</div></div>
+      <div class="r"><div class="a">Thu Oct 29</div><div class="b">F9 3749 · MSP 12:10p → LAS 1:45p</div></div>
+      <div class="r"><div class="a">Home · Sun Nov 1</div><div class="b">WN 2427 · LAS 8:20a → MCI 1:05p</div></div>
+    </div>
+    <div class="sec"><div class="lbl">Stay</div>
+      <div class="r"><div class="a">Minneapolis · Oct 28</div><div class="b"><span class="todo">Not booked yet</span></div></div>
+      <div class="r"><div class="a">The Palazzo, Las Vegas</div><div class="b">Two Queen Suite · 3 nights</div></div>
+    </div>
+    <div class="sec"><div class="lbl">Highlights</div>
+      <div class="h"><span>🎤</span><span>Your keynote · Thu Oct 29, 9:15a · <a href="https://www.minnesotaitsymposium.com/agenda">MN IT Symposium</a></span></div>
+      <div class="h"><span>🎸</span><span>Sphere · Thu Oct 29 + Sat Oct 31 (Halloween)</span></div>
+    </div>
+    <div class="heads"><div class="lbl">Needs attention</div>
+      <div>⚠️ Book the Minneapolis hotel</div>
+      <div>⚠️ Cancel backup DL 1542 before 3:20p CT Oct 29</div>
+      <div>⚠️ Palazzo free cancellation ends Oct 26</div>
+    </div>
+    <div class="gym">🏋️ No PF within 2 mi of the Palazzo</div>
+  </div>
+  <div class="btn-row"><a href="https://jarvisdanley.github.io/minneapolis-vegas-2026-10/" class="btn">📍 Full Briefing</a><a href="https://jarvisdanley.github.io/minneapolis-vegas-2026-10/today.html" class="btn alt">📅 Day-by-Day</a></div>
 </div>
 
-<!-- TAMPA — FMEA ENERGY CONNECTIONS · BOOKED -->
+<!-- TAMPA -->
 <div class="trip-card upcoming">
-  <span class="status-dot soon"></span>
-  <div class="destination">🇺🇸 Tampa, Florida</div>
-  <div class="dates">November 2–3, 2026 · 🟢 All Booked · <strong data-countdown="2026-11-02" data-countdown-end="2026-11-03">T-28</strong></div>
-  <div class="event"><span class="emoji">⚡</span> FMEA Energy Connections Conference &amp; Trade Show · Grand Hyatt Tampa Bay</div>
-  <ul class="rows">
-    <li><span class="k">🎤</span><span><strong>Jeff speaks Tue Nov 3</strong>, 10:15–11:00 AM EST</span></li>
-    <li><span class="k">✈️</span><span><strong>Out Mon Nov 2</strong> · WN 1369 · MCI 2:40 PM → TPA 6:10 PM</span></li>
-    <li><span class="k">✈️</span><span><strong>Home Tue Nov 3</strong> · WN 4966 · TPA 2:10 PM → MCI 4:05 PM</span></li>
-    <li><span class="k">🏨</span><span><a href="https://www.google.com/maps/search/Grand+Hyatt+Tampa+Bay+2900+Bayport+Dr+Tampa+FL+33607">Grand Hyatt Tampa Bay</a> · 1 night · cancel by Oct 30 or pay 1 night</span></li>
-    <li><span class="k">🍽️</span><span>Dinner with Rich Zinser, Mon Nov 2</span></li>
-    <li><span class="k">🏋️</span><span>No Planet Fitness within 2 mi · nearest 10055 W Hillsborough Ave, ~10 min</span></li>
-  </ul>
-  <div class="btn-row">
-    <a href="https://jarvisdanley.github.io/tampa-fmea-2026-11/" class="btn">📍 Full Briefing</a>
-    <a href="https://jarvisdanley.github.io/tampa-fmea-2026-11/today.html" class="btn">📅 Day-by-Day</a>
+  <div class="top">
+    <div>
+      <div class="destination">⚡ Tampa</div>
+      <div class="sub">FMEA Energy Connections · speaking</div>
+    </div>
+    <div class="chip" data-countdown="2026-11-02" data-countdown-end="2026-11-03">—</div>
   </div>
+  <div class="meta"><span>📅 Nov 2 – 3, 2026</span><span class="ok">● All booked</span><span class="tag">Work</span></div>
+  <div class="body">
+    <div class="sec"><div class="lbl">Travel</div>
+      <div class="r"><div class="a">Out · Mon Nov 2</div><div class="b">WN 1369 · MCI 2:40p → TPA 6:10p</div></div>
+      <div class="r"><div class="a">Home · Tue Nov 3</div><div class="b">WN 4966 · TPA 2:10p → MCI 4:05p</div></div>
+    </div>
+    <div class="sec"><div class="lbl">Stay</div>
+      <div class="r"><div class="a"><a href="https://www.google.com/maps/search/Grand+Hyatt+Tampa+Bay+2900+Bayport+Dr+Tampa+FL">Grand Hyatt Tampa Bay</a></div><div class="b">1 night</div></div>
+    </div>
+    <div class="sec"><div class="lbl">Highlights</div>
+      <div class="h"><span>🎤</span><span>You speak · Tue Nov 3, 10:15a ET</span></div>
+      <div class="h"><span>🍽️</span><span>Dinner with Rich Zinser · Mon Nov 2</span></div>
+    </div>
+    <div class="heads"><div class="lbl">Needs attention</div>
+      <div>⚠️ Hotel: cancel by Oct 30 or pay 1 night</div>
+    </div>
+    <div class="gym">🏋️ No PF within 2 mi · nearest 10 min</div>
+  </div>
+  <div class="btn-row"><a href="https://jarvisdanley.github.io/tampa-fmea-2026-11/" class="btn">📍 Full Briefing</a><a href="https://jarvisdanley.github.io/tampa-fmea-2026-11/today.html" class="btn alt">📅 Day-by-Day</a></div>
 </div>
 
-<!-- LAS VEGAS — METALLICA SPHERE #3 & #4 (WITH LEE) -->
+<!-- LAS VEGAS — METALLICA -->
 <div class="trip-card upcoming">
-  <span class="status-dot soon"></span>
-  <div class="destination">🇺🇸 Las Vegas, Nevada</div>
-  <div class="dates">November 5–8, 2026 · 🟢 All Booked · <strong data-countdown="2026-11-05" data-countdown-end="2026-11-08">T-31</strong></div>
-  <div class="event"><span class="emoji">🎸</span> Metallica "Life Burns Faster" · Sphere — shows #3 &amp; #4 (No Repeat Weekend)</div>
-  <ul class="rows">
-    <li><span class="k">🎟️</span><span><strong>With Lee</strong> · Lee holds the Sphere tickets</span></li>
-    <li><span class="k">🎸</span><span>Metallica at <a href="https://www.google.com/maps/search/Sphere+255+Sands+Ave+Las+Vegas">Sphere</a> · <strong>Thu Nov 5 + Sat Nov 7</strong> · doors 7:00, show 8:30</span></li>
-    <li><span class="k">✈️</span><span><strong>Out Thu Nov 5</strong> · WN 474 · MCI 11:40 AM → LAS 12:45 PM</span></li>
-    <li><span class="k">✈️</span><span><strong>Home Sun Nov 8</strong> · WN 2427 · LAS 8:20 AM → MCI 1:05 PM</span></li>
-    <li><span class="k">🏨</span><span><a href="https://www.google.com/maps/search/Harrah's+Las+Vegas+3475+S+Las+Vegas+Blvd">Harrah's</a> · 3 nights · free cancellation until ~Nov 3</span></li>
-    <li><span class="k">🚬</span><span><a href="https://www.metallica.com/tour">Smoke &amp; Metal w/ Rob Dietrich</a> · Fri Nov 6, 4–7 PM · reservation not made yet</span></li>
-    <li><span class="k">🏆</span><span>Meet &amp; Greet contest Oct 28 → Nov 3 on <a href="https://www.metallica.com/contests">metallica.com/contests</a></span></li>
-    <li><span class="k">⚠️</span><span>Seats not selected · Lee's flights not confirmed</span></li>
-    <li><span class="k">🏋️</span><span>No Planet Fitness within 2 mi · nearest 4001 S Decatur Blvd, 2.13 mi, 24/7</span></li>
-  </ul>
-  <div class="btn-row">
-    <a href="https://jarvisdanley.github.io/las-vegas-metallica-2026-11/" class="btn">📍 Full Briefing</a>
-    <a href="https://jarvisdanley.github.io/las-vegas-metallica-2026-11/today.html" class="btn">📅 Day-by-Day</a>
+  <div class="top">
+    <div>
+      <div class="destination">🎸 Las Vegas</div>
+      <div class="sub">Metallica at Sphere · shows #3 & #4 · with Lee</div>
+    </div>
+    <div class="chip" data-countdown="2026-11-05" data-countdown-end="2026-11-08">—</div>
   </div>
+  <div class="meta"><span>📅 Nov 5 – 8, 2026</span><span class="ok">● Booked</span><span class="tag">Personal</span></div>
+  <div class="body">
+    <div class="sec"><div class="lbl">Travel</div>
+      <div class="r"><div class="a">Out · Thu Nov 5</div><div class="b">WN 474 · MCI 11:40a → LAS 12:45p</div></div>
+      <div class="r"><div class="a">Home · Sun Nov 8</div><div class="b">WN 2427 · LAS 8:20a → MCI 1:05p</div></div>
+    </div>
+    <div class="sec"><div class="lbl">Stay</div>
+      <div class="r"><div class="a"><a href="https://www.google.com/maps/search/Harrahs+Las+Vegas+3475+S+Las+Vegas+Blvd">Harrah's Las Vegas</a></div><div class="b">3 nights · 10 min walk to Sphere</div></div>
+    </div>
+    <div class="sec"><div class="lbl">Highlights</div>
+      <div class="h"><span>🎸</span><span><a href="https://www.google.com/maps/search/Sphere+255+Sands+Ave+Las+Vegas">Sphere</a> · Thu Nov 5 + Sat Nov 7 · doors 7p</span></div>
+      <div class="h"><span>🚬</span><span>Smoke &amp; Metal w/ Rob Dietrich · Fri 4–7p</span></div>
+      <div class="h"><span>🏆</span><span><a href="https://www.metallica.com/contests">Meet &amp; Greet contest</a> · Oct 28 – Nov 3</span></div>
+    </div>
+    <div class="heads"><div class="lbl">Needs attention</div>
+      <div>⚠️ Pick seats · confirm Lee's flights</div>
+      <div>⚠️ Reserve Smoke &amp; Metal</div>
+    </div>
+    <div class="gym">🏋️ No PF within 2 mi · nearest 2.1 mi, 24/7</div>
+  </div>
+  <div class="btn-row"><a href="https://jarvisdanley.github.io/las-vegas-metallica-2026-11/" class="btn">📍 Full Briefing</a><a href="https://jarvisdanley.github.io/las-vegas-metallica-2026-11/today.html" class="btn alt">📅 Day-by-Day</a></div>
 </div>
 
-<!-- LAS VEGAS / CES 2027 — PLANNING -->
+<!-- LAS VEGAS / CES -->
 <div class="trip-card upcoming">
-  <span class="status-dot planning"></span>
-  <div class="destination">🇺🇸 Las Vegas, Nevada</div>
-  <div class="dates">January 5–8, 2027 · 🔵 Planning</div>
-  <div class="event"><span class="emoji">🤖</span> CES 2027 · Las Vegas Convention Center</div>
-  <ul class="rows">
-    <li><span class="k">🎟️</span><span>Registered · Industry Attendee</span></li>
-    <li><span class="k">✈️</span><span><strong>Out Tue Jan 5</strong> · WN 428 · MCI 11:50 AM → LAS 12:55 PM</span></li>
-    <li><span class="k">✈️</span><span><strong>Home Fri Jan 8</strong> · WN 422 · LAS 8:15 AM → MCI 1:00 PM</span></li>
-    <li><span class="k">🏨</span><span>MGM Grand · 3 nights · via CES housing</span></li>
-    <li><span class="k">⚠️</span><span>The 8:15 AM return skips CES's final day (Sat Jan 9) — confirm that's intended</span></li>
-  </ul>
-  <div class="btn-row">
-    <a class="btn disabled">📍 Coming Soon</a>
+  <div class="top">
+    <div>
+      <div class="destination">🤖 Las Vegas</div>
+      <div class="sub">CES 2027</div>
+    </div>
+    <div class="chip" data-countdown="2027-01-05" data-countdown-end="2027-01-08">—</div>
   </div>
+  <div class="meta"><span>📅 Jan 5 – 8, 2027</span><span class="ok">● Booked</span><span class="tag">Work</span></div>
+  <div class="body">
+    <div class="sec"><div class="lbl">Travel</div>
+      <div class="r"><div class="a">Out · Tue Jan 5</div><div class="b">WN 428 · MCI 11:50a → LAS 12:55p</div></div>
+      <div class="r"><div class="a">Home · Fri Jan 8</div><div class="b">WN 422 · LAS 8:15a → MCI 1:00p</div></div>
+    </div>
+    <div class="sec"><div class="lbl">Stay</div>
+      <div class="r"><div class="a">MGM Grand</div><div class="b">3 nights · CES housing</div></div>
+    </div>
+    <div class="sec"><div class="lbl">Highlights</div>
+      <div class="h"><span>🎟️</span><span>Registered · Industry Attendee</span></div>
+    </div>
+    <div class="heads"><div class="lbl">Needs attention</div>
+      <div>⚠️ 8:15a return skips CES's last day (Jan 9)</div>
+    </div>
+  </div>
+  <div class="btn-row"><a class="btn disabled">Trip page coming soon</a></div>
 </div>
 
 <a class="past-link" href="https://jarvisdanley.github.io/past.html">🗂️ Past Trips →</a>
@@ -234,9 +311,9 @@
       /* trip is over: hide its card here — it lives on the Past Trips page */
       var card = el.closest('.trip-card'); if (card) card.style.display = 'none';
     } else if (days > 1) {
-      el.textContent = 'T-' + days;
+      el.textContent = 'in ' + days + ' days';
     } else if (days === 1) {
-      el.textContent = 'T-1 · tomorrow';
+      el.textContent = 'Tomorrow';
     } else if (days === 0) {
       el.textContent = '🟢 Today';
     } else {
