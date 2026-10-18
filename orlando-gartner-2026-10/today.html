@@ -108,7 +108,8 @@
 
 <div class="section" id="timeline-section">
   <h2>📅 Today</h2>
-  <div id="timeline-content"></div>
+  <div class="ev-legend"><span class="gt">🔵 Gartner</span><span class="gb">🟠 Procore Groundbreak</span></div>
+    <div id="timeline-content"></div>
 </div>
 
 <div class="section" id="food-section">
@@ -265,7 +266,8 @@ var TRIP = {
         { time: '1:20 PM', text: '⭐ <strong>B041 · The Invisible Interface: Why the Agentic AI Shift Will Rewrite the Rules of Construction Workflows</strong> <span style=\"color:var(--dim)\">→ 2:00 PM · 📍 S230C · <a href=\"https://linkedin.com/in/dovamihod\" target=\"_blank\">Dov Amihod</a>, <a href=\"https://linkedin.com/in/kalynlengieza\" target=\"_blank\">Kalyn Lengieza</a></span>' },
         { time: '2:20 PM', text: '⭐ <strong>B042 · Ultimate Productivity or the Death of Human Oversight</strong> <span style=\"color:var(--dim)\">→ 3:00 PM · 📍 S230C · Andrew Rampton, Kris Henricksen, Indra Gutierrez</span>' },
         { time: '3:00 PM', text: '🤝 Catch speakers in the Expo Hall' },
-        { time: '4:00 PM', text: '<strong>Plan A:</strong> 🎤 Closing Keynote with <a href=\"https://linkedin.com/in/thiagocosta2\" target=\"_blank\">Thiago da Costa</a> → 5:00–7:00 PM reception · <strong>Plan B:</strong> leave ~3:35 for Gartner 4:15 Build vs. Buy + 5:15 CEO Mindset (Dolphin)' },
+        { time: '3:35 PM', text: '<strong>Plan B:</strong> 🚗 leave for the Dolphin → Gartner <strong>4:15 Build vs. Buy</strong> + <strong>5:15 CEO Mindset</strong>' },
+        { time: '4:00 PM', text: '<strong>Plan A:</strong> 🎤 Groundbreak Closing Keynote with <a href=\"https://linkedin.com/in/thiagocosta2\" target=\"_blank\">Thiago da Costa</a> → 5:00–7:00 PM Groundbreak reception' },
         { time: '7:00 PM', text: '🎉 <a href=\"https://hello.trunk.tools/gbk26-hh\" target=\"_blank\">After Party at Cuba Libre</a> <span style=\"color:var(--dim)\">→ 10:00 PM · <a href=\"https://www.google.com/maps/search/Cuba+Libre+9101+International+Dr+Orlando+FL\" target=\"_blank\">9101 International Dr</a> · RSVP</span>' }
       ],
       transit: [
@@ -451,6 +453,28 @@ render();
     var i = [].indexOf.call(w.parentElement.children, w);
     if (i >= 0 && i < TRIP.days.length) show(i);
   });
+})();
+</script>
+
+<style id="org-tint">
+/* Orlando only: Gartner = light blue, Procore Groundbreak = light orange */
+.event.ev-gt,details.sess.ev-gt{background:linear-gradient(135deg,#EEF6FF 0%,#DCEBFF 100%)!important;border:1px solid #BCD6F7!important;border-left:4px solid #0A84FF!important}
+.event.ev-gb,details.sess.ev-gb{background:linear-gradient(135deg,#FFF6EC 0%,#FFE4C7 100%)!important;border:1px solid #F7CFA3!important;border-left:4px solid #FF8A00!important}
+.ev-legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.ev-legend span{font-size:12px;font-weight:600;padding:5px 11px;border-radius:20px}
+.ev-legend .gt{background:linear-gradient(135deg,#EEF6FF,#DCEBFF);border:1px solid #BCD6F7;color:#0058B8}
+.ev-legend .gb{background:linear-gradient(135deg,#FFF6EC,#FFE4C7);border:1px solid #F7CFA3;color:#A04A00}
+</style>
+<script id="org-tint-js">
+(function(){
+  var GB=/groundbreak|groundbrew|occc|\bb04[12]\b|procore|cuba libre|expo hall|product keynote|built on intelligence|da costa|trunk\.tools/i;
+  var GT=/gartner|swan|dolphin|yacht|hollywood studios|welcome reception|navigator/i;
+  function tag(){document.querySelectorAll('#timeline-content .event').forEach(function(e){
+    e.classList.remove('ev-gt','ev-gb'); var h=e.innerHTML;
+    if(GB.test(h)) e.classList.add('ev-gb'); else if(GT.test(h)) e.classList.add('ev-gt');});}
+  var r=window.render; if(typeof r==='function'){window.render=function(){var o=r.apply(this,arguments);tag();return o;};}
+  document.addEventListener('click',function(){setTimeout(tag,0)},true);
+  if(document.readyState!=='loading')tag(); else document.addEventListener('DOMContentLoaded',tag);
 })();
 </script>
 </body>
