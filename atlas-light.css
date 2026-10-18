@@ -1,0 +1,119 @@
+/* Atlas light — iOS-style design system shared by every trip page.
+   Mirrors the landing page (jarvisdanley.github.io/): #E9E9EF page, white 24px cards
+   with hairline border + soft shadow, gradient hero, #F4F4F8 bordered widget tiles.
+   Per-trip tint comes from --hero1 / --hero2 / --accent set on each page. */
+:root{
+  --bg:#F4F4F8; --card:#FFFFFF; --border:#E1E1E8;
+  --text:#1C1C1E; --dim:#6E6E73; --sub:#3C3C43;
+  --green:#248A3D; --red:#D70015; --blue:#007AFF; --amber:#C93400;
+  --page:#E9E9EF; --tile:#F4F4F8;
+  --hero1:#007AFF; --hero2:#5AC8FA; --accent:#007AFF;
+}
+html{background:var(--page)}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif!important;
+  background:var(--page)!important;color:var(--text)!important;-webkit-font-smoothing:antialiased;
+  max-width:560px!important;padding:max(16px,env(safe-area-inset-top)) 14px 48px!important;line-height:1.5}
+a{color:var(--blue)}
+
+/* ---------- hero (masthead / header) ---------- */
+.masthead,.header{background:linear-gradient(135deg,var(--hero1),var(--hero2))!important;color:#fff!important;
+  border:none!important;border-radius:24px;padding:22px 20px 22px!important;margin:6px 0 16px!important;text-align:left!important;
+  box-shadow:0 1px 3px rgba(0,0,0,.08),0 12px 32px rgba(0,0,0,.10)}
+.masthead *,.header *{color:#fff!important}
+.masthead .icon,.header .emoji{font-size:1.9rem!important;display:block;margin-bottom:10px!important}
+.masthead h1,.header h1{font-size:28px!important;font-weight:700!important;letter-spacing:-.02em;line-height:1.12!important;margin:2px 0 6px!important}
+.masthead .tagline,.header .dates,.header .date,.masthead .date{font-size:14px!important;font-style:normal!important;opacity:.9;margin-top:2px!important}
+.header .day-label,.masthead .day-label{font-size:11px!important;font-weight:600!important;letter-spacing:.06em;opacity:.85}
+.masthead a,.header a{text-decoration:underline}
+
+/* ---------- top nav as iOS segmented control ---------- */
+.nav{display:flex;gap:2px!important;background:#DCDCE2;border-radius:10px;padding:2px;margin:0 0 14px!important}
+.nav a{flex:1;background:transparent!important;border:none!important;border-radius:8px!important;color:var(--text)!important;
+  font-size:13px!important;font-weight:600!important;padding:8px!important;text-align:center;text-decoration:none!important}
+.nav a:first-child{background:#fff!important;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+
+/* ---------- status pills ---------- */
+.status-bar{gap:6px!important;margin-bottom:14px!important}
+.status-pill{background:#fff!important;border:1px solid var(--border)!important;color:var(--sub)!important;border-radius:20px;
+  font-size:12px!important;font-weight:600;padding:6px 12px!important;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.status-pill.good{color:var(--green)!important;border-color:rgba(36,138,61,.35)!important;background:#F1FAF3!important}
+.status-pill.warn{color:var(--amber)!important;border-color:rgba(201,52,0,.3)!important;background:#FFF5EF!important}
+.hero{color:var(--dim)!important}
+
+/* ---------- cards (one per section) ---------- */
+.card,.section{background:#fff!important;border:1px solid rgba(0,0,0,.07)!important;border-radius:22px!important;
+  padding:18px 16px!important;margin-bottom:16px!important;box-shadow:0 1px 3px rgba(0,0,0,.08),0 12px 32px rgba(0,0,0,.08)}
+.card.good,.card.warn,.card.alert,.section.spotlight{border-left:1px solid rgba(0,0,0,.07)!important;background:#fff!important}
+.card h2,.section h2,.card.good h2,.card.warn h2,.card.alert h2{font-size:12px!important;font-weight:600!important;color:#8E8E93!important;
+  text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px!important;display:flex;align-items:center;gap:6px}
+.card.warn h2,.card.alert h2{color:var(--red)!important}
+.section h2 .icon{font-size:15px!important}
+.card h3{font-size:16px!important;font-weight:600!important;color:var(--text)!important;margin:16px 0 6px!important}
+.card h3:first-of-type{margin-top:2px!important}
+.card p,.card ul,.section ul li,.card li{color:var(--sub)!important;font-size:14px!important}
+.section ul li strong,.card li strong{color:var(--text)!important}
+.card .meta,.meta,.desc{color:var(--dim)!important}
+.grp{color:#8E8E93!important;font-size:12px!important;font-weight:600!important;letter-spacing:.05em;margin:16px 2px 8px!important}
+
+/* ---------- widget tiles inside cards ---------- */
+.rec-card,.event,.day-event,details.sess,.update,.weather-day,.flight-row,.count div,.day-block{
+  background:var(--tile)!important;border:1px solid var(--border)!important;border-radius:16px!important;
+  box-shadow:0 1px 2px rgba(0,0,0,.03)}
+.rec-card,details.sess,.update{padding:13px 14px!important;margin-bottom:10px!important}
+.event,.day-event{padding:10px 12px!important;margin-bottom:8px!important;font-size:14px!important;color:var(--sub)!important;border-radius:14px!important}
+.flight-row{padding:12px!important;margin-bottom:10px;border-bottom:1px solid var(--border)!important}
+.flight-row:last-child{border-bottom:1px solid var(--border)!important;margin-bottom:0}
+.flight-icon{background:#fff!important;border:1px solid var(--border);border-radius:12px!important}
+.flight-info .route{color:var(--text)!important;font-size:15px!important}
+.flight-info .detail{color:var(--dim)!important;font-size:13px!important}
+.day-block{padding:12px!important;margin-bottom:12px!important}
+.day-block .day-event{background:#fff!important}
+.day-label{color:var(--accent)!important;font-size:12px!important}
+.rec-card .name,.rec-card .name a{color:var(--text)!important;font-size:15px;font-weight:600}
+.rec-card .badge,.rec-card .rb{border-radius:20px!important;font-weight:600!important}
+.badge.top,.rb.top{background:rgba(255,149,0,.15)!important;color:#B25000!important}
+.badge.near,.rb.near{background:rgba(0,122,255,.12)!important;color:#0062CC!important}
+.badge.award,.rb.award{background:rgba(52,199,89,.15)!important;color:var(--green)!important}
+.time,.st,.event .time,.day-event .time,details.sess summary .st,.update .time{color:var(--accent)!important}
+details.sess summary{color:var(--text)!important;font-size:14px!important}
+details.sess .sbody p{color:var(--sub)!important;font-size:13px!important}
+
+/* tips / alerts as soft tinted tiles */
+.tip{background:#EEF5FF!important;border:1px solid #D6E6FF;border-radius:14px!important;color:var(--sub)!important;font-size:13px!important;padding:10px 12px!important}
+.tip strong{color:#0062CC!important}
+.warn-tip,.alert-box{background:#FFF4F2!important;border:1px solid #FFD9D2;border-radius:14px!important;color:var(--sub)!important;font-size:13px!important;padding:10px 12px!important}
+.warn-tip strong,.alert-box strong{color:var(--red)!important}
+
+/* tables */
+table{font-size:13px!important}
+th{color:#8E8E93!important;border-bottom:1px solid var(--border)!important}
+td{border-bottom:1px solid #EDEDF2!important;color:var(--sub)}
+td strong{color:var(--text)}
+
+/* thumbs */
+.thumbs button{background:#fff!important;border:1px solid var(--border)!important;color:var(--sub)!important;border-radius:10px!important;padding:4px 10px!important}
+.thumbs button.voted-up{background:#F1FAF3!important;border-color:rgba(36,138,61,.4)!important;color:var(--green)!important}
+.thumbs button.voted-down{background:#FFF4F2!important;border-color:rgba(215,0,21,.35)!important;color:var(--red)!important}
+
+/* countdown */
+.countdown{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:22px;padding:14px!important;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.countdown .num{color:var(--accent)!important}
+.count .n{color:var(--accent)!important}
+
+/* ---------- Day-by-Day page ---------- */
+.day-tabs{gap:8px!important;margin-bottom:16px!important}
+.day-tabs button{background:#fff!important;border:1px solid var(--border)!important;color:var(--text)!important;border-radius:14px!important;
+  padding:9px 12px!important;font-size:13px!important;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.day-tabs button small{color:var(--dim)!important}
+.day-tabs button.on{background:var(--accent)!important;border-color:transparent!important;color:#fff!important}
+.day-tabs button.on small{color:rgba(255,255,255,.85)!important}
+.weather-day{min-width:84px}
+.weather-day .hi{color:var(--text)!important}
+.weather-day .day,.weather-day .lo{color:var(--dim)!important}
+.weather-day .rain{color:var(--blue)!important}
+.weather-day.active,.weather-day.on{border-color:var(--accent)!important;background:#fff!important}
+.links-list li{color:var(--sub)}
+
+/* footer */
+.footer,footer{border-top:none!important;color:#8E8E93!important}
+.footer a,footer a{color:var(--blue)!important}

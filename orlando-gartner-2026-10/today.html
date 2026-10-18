@@ -70,6 +70,9 @@
   .day-tabs button.on { border-color: var(--accent); background: rgba(255,106,0,.12); color: var(--accent); }
   .weather-day { cursor: pointer; }
 </style>
+
+<link rel="stylesheet" href="/atlas-light.css">
+<style id="atlas-tint">:root{--hero1:#FF9500;--hero2:#FF5E3A;--accent:#D9480F}</style>
 </head>
 <body>
 
@@ -150,14 +153,13 @@ var TRIP = {
     {
       date: '2026-10-18',
       label: 'Sunday · Travel + Welcome Reception',
-      weather: { hi: 79, lo: 68, icon: '🌤️', rain: 12 },
+      weather: { hi: 78, lo: 67, icon: '🌦️', rain: 26 },
       pills: [
         { text: '✈️ WN 2661 11:40a', cls: 'good' },
         { text: '🚗 National pickup', cls: 'good' },
         { text: '🎉 Welcome 6:00p', cls: 'good' },
         { text: '🏨 Check-in Embassy Suites', cls: 'good' }
       ],
-      warn: '<strong>37°F at home this morning, 79°F when you land.</strong> MCI is <strong>41°F now and only 45°F at 9:40</strong> — the coat stays in the car, not the suitcase; dress warm for KC and change in Orlando. And at MCO the <strong>terminal↔gate walkway to Gates 100–129 is closed</strong> — the new <strong>Gate Link tram</strong> cars went live Oct 13, so <strong>budget the tram</strong> between the terminal and Southwest&#x27;s airside.',
       timeline: [
         { time: '9:40 AM', text: '🚗 Leave for MCI <span style="color:var(--dim)">CT · 2h before an 11:40 AM departure</span>' },
         { time: '11:40 AM', text: '🛫 <strong>WN 2661</strong> departs MCI, seat 5F <span style="color:var(--dim)">CT · nonstop, 2h 40m</span>' },
@@ -172,7 +174,7 @@ var TRIP = {
         'Embassy Suites → Swan & Dolphin: ~12 mi / ~20 min',
         'Southwest at MCO = Terminal A, gates 100–129 (airside train)'
       ],
-      tip: 'Travel day with the car handoff in the middle. You land 3:20 PM against a 6:00 PM reception — tight but workable: grab the <strong>National</strong> car (Emerald Aisle, conf 2139071560AISLE), drop bags at the Embassy Suites, and head straight to the Swan &amp; Dolphin. <strong>Badge pickup is required before you enter the block party</strong>, so do it first, not after. Dinner after the reception is in Celebration, minutes from the hotel. <strong>If the night runs past ~10:45 PM</strong>, come home on <strong>S.R. 536 (Epcot Center Dr)</strong> — S.R. 535 under I-4 is closed 11 PM–6 AM Sunday and Monday nights for beam setting.',
+      tip: 'Travel day with the car handoff in the middle. You land at 3:20 PM against a 6:00 PM reception — tight but workable: grab the <strong>National</strong> car, drop bags at the Embassy Suites, and head straight to the Swan &amp; Dolphin for badge pickup before the block party. Dinner after the reception is in Celebration, minutes from the hotel, not on the Strip-style drive back.',
       food: [
         { name: 'Charley\'s Steak House', meta: '📍 2901 Parkway Blvd, Kissimmee · USDA Prime wood-fired · ~7 min from the hotel', id: 'today-charleys', url: 'https://www.google.com/maps/search/Charleys+Steak+House+2901+Parkway+Blvd+Kissimmee+FL+34747' },
         { name: 'Columbia Restaurant', meta: '📍 649 Front St, Celebration · Spanish-Cuban, Florida\'s oldest (est. 1905) · ~10 min', id: 'today-columbia', url: 'https://www.google.com/maps/search/Columbia+Restaurant+649+Front+St+Celebration+FL+34747' },
@@ -182,7 +184,7 @@ var TRIP = {
     {
       date: '2026-10-19',
       label: 'Monday · Opening Day',
-      weather: { hi: 80, lo: 62, icon: '☀️', rain: 14 },
+      weather: { hi: 80, lo: 66, icon: '🌦️', rain: 23 },
       pills: [
         { text: '🎤 9 sessions', cls: 'good' },
         { text: '🍳 Gov CIO breakfast 7:30a', cls: 'good' },
@@ -215,7 +217,7 @@ var TRIP = {
     {
       date: '2026-10-20',
       label: 'Tuesday · Agentic Day + Hollywood Studios',
-      weather: { hi: 81, lo: 63, icon: '☀️', rain: 0 },
+      weather: { hi: 81, lo: 66, icon: '⛅', rain: 16 },
       pills: [
         { text: '🎤 Serena Williams 9:00a', cls: 'good' },
         { text: '🎤 7 sessions', cls: 'good' },
@@ -249,29 +251,27 @@ var TRIP = {
     {
       date: '2026-10-21',
       label: 'Wednesday · Procore Groundbreak',
-      weather: { hi: 81, lo: 62, icon: '☀️', rain: 3 },
+      weather: { hi: 82, lo: 67, icon: '⛅', rain: 20 },
       pills: [
         { text: '🏗️ Groundbreak day', cls: 'good' },
-        { text: '🪪 Badge pickup 7:00a', cls: 'warn' },
-        { text: '⭐ Agentic AI 1:20 + 2:20', cls: 'good' },
-        { text: '🎉 Cuba Libre 7:00p ✅', cls: 'good' }
+        { text: '⭐ Agentic AI 1:20 + 2:20', cls: 'good' }
       ],
       timeline: [
-        { time: '7:05 AM', text: '🚗 ~20 min to the <a href="https://www.google.com/maps/search/Orange+County+Convention+Center+South+Hall+9899+International+Dr+Orlando+FL" target="_blank">OCCC South Hall</a> · badge pickup Level 2 (photo ID + QR code from the email)' },
+        { time: '7:05 AM', text: '🚗 ~20 min to the <a href=\"https://www.google.com/maps/search/Orange+County+Convention+Center+South+Hall+9899+International+Dr+Orlando+FL\" target=\"_blank\">OCCC South Hall</a> · badge pickup Level 2 (photo ID + QR code from the email)' },
         { time: '7:30 AM', text: '☕ Groundbrew coffee + Expo Hall <strong>Procore AI zone</strong>' },
-        { time: '9:00 AM', text: '🎤 <strong>Opening Keynote | Built on Intelligence</strong> <span style="color:var(--dim)">→ 10:15 AM · 📍 Mainstage · Ajei Gopal</span>' },
-        { time: '10:30 AM', text: '🎤 Product Keynote | Every Job, Smarter Than the Last <span style="color:var(--dim)">optional · Mainstage</span>' },
-        { time: '11:15 AM', text: '🏗️ Expo Hall AI zone + lunch <span style="color:var(--dim)">→ 1:10 PM</span>' },
-        { time: '1:20 PM', text: '⭐ <strong>B041 · The Invisible Interface: Why the Agentic AI Shift Will Rewrite the Rules of Construction Workflows</strong> <span style="color:var(--dim)">→ 2:00 PM · 📍 S230C · <a href="https://linkedin.com/in/dovamihod" target="_blank">Dov Amihod</a>, <a href="https://linkedin.com/in/kalynlengieza" target="_blank">Kalyn Lengieza</a></span>' },
-        { time: '2:20 PM', text: '⭐ <strong>B042 · Ultimate Productivity or the Death of Human Oversight</strong> <span style="color:var(--dim)">→ 3:00 PM · 📍 S230C · Andrew Rampton, Kris Henricksen, Indra Gutierrez</span>' },
+        { time: '9:00 AM', text: '🎤 <strong>Opening Keynote | Built on Intelligence</strong> <span style=\"color:var(--dim)\">→ 10:15 AM · 📍 Mainstage · Ajei Gopal</span>' },
+        { time: '10:30 AM', text: '🎤 Product Keynote | Every Job, Smarter Than the Last <span style=\"color:var(--dim)\">optional · Mainstage</span>' },
+        { time: '11:15 AM', text: '🏗️ Expo Hall AI zone + lunch <span style=\"color:var(--dim)\">→ 1:10 PM</span>' },
+        { time: '1:20 PM', text: '⭐ <strong>B041 · The Invisible Interface: Why the Agentic AI Shift Will Rewrite the Rules of Construction Workflows</strong> <span style=\"color:var(--dim)\">→ 2:00 PM · 📍 S230C · <a href=\"https://linkedin.com/in/dovamihod\" target=\"_blank\">Dov Amihod</a>, <a href=\"https://linkedin.com/in/kalynlengieza\" target=\"_blank\">Kalyn Lengieza</a></span>' },
+        { time: '2:20 PM', text: '⭐ <strong>B042 · Ultimate Productivity or the Death of Human Oversight</strong> <span style=\"color:var(--dim)\">→ 3:00 PM · 📍 S230C · Andrew Rampton, Kris Henricksen, Indra Gutierrez</span>' },
         { time: '3:00 PM', text: '🤝 Catch speakers in the Expo Hall' },
-        { time: '4:00 PM', text: '<strong>Plan A:</strong> 🎤 Closing Keynote with <a href="https://linkedin.com/in/thiagocosta2" target="_blank">Thiago da Costa</a> → 5:00–7:00 PM reception · <strong>Plan B:</strong> leave ~3:35 for Gartner 4:15 Build vs. Buy + 5:15 CEO Mindset (Dolphin)' },
-        { time: '7:00 PM', text: '🎉 <a href="https://hello.trunk.tools/gbk26-hh" target="_blank">After Party at Cuba Libre</a> <span style="color:var(--dim)">→ 10:00 PM · <a href="https://www.google.com/maps/search/Cuba+Libre+9101+International+Dr+Orlando+FL" target="_blank">9101 International Dr</a> · ✅ registered</span>' }
+        { time: '4:00 PM', text: '<strong>Plan A:</strong> 🎤 Closing Keynote with <a href=\"https://linkedin.com/in/thiagocosta2\" target=\"_blank\">Thiago da Costa</a> → 5:00–7:00 PM reception · <strong>Plan B:</strong> leave ~3:35 for Gartner 4:15 Build vs. Buy + 5:15 CEO Mindset (Dolphin)' },
+        { time: '7:00 PM', text: '🎉 <a href=\"https://hello.trunk.tools/gbk26-hh\" target=\"_blank\">After Party at Cuba Libre</a> <span style=\"color:var(--dim)\">→ 10:00 PM · <a href=\"https://www.google.com/maps/search/Cuba+Libre+9101+International+Dr+Orlando+FL\" target=\"_blank\">9101 International Dr</a> · RSVP</span>' }
       ],
       transit: [
         'Hotel → OCCC South Hall ~20 min; OCCC → Dolphin ~20 min (Plan B)'
       ],
-      tip: 'Groundbreak day — and your after-party RSVP is already confirmed, so nothing to chase. <strong>Pick up the badge first at OCCC South Hall Level 2</strong> (photo ID + the QR code from the Final Details email) — nothing else works without it. The 3:00 PM gap right after B042 is your best shot at the agent speakers, and Braindate in the app is the way to get small-group time. Cuba Libre is at 7:00 PM on International Drive — no badge needed there.',
+      tip: 'Groundbreak day. The 3:00 PM gap right after B042 is your best shot at the agent speakers. Use Braindate in the app for small-group agent talks. Cuba Libre after party needs no badge — RSVP.',
       food: [
         { name: 'Charley\'s Steak House', meta: '📍 2901 Parkway Blvd, Kissimmee · USDA Prime · ~7 min from the hotel', id: 'today-charleys', url: 'https://www.google.com/maps/search/Charleys+Steak+House+2901+Parkway+Blvd+Kissimmee+FL+34747' },
         { name: 'Todd English\'s bluezoo', meta: '📍 1500 Epcot Resorts Blvd (the Dolphin) · seafood · on-site', id: 'today-bluezoo', url: 'https://www.google.com/maps/search/Todd+Englishs+bluezoo+Walt+Disney+World+Dolphin+1500+Epcot+Resorts+Blvd' },
@@ -281,7 +281,7 @@ var TRIP = {
     {
       date: '2026-10-22',
       label: 'Thursday · Close & Fly Home',
-      weather: { hi: 80, lo: 61, icon: '☀️', rain: 0 },
+      weather: { hi: 82, lo: 71, icon: '⛅', rain: 17 },
       pills: [
         { text: '🎤 3 sessions, done 1:00p', cls: 'good' },
         { text: '✈️ WN 2685 4:05p', cls: 'good' },
