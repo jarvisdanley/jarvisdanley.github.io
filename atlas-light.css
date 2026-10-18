@@ -117,3 +117,14 @@ td strong{color:var(--text)}
 /* footer */
 .footer,footer{border-top:none!important;color:#8E8E93!important}
 .footer a,footer a{color:var(--blue)!important}
+
+/* structured Atlas update tiles */
+.update{display:block}
+.update .time{display:block;margin-bottom:4px}
+.update .u-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:6px;padding-bottom:8px;border-bottom:1px solid #D5D5DC}
+.update + .update{margin-top:12px}
+.u-list{list-style:none;margin:0!important;padding:0!important}
+.u-list li{display:flex;gap:10px;align-items:flex-start;font-size:14px!important;line-height:1.45;color:var(--sub)!important;
+  padding:10px 0!important;margin:0!important;border-top:1px solid #D5D5DC!important}
+.u-list li:first-child{border-top:none!important}
+.u-list .ui{flex:0 0 20px;text-align:center}
