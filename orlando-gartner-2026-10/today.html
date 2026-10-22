@@ -295,30 +295,34 @@ var TRIP = {
     {
       date: '2026-10-22',
       label: 'Thursday · Close & Fly Home',
-      weather: { hi: 80, lo: 60, icon: '☀️', rain: 0 },
+      weather: { hi: 81, lo: 61, icon: '☀️', rain: 0 },
       pills: [
-        { text: '🎤 3 sessions, done 1:00p', cls: 'good' },
-        { text: '✈️ WN 2685 4:05p', cls: 'good' },
+        { text: '🟢 On time: WN 2685 4:05p', cls: 'good' },
+        { text: '🚗 National back 3:05p', cls: 'warn' },
+        { text: '🛂 MCO Reserve — not booked', cls: 'warn' },
         { text: '✈️ WN 611 6:55p → MCI', cls: 'good' }
       ],
-      warn: '<strong>National drop-off is booked for 3:05 PM against a 4:05 PM flight.</strong> Your last session ends 1:00 PM — leave right after and return the car by ~2:00 PM.',
+      warn: '<strong>Check-out is 11:00 AM but your last session ends at 1:00 PM.</strong> Bags go in the car at check-out — you are not driving back to Kissimmee. Leave the venue by <strong>~1:15 PM</strong>, at MCO by <strong>~1:45</strong>, National car back <strong>3:05 PM</strong>, boarding <strong>~3:40</strong>.',
       timeline: [
         { time: '7:20 AM', text: '🧳 Check out, bag in the car · 🚗 ~20 min to the venue' },
         { time: '8:00 AM', text: '🎤 <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4862277-Executive-Story-Stop-Talking-About-AI-Start-Doing-It-How-We-Operationalized-AI-in-90-Days" target="_blank"><strong>Executive Story: Stop Talking About AI. Start Doing It: How We Operationalized AI in 90 Days</strong></a> <span style="color:var(--dim)">→ 8:30 AM · 📍 Upper Peninsula 4, WDW Dolphin Hotel · John Tziortzis</span>' },
         { time: '10:30 AM', text: '🎤 <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/6224821-Hype-Cycle-for-Agentic-AI-2026-Repeat" target="_blank"><strong>Hype Cycle for Agentic AI 2026 (Repeat)</strong></a> <span style="color:var(--dim)">→ 10:50 AM · 📍 Stage 3, IT Xpo, Pacific Hall, WDW Dolphin Hotel · Rajesh Kandaswamy</span>' },
         { time: '12:30 PM', text: '🎤 <a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4967051-Reduce-Opex-and-AI-Token-Costs-With-Platform-Engineering" target="_blank"><strong>Reduce Opex and AI Token Costs With Platform Engineering</strong></a> <span style="color:var(--dim)">→ 1:00 PM · 📍 Swan Ballroom 6, WDW Swan Hotel · Bill Blosen</span>' },
-        { time: '~1:15 PM', text: '🚗 Leave the venue, ~25 min to MCO' },
-        { time: '~2:00 PM', text: '🚗 Return the <strong>National</strong> car <span style="color:var(--dim)">drop-off booked 3:05 PM</span>' },
+        { time: '~1:15 PM', text: '🚗 Leave the venue, ~22 mi / ~25 min to MCO' },
+        { time: '~1:45 PM', text: '🛂 Terminal A · <strong>MCO Reserve</strong> security slot <span style="color:var(--dim)">book 1:45–2:15 PM at flymco.com/mcoreserve</span>' },
+        { time: '3:05 PM', text: '🚗 Return the <strong>National</strong> car <span style="color:var(--dim)">booked drop-off time</span>' },
+        { time: '~3:40 PM', text: '🚈 <strong>Gate Link tram</strong> to gates 100–129 <span style="color:var(--dim)">walkway is closed — the tram is the only route</span>' },
         { time: '4:05 PM', text: '🛫 <strong>WN 2685</strong> MCO → BNA, seat 12A <span style="color:var(--dim)">ET</span>' },
-        { time: '6:55 PM', text: '🛫 <strong>WN 611</strong> BNA → MCI, seat 8A <span style="color:var(--dim)">CT</span>' },
-        { time: '8:40 PM', text: '🛬 Land MCI · 🏠 home' }
+        { time: '6:55 PM', text: '🛫 <strong>WN 611</strong> BNA → MCI, seat 8A <span style="color:var(--dim)">CT · 1h45m connection</span>' },
+        { time: '8:40 PM', text: '🛬 Land MCI · 🏠 home · 61°F' }
       ],
       transit: [
         'Swan & Dolphin → MCO: ~22 mi / ~25 min',
         'Return the car to the terminal your flight departs from (Southwest = Terminal A)',
-        'MCO Reserve is the free security-timeslot if you book it ahead'
+        'MCO Reserve is a free security timeslot — book it for 1:45–2:15 PM',
+        'Gates 100–129 are behind the Gate Link tram; the walkway is closed for the rebuild'
       ],
-      tip: 'Your last session ends at 1:00 PM, not the 1:45 PM IT Xpo close — use that. Head straight to MCO after the platform-engineering session and the car return stops being tight.',
+      tip: 'Your last session ends at 1:00 PM and the IT Xpo close at 1:45 PM is not a deadline for you — leave at 1:15. Book MCO Reserve before you check out; it is the one item still open from Sunday. And with 1h45m in Nashville, that is your window to enter the Metallica Meet & Greet contest if yesterday swallowed it.',
       food: [
         { name: 'Foxtail Coffee Co. — Celebration at 192', meta: '📍 6059 W Irlo Bronson Memorial Hwy · grab coffee before the drive in', id: 'today-foxtail', url: 'https://www.google.com/maps/search/Foxtail+Coffee+6059+W+Irlo+Bronson+Memorial+Hwy+Kissimmee+FL+34747' }
       ]
