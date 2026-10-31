@@ -116,24 +116,25 @@ var TRIP = {
     {
       date: '2026-11-02',
       label: 'Monday · KC → Tampa',
-      weather: { hi: 81, lo: 64, icon: '☀️', rain: 10 },
+      weather: { hi: 79, lo: 71, icon: '⛈️', rain: 60 },
       pills: [
         { text: '✈️ WN 1369 2:40pm', cls: 'good' },
+        { text: '⛈️ 60% storms — was 30%', cls: 'warn' },
         { text: '🏨 Grand Hyatt check-in', cls: 'good' },
         { text: '🍽️ Dinner w/ Rich Zinser', cls: 'good' }
       ],
       timeline: [
         { time: '2:40 PM CST', text: 'Depart MCI on WN 1369 (seat 4D) — nonstop, 2h 30m' },
-        { time: '6:10 PM EST', text: 'Land TPA — remember the +1h timezone jump' },
-        { time: '~7:00 PM', text: '🏨 Check in at the Grand Hyatt Tampa Bay, 2900 Bayport Dr' },
-        { time: 'Evening', text: 'Dinner with Rich Zinser' }
+        { time: '6:10 PM EST', text: 'Land TPA — remember the +1h timezone jump. 79°F, showers and thunderstorms likely (60%), gusts to 22 mph' },
+        { time: '~7:00 PM', text: '🏨 Check in at the Grand Hyatt Tampa Bay, 2900 Bayport Dr — taxi, not a walk; the causeway is exposed' },
+        { time: 'Evening', text: 'Dinner with Rich Zinser — ask for the dining room, not the deck' }
       ],
       transit: [
         'MCI: arrive ~1h40m early for the 2:40 PM departure',
         'TPA → Grand Hyatt: ~2 mi / 5 min — the airport district is next door',
         'Timezone: Tampa is 1h ahead of KC (EST)'
       ],
-      tip: 'A short travel day. You land at 6:10 PM EST and the hotel is ~2 mi from the airport, so dinner is comfortably doable by 7:30. <strong>Bern\u2019s Steak House is closed Mondays</strong> — if steak is the call, Charley\u2019s is the one that\u2019s open. Oystercatchers is on property and means no second drive after a travel day.',
+      tip: 'A short travel day, but <strong>the arrival weather turned wet this morning</strong> — Monday is now 79°F with showers and thunderstorms likely at 60% (it read 30% yesterday) and an east-northeast wind gusting to 22 mph. Taxi to Rocky Point rather than walking, and <strong>book Oystercatchers\u2019 dining room rather than the deck</strong> — the bay will be choppy and the deck is first-come. You land 6:10 PM EST and the hotel is ~2 mi from the airport, so dinner is comfortably doable by 7:30. <strong>Bern\u2019s Steak House is closed Mondays</strong> — if steak is the call, Charley\u2019s is the one that\u2019s open. Oystercatchers is on property and means no second drive after a travel day.',
       food: [
         { name: 'Oystercatchers', meta: '📍 On property at the Grand Hyatt · waterfront seafood since 1986 · dinner till 9 PM · oystercatchersrestaurant.com', id: 'today-oystercatchers', url: 'https://www.google.com/maps/search/Oystercatchers+2900+Bayport+Dr+Tampa+FL+33607' },
         { name: 'Charley\u2019s Steak House', meta: '📍 4444 W Cypress St · Prime/Angus over a 1,200° citrus-oak pit · Sun–Thu till 9:30 PM · open Mondays', id: 'today-charleys', url: 'https://www.google.com/maps/search/Charleys+Steak+House+4444+W+Cypress+St+Tampa+FL+33607' },
@@ -144,7 +145,7 @@ var TRIP = {
     {
       date: '2026-11-03',
       label: 'Tuesday · Speak → Fly Home',
-      weather: { hi: 81, lo: 64, icon: '⛅', rain: 15 },
+      weather: { hi: 82, lo: 71, icon: '⛅', rain: 30 },
       pills: [
         { text: '🎤 Speak 10:15am EST', cls: 'good' },
         { text: '✈️ WN 4966 home', cls: 'good' },
