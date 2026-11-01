@@ -116,16 +116,17 @@ var TRIP = {
     {
       date: '2026-11-02',
       label: 'Monday · KC → Tampa',
-      weather: { hi: 79, lo: 71, icon: '⛈️', rain: 60 },
+      weather: { hi: 79, lo: 72, icon: '⛅', rain: 50 },
       pills: [
         { text: '✈️ WN 1369 2:40pm', cls: 'good' },
-        { text: '⛈️ 60% storms — was 30%', cls: 'warn' },
+        { text: '⛅ TPA 50% scattered · mostly sunny', cls: 'good' },
+        { text: '⛈️ KC departs into 80% storms', cls: 'warn' },
         { text: '🏨 Grand Hyatt check-in', cls: 'good' },
         { text: '🍽️ Dinner w/ Rich Zinser', cls: 'good' }
       ],
       timeline: [
         { time: '2:40 PM CST', text: 'Depart MCI on WN 1369 (seat 4D) — nonstop, 2h 30m' },
-        { time: '6:10 PM EST', text: 'Land TPA — remember the +1h timezone jump. 79°F, showers and thunderstorms likely (60%), gusts to 22 mph' },
+        { time: '6:10 PM EST', text: 'Land TPA — remember the +1h timezone jump. 79°F, scattered showers 50%, mostly sunny, gusts to 23 mph — you land in a lull between the two bands' },
         { time: '~7:00 PM', text: '🏨 Check in at the Grand Hyatt Tampa Bay, 2900 Bayport Dr — taxi, not a walk; the causeway is exposed' },
         { time: 'Evening', text: 'Dinner with Rich Zinser — ask for the dining room, not the deck' }
       ],
@@ -145,10 +146,11 @@ var TRIP = {
     {
       date: '2026-11-03',
       label: 'Tuesday · Speak → Fly Home',
-      weather: { hi: 82, lo: 71, icon: '⛅', rain: 30 },
+      weather: { hi: 81, lo: 72, icon: '⛅', rain: 50 },
       pills: [
         { text: '🎤 Speak 10:15am EST', cls: 'good' },
         { text: '✈️ WN 4966 home', cls: 'good' },
+        { text: '⛈️ Storms after 1pm — watch WN 4966', cls: 'warn' },
         { text: '⏭️ Skips Nov 3 afternoon', cls: 'warn' }
       ],
       warn: 'You\u2019re on stage at 10:15 AM, off by 11:00, and flying out early afternoon. The return is booked for Nov 3 on purpose — that means skipping the Nov 3 afternoon breakouts, the trade show (4:30–6:30 PM) and the 7–9 PM networking dinner, and not being there for Day 2 (Nov 4). Not a problem, just the plan.',
