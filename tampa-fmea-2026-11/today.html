@@ -116,26 +116,28 @@ var TRIP = {
     {
       date: '2026-11-02',
       label: 'Monday · KC → Tampa',
-      weather: { hi: 79, lo: 72, icon: '⛅', rain: 50 },
+      weather: { hi: 80, lo: 72, icon: '⛅', rain: 14 },
       pills: [
-        { text: '✈️ WN 1369 2:40pm', cls: 'good' },
-        { text: '⛅ TPA 50% scattered · mostly sunny', cls: 'good' },
-        { text: '⛈️ KC departs into 80% storms', cls: 'warn' },
+        { text: '✈️ WN 1369 2:40pm · ON TIME', cls: 'good' },
+        { text: '⛈️ KC storms peak 12–3pm', cls: 'warn' },
+        { text: '☀️ TPA landing 77°F · 14%', cls: 'good' },
         { text: '🏨 Grand Hyatt check-in', cls: 'good' },
-        { text: '🍽️ Dinner w/ Rich Zinser', cls: 'good' }
+        { text: '🍽️ Dinner w/ Rich Zinser · book 8pm', cls: 'warn' }
       ],
       timeline: [
-        { time: '2:40 PM CST', text: 'Depart MCI on WN 1369 (seat 4D) — nonstop, 2h 30m' },
-        { time: '6:10 PM EST', text: 'Land TPA — remember the +1h timezone jump. 79°F, scattered showers 50%, mostly sunny, gusts to 23 mph — you land in a lull between the two bands' },
-        { time: '~7:00 PM', text: '🏨 Check in at the Grand Hyatt Tampa Bay, 2900 Bayport Dr — taxi, not a walk; the causeway is exposed' },
-        { time: 'Evening', text: 'Dinner with Rich Zinser — ask for the dining room, not the deck' }
+        { time: '11:00 AM CST', text: '⚠️ Check the Southwest app — WN 1369 and the Denver inbound (tail N243WN turns in 35 min at MCI). If either slips past ~45 min, call Acendas 816-822-3188 before you drive out' },
+        { time: '2:40 PM CST', text: 'Depart MCI on WN 1369 from gate B60 (seat 4D) — nonstop, 2h 30m. Storm peak is 12–3 PM, so an on-time push is the good outcome' },
+        { time: '6:10 PM EST', text: 'Land TPA, gate C35, baggage claim 13 — remember the +1h timezone jump. 77°F, mostly cloudy, only 14% chance of rain' },
+        { time: '~7:00 PM', text: '🏨 Check in at the Grand Hyatt Tampa Bay, 2900 Bayport Dr — taxi or rideshare, not a walk' },
+        { time: '~8:00 PM', text: 'Dinner with Rich Zinser — 8 PM, not 7:30. Kitchen closes at 9' }
       ],
       transit: [
         'MCI: arrive ~1h40m early for the 2:40 PM departure',
-        'TPA → Grand Hyatt: ~2 mi / 5 min — the airport district is next door',
-        'Timezone: Tampa is 1h ahead of KC (EST)'
+        'TPA → Grand Hyatt: ~5 mi / 12 min by taxi or rideshare across the Courtney Campbell causeway',
+        'Timezone: Tampa is 1h ahead of KC (EST)',
+        '✅ If WN 1369 cancels: ask for WN 2718, MCI 8:55 PM → TPA 12:25 AM — still makes tomorrow morning session'
       ],
-      tip: 'A short travel day, but <strong>the arrival weather turned wet this morning</strong> — Monday is now 79°F with showers and thunderstorms likely at 60% (it read 30% yesterday) and an east-northeast wind gusting to 22 mph. Taxi to Rocky Point rather than walking, and <strong>book Oystercatchers\u2019 dining room rather than the deck</strong> — the bay will be choppy and the deck is first-come. You land 6:10 PM EST and the hotel is ~2 mi from the airport, so dinner is comfortably doable by 7:30. <strong>Bern\u2019s Steak House is closed Mondays</strong> — if steak is the call, Charley\u2019s is the one that\u2019s open. Oystercatchers is on property and means no second drive after a travel day.',
+      tip: 'The plane is on time; the storm is the story. <strong>NWS Kansas City names two thunderstorm peaks today — 12–3 PM and 8 PM to midnight</strong> — and your 2:40 PM departure sits at the tail of the first, with MVFR/IFR at MCI and gusts to 25 kt. No watches or warnings are up, so expect a <em>delay</em> risk rather than a shutdown — but <strong>this exact flight number left 45 to 56 minutes late yesterday.</strong> Check the Southwest app at 11 AM; if it goes wrong, the answer is <strong>WN 2718 at 8:55 PM</strong>, which still lands you ten hours before you speak. Tampa is now the easy end — <strong>77°F and 14% at your 6:10 PM landing</strong> — so the deck is viable tonight. <strong>book Oystercatchers\u2019 dining room rather than the deck</strong> — 12 mph easterlies make the bay choppy and the deck is first-come. The hotel is ~5 mi / 12 min from TPA, so book the table for 8 PM rather than 7:30 — the kitchen closes at 9. <strong>Bern\u2019s Steak House is closed Mondays</strong> — if steak is the call, Charley\u2019s is the one that\u2019s open. Oystercatchers is on property and means no second drive after a travel day.',
       food: [
         { name: 'Oystercatchers', meta: '📍 On property at the Grand Hyatt · waterfront seafood since 1986 · dinner till 9 PM · oystercatchersrestaurant.com', id: 'today-oystercatchers', url: 'https://www.google.com/maps/search/Oystercatchers+2900+Bayport+Dr+Tampa+FL+33607' },
         { name: 'Charley\u2019s Steak House', meta: '📍 4444 W Cypress St · Prime/Angus over a 1,200° citrus-oak pit · Sun–Thu till 9:30 PM · open Mondays', id: 'today-charleys', url: 'https://www.google.com/maps/search/Charleys+Steak+House+4444+W+Cypress+St+Tampa+FL+33607' },
@@ -146,11 +148,11 @@ var TRIP = {
     {
       date: '2026-11-03',
       label: 'Tuesday · Speak → Fly Home',
-      weather: { hi: 81, lo: 72, icon: '⛅', rain: 50 },
+      weather: { hi: 84, lo: 72, icon: '☀️', rain: 7 },
       pills: [
-        { text: '🎤 Speak 10:15am EST', cls: 'good' },
-        { text: '✈️ WN 4966 home', cls: 'good' },
-        { text: '⛈️ Storms after 1pm — watch WN 4966', cls: 'warn' },
+        { text: '🎤 Speak 10:15am EST · 78°F, 7%', cls: 'good' },
+        { text: '✈️ WN 4966 home 2:10pm', cls: 'good' },
+        { text: '⛈️ Storms from 1pm · 50% — watch WN 4966', cls: 'warn' },
         { text: '⏭️ Skips Nov 3 afternoon', cls: 'warn' }
       ],
       warn: 'You\u2019re on stage at 10:15 AM, off by 11:00, and flying out early afternoon. The return is booked for Nov 3 on purpose — that means skipping the Nov 3 afternoon breakouts, the trade show (4:30–6:30 PM) and the 7–9 PM networking dinner, and not being there for Day 2 (Nov 4). Not a problem, just the plan.',
@@ -162,7 +164,7 @@ var TRIP = {
         { time: '4:05 PM CST', text: 'Land MCI — home' }
       ],
       transit: [
-        'Grand Hyatt → TPA: ~2 mi / 5–10 min — a short rideshare',
+        'Grand Hyatt → TPA: ~5 mi / 12 min across the Courtney Campbell causeway',
         'Back at the airport ~1h40m before the 2:10 PM departure',
         'Timezone: you gain the hour back (arrive 4:05 PM CST)'
       ],
