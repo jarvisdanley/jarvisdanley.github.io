@@ -148,31 +148,34 @@ var TRIP = {
     {
       date: '2026-11-03',
       label: 'Tuesday · Speak → Fly Home',
-      weather: { hi: 84, lo: 72, icon: '☀️', rain: 7 },
+      weather: { hi: 82, lo: 74, icon: '🌦️', rain: 50 },
       pills: [
-        { text: '🎤 Speak 10:15am EST · 78°F, 7%', cls: 'good' },
-        { text: '✈️ WN 4966 home 2:10pm', cls: 'good' },
-        { text: '⛈️ Storms from 1pm · 50% — watch WN 4966', cls: 'warn' },
-        { text: '⏭️ Skips Nov 3 afternoon', cls: 'warn' }
+        { text: '🎤 Speak 10:15am ET · 78°F, 11% — dry', cls: 'good' },
+        { text: '⏰ Metallica M&G closes 1:00pm ET', cls: 'warn' },
+        { text: '✈️ WN 4966 2:10pm · gate C38 → B64', cls: 'good' },
+        { text: '⛈️ Storms 2–4pm · 50–60% — on the departure', cls: 'warn' }
       ],
-      warn: 'You\u2019re on stage at 10:15 AM, off by 11:00, and flying out early afternoon. The return is booked for Nov 3 on purpose — that means skipping the Nov 3 afternoon breakouts, the trade show (4:30–6:30 PM) and the 7–9 PM networking dinner, and not being there for Day 2 (Nov 4). Not a problem, just the plan.',
+      warn: '⏰ The one hard clock today is NOT the flight — it is the Metallica Meet &amp; Greet entry, which closes 1:00 PM ET (10 AM PT). You are off stage at 11:00 and boarding is ~1:40, so file it in that gap. Then: checkout is 11 AM, cab at 12:15–12:30, TPA ~12:45. ⛈️ Storms peak 2–4 PM — a 60-minute delay is plausible, and it costs you an evening, not a session, because you have nothing booked after this.',
       timeline: [
         { time: '9:00 AM EST', text: 'Day 1 general sessions open — Grand Hyatt Tampa Bay' },
         { time: '10:15 AM', text: '🎤 JEFF SPEAKS — 10:15–11:00 AM EST' },
-        { time: '11:00 AM', text: 'Off stage' },
-        { time: '2:10 PM EST', text: 'WN 4966 departs TPA (seat 2F)' },
-        { time: '4:05 PM CST', text: 'Land MCI — home' }
+        { time: '11:00 AM', text: 'Off stage → ⏰ file the Metallica M&amp;G entry by 1:00 PM ET' },
+        { time: '11:30 AM', text: 'Pack, settle the folio, leave the bag with the desk (checkout 11 AM)' },
+        { time: '12:15 PM', text: 'Cab Rocky Point → TPA, 10–15 min' },
+        { time: '1:40 PM', text: 'At gate C38' },
+        { time: '2:10 PM EST', text: 'WN 4966 departs TPA (seat 2F, aircraft 7M8)' },
+        { time: '4:05 PM CST', text: 'Land MCI gate B64 — home' }
       ],
       transit: [
         'Grand Hyatt → TPA: ~5 mi / 12 min across the Courtney Campbell causeway',
-        'Back at the airport ~1h40m before the 2:10 PM departure',
+        'No walk — 13 mph easterlies make the causeway a bad idea',
         'Timezone: you gain the hour back (arrive 4:05 PM CST)'
       ],
-      tip: 'The whole day is in one building until you leave for the airport. Coffee early (Buddy Brew opens 6 AM, ~1 mi away), then the 9 AM block, then you\u2019re on at 10:15. Off stage at 11:00 leaves a comfortable ~3 hours before the 2:10 PM departure \u2014 a ~2 mi hop to TPA and a single nonstop home, no rush. Keep it carry-on so there\u2019s nothing to wait for at bag claim.',
+      tip: 'The whole day is one building until you leave for the airport — coffee early (Buddy Brew opens 6 AM, ~1 mi), the 9 AM block, then you are on at 10:15. Off stage at 11:00 is not free time: the Metallica entry closes at 1:00 PM ET and the boarding call is 1:40, so do it first and everything else relaxes. Carry-on only, no bag claim to wait for. And if WN 4966 slips, it is not worth chasing — the next Southwest to MCI is not until tomorrow evening.',
       food: [
         { name: 'Buddy Brew Coffee — Current Hotel', meta: '📍 2545 N Rocky Point Dr · closest real coffee to the hotel · opens 6 AM', id: 'today-buddybrew', url: 'https://www.google.com/maps/search/Buddy+Brew+Coffee+2545+N+Rocky+Point+Dr+Tampa+FL+33607' },
         { name: 'Kahwa Coffee — Kennedy Blvd', meta: '📍 2802 W Kennedy Blvd · Tampa small-batch roaster · drive-thru', id: 'today-kahwa', url: 'https://www.google.com/maps/search/Kahwa+Coffee+2802+W+Kennedy+Blvd+Tampa+FL+33609' },
-        { name: 'Oystercatchers', meta: '📍 On property · lunch Mon–Sat 11:30 AM–2:30 PM — a sit-down before the airport if the schedule allows', id: 'today-oystercatchers-2', url: 'https://www.google.com/maps/search/Oystercatchers+2900+Bayport+Dr+Tampa+FL+33607' }
+        { name: 'Oystercatchers', meta: '📍 On property · lunch Mon–Sat 11:30 AM–2:30 PM — but you are in a cab at 12:15, so this is a no today', id: 'today-oystercatchers-2', url: 'https://www.google.com/maps/search/Oystercatchers+2900+Bayport+Dr+Tampa+FL+33607' }
       ]
     }
   ]
