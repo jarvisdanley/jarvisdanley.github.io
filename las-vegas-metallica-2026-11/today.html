@@ -116,11 +116,11 @@ var TRIP = {
     {
       date: '2026-11-05',
       label: 'Thursday · KC → Vegas · Night 3 🎸',
-      weather: { hi: 69, lo: 54, icon: '⛅', rain: 0 },
+      weather: { hi: 70, lo: 55, icon: '⛅', rain: 0 },
       pills: [
         { text: '✈️ WN 474 11:40am', cls: 'good' },
-        { text: '🏨 Check-in 4pm', cls: 'good' },
-        { text: '🎫 Tix w/ Lee', cls: 'warn' },
+        { text: '⚠️ Lee seat unbooked', cls: 'warn' },
+        { text: '🏨 Check-in 3pm', cls: 'good' },
         { text: '🎸 Night 3 8:30pm', cls: 'good' }
       ],
       warn: 'The Sphere is <strong>mobile-ticket only</strong> and the tickets are with <strong>Lee</strong>. Coordinate the wallet handoff before doors tonight.',
@@ -146,16 +146,17 @@ var TRIP = {
     {
       date: '2026-11-06',
       label: 'Friday · Vegas · no show · cigar day',
-      weather: { hi: 72, lo: 54, icon: '☀️', rain: 0 },
+      weather: { hi: 72, lo: 55, icon: '☀️', rain: 0 },
       pills: [
-        { text: '🚬 Smoke & Metal 4–7pm', cls: 'good' },
-        { text: '🎡 High Roller', cls: 'good' },
+        { text: '📋 Black Box 2:30–7:30pm', cls: 'good' },
+        { text: '🚬 Smoke & Metal 4 or 7pm?', cls: 'warn' },
         { text: '🎫 No show tonight', cls: 'good' }
       ],
-      warn: 'Reservations are <strong>required</strong> for "Smoke & Metal" at Eight Lounge and it is <strong>not yet booked</strong>. Book before the Life Burns Faster weekend fills it.',
+      warn: 'Two things to settle: <strong>"Smoke &amp; Metal" is still unreserved</strong> and its start time is in dispute (metallica.com says 4–7 PM, Eight Lounge’s own page says 7 PM). <strong>Call Eight Lounge.</strong> And the <strong>final Black Box Friday</strong> runs 2:30–7:30 PM inside your own hotel.',
       timeline: [
-        { time: 'Afternoon', text: '🎡 High Roller at The LINQ — a five-minute walk from the room' },
-        { time: '4:00–7:00 PM PT', text: '🚬 Rob Dietrich "Smoke & Metal" @ Eight Lounge, Resorts World — 21+, reservations required' }
+        { time: '10 AM–8 PM', text: '🛍️ Life Burns Faster Experience @ The Summit Showroom, The Venetian — 5 min from the room' },
+        { time: '2:30–7:30 PM PT', text: '📋 Black Box Friday @ The Stadium, The Palazzo — Fan Can VI double feature + intro from Spider-Dan &amp; Jeff Yeager · $80, tickets required' },
+        { time: '4:00–7:00 PM PT', text: '🚬 Rob Dietrich &amp; Jonathan Drew "Smoke &amp; Metal" @ Eight Lounge, Resorts World — 21+, reservations required' }
       ],
       transit: [
         'Eight Lounge (Resorts World) is north on the Strip — an easy rideshare from The Palazzo',
@@ -196,8 +197,8 @@ var TRIP = {
     },
     {
       date: '2026-11-08',
-      label: 'Sunday · Vegas → KC',
-      weather: { hi: 74, lo: 57, icon: '☀️', rain: 0 },
+      label: 'Sunday · Vegas → KC · 8:20am flight',
+      weather: { hi: 73, lo: 52, icon: '☀️', rain: 0 },
       pills: [
         { text: '✈️ WN 2427 8:20am', cls: 'good' },
         { text: '⏰ ~6am checkout', cls: 'warn' }
