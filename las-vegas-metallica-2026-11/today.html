@@ -152,27 +152,29 @@ var TRIP = {
     },
     {
       date: '2026-11-06',
-      label: 'Friday · Vegas · no show · cigar day',
-      weather: { hi: 72, lo: 55, icon: '☀️', rain: 0 },
+      label: 'Friday · Vegas · no show · Black Box + cigars',
+      weather: { hi: 73, lo: 56, icon: '☀️', rain: 0 },
       pills: [
+        { text: '✅ Night 3 done · no Sandman (as called)', cls: 'good' },
+        { text: '💻 AI Club Board 10am PT', cls: 'warn' },
         { text: '📋 Black Box 2:30–7:30pm', cls: 'good' },
-        { text: '🚬 Smoke & Metal 4 or 7pm?', cls: 'warn' },
-        { text: '🎸 Rival Sons 7pm', cls: 'good' }
+        { text: '🚬 Smoke & Metal 7pm confirmed', cls: 'good' }
       ],
-      warn: 'Two things to settle: <strong>"Smoke &amp; Metal" is still unreserved</strong> and its start time is in dispute (metallica.com says 4–7 PM, Eight Lounge’s own page says 7 PM). <strong>Call Eight Lounge.</strong> And the <strong>final Black Box Friday</strong> runs 2:30–7:30 PM inside your own hotel.',
+      warn: 'The cigar time dispute is <strong>settled — Eight Lounge’s own page says 7 PM</strong>, and it is <strong>no cover, walk-ins first-come</strong>, so you do not need a reservation for two. That creates one real collision: <strong>Black Box runs to 7:30 PM</strong> in your own hotel. Plan on leaving Black Box ~5:15.',
       timeline: [
-        { time: 'Daytime', text: '🤘 Free Metallica exhibit @ Hard Rock Cafe, 3771 S Las Vegas Blvd' },
-        { time: '10 AM–8 PM', text: '🛍️ Life Burns Faster Experience @ The Summit Showroom, The Venetian — 5 min from the room' },
-        { time: '2:30–7:30 PM PT', text: '📋 Black Box Friday @ The Stadium, The Palazzo — Fan Can VI double feature + intro from Spider-Dan &amp; Jeff Yeager · $80, tickets required' },
-        { time: '4:00–7:00 PM PT', text: '🚬 Rob Dietrich &amp; Jonathan Drew "Smoke &amp; Metal" @ Eight Lounge, Resorts World — 21+, reservations required' },
-        { time: '7:00 PM PT', text: '🎸 Rival Sons @ Brooklyn Bowl, The LINQ — top pick, ~15-min walk · alt: SEMA Fest (Offspring/311/Jimmy Eat World, LVCC) or Big Smoke cigar fest (Horseshoe, 6:30–9:30)' }
+        { time: '10:00–11:00 AM PT', text: '💻 AI Club Monthly Board Meeting (12:00 PM CST) — Zoom, us06web.zoom.us/j/81749906455' },
+        { time: '10 AM–8 PM', text: '🛍️ Life Burns Faster Experience @ The Summit Showroom, The Venetian — Friday hours 10 AM–8 PM · 5 min from the room' },
+        { time: '12:00–6:00 PM', text: '🩸 Red Cross × Metallica blood drive @ Fashion Show — last day in the window, but you already gave in October · Squindo tee if you want it' },
+        { time: '2:30–5:15 PM PT', text: '📋 Black Box Friday @ The Stadium, The Palazzo — Fan Can VI double feature + live intro from Spider-Dan &amp; Jeff Yeager · $80 · last one of the residency' },
+        { time: '5:15–6:30 PM PT', text: '🥩 Dinner inside the building — CUT or Delmonico; eat before you go north' },
+        { time: '7:00 PM PT', text: '🚬 Rob Dietrich &amp; Jonathan Drew "Smoke &amp; Metal" @ Eight Lounge, Resorts World — 21+, no cover, walk-ins first-come · first 100 get the BLACKENED poster' }
       ],
       transit: [
-        'Eight Lounge (Resorts World) is north on the Strip — an easy rideshare from The Palazzo',
-        'High Roller at The LINQ is a 5-min walk',
-        'Brooklyn Bowl (Rival Sons) is on The LINQ Promenade — ~15-min walk'
+        'Palazzo → Eight Lounge (Resorts World): ~1.5 mi north — 10 min by rideshare, or the Strip walk if the evening is nice',
+        'Leave Black Box by 5:15 and you have dinner time; leave at 7:00 and you miss the cigar event',
+        'Sphere is shut tonight — nothing to walk to, so the whole evening is yours'
       ],
-      tip: 'Your one show-free day. The High Roller at The LINQ is a five-minute walk from the room — ride it after dark for the neon. Then the main event: <strong>Rob Dietrich\'s "Smoke &amp; Metal"</strong> at Eight Lounge in Resorts World, 4–7 PM. It is 21+ and reservations are required, so book it. Both cigar spots are north on the Strip.',
+      tip: 'Your one show-free day, and it is genuinely full. Handle the AI Club board call at 10 AM from the room, then Black Box at 2:30 — it is the <strong>last Black Box Friday of the whole residency</strong> and it is in your own hotel. Cut out at 5:15, eat in the <a href="https://www.google.com/maps/search/CUT+Steakhouse+The+Palazzo+3325+S+Las+Vegas+Blvd" style="color:var(--blue)">Palazzo or Venetian</a>, then go north for the cigars at 7. <strong>Do not try to do Black Box to the end and the cigar event — Eight Lounge is 1.5 mi away and the good stuff starts when you arrive.</strong>',
       food: [
         { name: 'The Golden Steer Steakhouse', url: 'https://goldensteer.com/', meta: '📍 308 W Sahara Ave · oldest steakhouse in Vegas, since 1958 · reserve early', id: 'today-lv-goldensteer' },
         { name: 'CUT by Wolfgang Puck', url: 'https://www.venetianlasvegas.com/dining/restaurants/cut-by-wolfgang-puck.html', meta: '📍 The Palazzo · AAA Four Diamond · the 40 oz tomahawk is the headline', id: 'today-lv-cut' },
@@ -182,13 +184,14 @@ var TRIP = {
     {
       date: '2026-11-07',
       label: 'Saturday · Vegas · Night 4 🎸',
-      weather: { hi: 73, lo: 56, icon: '☀️', rain: 0 },
+      weather: { hi: 75, lo: 56, icon: '☀️', rain: 0 },
       pills: [
-        { text: '🚬 BLACKENED 2–8pm', cls: 'good' },
         { text: '🎸 Night 4 8:30pm', cls: 'good' },
+        { text: '🎯 Enter Sandman + One tonight', cls: 'good' },
+        { text: '🛍️ Last pop-up day', cls: 'warn' },
         { text: '⏰ Pack tonight', cls: 'warn' }
       ],
-      warn: 'Set lists are <strong>completely different from Thursday</strong> — that is the No Repeat Weekend draw. Doors are 7:00 PM.',
+      warn: 'Thursday ran the <strong>Battery</strong> half and closed on <em>Master of Puppets</em> — no <em>Enter Sandman</em>, no <em>One</em>, no <em>For Whom the Bell Tolls</em>. Tonight is the <strong>Blackened</strong> half, and those three are the ones left on the table. Doors 7:00 PM.',
       timeline: [
         { time: '2:00–8:00 PM PT', text: '🚬 BLACKENED Cigar Happy Hour @ Davidoff of Geneva (Fashion Show Mall) — show-day hours' },
         { time: '7:00 PM PT', text: '🎪 Doors @ Sphere' },
@@ -198,7 +201,7 @@ var TRIP = {
         'Davidoff (Fashion Show Mall) is north on the Strip — easy rideshare',
         'Sphere is walkable from The Palazzo (indoor bridge)'
       ],
-      tip: 'Second show, different set list — nothing repeats from Thursday. The <strong>BLACKENED Cigar Happy Hour</strong> at Davidoff runs 2–8 PM today (show-day hours), so you can hit it before doors. Note the Sunday flight leaves at <strong>8:20 AM</strong> — the morning after this show lets out late — so pack tonight.',
+      tip: 'Tonight is the payoff night: <em>Enter Sandman</em>, <em>One</em> and <em>For Whom the Bell Tolls</em> were all held back on Thursday, and every Saturday in this residency has closed on <em>Sandman</em>. Thursday took <em>Orion</em> for the Cliff Burton slot, so expect <em>The Call of Ktulu</em> tonight. <strong>Today is also your last shot at the Life Burns Faster pop-up</strong> — Sunday it only runs 10 AM–2 PM and you are airborne at 8:20. Hit Davidoff 2–8 PM, then doors at 7. <strong>Pack before you leave for the show, not at 1 AM.</strong>',
       food: [
         { name: 'Delmonico Steakhouse', url: 'https://www.venetianlasvegas.com/dining/restaurants/delmonico-steakhouse.html', meta: '📍 The Venetian · Emeril Lagasse · chateaubriand carved tableside', id: 'today-lv-delmonico' },
         { name: 'Mott 32', url: 'https://www.google.com/maps/search/Mott+32+The+Venetian+Las+Vegas', meta: '📍 The Venetian · Cantonese, applewood-roasted Peking duck', id: 'today-lv-mott32' },
@@ -208,12 +211,12 @@ var TRIP = {
     {
       date: '2026-11-08',
       label: 'Sunday · Vegas → KC · 8:20am flight',
-      weather: { hi: 73, lo: 52, icon: '☀️', rain: 0 },
+      weather: { hi: 75, lo: 57, icon: '☀️', rain: 0 },
       pills: [
         { text: '✈️ WN 2427 8:20am', cls: 'good' },
         { text: '⏰ ~6am checkout', cls: 'warn' }
       ],
-      warn: 'The 8:20 AM departure is the morning after the final show — you leave the hotel around 6 AM against the 11 AM checkout, roughly five hours after the Sphere let out. ⚠️ Nov 8 itself is still outside the NWS seven-day window, so the weather on this card is a placeholder carried from Saturday — it refreshes at T-3.',
+      warn: 'The 8:20 AM departure is the morning after the final show — you leave the hotel around 6 AM against the 11 AM checkout, roughly five hours after the Sphere let out. Add 15 minutes for the F1 lane reductions on the Strip overnight.',
       timeline: [
         { time: '~6:00 AM PT', text: 'Check out, head to LAS' },
         { time: '8:20 AM PST', text: 'Depart LAS on WN 2427 (nonstop)' },
