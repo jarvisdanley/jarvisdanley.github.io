@@ -112,145 +112,31 @@
 var TRIP = {
   start: '2026-11-05',
   end: '2026-11-08',
+  complete: true,
   days: [
     {
-      date: '2026-11-05',
-      label: 'Thursday · KC → Vegas · Night 3 🎸',
-      weather: { hi: 69, lo: 54, icon: '⛅', rain: 0 },
-      pills: [
-        { text: '✈️ WN 474 11:40am · on time', cls: 'good' },
-        { text: '⚠️ Lee seat still unbooked', cls: 'warn' },
-        { text: '🏨 Check-in 3pm', cls: 'good' },
-        { text: '🎸 Night 3 · doors 7pm', cls: 'good' },
-        { text: '✅ Night 3 done — closed on <em>Master of Puppets</em>', cls: 'good' }
-      ],
-      warn: 'The Sphere is <strong>mobile-ticket only</strong> and the tickets are with <strong>Lee</strong>. ✅ <strong>Night 3 recap:</strong> 18 songs, <a href="https://www.setlist.fm/setlist/metallica/2026/sphere-at-the-venetian-resort-las-vegas-nv-73481669.html" style="color:var(--blue)" target="_blank">8:45–10:55 PM</a>, opened <em>Battery → Creeping Death</em> and closed <em>Seek &amp; Destroy → Master of Puppets</em> — <strong>no <em>Enter Sandman</em></strong>, which was always going to be Saturday’s. ⚠️ <strong>Correction on the F1 closures:</strong> this page originally carried “Venetian bridge shut midnight–9 AM Nov 5–9.” The newer race-organizer release does not list the Venetian bridge that weekend, and the Las Vegas Blvd overnight lane phase <strong>ended Oct 30</strong>. What is actually live is <strong>Sands Ave one lane each way 9 PM–6 AM</strong>.',
-      timeline: [
-        { time: '11:40 AM CST', text: '✈️ Depart MCI on <strong>WN 474</strong> — 737-700, on schedule (STD 17:40Z / STA 20:45Z)' },
-        { time: '12:45 PM PT', text: 'Land LAS — 69°F, partly sunny, 0% precip' },
-        { time: '~1:30 PM PT', text: '🚕 Rideshare/taxi to the Strip, ~15–20 min' },
-        { time: '2:00–8:00 PM PT', text: '🚬 BLACKENED Cigar Happy Hour @ Davidoff of Geneva, Fashion Show Mall — 21+, no reservation (this is a Nov 5 date)' },
-        { time: '3:00 PM PT', text: '🏨 Check in at The Palazzo (Luxury Two Queen Suite, conf SFXZX)' },
-        { time: '3:00 PM PT', text: '🛍️ Life Burns Faster Experience — Summit Showroom, The Venetian, open Thu 10 AM until after the show' },
-        { time: '5:00–6:15 PM PT', text: '🥩 Dinner <strong>in your own building</strong> — CUT at the Palazzo or Delmonico at the Venetian · book it before you board' },
-        { time: '7:00 PM PT', text: '🎪 Doors @ Sphere — 5–10 min walk via the Bridge to Sphere' },
-        { time: '8:45–10:55 PM PT', text: '🎸 METALLICA — Life Burns Faster, Night 3 ✅ · 18 songs · opened <em>Battery → Creeping Death</em>, closed <em>Seek &amp; Destroy → Master of Puppets</em> · no <em>Sandman</em> · <em>Orion</em> for Cliff' },
-        { time: '~11:15 PM PT', text: '🌙 Out of Sphere — street-level walk if the bridge is under F1 shielding work' }
-      ],
-      transit: [
-        'LAS → The Palazzo: ~4 mi / 15 min · Uber to the Palazzo Upper Porte Cochere',
-        'Palazzo → Sphere: ~5–10 min via the indoor bridge, no car needed',
-        'Doors 7:00 PM · show 8:30 PM (confirmed Live Nation + metallica.com)',
-        '⚠️ Strip down to one lane each way midnight–9 AM; Sands one lane each way 9 PM–6 AM · F1 build'
-      ],
-      tip: 'Everything about today is easy except one thing: <strong>Lee has no seat</strong> and the plane goes at 11:40 AM — settle it this morning, one way or the other. The aeroplane is on time, MCI is calm at 39°F, and Las Vegas is 69°F and dry. Eat at CUT or Delmonico inside your own building — the Strip is torn up for F1 prep from 9 PM and you do not want to be in a car before a 7 PM doors. Grab the mobile tickets from Lee before you leave.',
-      food: [
-        { name: 'Bouchon Bistro', url: 'https://www.google.com/maps/search/Bouchon+Bistro+The+Venetian+Las+Vegas', meta: '📍 The Venetian, 10th floor · Thomas Keller · the easy, excellent pre-show meal', id: 'today-lv-bouchon' },
-        { name: 'estiatorio Milos', url: 'https://www.venetianlasvegas.com/dining/restaurants/estiatorio-milos.html', meta: '📍 The Venetian · market-fresh seafood · best prix fixe lunch on the Strip', id: 'today-lv-milos' },
-        { name: 'Aroma Barista Bar', url: 'https://www.google.com/maps/search/Aroma+Barista+Bar+300+W+Sahara+Ave+Las+Vegas', meta: '📍 300 W Sahara Ave · closest espresso bar · 6 AM–6 PM', id: 'today-lv-aroma' }
-      ]
-    },
-    {
-      date: '2026-11-06',
-      label: 'Friday · Vegas · no show · Black Box + cigars',
-      weather: { hi: 73, lo: 56, icon: '☀️', rain: 0 },
-      pills: [
-        { text: '✅ Night 3 done · no Sandman (as called)', cls: 'good' },
-        { text: '💻 AI Club Board 10am PT', cls: 'warn' },
-        { text: '📋 Black Box 2:30–7:30pm', cls: 'good' },
-        { text: '🚬 Smoke & Metal 7pm confirmed', cls: 'good' }
-      ],
-      warn: 'The cigar time dispute is <strong>settled — Eight Lounge’s own page says 7 PM</strong>, and it is <strong>no cover, walk-ins first-come</strong>, so you do not need a reservation for two. That creates one real collision: <strong>Black Box runs to 7:30 PM</strong> in your own hotel. Plan on leaving Black Box ~5:15.',
-      timeline: [
-        { time: '10:00–11:00 AM PT', text: '💻 AI Club Monthly Board Meeting (12:00 PM CST) — Zoom, us06web.zoom.us/j/81749906455' },
-        { time: '10 AM–8 PM', text: '🛍️ Life Burns Faster Experience @ The Summit Showroom, The Venetian — Friday hours 10 AM–8 PM · 5 min from the room' },
-        { time: '12:00–6:00 PM', text: '🩸 Red Cross × Metallica blood drive @ Fashion Show — last day in the window, but you already gave in October · Squindo tee if you want it' },
-        { time: '2:30–5:15 PM PT', text: '📋 Black Box Friday @ The Stadium, The Palazzo — Fan Can VI double feature + live intro from Spider-Dan &amp; Jeff Yeager · $80 · last one of the residency' },
-        { time: '5:15–6:30 PM PT', text: '🥩 Dinner inside the building — CUT or Delmonico; eat before you go north' },
-        { time: '7:00 PM PT', text: '🚬 Rob Dietrich &amp; Jonathan Drew "Smoke &amp; Metal" @ Eight Lounge, Resorts World — 21+, no cover, walk-ins first-come · first 100 get the BLACKENED poster' }
-      ],
-      transit: [
-        'Palazzo → Eight Lounge (Resorts World): ~1.5 mi north — 10 min by rideshare, or the Strip walk if the evening is nice',
-        'Leave Black Box by 5:15 and you have dinner time; leave at 7:00 and you miss the cigar event',
-        'Sphere is shut tonight — nothing to walk to, so the whole evening is yours'
-      ],
-      tip: 'Your one show-free day, and it is genuinely full. Handle the AI Club board call at 10 AM from the room, then Black Box at 2:30 — it is the <strong>last Black Box Friday of the whole residency</strong> and it is in your own hotel. Cut out at 5:15, eat in the <a href="https://www.google.com/maps/search/CUT+Steakhouse+The+Palazzo+3325+S+Las+Vegas+Blvd" style="color:var(--blue)">Palazzo or Venetian</a>, then go north for the cigars at 7. <strong>Do not try to do Black Box to the end and the cigar event — Eight Lounge is 1.5 mi away and the good stuff starts when you arrive.</strong>',
-      food: [
-        { name: 'The Golden Steer Steakhouse', url: 'https://goldensteer.com/', meta: '📍 308 W Sahara Ave · oldest steakhouse in Vegas, since 1958 · reserve early', id: 'today-lv-goldensteer' },
-        { name: 'CUT by Wolfgang Puck', url: 'https://www.venetianlasvegas.com/dining/restaurants/cut-by-wolfgang-puck.html', meta: '📍 The Palazzo · AAA Four Diamond · the 40 oz tomahawk is the headline', id: 'today-lv-cut' },
-        { name: 'Vesta Coffee Roasters', url: 'https://www.google.com/maps/search/Vesta+Coffee+Roasters+1114+S+Casino+Center+Blvd+Las+Vegas', meta: '📍 1114 S Casino Center Blvd · Arts District pour-over', id: 'today-lv-vesta' }
-      ]
-    },
-    {
-      date: '2026-11-07',
-      label: '✅ Saturday · Vegas · NIGHT 4 — DONE · closed on <em>Enter Sandman</em>',
-      weather: { hi: 75, lo: 55, icon: '☀️', rain: 0 },
-      pills: [
-        { text: '🎸 Night 4 · doors 7pm · show 8:30pm', cls: 'good' },
-        { text: '🛍️ Last real pop-up day', cls: 'warn' },
-        { text: '🚬 Cigar hour 2–8pm · Davidoff', cls: 'good' },
-        { text: '🥩 Golden Steer 4:45pm', cls: 'good' },
-        { text: '🧳 Pack 3–4:30pm', cls: 'warn' },
-        { text: '✈️ Return check-in opens 8:20am PT', cls: 'warn' }
-      ],
-      warn: 'This is the <strong>final Sphere show of 2026</strong> — the residency does not return until Jan 28, 2027. Thursday took the <em>Battery</em> half, so <strong><em>Enter Sandman</em>, <em>One</em> and <em>For Whom the Bell Tolls</em> are all still on the table</strong> and every Saturday of the run has closed on <em>Sandman</em> — but it is a finale, so do not build the night around one song. ⚠️ <strong>Pack this afternoon, before the cigars:</strong> the 8:20 AM flight leaves roughly four and a half hours after the show lets out.',
-      timeline: [
-        { time: '8:00–10:00 AM PT', text: '🏋️ Workout window — the Palazzo/Venetian fitness centre (no Planet Fitness within 2 mi; nearest is 2.35 mi)' },
-        { time: '8:20 AM PT', text: '✈️ <strong>Southwest check-in opens for tomorrow\'s WN 2427</strong> — do it from the phone and confirm the seat' },
-        { time: '10:00 AM–after show', text: '🛍️ <strong>Last real pop-up day</strong> — Life Burns Faster Experience @ The Summit Showroom, The Venetian. Sunday runs 10–2 and you fly at 8:20, so this is it' },
-        { time: '2:00–8:00 PM PT', text: '🚬 BLACKENED Cigar Happy Hour @ Davidoff of Geneva, Fashion Show Mall — 21+, no reservation, last live date of the run' },
-        { time: '3:00–4:30 PM PT', text: '🧳 <strong>Pack.</strong> Not at 1 AM' },
-        { time: '4:45–6:15 PM PT', text: '🥩 <strong>Dinner: The Golden Steer</strong>, 308 W Sahara Ave · (702) 384-4470 · opens 4:30 · book it this morning' },
-        { time: '7:00 PM PT', text: '🎪 Doors @ Sphere — normal walk over the Bridge to Sphere' },
-        { time: '8:55–10:55 PM PT', text: '🎸 <strong>METALLICA — Night 4 DONE.</strong> 18 songs · opened <em>Blackened → Fuel → Leper Messiah</em> · closed <em>For Whom the Bell Tolls → One → Enter Sandman</em> · <em>The Call of Ktulu</em> for Cliff Burton' },
-        { time: '~11:15 PM PT', text: '✅ Out of the Sphere — <strong>two hours earlier than this page had warned</strong>. The “1:30 AM” figure was a slot assumption, never an observed set time' }
-      ],
-      transit: [
-        'Palazzo → Golden Steer (308 W Sahara): ~1.3 mi / 15 min · rideshare, or a 25-min walk',
-        'Golden Steer → Sphere (255 Sands Ave): short rideshare, ~8 min',
-        'Palazzo → Sphere: 5–10 min via the indoor bridge — expected to be open tonight',
-        '⚠️ Sands Avenue is one lane each way 9 PM–6 AM — matters for tomorrow\'s airport run, not tonight'
-      ],
-      tip: 'Three things today, in this order: <strong>the last pop-up, the last cigar hour, and the last show.</strong> The pop-up at The Summit Showroom runs 10 AM until after the show — Sunday is 10–2 and you are airborne at 8:20, so anything you want to buy, buy it today. Davidoff at Fashion Show is 2–8 PM, the final live date of the run. Then <strong>The Golden Steer</strong> — the steakhouse I told you to hold for Saturday — at 4:45, because tonight is the one night with runway before doors. <strong>Pack between 3 and 4:30, before any of it.</strong> And when the lights come up on <em>Sandman</em> — or whatever they close on — that is the last Sphere show of the year.',
-      food: [
-        { name: 'The Golden Steer Steakhouse', url: 'https://goldensteer.com/pages/reservations', meta: '📍 308 W Sahara Ave · since 1958 · the Las Vegas steakhouse · opens 4:30 PM · ⭐ TONIGHT', id: 'today-lv-goldensteer' },
-        { name: 'Delmonico Steakhouse', url: 'https://www.venetianlasvegas.com/dining/restaurants/delmonico-steakhouse.html', meta: '📍 The Venetian · Emeril Lagasse · chateaubriand carved tableside · in-building fallback', id: 'today-lv-delmonico' },
-        { name: 'Mott 32', url: 'https://www.google.com/maps/search/Mott+32+The+Venetian+Las+Vegas', meta: '📍 The Venetian · Cantonese, applewood-roasted Peking duck', id: 'today-lv-mott32' },
-        { name: 'Vesta Coffee Roasters', url: 'https://www.google.com/maps/search/Vesta+Coffee+Roasters+1114+S+Casino+Center+Blvd+Las+Vegas', meta: '📍 1114 S Casino Center Blvd · Arts District pour-over · morning option', id: 'today-lv-vesta' },
-        { name: 'Yaw Farm Coffee Roaster', url: 'https://www.google.com/maps/search/Yaw+Farm+Coffee+Roaster+7034+W+Charleston+Blvd+Las+Vegas', meta: '📍 7034 W Charleston Blvd · micro-farm beans roasted in house', id: 'today-lv-yaw' }
-      ]
-    },
-    {
       date: '2026-11-08',
-      label: 'Sunday · DEPARTURE DAY · Vegas → KC · WN 2427 8:20am ✈️',
-      weather: { hi: 75, lo: 55, icon: '☀️', rain: 0 },
+      label: '✅ Trip complete — Las Vegas · Metallica at Sphere #3 &amp; #4',
+      weather: { hi: 75, lo: 55, icon: '\u2600\ufe0f', rain: 0 },
       pills: [
-        { text: '✈️ WN 2427 · LAS 8:20am → MCI 1:05pm', cls: 'good' },
-        { text: '✅ Night 4 done — <em>Enter Sandman</em> closed it', cls: 'good' },
-        { text: '⏰ Correction: the show ended 10:55pm, not 1:30am', cls: 'warn' },
-        { text: '🛧 Route to LAS via I-15/Koval · Terminal 1', cls: 'warn' },
-        { text: '🇺🇸 FAA clean at LAS + MCI', cls: 'good' },
-        { text: '💳 Folio + card last-4 at the desk', cls: 'warn' }
+        { text: '✅ Both Sphere nights delivered — 18 songs each', cls: 'good' },
+        { text: '\u2708\ufe0f WN 474 + WN 2427 both flew clean', cls: 'good' },
+        { text: '\ud83c\udfb8 Night 4 closed on <em>Enter Sandman</em> \u00b7 <em>Ktulu</em> for Cliff', cls: 'good' },
+        { text: '\ud83d\udcb3 Open: Palazzo folio + card last-4 (SFXZX)', cls: 'warn' }
       ],
-      warn: '<strong>The one correction of the week: the finale ended at 10:55 PM, not 1:30 AM.</strong> Every pass warned you this morning would be a four-hour night — <a href="https://www.setlist.fm/setlist/metallica/2026/sphere-at-the-venetian-resort-las-vegas-nv-7b481664.html" style="color:var(--blue)" target="_blank">setlist.fm</a> puts the show at <strong>8:55–10:55 PM</strong>, so you were out of the building by about 11:15. <strong>This is a normal departure morning.</strong> ⚠️ <strong>Sands Avenue is one lane each way 9 PM–6 AM through Nov 13</strong>, so route the airport run <strong>via I-15/Koval</strong> rather than Las Vegas Blvd — and <strong>Southwest at LAS is Terminal 1</strong>.',
+      warn: '<strong>Trip complete \u2014 nothing left to watch.</strong> The weather behaved (75\u00b0F sunny both show days, zero precipitation across all four days), the FAA board never showed a delay at LAS or MCI, and both flights ran on time. <strong>The one open item is a receipt rather than a flight:</strong> the Palazzo folio showing the $257.50 Apple Pay deposit applied against the $1,164.52 total, plus the card\u2019s last-4 \u2014 blank on the confirmation because it was Apple Pay. Resort Services <a href="tel:+187****5777" style="color:var(--blue)">1.877.444.5777</a>, conf <code>SFXZX</code>.',
       timeline: [
-        { time: '~6:00–6:15 AM PT', text: '🧳 Check out and head to <strong>LAS, Terminal 1</strong> — ~4 mi / 13–20 min · route via I-15/Koval' },
-        { time: 'at the desk', text: '💳 <strong>Ask for the folio</strong> — the $257.50 Apple Pay deposit applied against the $1,164.52 stay total, plus the card’s last-4. Conf <code>SFXZX</code>' },
-        { time: '8:20 AM PST', text: '✈️ <strong>WN 2427 departs LAS</strong> — nonstop, 2h 45m · conf <code>B94WSS</code>' },
-        { time: '1:05 PM CST', text: '🏠 <strong>Land MCI into 65°F and sun</strong> — home ~1:45 PM' },
-        { time: '7:00 PM CST', text: '💻 <strong>Sunday Content Review</strong> with Neo — Zoom, 45 min' }
+        { time: 'Thu Nov 5', text: '\u2708\ufe0f WN 474 MCI \u2192 LAS \u00b7 checked into <strong>The Palazzo</strong> 3 PM \u00b7 \ud83c\udfb8 <strong>Night 3</strong> \u2014 18 songs, <em>Battery \u2192 Creeping Death</em> open, <em>Seek &amp; Destroy \u2192 Master of Puppets</em> close, no <em>Sandman</em>, <em>Orion</em> for Cliff' },
+        { time: 'Fri Nov 6', text: '\ud83d\udcbb AI Club Board from the room \u00b7 \ud83d\udccb <strong>Black Box Friday</strong> (the residency\u2019s last) \u00b7 \ud83d\udeac <strong>Smoke &amp; Metal</strong> at Eight Lounge, no cover' },
+        { time: 'Sat Nov 7', text: '\ud83d\udeac Last BLACKENED cigar hour \u00b7 \ud83e\udd69 <strong>The Golden Steer</strong> 4:45 \u00b7 \ud83c\udfb8 <strong>NIGHT 4, the last Sphere show of 2026</strong> \u2014 <em>Blackened \u2192 Fuel \u2192 Leper Messiah</em> open, closed <em>For Whom the Bell Tolls \u2192 One \u2192 Enter Sandman</em>, <em>The Call of Ktulu</em> for Cliff, <strong>Lars\u2019 snare broke during <em>Whiskey in the Jar</em></strong>' },
+        { time: 'Sun Nov 8', text: '\ud83e\uddf3 Checked out ~6 AM \u00b7 \u2708\ufe0f <strong>WN 2427</strong> LAS 8:20 AM \u2192 MCI 1:05 PM \u00b7 home ~1:45 PM' }
       ],
       transit: [
-        'Palazzo → LAS Terminal 1: ~4 mi / 13–20 min · </strong>leave by 6:15</strong>',
-        '⚠️ Sands Ave is one lane each way 9 PM–6 AM through Nov 13 — a 6 AM departure sits at the tail of it. Take I-15/Koval',
-        'Southwest = Terminal 1 at LAS. Sunday-morning security is the easiest of the week',
-        'No Planet Fitness within 2 mi of the Palazzo (nearest 4001 S Decatur, 2.35 mi) — and no workout window today'
+        'Next travel: Wed Nov 11 \u2014 Houston day trip, WN 4597 leaves MCI 5:45 AM (leave ~3:45 AM)',
+        'Then Sat Nov 21 \u2014 Inter Miami vs Columbus Crew, Game 1, 6:00 PM ET at Nu Stadium (Hollywood Beach, Nov 19\u201322)'
       ],
-      tip: 'A quiet morning, and it is <strong>not</strong> the punishing one I warned you about — the show ended at 10:55, so this is a normal 6 AM departure rather than the tail of a four-hour night. <strong>Do the desk business before you walk out:</strong> the folio showing the $257.50 Apple Pay deposit against the $1,164.52 total, and the card’s last-4, which was blank on the confirmation. Then it is one nonstop and you are home by 1:45 with 65°F and sun waiting. Two things still ahead: <strong>Houston on Wednesday at T-3 — still blocked on purpose and venue</strong> — and the <strong>Inter Miami Round One opponent is set: Columbus Crew</strong>, with Game 1’s date still to be announced.',
-      food: [
-        { name: 'Aroma Barista Bar', url: 'https://www.google.com/maps/search/Aroma+Barista+Bar+300+W+Sahara+Ave+Las+Vegas', meta: '📍 300 W Sahara Ave · opens 6 AM · works before an early call', id: 'today-lv-aroma-2' },
-        { name: 'Bouchon Bistro', url: 'https://www.google.com/maps/search/Bouchon+Bistro+The+Venetian+Las+Vegas', meta: '📍 The Venetian, 10th floor · breakfast only if you have the time', id: 'today-lv-bouchon-2' }
-      ]
+      tip: '<strong>What this trip taught the file:</strong> the no-repeat pattern is reliable on the spine and the deep cuts rotate \u2014 every Saturday of the residency closed on <em>Enter Sandman</em>, and <em>The Call of Ktulu</em> was the right read for the Cliff slot once <em>Orion</em> went Thursday. <strong>The one call I got wrong was the end time</strong>: the shows ran to 10:55 PM, not 1:30 AM, so the \u201chard morning\u201d warnings were overstated four passes running. Next time, take the observed set times from setlist.fm and stop projecting a slot. <strong>Rate the restaurants and coffee on the full briefing page with the thumbs while it\u2019s fresh</strong> \u2014 that is what tunes the next city.',
+      food: []
     }
   ]
 };
