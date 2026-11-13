@@ -35,7 +35,7 @@
     transition: border-color 0.2s, transform 0.15s;
     position: relative; overflow: hidden;
   }
-  .trip-card:hover { border-color: var(--accent); }
+  @media (hover:hover) and (pointer:fine){ .trip-card:hover { border-color: var(--accent); } }
   .trip-card.active { border-color: var(--green); }
   .trip-card.upcoming { border-color: var(--blue); }
 
@@ -71,7 +71,7 @@
     border: 1px solid var(--accent);
     background: transparent; color: var(--accent);
   }
-  .btn:hover { background: var(--accent); color: #000; }
+  @media (hover:hover) and (pointer:fine){ .btn:hover { background: var(--accent); color: #000; } }
   .btn.disabled {
     border-color: var(--border); color: var(--dim);
     pointer-events: none; cursor: default;

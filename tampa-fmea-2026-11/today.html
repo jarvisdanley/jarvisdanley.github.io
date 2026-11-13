@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#E9E9EF">
 <title>Today · Tampa — FMEA Energy Connections</title>
 <style>
   :root {
@@ -48,7 +49,7 @@
     color: var(--dim); font-size: 0.85rem; padding: 2px 6px; cursor: pointer;
     transition: all 0.15s;
   }
-  .thumbs button:hover { border-color: var(--accent); }
+  @media (hover:hover) and (pointer:fine){ .thumbs button:hover { border-color: var(--accent); } }
   .thumbs button.voted-up { background: rgba(46,204,113,0.15); border-color: var(--green); color: var(--green); }
   .thumbs button.voted-down { background: rgba(231,76,60,0.15); border-color: var(--red); color: var(--red); }
   .footer { text-align: center; font-size: 0.65rem; color: var(--dim); margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); }

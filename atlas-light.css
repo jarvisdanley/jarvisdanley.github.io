@@ -128,3 +128,22 @@ td strong{color:var(--text)}
   padding:10px 0!important;margin:0!important;border-top:1px solid #D5D5DC!important}
 .u-list li:first-child{border-top:none!important}
 .u-list .ui{flex:0 0 20px;text-align:center}
+
+/* ---------- mobile-native pass (Jarvis, Nov 12 2026; skill: mobile-native) ----------
+   Why each line exists:
+   - text-size-adjust: iOS must not inflate font sizes when the phone rotates.
+   - safe-area on all four sides: viewport-fit=cover lets the page run under the notch
+     and home indicator, so side/bottom padding has to clear them, not just the top.
+   - tap highlight off + :active feedback: kills the gray flash and gives an
+     immediate press response instead.
+   - touch-action: manipulation: removes double-tap-zoom wait on taps.
+   - user-select none on controls only (never on body text). */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{padding-left:max(14px,env(safe-area-inset-left))!important;
+  padding-right:max(14px,env(safe-area-inset-right))!important;
+  padding-bottom:max(48px,calc(env(safe-area-inset-bottom) + 24px))!important}
+a,button,.nav a,.status-pill,.thumbs button,summary{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.nav a,button,.status-pill,summary{-webkit-user-select:none;user-select:none}
+.nav a:active,button:active,.thumbs button:active{opacity:.6;transition:opacity 0s}
+.nav a,button,.thumbs button{transition:opacity .15s ease-out}
+input,select,textarea{font-size:max(16px,1em)}
