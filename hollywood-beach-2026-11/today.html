@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="theme-color" content="#E9E9EF">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Today · Hollywood">
+<title>Today · Hollywood Beach · Nov 19–22, 2026</title>
+<link rel="stylesheet" href="/atlas-light.css">
+<style id="atlas-tint">:root{--hero1:#0E9A9A;--hero2:#3CC8BE;--accent:#0B7A7A}</style>
+<style>
+/* page layer · mobile-native (skill: mobile-native). Shared fixes live in /atlas-light.css. */
+*{box-sizing:border-box}
+body{margin:0 auto}
+/* Day chips + weather: native horizontal scroll with snap; contain so an edge swipe does not navigate back. */
+.hscroll{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 -2px;padding:2px 2px 4px}
+.hscroll::-webkit-scrollbar{display:none}
+.hscroll>*{flex:0 0 auto;scroll-snap-align:start}
+.status-bar{flex-wrap:nowrap}
+.day-tabs button{min-height:44px;min-width:64px;display:flex;flex-direction:column;align-items:center;line-height:1.15;
+  cursor:pointer;transition:transform 120ms cubic-bezier(.2,.8,.2,1)}
+.day-tabs button small{font-size:11px;font-weight:500}
+.day-tabs button:active{transform:scale(.95);transition-duration:0s}
+.weather-day{min-width:88px;padding:10px 12px;text-align:center;cursor:pointer;-webkit-user-select:none;user-select:none}
+.weather-day .day{font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+.weather-day .hi{font-size:20px;font-weight:700}
+.weather-day .lo,.weather-day .rain{font-size:12px}
+.weather-day.pending .hi{opacity:.45}
+.event{display:flex;gap:10px}
+.event .time{flex:0 0 74px;font-weight:600;font-size:13px}
+.rec-card .name{font-size:15px;font-weight:600}
+.rec-card .meta{font-size:12px;margin-top:4px}
+.thumbs{display:flex;gap:8px;margin-top:10px}
+.thumbs button{min-height:36px;min-width:52px;font-size:16px;cursor:pointer}
+.row{display:flex;align-items:center;gap:12px;min-height:44px;padding:11px 12px;margin-top:8px;background:var(--accent);
+  border-radius:14px;color:#fff;text-decoration:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;
+  transition:transform 120ms cubic-bezier(.2,.8,.2,1)}
+.row:active{transform:scale(.98);transition-duration:0s}
+.row b{flex:1;font-size:15px}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;gap:8px;justify-content:center;
+  padding:10px max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));
+  background:rgba(233,233,239,.82);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);
+  border-top:1px solid rgba(0,0,0,.08)}
+.dock a{flex:1 1 0;max-width:180px;min-height:44px;display:flex;align-items:center;justify-content:center;background:#fff;color:var(--text);
+  border:1px solid rgba(0,0,0,.08);border-radius:14px;font-size:14px;font-weight:600;text-decoration:none;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:transform 120ms cubic-bezier(.2,.8,.2,1)}
+.dock a.primary{background:var(--accent);color:#fff;border-color:transparent}
+.dock a:active{transform:scale(.96);opacity:.85;transition-duration:0s}
+body.has-dock{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))!important}
+@media (hover:hover) and (pointer:fine){
+  .day-tabs button:hover{border-color:var(--accent)!important}
+  .weather-day:hover{border-color:var(--accent)!important}
+  .thumbs button:hover{border-color:var(--accent)!important}
+  .dock a:hover,.row:hover{filter:brightness(.97)}
+}
+@media (prefers-reduced-motion:reduce){.day-tabs button,.row,.dock a{transition:none}}
+</style>
+</head>
+<body class="has-dock">
+
+<div class="header">
+  <div class="day-label" id="day-label">—</div>
+  <h1>Hollywood Beach</h1>
+  <div class="date" id="day-date">—</div>
+</div>
+
+<nav class="nav" aria-label="Trip views">
+  <a href="./today.html" aria-current="page">Today</a>
+  <a href="./">Briefing</a>
+  <a href="/">All trips</a>
+</nav>
+
+<div class="day-tabs hscroll" id="day-tabs" role="tablist" aria-label="Trip days"></div>
+<div class="status-bar hscroll" id="status-bar"></div>
+
+<div class="section" id="warn-section" style="display:none"><div class="warn-tip" id="warn-content" style="margin:0"></div></div>
+
+<div class="section"><h2><span class="icon">🌤️</span> Weather</h2><div class="hscroll" id="weather-content"></div></div>
+<div class="section"><h2><span class="icon">🕒</span> Timeline</h2><div id="timeline-content"></div></div>
+<div class="section" id="transit-section"><h2><span class="icon">🚗</span> Getting around</h2><div id="transit-content"></div></div>
+<div class="section"><h2><span class="icon">🍽️</span> Eat &amp; Coffee</h2><div id="food-content"></div></div>
+<div class="section"><h2><span class="icon">💡</span> Atlas tip</h2><div class="tip" id="tip-content" style="margin:0"></div></div>
+
+<div class="footer">Atlas · Hollywood Beach Nov 19–22 · last updated Thu Nov 12, 2026 · <a href="./">full briefing</a></div>
+
+<nav class="dock" aria-label="Quick actions">
+  <a class="primary" href="./">📖 Briefing</a>
+  <a href="./#stadium">⚽ Match day</a>
+  <a href="./#flights">✈️ Flights</a>
+</nav>
+
+<script>
+var UBER_NU = 'https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bnickname%5D=Nu%20Stadium%20%E2%80%94%20Inter%20Miami%20CF&dropoff%5Bformatted_address%5D=1900%20NW%2037th%20Ave%2C%20Miami%2C%20FL%2033125&dropoff%5Blatitude%5D=25.7924491&dropoff%5Blongitude%5D=-80.2602921';
+var UBER_CONDO = 'https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bnickname%5D=Hollywood%20Beach%20Broadwalk%20%28Poseidon%20condo%20%E2%80%94%20confirm%20exact%20address%29&dropoff%5Bformatted_address%5D=Hollywood%20Beach%20Broadwalk%2C%20Hollywood%2C%20FL%2033019&dropoff%5Blatitude%5D=26.0103&dropoff%5Blongitude%5D=-80.1159';
+var UBER_FLL = 'https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bnickname%5D=FLL%20Terminal%201%20%E2%80%94%20Southwest%20departures&dropoff%5Bformatted_address%5D=100%20Terminal%20Dr%2C%20Fort%20Lauderdale%2C%20FL%2033315&dropoff%5Blatitude%5D=26.0720170&dropoff%5Blongitude%5D=-80.1509967';
+function maps(q) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q); }
+
+var TRIP = {
+  start: '2026-11-19',
+  end: '2026-11-22',
+  tz: '-05:00', /* Eastern Standard Time all four days */
+  days: [
+    {
+      date: '2026-11-19', label: 'Day 1 · Travel day',
+      weather: { hi: 81, lo: 74, icon: '🌦️', rain: 47 },
+      pills: [ { text: '✈️ WN 3489 · MCI 6:00 PM CT', cls: 'good' }, { text: '🥜 Pre-board to wipe seats', cls: 'warn' }, { text: '🏠 Check-in from 3 PM', cls: 'good' } ],
+      warn: '<strong>Luke:</strong> be at the MCI gate ~1 hr early so he can pre-board and wipe row 14. He is in <strong>14A, an Extra Legroom seat</strong>, and EL rows are served pistachios.',
+      timeline: [
+        { time: '4:30 PM CT', text: 'At MCI, at the gate early for pre-boarding' },
+        { time: '6:00 PM CT', text: '✈️ WN 3489 MCI → FLL · row 14: Luke 14A · Marcie 14B · Jeff 14C · Ben 14D' },
+        { time: '9:55 PM ET', text: '🛬 Land FLL' },
+        { time: '~10:30 PM', text: '🚗 Rental pick-up or Uber, ~15 min to the condo' }
+      ],
+      transit: [ 'FLL → Broadwalk: ~4.8 mi, ~15 min. Swap in the street address once the host sends it.' ],
+      rides: [ { label: 'Uber FLL → condo', url: UBER_CONDO } ],
+      tip: 'A late landing into the windy tail of a wet week. Thursday is <strong>81°F, NE 24 mph, 47% showers</strong>. Do nothing but get in, unpack, and hear the ocean. The beach is tomorrow.',
+      food: [
+        { name: 'The Mermaid Queen', url: 'https://themermaidqueen.us/', meta: '📍 300 S Broadwalk · ~0.3 mi · open to 9:30 PM Thu, so too late tonight. Bookmark it · 🥜 ask about salsas', id: 'restaurant-mermaidqueen' }
+      ]
+    },
+    {
+      date: '2026-11-20', label: 'Day 2 · Beach day',
+      weather: { hi: null, lo: null, icon: '⏳', rain: null },
+      pills: [ { text: '🏖️ Free day', cls: 'good' }, { text: '🦀 Stone crab tonight', cls: 'good' }, { text: '💻 AI Club 1 PM ET (optional)', cls: '' } ],
+      timeline: [
+        { time: 'Morning', text: '🏃 Broadwalk run: 2.5 mi of paved promenade' },
+        { time: 'Late AM', text: '☕ Cafe Club (walk) or Superwow (downtown)' },
+        { time: '1–2 PM ET', text: '💻 Optional: AI Club working session (Zoom, phone only)' },
+        { time: 'Dinner', text: '🦀 Billy’s Stone Crab, 400 N Ocean Dr' }
+      ],
+      tip: 'The forecast for today isn’t in range yet; I refresh it Mon Nov 16. If the NE wind is still up, the surf will be rough, so swim near a lifeguard tower and watch the flags.',
+      food: [
+        { name: 'Cafe Club', url: maps('Cafe Club 311 Johnson St Hollywood FL'), meta: '☕ 311 Johnson St · ~0.6 mi walk', id: 'coffee-cafeclub' },
+        { name: 'Ocean Alley', url: 'https://www.oceanalleyrestaurant.com/', meta: '🍤 900 N Broadwalk · lunch with a view · ~0.5 mi', id: 'restaurant-oceanalley' },
+        { name: 'Billy’s Stone Crab', url: 'https://crabs.com/', meta: '🦀 400 N Ocean Dr · ~0.9 mi · noon–10 · tell them about the peanut allergy', id: 'restaurant-billys' }
+      ]
+    },
+    {
+      date: '2026-11-21', label: 'Day 3 · Match day',
+      weather: { hi: null, lo: null, icon: '⏳', rain: null },
+      pills: [ { text: '⚽ Kickoff 6:00 PM ET', cls: 'good' }, { text: '🚪 Gates 4:30 PM', cls: 'warn' }, { text: '🎒 Clear bag · no umbrella', cls: 'warn' } ],
+      warn: '<strong>Leave by 4:00 PM ET.</strong> Driving? You need the <strong>prepaid parking pass</strong>. Bring a clear bag ≤12×6×12 in, no umbrella (bring a rain shell), and have Luke eat before you go. Concessions are cashless.',
+      timeline: [
+        { time: 'Morning', text: '☕ Superwow → 🎸 Vinyl Asylum, 2028 Hollywood Blvd (call first: 954-251-2943)' },
+        { time: '1:00 PM', text: '🍽️ Real lunch; no relying on stadium food for Luke' },
+        { time: '4:00 PM ET', text: '🚗 Leave the Broadwalk for Nu Stadium (35–50 min)' },
+        { time: '4:30 PM ET', text: '🚪 Gates open' },
+        { time: '6:00 PM ET', text: '⚽ Inter Miami vs Columbus Crew · Game 1' },
+        { time: '~8:00 PM', text: '🏁 Final whistle · last regular Tri-Rail north 8:52 PM' }
+      ],
+      transit: [
+        'Car: about 23 mi on I-95 S. Lots open 3:00 PM and need a prepaid pass (Audi Black, Red or Yellow).',
+        'Tri-Rail: Hollywood 3:41 PM → Miami Airport 4:16 PM, walk ~10–15 min. Home: 8:52 PM → Hollywood 9:23 PM.',
+        'Uber XL fits all four. Expect a post-match surge.'
+      ],
+      rides: [ { label: 'Uber to Nu Stadium', url: UBER_NU } ],
+      tip: 'First playoff match ever at Nu Stadium, with the champs defending. Get in when the gates open and watch warm-ups. Lightning means a 30-min hold per strike within 8 mi, and you can’t leave and come back.',
+      food: [
+        { name: 'Superwow Coffee', url: 'https://www.superwowfactory.com/', meta: '☕ 2029 Tyler St · ~2.0 mi · Sat 9–4', id: 'coffee-superwow' },
+        { name: 'Koffee Kult', url: 'https://www.koffeekult.com/pages/hollywood-coffee-shop', meta: '☕ roastery · 311 S 21st Ave · Sat 8–3', id: 'coffee-koffeekult' },
+        { name: 'JWB Prime Steak & Seafood', url: 'https://www.margaritavillehollywoodbeachresort.com/dining/jwb', meta: '🥩 1111 N Ocean Dr · ~0.6 mi · post-match only if you are back by ~9:30', id: 'steak-jwb' }
+      ]
+    },
+    {
+      date: '2026-11-22', label: 'Day 4 · Home',
+      weather: { hi: null, lo: null, icon: '⏳', rain: null },
+      pills: [ { text: '🚗 Leave condo 8:00 AM', cls: 'warn' }, { text: '✈️ WN 4778 · 10:05 AM ET', cls: 'good' }, { text: '🏠 MCI 4:00 PM CT', cls: 'good' } ],
+      timeline: [
+        { time: '8:00 AM ET', text: '🧳 Out of the condo (checkout 11 AM) → FLL Terminal 1' },
+        { time: '10:05 AM ET', text: '✈️ WN 4778 FLL → BNA · row 12' },
+        { time: '11:30 AM CT', text: '🛬 BNA · 2h45 layover, all four together' },
+        { time: '2:15 PM CT', text: '✈️ WN 4485 BNA → MCI · row 24' },
+        { time: '4:00 PM CT', text: '🏠 Land MCI' }
+      ],
+      transit: [ 'Condo → FLL: ~4.8 mi, ~15 min. Return the rental first if you have one.' ],
+      rides: [ { label: 'Uber condo → FLL', url: UBER_FLL } ],
+      tip: 'Luke pre-boards again at FLL and BNA to wipe seats. Koffee Kult is closed Sundays, so if you want beans to take home, buy them Saturday.',
+      food: [
+        { name: 'Hollywood Broadwalk Cafe', url: 'https://riptidehotel.com/wine-dine/hollywood-broadwalk-cafe', meta: '☕ 2300 N Surf Rd · opens 7 AM · one last coffee on the sand', id: 'coffee-riptide' }
+      ]
+    }
+  ]
+};
+
+function getToday() {
+  var now = new Date();
+  var start = new Date(TRIP.start + 'T00:00:00' + TRIP.tz), end = new Date(TRIP.end + 'T23:59:59' + TRIP.tz);
+  if (now < start) return { day: TRIP.days[0], idx: 0, mode: 'pre-trip' };
+  if (now > end) return { day: TRIP.days[TRIP.days.length - 1], idx: TRIP.days.length - 1, mode: 'post-trip' };
+  for (var i = 0; i < TRIP.days.length; i++) {
+    var a = new Date(TRIP.days[i].date + 'T00:00:00' + TRIP.tz), b = new Date(TRIP.days[i].date + 'T23:59:59' + TRIP.tz);
+    if (now >= a && now <= b) return { day: TRIP.days[i], idx: i, mode: 'active' };
+  }
+  return { day: TRIP.days[0], idx: 0, mode: 'pre-trip' };
+}
+
+function fmt(d) { return new Date(d + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }); }
+
+function render(i, mode) {
+  var day = TRIP.days[i];
+  document.getElementById('day-label').textContent = (mode === 'pre-trip' ? 'NEXT UP · ' : '') + day.label.toUpperCase();
+  document.getElementById('day-date').textContent = fmt(day.date) + ' · Eastern time';
+
+  document.getElementById('status-bar').innerHTML = (day.pills || []).map(function (p) {
+    return '<span class="status-pill ' + (p.cls || '') + '">' + p.text + '</span>'; }).join('');
+
+  var ws = document.getElementById('warn-section');
+  if (day.warn) { document.getElementById('warn-content').innerHTML = day.warn; ws.style.display = ''; } else { ws.style.display = 'none'; }
+
+  document.getElementById('weather-content').innerHTML = TRIP.days.map(function (dd, j) {
+    var w = dd.weather, pend = w.hi === null;
+    return '<div class="weather-day' + (j === i ? ' on' : '') + (pend ? ' pending' : '') + '" data-i="' + j + '">' +
+      '<div class="day">' + new Date(dd.date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'short', day: 'numeric' }) + '</div>' +
+      '<div class="hi">' + (pend ? '–' : w.hi + '°F') + '</div>' +
+      '<div class="lo">' + (pend ? 'Nov 16' : 'low ' + w.lo + '°F') + '</div>' +
+      '<div class="rain">' + w.icon + (pend ? '' : ' ' + w.rain + '%') + '</div></div>';
+  }).join('');
+
+  document.getElementById('timeline-content').innerHTML = (day.timeline || []).map(function (e) {
+    return '<div class="event"><span class="time">' + e.time + '</span><span>' + e.text + '</span></div>'; }).join('');
+
+  var ts = document.getElementById('transit-section');
+  if (day.transit || day.rides) {
+    document.getElementById('transit-content').innerHTML =
+      (day.transit || []).map(function (x) { return '<div class="event">' + x + '</div>'; }).join('') +
+      (day.rides || []).map(function (r) { return '<a class="row" href="' + r.url + '" target="_blank" rel="noopener"><span>🚗</span><b>' + r.label + '</b><span>›</span></a>'; }).join('');
+    ts.style.display = '';
+  } else { ts.style.display = 'none'; }
+
+  document.getElementById('food-content').innerHTML = (day.food || []).map(function (f) {
+    return '<div class="rec-card" data-feedback-id="' + f.id + '"><div class="name"><a href="' + f.url + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">' + f.name + '</a></div>' +
+      '<div class="meta">' + f.meta + '</div>' +
+      '<div class="thumbs"><button type="button" onclick="vote(\'' + f.id + '\',\'up\',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote(\'' + f.id + '\',\'down\',this)" aria-label="Thumbs down">👎</button></div></div>';
+  }).join('');
+  restoreVotes();
+
+  document.getElementById('tip-content').innerHTML = day.tip;
+
+  [].forEach.call(document.getElementById('day-tabs').children, function (b, j) {
+    b.classList.toggle('on', j === i); b.setAttribute('aria-selected', j === i ? 'true' : 'false'); });
+}
+
+function vote(id, dir, btn) {
+  var key = 'atlas_vote_' + id;
+  var data = JSON.parse(localStorage.getItem(key) || '{"up":0,"down":0,"voted":null}');
+  var box = btn.parentElement, up = box.children[0], down = box.children[1];
+  if (data.voted === dir) { data[dir] = Math.max(0, data[dir] - 1); data.voted = null; up.classList.remove('voted-up'); down.classList.remove('voted-down'); }
+  else { if (data.voted) data[data.voted] = Math.max(0, data[data.voted] - 1); data[dir] = (data[dir] || 0) + 1; data.voted = dir;
+    up.classList.toggle('voted-up', dir === 'up'); down.classList.toggle('voted-down', dir === 'down'); }
+  localStorage.setItem(key, JSON.stringify(data));
+}
+function restoreVotes() {
+  document.querySelectorAll('.thumbs').forEach(function (el) {
+    var m = el.querySelector('button').getAttribute('onclick').match(/vote\('([^']+)'/); if (!m) return;
+    var d = JSON.parse(localStorage.getItem('atlas_vote_' + m[1]) || '{"voted":null}');
+    if (d.voted === 'up') el.children[0].classList.add('voted-up');
+    if (d.voted === 'down') el.children[1].classList.add('voted-down');
+  });
+}
+
+(function () {
+  var bar = document.getElementById('day-tabs');
+  TRIP.days.forEach(function (d, i) {
+    var dt = new Date(d.date + 'T12:00:00'), b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('role', 'tab');
+    b.innerHTML = dt.toLocaleDateString('en-US', { weekday: 'short' }) + '<small>' + dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + '</small>';
+    /* Press feedback comes from :active (instant on touch-down); click does the work so keyboard still works. */
+    b.addEventListener('click', function () { render(i, 'active'); if (b.scrollIntoView) b.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' }); });
+    bar.appendChild(b);
+  });
+  document.getElementById('weather-content').addEventListener('click', function (ev) {
+    var w = ev.target.closest('.weather-day'); if (w) render(+w.getAttribute('data-i'), 'active');
+  });
+  var t = getToday();
+  render(t.idx, t.mode);
+})();
+</script>
+</body>
+</html>

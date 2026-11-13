@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="theme-color" content="#E9E9EF">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Hollywood Beach">
+<title>Hollywood Beach · Inter Miami Game 1 · Nov 19–22, 2026</title>
+<link rel="stylesheet" href="/atlas-light.css">
+<style id="atlas-tint">:root{--hero1:#0E9A9A;--hero2:#3CC8BE;--accent:#0B7A7A}</style>
+<style>
+/* ---------- page layer · mobile-native (skill: mobile-native) ----------
+   Every rule says why it is here. Shared fixes (tap flash, :active, safe-area
+   on all sides, 16px inputs) already ship in /atlas-light.css (commit 37f0bfb). */
+*{box-sizing:border-box}
+body{margin:0 auto}
+ul{margin:0;padding-left:18px}
+
+/* Horizontal scrollers (pills, weather, day chips): native momentum + snap, and
+   overscroll-behavior-x:contain so a sideways swipe at the end does not fire the
+   browser's back gesture. No JS gesture code; the platform does the physics. */
+.hscroll{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;
+  overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+  margin:0 -2px;padding:2px 2px 4px}
+.hscroll::-webkit-scrollbar{display:none}
+.hscroll>*{flex:0 0 auto;scroll-snap-align:start}
+.status-bar{flex-wrap:nowrap}
+
+/* Bottom dock: the thumb zone. Pinned with position:fixed (not 100vh math), and its
+   bottom padding clears the home indicator via env(); viewport-fit=cover makes env() non-zero. */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;gap:8px;justify-content:center;
+  padding:10px max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));
+  background:rgba(233,233,239,.82);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);
+  border-top:1px solid rgba(0,0,0,.08)}
+.dock a{flex:1 1 0;max-width:180px;min-height:44px;display:flex;align-items:center;justify-content:center;gap:6px;
+  background:#fff;color:var(--text);border:1px solid rgba(0,0,0,.08);border-radius:14px;
+  font-size:14px;font-weight:600;text-decoration:none;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
+  transition:transform 120ms cubic-bezier(.2,.8,.2,1),opacity 120ms}
+.dock a.primary{background:var(--accent);color:#fff;border-color:transparent}
+/* Press feedback on pointer-down (:active), not on release: reads as instant. */
+.dock a:active{transform:scale(.96);opacity:.85;transition-duration:0s}
+/* Content must scroll clear of the dock + home indicator. Higher specificity beats atlas-light's body rule. */
+body.has-dock{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))!important}
+
+/* Tappable rows (whole row is the link): 44px target, press feedback, no long-press callout. */
+.row{display:flex;align-items:center;gap:12px;min-height:44px;padding:11px 12px;margin-bottom:8px;
+  background:var(--tile);border:1px solid var(--border);border-radius:14px;color:var(--text);text-decoration:none;
+  -webkit-touch-callout:none;transition:transform 120ms cubic-bezier(.2,.8,.2,1)}
+.row:active{transform:scale(.98);transition-duration:0s}
+.row .ri{flex:0 0 28px;font-size:20px;text-align:center}
+.row .rt{flex:1;min-width:0}
+.row .rt b{display:block;font-size:15px;color:var(--text)}
+.row .rt span{display:block;font-size:13px;color:var(--dim)}
+.row .chev{color:#C7C7CC;font-size:18px}
+.row.primary{background:var(--accent);border-color:transparent}
+.row.primary .rt b,.row.primary .rt span,.row.primary .chev{color:#fff}
+
+/* Disclosure groups: native-feeling <details>. Summary is a control, so it is not text-selectable. */
+details.fold{border-top:1px solid #EDEDF2;padding:4px 0}
+details.fold:first-of-type{border-top:none}
+details.fold>summary{list-style:none;cursor:pointer;min-height:44px;display:flex;align-items:center;justify-content:space-between;
+  font-size:15px;font-weight:600;color:var(--text)}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::after{content:"›";font-size:22px;color:#C7C7CC;transition:transform 160ms ease-out;transform:rotate(90deg)}
+details.fold[open]>summary::after{transform:rotate(-90deg)}
+details.fold .fb{padding:2px 0 10px}
+
+/* Rec cards */
+.rec-card{position:relative}
+.rec-card .name{padding-right:96px}
+.rec-card .badge{position:absolute;top:12px;right:12px;font-size:11px;padding:3px 9px}
+.rec-card .desc{font-size:13px;margin-top:4px}
+.rec-card .meta{font-size:12px;margin-top:6px}
+.rec-card .meta a{color:var(--blue)}
+.badge.nut{background:rgba(215,0,21,.10)!important;color:var(--red)!important}
+.thumbs{display:flex;gap:8px;margin-top:10px}
+.thumbs button{min-height:36px;min-width:52px;font-size:16px;cursor:pointer}
+
+/* Countdown pair */
+.cd-row{display:flex;gap:10px}
+.cd-row .countdown{flex:1;text-align:center;margin:0;box-shadow:none}
+.cd-row .num{font-size:34px;font-weight:800;line-height:1.05;font-variant-numeric:tabular-nums}
+.cd-row .lbl{font-size:12px;color:var(--dim)}
+
+/* Weather tiles */
+.weather-day{min-width:96px;padding:10px 12px;text-align:center}
+.weather-day .day{font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+.weather-day .hi{font-size:20px;font-weight:700}
+.weather-day .lo,.weather-day .rain{font-size:12px}
+.weather-day.pending{opacity:.55}
+
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:14px;color:var(--sub)}
+.kv dt{color:var(--dim);font-size:13px}
+.kv dd{margin:0}
+.kv dd strong{color:var(--text)}
+.seat{font-variant-numeric:tabular-nums}
+.small{font-size:12px;color:var(--dim)}
+.section h2 .icon{font-size:15px}
+.tip,.warn-tip{margin:10px 0 0}
+.flight-row{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:start}
+.flight-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:18px}
+
+/* Hover styles exist only for mouse/trackpad. On touch, :hover sticks after a tap. */
+@media (hover:hover) and (pointer:fine){
+  .row:hover{background:#ECECF2}
+  .row.primary:hover{filter:brightness(1.06)}
+  .dock a:hover{filter:brightness(.97)}
+  .rec-card .name a:hover{text-decoration:underline!important}
+  .thumbs button:hover{border-color:var(--accent)!important}
+}
+@media (prefers-reduced-motion:reduce){
+  .row,.dock a,details.fold>summary::after{transition:none}
+}
+</style>
+</head>
+<body class="has-dock">
+
+<div class="header">
+  <span class="emoji">🏖️</span>
+  <div class="day-label">FAMILY TRIP · 4 TRAVELLERS</div>
+  <h1>Hollywood Beach</h1>
+  <div class="dates">Thu Nov 19 – Sun Nov 22, 2026 · KC → FLL → BNA → KC<br>⚽ Inter Miami vs Columbus Crew · Playoff Game 1 · Sat 6:00 PM ET</div>
+</div>
+
+<nav class="nav" aria-label="Trip views">
+  <a href="./" aria-current="page">Briefing</a>
+  <a href="./today.html">Today</a>
+  <a href="/">All trips</a>
+</nav>
+
+<div class="status-bar hscroll" role="list">
+  <span class="status-pill good" role="listitem">✈️ All 4 ticketed · WN 3489</span>
+  <span class="status-pill good" role="listitem">🏠 Condo booked · 3 nights</span>
+  <span class="status-pill good" role="listitem">🎟️ Match tickets bought</span>
+  <span class="status-pill good" role="listitem">🥜 Luke's allergy filed w/ Southwest</span>
+  <span class="status-pill warn" role="listitem">🚗 Stadium transport: decide</span>
+  <span class="status-pill warn" role="listitem">📍 Street address: host to send</span>
+  <span class="status-pill" role="listitem">🏋️ No PF within 2 mi</span>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="section">
+  <h2><span class="icon">⏱️</span> Countdown</h2>
+  <div class="cd-row">
+    <div class="countdown"><div class="num" id="cd-depart">–</div><div class="lbl" id="cd-depart-lbl">days to takeoff</div></div>
+    <div class="countdown"><div class="num" id="cd-match">–</div><div class="lbl" id="cd-match-lbl">days to kickoff</div></div>
+  </div>
+</div>
+
+<!-- LATEST UPDATE -->
+<div class="section">
+  <h2><span class="icon">🤖</span> Latest Update</h2>
+  <div class="update">
+    <div class="time">Thu Nov 12 · 10:50 PM CST · T-7</div>
+    <div class="u-title">Page is live a week out. Three of the four big pieces are locked. The open one is getting four people to Nu Stadium and back.</div>
+    <ul class="u-list">
+      <li><span class="ui">✅</span><span><strong>Locked:</strong> all four seats on <strong>WN 3489</strong> out and <strong>WN 4778 + WN 4485</strong> home, the <strong>Poseidon condo</strong> for three nights, and your <strong>Game 1 tickets</strong>. Nothing on this list needs buying.</span></li>
+      <li><span class="ui">🚗</span><span><strong>The real decision is how to get to Nu Stadium.</strong> My pick is a <strong>rental car from FLL plus a prepaid stadium parking pass</strong>. The club says you <strong>can't park on-site without one</strong>, and lots open at 3:00 PM. The rental also covers the 9:55 PM Thursday landing and the 8 AM Sunday airport run. Rideshare and Tri-Rail fallbacks are <a href="#stadium">below</a>. It's your call; I haven't bought anything.</span></li>
+      <li><span class="ui">☁️</span><span><strong>Weather:</strong> NWS now reaches <strong>Thursday: 81°F, NE 24 mph, 47% showers</strong>. That's the tail of a wet, windy Mon–Wed. <strong>Fri–Sun is not in range yet</strong>; I refresh Mon Nov 16. <strong>Umbrellas are banned at Nu Stadium</strong>, so pack a rain shell.</span></li>
+      <li><span class="ui">📍</span><span><strong>Still owed by the host:</strong> the exact street address, plus the Airbnb confirmation code and total. Distances on this page are measured from the Airbnb map pin, which is approximate, so expect a block or two of drift.</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- MATCH -->
+<div class="section spotlight" id="match">
+  <h2><span class="icon">⚽</span> The Match · Saturday</h2>
+  <div class="rec-card">
+    <div class="badge top">CENTERPIECE</div>
+    <div class="name"><a href="https://www.intermiamicf.com/news/it-s-miami-time-presented-by-royal-caribbean-schedule-announced-for-audi-2026-mls-cup-playoffs-round-one-series-against-columbus-crew" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Inter Miami CF vs Columbus Crew</a></div>
+    <div class="desc">Audi 2026 MLS Cup Playoffs · Round One, Best-of-3 · <strong>Game 1</strong> · (2) Miami vs (7) Columbus. This is the first playoff match ever at Nu Stadium, and Miami are the defending MLS Cup champions. On TV: Apple TV.</div>
+    <dl class="kv" style="margin-top:10px">
+      <dt>Kickoff</dt><dd><strong>Sat Nov 21 · 6:00 PM ET</strong> (5:00 PM CT)</dd>
+      <dt>Gates</dt><dd><strong>4:30 PM ET</strong> (90 min before)</dd>
+      <dt>Parking</dt><dd>Lots open 3:00 PM · <strong>prepaid pass required</strong></dd>
+      <dt>Venue</dt><dd><a href="https://www.google.com/maps/search/?api=1&query=Nu+Stadium+1900+NW+37th+Ave+Miami+FL+33125" target="_blank" rel="noopener">Nu Stadium, 1900 NW 37th Ave, Miami</a> · 26,700 seats</dd>
+      <dt>Tickets</dt><dd>✅ Bought. Section, seats and delivery are in your app, not on file here.</dd>
+    </dl>
+  </div>
+  <details class="fold">
+    <summary>🎒 What gets you through the gate</summary>
+    <div class="fb"><ul>
+      <li><strong>Clear bag only</strong>, max 12″×6″×12″ (or a 1-gal ziploc), plus a hand-sized clutch. There's <strong>no bag check</strong>. (<a href="https://nustadium.com/clear-bag-policy/" target="_blank" rel="noopener">policy</a>)</li>
+      <li><strong>No umbrellas</strong>, no outside food or drink, no selfie sticks.</li>
+      <li><strong>Cashless</strong> concessions. Use a card or phone.</li>
+      <li><strong>Lightning protocol:</strong> play resumes 30 min after the last strike within 8 mi. Once you've scanned in there's no re-entry, so you'd shelter inside the stadium.</li>
+      <li>🥜 <strong>Luke:</strong> concessions are a peanut-dust risk with no ingredient control. Eat before, or carry sealed safe snacks (medical items need pre-approval: <a href="mailto:members@intermiamicf.com">members@intermiamicf.com</a>).</li>
+    </ul></div>
+  </details>
+  <details class="fold">
+    <summary>📅 Rest of the series</summary>
+    <div class="fb"><ul>
+      <li><strong>Game 2:</strong> Fri Nov 27 · 8:00 PM ET · at Columbus (you'll be home)</li>
+      <li><strong>Game 3, if needed:</strong> Tue Dec 1 or Wed Dec 2 · Nu Stadium · time TBD</li>
+    </ul></div>
+  </details>
+</div>
+
+<!-- STADIUM TRANSPORT -->
+<div class="section" id="stadium">
+  <h2><span class="icon">🚗</span> Getting to Nu Stadium</h2>
+  <p style="margin:0 0 10px">It's about 23 mi and 35–50 min from the Broadwalk. On a Saturday, plan to <strong>leave by 4:00 PM ET</strong>. You're four adults, so ranked:</p>
+  <div class="rec-card">
+    <div class="badge top">MY PICK</div>
+    <div class="name">① Rental car from FLL + prepaid parking pass</div>
+    <div class="desc">This one car covers the Thursday 9:55 PM landing, the drive to the match and back, and the 8 AM Sunday airport run, with no post-match surge. The catch is that <strong>parking on-site needs a pass bought in advance</strong> (lots: Audi Black, Red, Yellow).</div>
+    <div class="meta">🅿️ <a href="https://www.intermiamicf.com/nu-stadium/faqs" target="_blank" rel="noopener">Nu Stadium parking info</a> · Membership Services <a href="tel:+13054280611">305-428-0611</a></div>
+  </div>
+  <div class="rec-card">
+    <div class="name">② Uber XL there, Tri-Rail home</div>
+    <div class="desc">An XL takes all four of you there. Coming back, the <strong>8:52 PM Tri-Rail from Miami Airport</strong> beats the rideshare surge. It reaches Hollywood at 9:23 PM, and then it's a 3.3 mi hop to the beach. The match should end around 8:00 PM, and the station is a 10–15 min walk over the canal bridge.</div>
+  </div>
+  <div class="rec-card">
+    <div class="name">③ Tri-Rail both ways</div>
+    <div class="desc">Take the <strong>3:41 PM from Hollywood station → Miami Airport 4:16 PM</strong> and walk to the gates as they open. This route needs a rideshare to and from the station each way. Last time the club ran a special ~10:00 PM return train it was for <strong>regular-season</strong> Saturdays; <strong>nothing has been announced for Nov 21</strong> yet.</div>
+    <div class="meta">🚆 <a href="https://www.tri-rail.com/ScheduleTable/2" target="_blank" rel="noopener">Weekend schedule</a> · <a href="https://www.intermiamicf.com/nu-stadium/public-transportation" target="_blank" rel="noopener">walking route from the station</a></div>
+  </div>
+  <a class="row primary" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bnickname%5D=Nu%20Stadium%20%E2%80%94%20Inter%20Miami%20CF&dropoff%5Bformatted_address%5D=1900%20NW%2037th%20Ave%2C%20Miami%2C%20FL%2033125&dropoff%5Blatitude%5D=25.7924491&dropoff%5Blongitude%5D=-80.2602921" target="_blank" rel="noopener">
+    <span class="ri">🚗</span><span class="rt"><b>Uber to Nu Stadium</b><span>Drop-off prefilled · 1900 NW 37th Ave</span></span><span class="chev">›</span></a>
+  <a class="row" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bnickname%5D=Hollywood%20Tri-Rail%20Station&dropoff%5Bformatted_address%5D=3001%20Hollywood%20Blvd%2C%20Hollywood%2C%20FL%2033021&dropoff%5Blatitude%5D=26.0106661&dropoff%5Blongitude%5D=-80.1686243" target="_blank" rel="noopener">
+    <span class="ri">🚆</span><span class="rt"><b>Uber to Hollywood Tri-Rail</b><span>3001 Hollywood Blvd · 3.3 mi from the beach</span></span><span class="chev">›</span></a>
+</div>
+
+<!-- FLIGHTS -->
+<div class="section" id="flights">
+  <h2><span class="icon">✈️</span> Flights · Southwest</h2>
+  <div class="flight-row">
+    <div class="flight-icon">🛫</div>
+    <div class="flight-info">
+      <div class="route">Thu Nov 19 · WN 3489 · MCI 6:00 PM CT → FLL 9:55 PM ET</div>
+      <div class="detail">Nonstop · 2h55 · <span class="seat">row 14: Luke 14A · Marcie 14B · Jeff 14C · Ben 14D</span> (Extra Legroom)</div>
+    </div>
+  </div>
+  <div class="flight-row">
+    <div class="flight-icon">🛬</div>
+    <div class="flight-info">
+      <div class="route">Sun Nov 22 · WN 4778 · FLL 10:05 AM ET → BNA 11:30 AM CT</div>
+      <div class="detail"><span class="seat">row 12: Luke 12A · Marcie 12B · Jeff 12C · Ben 12D</span> (Preferred)</div>
+    </div>
+  </div>
+  <div class="flight-row">
+    <div class="flight-icon">🏠</div>
+    <div class="flight-info">
+      <div class="route">Sun Nov 22 · WN 4485 · BNA 2:15 PM → MCI 4:00 PM CT</div>
+      <div class="detail">2h45 at BNA, all four together · <span class="seat">row 24: Luke 24A · Jeff 24B · Marcie 24C · Ben 24D</span></div>
+    </div>
+  </div>
+  <details class="fold">
+    <summary>🎫 Confirmations &amp; fares</summary>
+    <div class="fb"><ul>
+      <li><strong>2OR7H4</strong>: Jeff · Choice Extra (refundable, 2 free bags)</li>
+      <li><strong>BQVN4M</strong>: Luke · Companion Pass</li>
+      <li><strong>BR23YL</strong>: Ben + Marcie · return upgraded to <strong>Choice</strong> on Nov 11 so everyone flies home together</li>
+      <li>Check-in opens <strong>24 h before</strong>: Wed Nov 18, 6:00 PM CT (out) · Sat Nov 21, 10:05 AM ET (home).</li>
+    </ul></div>
+  </details>
+  <div class="warn-tip"><strong>🥜 Luke's peanut-dust allergy is filed on BQVN4M</strong>, on all three flights. Southwest serves peanut-free snacks but sets no buffer zone. He can <strong>pre-board to wipe the seats</strong> (no doctor's note needed), so get to the gate about an hour early. Extra Legroom rows serve pistachios, and on WN 3489 Luke is in <strong>14A, an EL seat</strong>.</div>
+</div>
+
+<!-- STAY -->
+<div class="section" id="stay">
+  <h2><span class="icon">🏠</span> The Condo</h2>
+  <div class="rec-card">
+    <div class="name"><a href="https://www.airbnb.com/rooms/831803372563278028" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Poseidon nights · entire condo</a></div>
+    <div class="desc">On the Hollywood Beach Broadwalk · 2 BR · 4 beds · 2.5 baths · ★4.97 · host Luka</div>
+    <dl class="kv" style="margin-top:10px">
+      <dt>Check-in</dt><dd><strong>Thu Nov 19 · 3:00 PM ET</strong> (you land 9:55 PM)</dd>
+      <dt>Checkout</dt><dd><strong>Sun Nov 22 · 11:00 AM ET</strong> (you leave ~8:00 AM)</dd>
+      <dt>Address</dt><dd>⏳ The host sends it closer to check-in</dd>
+    </dl>
+    <div class="meta">💬 <a href="https://www.airbnb.com/messaging/thread/2719299337" target="_blank" rel="noopener">Host thread</a> · <a href="https://www.google.com/maps/search/?api=1&query=26.0103,-80.1159" target="_blank" rel="noopener">approx. map pin</a></div>
+  </div>
+  <a class="row" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bnickname%5D=Hollywood%20Beach%20Broadwalk%20%28Poseidon%20condo%20%E2%80%94%20confirm%20exact%20address%29&dropoff%5Bformatted_address%5D=Hollywood%20Beach%20Broadwalk%2C%20Hollywood%2C%20FL%2033019&dropoff%5Blatitude%5D=26.0103&dropoff%5Blongitude%5D=-80.1159" target="_blank" rel="noopener">
+    <span class="ri">🚗</span><span class="rt"><b>Uber FLL → condo</b><span>~4.8 mi · ~15 min · swap in the real address once it lands</span></span><span class="chev">›</span></a>
+  <a class="row" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bnickname%5D=FLL%20Terminal%201%20%E2%80%94%20Southwest%20departures&dropoff%5Bformatted_address%5D=100%20Terminal%20Dr%2C%20Fort%20Lauderdale%2C%20FL%2033315&dropoff%5Blatitude%5D=26.0720170&dropoff%5Blongitude%5D=-80.1509967" target="_blank" rel="noopener">
+    <span class="ri">🛫</span><span class="rt"><b>Uber condo → FLL (Sunday)</b><span>Southwest departs Terminal 1 · leave ~8:00 AM</span></span><span class="chev">›</span></a>
+</div>
+
+<!-- WEATHER -->
+<div class="section" id="weather">
+  <h2><span class="icon">🌤️</span> Weather · Hollywood Beach</h2>
+  <div class="hscroll" id="wx">
+    <div class="weather-day"><div class="day">Thu 19</div><div class="hi">81°F</div><div class="lo">night ~74°F</div><div class="rain">🌦️ 47%</div></div>
+    <div class="weather-day pending"><div class="day">Fri 20</div><div class="hi">–</div><div class="lo">refresh Nov 16</div><div class="rain">—</div></div>
+    <div class="weather-day pending"><div class="day">Sat 21</div><div class="hi">–</div><div class="lo">match night</div><div class="rain">—</div></div>
+    <div class="weather-day pending"><div class="day">Sun 22</div><div class="hi">–</div><div class="lo">fly home</div><div class="rain">—</div></div>
+  </div>
+  <div class="tip"><strong>Read:</strong> Thursday is the tail of a <strong>windy, showery Mon–Wed</strong>, with NE winds of 24–30 mph and 50–56% thunderstorm odds Tue/Wed. Expect a rough surf and a beach-flag day on arrival, then the pattern should ease. Source: <a href="https://forecast.weather.gov/MapClick.php?lat=26.0103&lon=-80.1159" target="_blank" rel="noopener">NWS Miami</a>, issued Nov 12. All °F.</div>
+</div>
+
+<!-- COFFEE -->
+<div class="section" id="coffee">
+  <h2><span class="icon">☕</span> Coffee</h2>
+  <div class="rec-card" data-feedback-id="coffee-superwow">
+    <div class="badge top">TOP PICK</div>
+    <div class="name"><a href="https://www.superwowfactory.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Superwow Coffee</a></div>
+    <div class="desc">The serious one. They roast their own and source from Tokyo roasters. Get a cortado with pão de queijo, or the applewood-smoked cold brew.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=Superwow+Coffee+2029+Tyler+St+Hollywood+FL" target="_blank" rel="noopener">2029 Tyler St, Unit B</a> · downtown · ~2.0 mi · Mon–Fri 8–4, Sat–Sun 9–4</div>
+    <div class="thumbs"><button type="button" onclick="vote('coffee-superwow','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('coffee-superwow','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+  <div class="rec-card" data-feedback-id="coffee-koffeekult">
+    <div class="badge award">ROASTER</div>
+    <div class="name"><a href="https://www.koffeekult.com/pages/hollywood-coffee-shop" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Koffee Kult</a></div>
+    <div class="desc">A working roastery since 2012, and you can watch the roast. Good bag of beans to take home. ⚠️ <strong>Closed Sunday.</strong></div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=Koffee+Kult+311+S+21st+Ave+Hollywood+FL" target="_blank" rel="noopener">311 S 21st Ave</a> · ~2.0 mi · Mon–Fri 7–3, Sat 8–3</div>
+    <div class="thumbs"><button type="button" onclick="vote('coffee-koffeekult','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('coffee-koffeekult','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+  <div class="rec-card" data-feedback-id="coffee-cafeclub">
+    <div class="badge near">WALKABLE</div>
+    <div class="name"><a href="https://www.google.com/maps/search/?api=1&query=Cafe+Club+311+Johnson+St+Hollywood+FL" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Cafe Club</a></div>
+    <div class="desc">A local spot steps off the Broadwalk: cappuccino and almond cake. This is the walk-to option for slow mornings.</div>
+    <div class="meta">📍 311 Johnson St · ~0.6 mi · <a href="tel:+17542633436">754-263-3436</a></div>
+    <div class="thumbs"><button type="button" onclick="vote('coffee-cafeclub','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('coffee-cafeclub','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+  <div class="rec-card" data-feedback-id="coffee-riptide">
+    <div class="badge near">ON THE SAND</div>
+    <div class="name"><a href="https://riptidehotel.com/wine-dine/hollywood-broadwalk-cafe" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Hollywood Broadwalk Cafe (Riptide)</a></div>
+    <div class="desc">Espresso drinks right on the Broadwalk. Use it on a morning run.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=2300+N+Surf+Rd+Hollywood+FL+33019" target="_blank" rel="noopener">2300 N Surf Rd</a> · ~1.0 mi · Mon–Thu 7–2, Fri–Sun 7–5</div>
+    <div class="thumbs"><button type="button" onclick="vote('coffee-riptide','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('coffee-riptide','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+  <p class="small" style="margin:6px 2px 0">Fallback: <a href="https://www.google.com/maps/search/?api=1&query=Starbucks+near+Hollywood+Beach+FL" target="_blank" rel="noopener">Starbucks near Hollywood Beach</a>.</p>
+</div>
+
+<!-- FOOD -->
+<div class="section" id="food">
+  <h2><span class="icon">🦀</span> Seafood &amp; Steak</h2>
+  <div class="warn-tip" style="margin:0 0 10px"><strong>🥜 Luke:</strong> tell every server about the peanut allergy. Peruvian sauces (ají de gallina, ocopa) and Mexican moles can contain peanut, so those cards are flagged.</div>
+  <div class="rec-card" data-feedback-id="restaurant-billys">
+    <div class="badge top">TOP PICK</div>
+    <div class="name"><a href="https://crabs.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Billy's Stone Crab</a></div>
+    <div class="desc">Family-owned since 1975, with its own Keys fishery, on the Intracoastal. <strong>Stone crab season is open</strong>, and this is the place for it. Strong Friday-night dinner.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=Billys+Stone+Crab+400+N+Ocean+Dr+Hollywood+FL" target="_blank" rel="noopener">400 N Ocean Dr</a> · ~0.9 mi · daily noon–10 · <a href="tel:+19549232300">954-923-2300</a></div>
+    <div class="thumbs"><button type="button" onclick="vote('restaurant-billys','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('restaurant-billys','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+  <div class="rec-card" data-feedback-id="steak-jwb">
+    <div class="badge award">STEAK</div>
+    <div class="name"><a href="https://www.margaritavillehollywoodbeachresort.com/dining/jwb" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">JWB Prime Steak &amp; Seafood</a></div>
+    <div class="desc">Prime steaks, wet-aged 26 days, plus a raw bar. The closest serious steak to the condo. ★4.5 on 2,288 OpenTable reviews. Surf &amp; turf, then butter cake.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=JWB+Prime+1111+N+Ocean+Dr+Hollywood+FL" target="_blank" rel="noopener">1111 N Ocean Dr (Margaritaville)</a> · ~0.6 mi · <a href="https://www.opentable.com/r/jwb-prime-steak-and-seafood-hollywood" target="_blank" rel="noopener">reserve</a></div>
+    <div class="thumbs"><button type="button" onclick="vote('steak-jwb','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('steak-jwb','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+  <div class="rec-card" data-feedback-id="steak-diplomat">
+    <div class="badge award">STEAK</div>
+    <div class="name"><a href="https://www.diplomatresort.com/dining/diplomat-prime/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Diplomat Prime</a></div>
+    <div class="desc">The big-occasion option: porterhouse and truffle mash. ★4.6 on OpenTable.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=Diplomat+Prime+3555+S+Ocean+Dr+Hollywood+FL" target="_blank" rel="noopener">3555 S Ocean Dr</a> · ~1.3 mi · Sun–Thu 5:30–10, Fri–Sat to 10:30 · <a href="https://www.opentable.com/diplomat-prime-diplomat-resort-and-spa-hollywood" target="_blank" rel="noopener">reserve</a></div>
+    <div class="thumbs"><button type="button" onclick="vote('steak-diplomat','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('steak-diplomat','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+  <div class="rec-card" data-feedback-id="restaurant-oceanalley">
+    <div class="badge near">BROADWALK</div>
+    <div class="name"><a href="https://www.oceanalleyrestaurant.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Ocean Alley</a></div>
+    <div class="desc">A long-running Broadwalk fixture with ocean views. Go for the seafood gumbo and clam chowder. Easy lunch after a beach morning.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=Ocean+Alley+900+N+Broadwalk+Hollywood+FL" target="_blank" rel="noopener">900 N Broadwalk</a> · ~0.5 mi walk · <a href="tel:+19549216171">954-921-6171</a></div>
+    <div class="thumbs"><button type="button" onclick="vote('restaurant-oceanalley','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('restaurant-oceanalley','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+  <div class="rec-card" data-feedback-id="restaurant-atperu">
+    <div class="badge nut">🥜 ASK</div>
+    <div class="name"><a href="https://www.google.com/maps/search/?api=1&query=At+Peru+907+N+Broadwalk+Hollywood+FL" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">At Peru</a></div>
+    <div class="desc">Family-run Peruvian on the Broadwalk: ceviche with a view and lomo saltado. Ask about peanut in any sauce, and order chicha morada as the no-alcohol pick.</div>
+    <div class="meta">📍 907 N Broadwalk · ~0.5 mi walk · <a href="tel:+17862788277">786-278-8277</a></div>
+    <div class="thumbs"><button type="button" onclick="vote('restaurant-atperu','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('restaurant-atperu','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+  <div class="rec-card" data-feedback-id="restaurant-mermaidqueen">
+    <div class="badge nut">🥜 ASK</div>
+    <div class="name"><a href="https://themermaidqueen.us/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">The Mermaid Queen</a></div>
+    <div class="desc">Beachfront Mexican seafood and the <strong>closest sit-down to the condo</strong>. Ceviche and grilled shrimp, all made to order. Ask about peanut in the salsas.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=The+Mermaid+Queen+300+S+Broadwalk+Hollywood+FL" target="_blank" rel="noopener">300 S Broadwalk</a> · ~0.3 mi · Mon–Thu 11–9:30, Fri 11–10, Sat–Sun 10–10</div>
+    <div class="thumbs"><button type="button" onclick="vote('restaurant-mermaidqueen','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('restaurant-mermaidqueen','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+</div>
+
+<!-- RECORDS + MUSIC -->
+<div class="section" id="records">
+  <h2><span class="icon">🎸</span> Records &amp; Live Music</h2>
+  <div class="rec-card">
+    <div class="name"><a href="https://www.instagram.com/vinylasylumrecords/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Vinyl Asylum Records &amp; Memorabilia</a></div>
+    <div class="desc">Classic rock and metal vinyl, 3-for-$10 bins, and rock memorabilia, on the downtown Hollywood strip next to the coffee. ⚠️ One listing marks it <strong>closed</strong> and a recent review found it locked during posted hours, so <strong>call before you go</strong>.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=Vinyl+Asylum+2028+Hollywood+Blvd+Hollywood+FL" target="_blank" rel="noopener">2028 Hollywood Blvd</a> · ~2.3 mi · posted Tue–Sun afternoons · <a href="tel:+19542512943">954-251-2943</a></div>
+  </div>
+  <div class="rec-card">
+    <div class="name"><a href="https://www.google.com/maps/search/?api=1&query=Vinyl+Destination+937+NE+19th+Ave+Fort+Lauderdale+FL" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Vinyl Destination</a></div>
+    <div class="desc">The reliable backup if Vinyl Asylum is dark, in Fort Lauderdale, about a 20-min drive north.</div>
+    <div class="meta">📍 937 NE 19th Ave, Fort Lauderdale · opens noon, check hours before driving</div>
+  </div>
+  <div class="tip"><strong>Concert sweep, Nov 19–22:</strong> nothing worth bending the trip for. The only heavy show is <a href="https://www.songkick.com/metro-areas/19511-us-fort-lauderdale/genre/metal" target="_blank" rel="noopener">Born of Osiris + Miss May I</a> on Sat in West Palm Beach, ~45 mi away on match night. <a href="https://casino.hardrock.com/hollywood/events/sebastian-maniscalco" target="_blank" rel="noopener">Sebastian Maniscalco</a> is at Hard Rock Live Thu–Sun at 8 PM if you want a non-music night out.</div>
+</div>
+
+<!-- PLANET FITNESS -->
+<div class="section" id="gym">
+  <h2><span class="icon">🏋️</span> Planet Fitness</h2>
+  <p style="margin:0 0 10px"><strong>None within 2 miles of the condo.</strong> The closest is a ~6 mi drive. The Broadwalk is a 2.5 mi paved run, so that's your training ground this trip.</p>
+  <div class="rec-card">
+    <div class="name"><a href="https://www.planetfitness.com/gyms/miami-ives-dairy-fl" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Miami (Ives Dairy)</a></div>
+    <div class="desc">Mon 5 AM–midnight · <strong>Tue–Thu 24 hrs</strong> · Fri until 9 PM · Sat–Sun 7 AM–9 PM</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=Planet+Fitness+850+Ives+Dairy+Rd+North+Miami+FL+33179" target="_blank" rel="noopener">850 Ives Dairy Rd, North Miami</a> · ~6 mi · <a href="tel:+13056909699">305-690-9699</a></div>
+  </div>
+  <p class="small" style="margin:4px 2px 0">Next closest: <a href="https://www.google.com/maps/search/?api=1&query=Planet+Fitness+1630+NE+163rd+St+North+Miami+Beach+FL" target="_blank" rel="noopener">1630 NE 163rd St</a> (~7 mi) · <a href="https://www.google.com/maps/search/?api=1&query=Planet+Fitness+110+SE+6th+St+Fort+Lauderdale+FL" target="_blank" rel="noopener">110 SE 6th St, Fort Lauderdale</a> (~7 mi). I'll re-run this from the real street address when the host sends it.</p>
+</div>
+
+<!-- ITINERARY -->
+<div class="section" id="itinerary">
+  <h2><span class="icon">📋</span> Day by Day</h2>
+  <div class="day-block"><div class="day-label">Thu Nov 19 · travel</div>
+    <div class="day-event"><span class="time">~4:30 PM CT</span> At MCI. Luke pre-boards to wipe seats; be at the gate ~1 hr early</div>
+    <div class="day-event"><span class="time">6:00 PM CT</span> WN 3489 → FLL, lands 9:55 PM ET</div>
+    <div class="day-event"><span class="time">~10:30 PM ET</span> Rental pick-up or Uber, ~15 min to the condo</div></div>
+  <div class="day-block"><div class="day-label">Fri Nov 20 · beach day</div>
+    <div class="day-event"><span class="time">AM</span> Broadwalk run → coffee at Cafe Club or Superwow</div>
+    <div class="day-event"><span class="time">1–2 PM ET</span> <em>Optional</em>: AI Club working session (Zoom, phone only)</div>
+    <div class="day-event"><span class="time">Dinner</span> 🦀 Billy's Stone Crab</div></div>
+  <div class="day-block"><div class="day-label">Sat Nov 21 · match day</div>
+    <div class="day-event"><span class="time">AM</span> Downtown Hollywood: Superwow + Vinyl Asylum (call first)</div>
+    <div class="day-event"><span class="time">Early lunch</span> Eat before the match (Luke: no stadium food)</div>
+    <div class="day-event"><span class="time">4:00 PM ET</span> Leave for Nu Stadium · gates 4:30</div>
+    <div class="day-event"><span class="time">6:00 PM ET</span> ⚽ Kickoff, Game 1 vs Columbus</div></div>
+  <div class="day-block"><div class="day-label">Sun Nov 22 · home</div>
+    <div class="day-event"><span class="time">8:00 AM ET</span> Leave the condo (checkout 11) → FLL Terminal 1</div>
+    <div class="day-event"><span class="time">10:05 AM ET</span> WN 4778 → BNA · 2:15 PM WN 4485 → MCI 4:00 PM CT</div></div>
+</div>
+
+<!-- OPEN ITEMS -->
+<div class="section" id="open">
+  <h2><span class="icon">⚠️</span> Your Calls</h2>
+  <ul>
+    <li><strong>Stadium transport</strong>: rental + parking pass (my pick), Uber XL, or Tri-Rail. I won't book it.</li>
+    <li><strong>If you drive</strong>: buy the Nu Stadium parking pass ahead; there's no pass, no lot.</li>
+    <li><strong>Tickets</strong>: send me the section and seats if you'd like them on this page.</li>
+    <li><strong>From the host</strong>: street address, Airbnb confirmation code and total.</li>
+  </ul>
+</div>
+
+<div class="footer">
+  Atlas Travel Concierge · built early and filled in on every heartbeat<br>
+  Last updated Thu Nov 12, 2026 · 10:50 PM CST · <a href="./">Refresh</a>
+</div>
+
+<nav class="dock" aria-label="Quick actions">
+  <a class="primary" href="./today.html">📅 Today</a>
+  <a href="#stadium">⚽ Match day</a>
+  <a href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bnickname%5D=Nu%20Stadium%20%E2%80%94%20Inter%20Miami%20CF&dropoff%5Bformatted_address%5D=1900%20NW%2037th%20Ave%2C%20Miami%2C%20FL%2033125&dropoff%5Blatitude%5D=25.7924491&dropoff%5Blongitude%5D=-80.2602921" target="_blank" rel="noopener">🚗 Uber</a>
+</nav>
+
+<script>
+(function () {
+  var depart = new Date('2026-11-19T18:00:00-06:00');
+  var kick = new Date('2026-11-21T18:00:00-05:00');
+  var home = new Date('2026-11-22T16:00:00-06:00');
+  function days(t, now) { return Math.max(0, Math.ceil((t - now) / 86400000)); }
+  function update() {
+    var now = new Date();
+    var d = document.getElementById('cd-depart'), dl = document.getElementById('cd-depart-lbl');
+    var m = document.getElementById('cd-match'), ml = document.getElementById('cd-match-lbl');
+    if (now >= home) { d.textContent = '✅'; dl.textContent = 'trip complete'; }
+    else if (now >= depart) { d.textContent = '🟢'; dl.textContent = 'trip in progress'; }
+    else { d.textContent = days(depart, now); dl.textContent = 'days to takeoff'; }
+    if (now >= kick) { m.textContent = '⚽'; ml.textContent = 'match played'; }
+    else { var h = (kick - now) / 3600000;
+      if (h < 24) { m.textContent = Math.ceil(h) + 'h'; ml.textContent = 'to kickoff'; }
+      else { m.textContent = days(kick, now); ml.textContent = 'days to kickoff'; } }
+  }
+  update(); setInterval(update, 60000);
+})();
+
+function vote(id, dir, btn) {
+  var key = 'atlas_vote_' + id;
+  var data = JSON.parse(localStorage.getItem(key) || '{"up":0,"down":0,"voted":null}');
+  var box = btn.parentElement, up = box.children[0], down = box.children[1];
+  if (data.voted === dir) {
+    data[dir] = Math.max(0, data[dir] - 1); data.voted = null;
+    up.classList.remove('voted-up'); down.classList.remove('voted-down');
+  } else {
+    if (data.voted) data[data.voted] = Math.max(0, data[data.voted] - 1);
+    data[dir] = (data[dir] || 0) + 1; data.voted = dir;
+    up.classList.toggle('voted-up', dir === 'up'); down.classList.toggle('voted-down', dir === 'down');
+  }
+  localStorage.setItem(key, JSON.stringify(data));
+}
+(function () {
+  document.querySelectorAll('.thumbs').forEach(function (el) {
+    var b = el.querySelector('button'); if (!b) return;
+    var m = b.getAttribute('onclick').match(/vote\('([^']+)'/); if (!m) return;
+    var d = JSON.parse(localStorage.getItem('atlas_vote_' + m[1]) || '{"voted":null}');
+    if (d.voted === 'up') el.children[0].classList.add('voted-up');
+    if (d.voted === 'down') el.children[1].classList.add('voted-down');
+  });
+})();
+</script>
+</body>
+</html>
