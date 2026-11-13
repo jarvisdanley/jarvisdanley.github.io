@@ -126,15 +126,17 @@ var TRIP = {
     },
     {
       date: '2026-11-20', label: 'Day 2 · Beach day',
-      weather: { hi: null, lo: null, icon: '⏳', rain: null },
+      weather: { hi: 81, lo: 68, icon: '📊', rain: null, normal: true },
       pills: [ { text: '🏖️ Free day', cls: 'good' }, { text: '🦀 Stone crab tonight', cls: 'good' }, { text: '💻 AI Club 1 PM ET (optional)', cls: '' } ],
       timeline: [
         { time: 'Morning', text: '🏃 Broadwalk run: 2.5 mi of paved promenade' },
         { time: 'Late AM', text: '☕ Cafe Club (walk) or Superwow (downtown)' },
         { time: '1–2 PM ET', text: '💻 Optional: AI Club working session (Zoom, phone only)' },
-        { time: 'Dinner', text: '🦀 Billy’s Stone Crab, 400 N Ocean Dr' }
+        { time: 'Dinner', text: '🦀 Billy’s Stone Crab, 400 N Ocean Dr' },
+        { time: '5–9 PM', text: '🎄 Tree lighting + live jazz, ArtsPark at Young Circle (free · tree lit 7 PM · ~1.7 mi)' },
+        { time: '7–9 PM', text: '🎶 Or free live music at the Beach Theatre, 200 Johnson St (walk)' }
       ],
-      tip: 'The forecast for today isn’t in range yet; I refresh it Mon Nov 16. If the NE wind is still up, the surf will be rough, so swim near a lifeguard tower and watch the flags.',
+      tip: 'The forecast isn’t in range yet, so the tile shows the November normal (81°/68°F); live numbers come Mon Nov 16. If the NE wind is still up, the surf will be rough, so swim near a lifeguard tower and watch the flags.',
       food: [
         { name: 'Cafe Club', url: maps('Cafe Club 311 Johnson St Hollywood FL'), meta: '☕ 311 Johnson St · ~0.6 mi walk', id: 'coffee-cafeclub' },
         { name: 'Ocean Alley', url: 'https://www.oceanalleyrestaurant.com/', meta: '🍤 900 N Broadwalk · lunch with a view · ~0.5 mi', id: 'restaurant-oceanalley' },
@@ -143,13 +145,15 @@ var TRIP = {
     },
     {
       date: '2026-11-21', label: 'Day 3 · Match day',
-      weather: { hi: null, lo: null, icon: '⏳', rain: null },
+      weather: { hi: 81, lo: 68, icon: '📊', rain: null, normal: true },
       pills: [ { text: '⚽ Kickoff 6:00 PM ET', cls: 'good' }, { text: '🚪 Gates 4:30 PM', cls: 'warn' }, { text: '🎒 Clear bag · no umbrella', cls: 'warn' } ],
       warn: '<strong>Leave by 4:00 PM ET.</strong> Driving? You need the <strong>prepaid parking pass</strong>. Bring a clear bag ≤12×6×12 in, no umbrella (bring a rain shell), and have Luke eat before you go. Concessions are cashless.',
       timeline: [
-        { time: 'Morning', text: '☕ Superwow → 🎸 Vinyl Asylum, 2028 Hollywood Blvd (call first: 954-251-2943)' },
-        { time: '1:00 PM', text: '🍽️ Real lunch; no relying on stadium food for Luke' },
-        { time: '4:00 PM ET', text: '🚗 Leave the Broadwalk for Nu Stadium (35–50 min)' },
+        { time: '9:00 AM', text: '🏃 Free beach workout, Charnow Park · or 🛶 Anne Kolb kayak rentals (Sat 9–3)' },
+        { time: 'Late AM', text: '☕ Superwow → 🎸 Vinyl Asylum, 2028 Hollywood Blvd (call first: 954-251-2943)' },
+        { time: '12:00 PM', text: '🍽️ Real lunch; no relying on stadium food for Luke' },
+        { time: '1–3 PM', text: '🎷 Hollywood REAL Jazz Fest at ArtsPark: Nicole Yarling 1:00, Warren Wolf 2:00 (free)' },
+        { time: '3:30 PM ET', text: '🚗 Leave for Nu Stadium (35–50 min) · Ron Carter is live on SiriusXM ch. 76 for the drive' },
         { time: '4:30 PM ET', text: '🚪 Gates open' },
         { time: '6:00 PM ET', text: '⚽ Inter Miami vs Columbus Crew · Game 1' },
         { time: '~8:00 PM', text: '🏁 Final whistle · last regular Tri-Rail north 8:52 PM' }
@@ -157,7 +161,8 @@ var TRIP = {
       transit: [
         'Car: about 23 mi on I-95 S. Lots open 3:00 PM and need a prepaid pass (Audi Black, Red or Yellow).',
         'Tri-Rail: Hollywood 3:41 PM → Miami Airport 4:16 PM, walk ~10–15 min. Home: 8:52 PM → Hollywood 9:23 PM.',
-        'Uber XL fits all four. Expect a post-match surge.'
+        'Uber XL fits all four. Expect a post-match surge.',
+        'Tri-Rail: the club sells a $10 round-trip game-day ticket with a $10 food credit (transport only).'
       ],
       rides: [ { label: 'Uber to Nu Stadium', url: UBER_NU } ],
       tip: 'First playoff match ever at Nu Stadium, with the champs defending. Get in when the gates open and watch warm-ups. Lightning means a 30-min hold per strike within 8 mi, and you can’t leave and come back.',
@@ -169,7 +174,7 @@ var TRIP = {
     },
     {
       date: '2026-11-22', label: 'Day 4 · Home',
-      weather: { hi: null, lo: null, icon: '⏳', rain: null },
+      weather: { hi: 81, lo: 68, icon: '📊', rain: null, normal: true },
       pills: [ { text: '🚗 Leave condo 8:00 AM', cls: 'warn' }, { text: '✈️ WN 4778 · 10:05 AM ET', cls: 'good' }, { text: '🏠 MCI 4:00 PM CT', cls: 'good' } ],
       timeline: [
         { time: '8:00 AM ET', text: '🧳 Out of the condo (checkout 11 AM) → FLL Terminal 1' },
@@ -214,12 +219,12 @@ function render(i, mode) {
   if (day.warn) { document.getElementById('warn-content').innerHTML = day.warn; ws.style.display = ''; } else { ws.style.display = 'none'; }
 
   document.getElementById('weather-content').innerHTML = TRIP.days.map(function (dd, j) {
-    var w = dd.weather, pend = w.hi === null;
+    var w = dd.weather, pend = w.hi === null || w.normal;
     return '<div class="weather-day' + (j === i ? ' on' : '') + (pend ? ' pending' : '') + '" data-i="' + j + '">' +
       '<div class="day">' + new Date(dd.date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'short', day: 'numeric' }) + '</div>' +
-      '<div class="hi">' + (pend ? '–' : w.hi + '°F') + '</div>' +
-      '<div class="lo">' + (pend ? 'Nov 16' : 'low ' + w.lo + '°F') + '</div>' +
-      '<div class="rain">' + w.icon + (pend ? '' : ' ' + w.rain + '%') + '</div></div>';
+      '<div class="hi">' + (w.hi === null ? '–' : (w.normal ? '~' : '') + w.hi + '°F') + '</div>' +
+      '<div class="lo">' + (w.hi === null ? 'Nov 16' : 'low ' + (w.normal ? '~' : '') + w.lo + '°F') + '</div>' +
+      '<div class="rain">' + w.icon + (w.normal ? ' normal' : (pend ? '' : ' ' + w.rain + '%')) + '</div></div>';
   }).join('');
 
   document.getElementById('timeline-content').innerHTML = (day.timeline || []).map(function (e) {

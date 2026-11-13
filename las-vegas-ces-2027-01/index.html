@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="theme-color" content="#E9E9EF">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="CES 2027">
+<title>Las Vegas · CES 2027 · Jan 5–8, 2027</title>
+<link rel="stylesheet" href="/atlas-light.css">
+<style id="atlas-tint">:root{--hero1:#4B23B0;--hero2:#C2378F;--accent:#4B23B0}</style>
+<style>
+/* ---------- page layer · mobile-native (skill: mobile-native) ----------
+   Every rule says why it is here. Shared fixes (tap flash, :active, safe-area
+   on all sides, 16px inputs) already ship in /atlas-light.css (commit 37f0bfb). */
+*{box-sizing:border-box}
+body{margin:0 auto}
+ul{margin:0;padding-left:18px}
+
+/* Horizontal scrollers (pills, weather, day chips): native momentum + snap, and
+   overscroll-behavior-x:contain so a sideways swipe at the end does not fire the
+   browser's back gesture. No JS gesture code; the platform does the physics. */
+.hscroll{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;
+  overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+  margin:0 -2px;padding:2px 2px 4px}
+.hscroll::-webkit-scrollbar{display:none}
+.hscroll>*{flex:0 0 auto;scroll-snap-align:start}
+.status-bar{flex-wrap:nowrap}
+
+/* Bottom dock: the thumb zone. Pinned with position:fixed (not 100vh math), and its
+   bottom padding clears the home indicator via env(); viewport-fit=cover makes env() non-zero. */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;gap:8px;justify-content:center;
+  padding:10px max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));
+  background:rgba(233,233,239,.82);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);
+  border-top:1px solid rgba(0,0,0,.08)}
+.dock a{flex:1 1 0;max-width:180px;min-height:44px;display:flex;align-items:center;justify-content:center;gap:6px;
+  background:#fff;color:var(--text);border:1px solid rgba(0,0,0,.08);border-radius:14px;
+  font-size:14px;font-weight:600;text-decoration:none;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
+  transition:transform 120ms cubic-bezier(.2,.8,.2,1),opacity 120ms}
+.dock a.primary{background:var(--accent);color:#fff;border-color:transparent}
+/* Press feedback on pointer-down (:active), not on release: reads as instant. */
+.dock a:active{transform:scale(.96);opacity:.85;transition-duration:0s}
+/* Content must scroll clear of the dock + home indicator. Higher specificity beats atlas-light's body rule. */
+body.has-dock{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))!important}
+
+/* Tappable rows (whole row is the link): 44px target, press feedback, no long-press callout. */
+.row{display:flex;align-items:center;gap:12px;min-height:44px;padding:11px 12px;margin-bottom:8px;
+  background:var(--tile);border:1px solid var(--border);border-radius:14px;color:var(--text);text-decoration:none;
+  -webkit-touch-callout:none;transition:transform 120ms cubic-bezier(.2,.8,.2,1)}
+.row:active{transform:scale(.98);transition-duration:0s}
+.row .ri{flex:0 0 28px;font-size:20px;text-align:center}
+.row .rt{flex:1;min-width:0}
+.row .rt b{display:block;font-size:15px;color:var(--text)}
+.row .rt span{display:block;font-size:13px;color:var(--dim)}
+.row .chev{color:#C7C7CC;font-size:18px}
+.row.primary{background:var(--accent);border-color:transparent}
+.row.primary .rt b,.row.primary .rt span,.row.primary .chev{color:#fff}
+
+/* Disclosure groups: native-feeling <details>. Summary is a control, so it is not text-selectable. */
+details.fold{border-top:1px solid #EDEDF2;padding:4px 0}
+details.fold:first-of-type{border-top:none}
+details.fold>summary{list-style:none;cursor:pointer;min-height:44px;display:flex;align-items:center;justify-content:space-between;
+  font-size:15px;font-weight:600;color:var(--text)}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::after{content:"›";font-size:22px;color:#C7C7CC;transition:transform 160ms ease-out;transform:rotate(90deg)}
+details.fold[open]>summary::after{transform:rotate(-90deg)}
+details.fold .fb{padding:2px 0 10px}
+
+/* Rec cards */
+.rec-card{position:relative}
+.rec-card .name{padding-right:96px}
+.rec-card .badge{position:absolute;top:12px;right:12px;font-size:11px;padding:3px 9px}
+.rec-card .desc{font-size:13px;margin-top:4px}
+.rec-card .meta{font-size:12px;margin-top:6px}
+.rec-card .meta a{color:var(--blue)}
+.badge.nut{background:rgba(215,0,21,.10)!important;color:var(--red)!important}
+.thumbs{display:flex;gap:8px;margin-top:10px}
+.thumbs button{min-height:36px;min-width:52px;font-size:16px;cursor:pointer}
+
+/* Countdown pair */
+.cd-row{display:flex;gap:10px}
+.cd-row .countdown{flex:1;text-align:center;margin:0;box-shadow:none}
+.cd-row .num{font-size:34px;font-weight:800;line-height:1.05;font-variant-numeric:tabular-nums}
+.cd-row .lbl{font-size:12px;color:var(--dim)}
+
+/* Weather tiles */
+.weather-day{min-width:96px;padding:10px 12px;text-align:center}
+.weather-day .day{font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+.weather-day .hi{font-size:20px;font-weight:700}
+.weather-day .lo,.weather-day .rain{font-size:12px}
+.weather-day.pending{opacity:.55}
+
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:14px;color:var(--sub)}
+.kv dt{color:var(--dim);font-size:13px}
+.kv dd{margin:0}
+.kv dd strong{color:var(--text)}
+.seat{font-variant-numeric:tabular-nums}
+.small{font-size:12px;color:var(--dim)}
+.section h2 .icon{font-size:15px}
+.tip,.warn-tip{margin:10px 0 0}
+.flight-row{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:start}
+.flight-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:18px}
+
+/* Hover styles exist only for mouse/trackpad. On touch, :hover sticks after a tap. */
+@media (hover:hover) and (pointer:fine){
+  .row:hover{background:#ECECF2}
+  .row.primary:hover{filter:brightness(1.06)}
+  .dock a:hover{filter:brightness(.97)}
+  .rec-card .name a:hover{text-decoration:underline!important}
+  .thumbs button:hover{border-color:var(--accent)!important}
+}
+@media (prefers-reduced-motion:reduce){
+  .row,.dock a,details.fold>summary::after{transition:none}
+}
+</style>
+</head>
+<body class="has-dock">
+
+<div class="header">
+  <span class="emoji">🎰</span>
+  <div class="day-label">WORK TRIP · BURNS &amp; MCDONNELL</div>
+  <h1>Las Vegas · CES 2027</h1>
+  <div class="dates">Tue Jan 5 – Fri Jan 8, 2027 · KC ⇄ LAS · MGM Grand<br>CES runs Wed Jan 6 – Sat Jan 9 · you're on the floor Wed + Thu</div>
+</div>
+
+<nav class="nav" aria-label="Trip views">
+  <a href="./" aria-current="page">Briefing</a>
+  <a href="./today.html">Today</a>
+  <a href="/">All trips</a>
+</nav>
+
+<div class="status-bar hscroll" role="list">
+  <span class="status-pill good" role="listitem">✈️ WN 428 / WN 422 ticketed</span>
+  <span class="status-pill good" role="listitem">🏨 MGM Grand · 3 nights</span>
+  <span class="status-pill good" role="listitem">🎟️ Registered · Industry Attendee</span>
+  <span class="status-pill warn" role="listitem">⚠️ 8:15 AM Fri return skips last 2 show days</span>
+  <span class="status-pill" role="listitem">🏋️ No PF within 2 mi · nearest 3.1 mi</span>
+  <span class="status-pill good" role="listitem">🛡️ No safety flags</span>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="section">
+  <h2><span class="icon">⏱️</span> Countdown</h2>
+  <div class="cd-row">
+    <div class="countdown"><div class="num" id="cd-depart">–</div><div class="lbl" id="cd-depart-lbl">days to takeoff</div></div>
+    <div class="countdown"><div class="num" id="cd-match">–</div><div class="lbl" id="cd-match-lbl">days to show floor</div></div>
+  </div>
+</div>
+
+<!-- LATEST UPDATE -->
+<div class="section">
+  <h2><span class="icon">🤖</span> Latest Update</h2>
+  <div class="update">
+    <div class="time">Thu Nov 12, 2026 · 11:45 PM CST · T-54 · first page, full research pass</div>
+    <div class="u-title">The page is up 54 days out (new rule: build the moment a trip exists). Everything is booked. The one real question is your return flight.</div>
+    <ul class="u-list">
+      <li><span class="ui">✅</span><span><strong>Locked:</strong> registration (conf <strong>422859</strong>), <strong>MGM Grand</strong> Jan 5–8 via OnPeak, <strong>WN 428</strong> out and <strong>WN 422</strong> home.</span></li>
+      <li><span class="ui">⚠️</span><span><strong>WN 422 leaves LAS at 8:15 AM Friday</strong>, before that day's floor opens, so you get <strong>Wed + Thu only</strong> and miss Fri and Sat (the floor runs to Sat 4 PM). If that's intended, nothing to do. If not, both the flight and a 4th hotel night have to move. <a href="#calls">Your calls ↓</a></span></li>
+      <li><span class="ui">🎤</span><span><strong>Keynotes so far:</strong> Waymo co-CEO Tekedra Mawakana, <strong>Tue Jan 5, 6:30 PM</strong> (the night you land), and the CTA State of the Industry + Stellantis CEO, <strong>Wed 8:30 AM</strong>. Both are in the Palazzo Ballroom at the Venetian. Lenovo's Yuanqing Yang is announced, with no time yet.</span></li>
+      <li><span class="ui">🏒</span><span><strong>Golden Knights vs Wild, Thu Jan 7, 6:30 PM</strong> at T-Mobile Arena, a 0.6 mi walk from MGM. It's the only marquee event while you're there; no rock or metal shows Jan 5–7. Metallica's Sphere run picks back up Jan 28.</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- CES -->
+<div class="section spotlight" id="ces">
+  <h2><span class="icon">🎟️</span> CES 2027 · Your Days</h2>
+  <dl class="kv">
+    <dt>Tue Jan 5</dt><dd>Conference sessions only, no show floor · <strong>Waymo keynote 6:30 PM</strong>, Palazzo Ballroom</dd>
+    <dt>Wed Jan 6</dt><dd><strong>State of the Industry + Stellantis 8:30 AM</strong> · floor <strong>10 AM–6 PM</strong></dd>
+    <dt>Thu Jan 7</dt><dd>Floor <strong>9 AM–6 PM</strong> · your last full day</dd>
+    <dt>Fri Jan 8</dt><dd>Floor 9–6 · <em>you fly at 8:15 AM</em></dd>
+    <dt>Sat Jan 9</dt><dd>Floor 9 AM–4 PM · <em>after you leave</em></dd>
+  </dl>
+  <details class="fold">
+    <summary>🧭 Where things are</summary>
+    <div class="fb"><ul>
+      <li><strong>LVCC</strong> (West, North, Central, South halls) is the main floor, ~2.2 mi from MGM. Mobility and Stellantis are in <strong>West Hall</strong> (booth 4518), and Waymo is at booth 3741.</li>
+      <li><strong>Venetian Expo</strong> houses Eureka Park startups, and the keynotes are next door in the Palazzo Ballroom, ~1.3 mi.</li>
+      <li><strong>C Space at ARIA</strong> (Wed–Fri 9–6) is the marketing and media track, a short walk from MGM.</li>
+      <li><strong>CES Foundry at Fontainebleau</strong> (Wed 10–6, Thu–Fri 9–6): reach it on the shuttle via LVCC West Hall.</li>
+      <li>⚠️ <strong>Badge pickup</strong> location isn't confirmed yet; it usually opens at the airport, LVCC and Venetian. I'll pin it once CES posts it.</li>
+    </ul></div>
+  </details>
+  <div class="tip">For an AI-and-enterprise eye: CES 2026's keynotes leaned AI-everything (AMD, Siemens, Lenovo, Caterpillar). Jan 5 conference programming is the quiet day to catch sessions before the floor opens. <a href="https://www.ces.tech/attend/keynotes/" target="_blank" rel="noopener">Keynote list</a> · <a href="https://www.ces.tech/plan-your-visit/dates-and-hours/" target="_blank" rel="noopener">official hours</a></div>
+</div>
+
+<!-- GETTING AROUND -->
+<div class="section" id="around">
+  <h2><span class="icon">🚝</span> Getting Around</h2>
+  <div class="rec-card">
+    <div class="badge top">MY PICK</div>
+    <div class="name">① Free CES shuttle from MGM Grand</div>
+    <div class="desc">Board at the <strong>Grand Garden Entrance</strong>, a badge is required. Hours: Tue 8 AM–6 PM, Wed–Fri 7:30 AM–6:30 PM. It runs to LVCC and the Venetian, and the Tech Express links those two all day.</div>
+    <div class="meta"><a href="https://www.ces.tech/media/02tnll0c/final-ces-2027-transportation-flyer-10-5.pdf" target="_blank" rel="noopener">CES transportation flyer</a></div>
+  </div>
+  <div class="rec-card">
+    <div class="name">② Las Vegas Monorail · MGM Grand → LVCC</div>
+    <div class="desc">The station is inside MGM; take the escalators by the Bell Desk down to the Underground. It's ~10 min to LVCC and beats Strip traffic. <strong>$5.75 a ride, or $30.85 for 3 days</strong> (eTicket). Hours: Tue–Thu 7 AM–2 AM. The <strong>Vegas Loop</strong> (Teslas in tunnels) is free inside the LVCC campus.</div>
+    <div class="meta"><a href="https://www.lvmonorail.com/ticket-information/" target="_blank" rel="noopener">Buy an eTicket</a> · <a href="https://www.lvmonorail.com/getting-monorail/" target="_blank" rel="noopener">station directions</a></div>
+  </div>
+  <div class="rec-card">
+    <div class="name">③ Waymo or Uber</div>
+    <div class="desc">Waymo just opened to the public in Las Vegas, so ride one after Mawakana's keynote. Uber is the reliable fallback, but expect surge pricing at 6 PM when the floor empties.</div>
+  </div>
+  <a class="row primary" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bnickname%5D=LVCC%20West%20Hall%20%E2%80%94%20CES&dropoff%5Bformatted_address%5D=3150%20Paradise%20Rd%2C%20Las%20Vegas%2C%20NV%2089109&dropoff%5Blatitude%5D=36.1338265&dropoff%5Blongitude%5D=-115.1572733" target="_blank" rel="noopener"><span class="ri">🚗</span><span class="rt"><b>Uber to LVCC West Hall</b><span>3150 Paradise Rd · ~2.9 mi drive</span></span><span class="chev">›</span></a>
+  <a class="row" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bnickname%5D=Palazzo%20Ballroom%20%E2%80%94%20The%20Venetian%20%28CES%20keynotes%29&dropoff%5Bformatted_address%5D=3355%20S%20Las%20Vegas%20Blvd%2C%20Las%20Vegas%2C%20NV%2089109&dropoff%5Blatitude%5D=36.1212076&dropoff%5Blongitude%5D=-115.1620674" target="_blank" rel="noopener"><span class="ri">🎤</span><span class="rt"><b>Uber to the Venetian (keynotes)</b><span>Palazzo Ballroom · ~1.6 mi</span></span><span class="chev">›</span></a>
+  <a class="row" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bnickname%5D=MGM%20Grand%20%E2%80%94%20main%20lobby&dropoff%5Bformatted_address%5D=3799%20S%20Las%20Vegas%20Blvd%2C%20Las%20Vegas%2C%20NV%2089109&dropoff%5Blatitude%5D=36.10362&dropoff%5Blongitude%5D=-115.16757" target="_blank" rel="noopener"><span class="ri">🏨</span><span class="rt"><b>Uber back to MGM Grand</b><span>3799 S Las Vegas Blvd</span></span><span class="chev">›</span></a>
+</div>
+
+<!-- FLIGHTS -->
+<div class="section" id="flights">
+  <h2><span class="icon">✈️</span> Flights · Southwest</h2>
+  <div class="flight-row"><div class="flight-icon">🛫</div><div class="flight-info">
+    <div class="route">Tue Jan 5 · WN 428 · MCI 11:50 AM CT → LAS 12:55 PM PT</div>
+    <div class="detail">Booked via Acendas · check-in opens <strong>Mon Jan 4, 11:50 AM CT</strong></div></div></div>
+  <div class="flight-row"><div class="flight-icon">🏠</div><div class="flight-info">
+    <div class="route">Fri Jan 8 · WN 422 · LAS 8:15 AM PT → MCI 1:00 PM CT</div>
+    <div class="detail">Check-in opens <strong>Thu Jan 7, 8:15 AM PT</strong> · leave MGM by <strong>~5:45 AM</strong></div></div></div>
+  <div class="warn-tip"><strong>Friday morning:</strong> LAS Terminal 1 is ~3.5 mi from MGM, but CES week makes TSA slow. Settle the folio Thursday night, set two alarms, and order the Uber at 5:40.</div>
+  <a class="row" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bnickname%5D=LAS%20Terminal%201%20%E2%80%94%20Southwest%20departures&dropoff%5Bformatted_address%5D=5757%20Wayne%20Newton%20Blvd%2C%20Las%20Vegas%2C%20NV%2089119&dropoff%5Blatitude%5D=36.0854771&dropoff%5Blongitude%5D=-115.1498236" target="_blank" rel="noopener"><span class="ri">✈️</span><span class="rt"><b>Uber to LAS Terminal 1</b><span>Southwest departures</span></span><span class="chev">›</span></a>
+</div>
+
+<!-- HOTEL -->
+<div class="section" id="hotel">
+  <h2><span class="icon">🏨</span> MGM Grand</h2>
+  <dl class="kv">
+    <dt>Address</dt><dd><a href="https://www.google.com/maps/search/?api=1&query=MGM+Grand+3799+S+Las+Vegas+Blvd+Las+Vegas+NV" target="_blank" rel="noopener">3799 S Las Vegas Blvd</a></dd>
+    <dt>Nights</dt><dd><strong>Tue Jan 5 → Fri Jan 8</strong> · 3 nights · CES housing via OnPeak</dd>
+    <dt>Cancel by</dt><dd>~<strong>Sat Jan 2</strong> (72 h before arrival), or pay 1 night + tax</dd>
+    <dt>Built in</dt><dd>Monorail station · CES shuttle (Grand Garden Entrance) · T-Mobile Arena next door</dd>
+  </dl>
+</div>
+
+<!-- WEATHER -->
+<div class="section" id="weather">
+  <h2><span class="icon">🌤️</span> Weather · Las Vegas</h2>
+  <div class="hscroll">
+    <div class="weather-day pending"><div class="day">Tue 5</div><div class="hi">~58°F</div><div class="lo">low ~40 · normal</div><div class="rain">📊 Jan avg</div></div>
+    <div class="weather-day pending"><div class="day">Wed 6</div><div class="hi">~58°F</div><div class="lo">low ~40 · normal</div><div class="rain">📊 Jan avg</div></div>
+    <div class="weather-day pending"><div class="day">Thu 7</div><div class="hi">~58°F</div><div class="lo">low ~40 · normal</div><div class="rain">📊 Jan avg</div></div>
+    <div class="weather-day pending"><div class="day">Fri 8</div><div class="hi">~58°F</div><div class="lo">~40 at 5:45 AM</div><div class="rain">📊 fly home</div></div>
+  </div>
+  <p class="small" style="margin:6px 2px 0">These are <strong>seasonal normals</strong> (NOAA 1991–2020, Harry Reid Intl: Jan avg 58.5°/40.5°F, 0.56 in of rain for the month), not a forecast. The live NWS forecast takes over around Dec 29.</p>
+  <div class="tip"><strong>Pack:</strong> a real jacket. It's desert-dry with an 18° daily swing, mid-50s by afternoon and near 40 at your 5:45 AM airport run. The halls are warm and you'll walk 15–20k steps a day, so wear broken-in shoes.</div>
+</div>
+
+<!-- COFFEE -->
+<div class="section" id="coffee">
+  <h2><span class="icon">☕</span> Coffee</h2>
+  <p style="margin:0 0 10px">Vegas's specialty scene is <strong>entirely off-Strip</strong>. There's nothing local worth it within walking distance of MGM, so fold one of these into a downtown evening or do a Tuesday-afternoon run after you land. Starbucks is the on-Strip fallback.</p>
+  <div class="rec-card" data-feedback-id="coffee-vesta">
+    <div class="badge top">TOP PICK</div>
+    <div class="name"><a href="https://www.vestacoffee.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Vesta Coffee Roasters</a></div>
+    <div class="desc">The roastery that kicked off the Arts District's coffee scene in 2016; the Probat hums in the back. Order a cortado and take home a bag of the Goose Bumps espresso blend.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=Vesta+Coffee+Roasters+1114+S+Casino+Center+Blvd+Las+Vegas" target="_blank" rel="noopener">1114 S Casino Center Blvd</a> · Arts District · ~5.7 mi, 10 min · daily 7 AM–4 PM</div>
+    <div class="thumbs"><button type="button" onclick="vote('coffee-vesta','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('coffee-vesta','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+
+  <div class="rec-card" data-feedback-id="coffee-mothership">
+    <div class="badge award">ROASTER</div>
+    <div class="name"><a href="https://mothershipcoffee.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Mothership Coffee Roasters · Fergusons</a></div>
+    <div class="desc">Locally roasted, Latina-owned, in a restored motel courtyard on Fremont East. It pairs with an 11th Street Records stop next door.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=Mothership+Coffee+1028+E+Fremont+St+Las+Vegas" target="_blank" rel="noopener">1028 E Fremont St</a> · ~6 mi, ~15 min</div>
+    <div class="thumbs"><button type="button" onclick="vote('coffee-mothership','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('coffee-mothership','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+
+  <div class="rec-card" data-feedback-id="coffee-publicus">
+    <div class="name"><a href="https://www.publicuslv.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">PublicUs</a></div>
+    <div class="desc">Coffee bar plus a real breakfast and lunch menu, the best sit-down-and-work option. Order the macadamia nut latte.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=PublicUs+1126+E+Fremont+St+Las+Vegas" target="_blank" rel="noopener">1126 E Fremont St</a> · ~6 mi · daily 7 AM–3 PM</div>
+    <div class="thumbs"><button type="button" onclick="vote('coffee-publicus','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('coffee-publicus','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+
+</div>
+
+<!-- STEAK -->
+<div class="section" id="steak">
+  <h2><span class="icon">🥩</span> Steak</h2>
+  <p style="margin:0 0 10px">Vegas is a genuine steak town. You have two dinners (Tue and Wed) and maybe Thu, so book them.</p>
+  <div class="rec-card" data-feedback-id="steak-goldensteer">
+    <div class="badge top">TOP PICK</div>
+    <div class="name"><a href="https://goldensteer.com/pages/las-vegas" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Golden Steer Steakhouse</a></div>
+    <div class="desc">Open since 1958, the oldest steakhouse in Vegas, with Sinatra's booth, leather and tableside Caesar. It's the most Vegas dinner you can have that isn't on the Strip. ⚠️ <strong>Book direct only</strong>: they don't honor third-party reservations, and the whole party must be present to be seated.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=Golden+Steer+308+W+Sahara+Ave+Las+Vegas" target="_blank" rel="noopener">308 W Sahara Ave</a> · ~3.5 mi, ~10 min · opens 4:30 PM, last seating 9:45 · <a href="tel:+17023844470">702-384-4470</a></div>
+    <div class="thumbs"><button type="button" onclick="vote('steak-goldensteer','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('steak-goldensteer','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+
+  <div class="rec-card" data-feedback-id="steak-bavettes">
+    <div class="badge award">WALK FROM MGM</div>
+    <div class="name"><a href="https://www.google.com/maps/search/?api=1&query=Bavette%27s+Steakhouse+Park+MGM+Las+Vegas" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Bavette's Steakhouse &amp; Bar · Park MGM</a></div>
+    <div class="desc">A dark, moody, French-accented Chicago chophouse. It's the no-car night: walk over after the Wednesday floor closes.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=Bavettes+Park+MGM+Las+Vegas" target="_blank" rel="noopener">Park MGM</a> · ~0.4 mi walk</div>
+    <div class="thumbs"><button type="button" onclick="vote('steak-bavettes','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('steak-bavettes','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+
+  <div class="rec-card" data-feedback-id="steak-bazaarmeat">
+    <div class="name"><a href="https://www.google.com/maps/search/?api=1&query=Bazaar+Meat+by+Jose+Andres+Palazzo+Las+Vegas" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Bazaar Meat by José Andrés · Palazzo</a></div>
+    <div class="desc">Open-fire kitchen in a 20,000 sq ft room, with shareable large-format cuts. Pair it with the Tuesday keynote next door. Booking is on SevenRooms, and the bar takes walk-ins.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=Bazaar+Meat+Palazzo+Las+Vegas" target="_blank" rel="noopener">3325 S Las Vegas Blvd</a> · ~1.4 mi · daily from 5 PM</div>
+    <div class="thumbs"><button type="button" onclick="vote('steak-bazaarmeat','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('steak-bazaarmeat','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+
+  <p class="small" style="margin:4px 2px 0">Also good: Barry's Downtown Prime at Circa (old-school, ~5 mi) · SW Steakhouse at Wynn (lake-show view).</p>
+</div>
+
+<!-- RECORDS + EVENTS -->
+<div class="section" id="records">
+  <h2><span class="icon">🎸</span> Records, Music &amp; Events</h2>
+  <div class="rec-card" data-feedback-id="records-recordcity">
+    <div class="badge top">OLDEST IN VEGAS</div>
+    <div class="name"><a href="https://www.recordcityonline.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Record City</a></div>
+    <div class="desc">Vegas's oldest record store: deep rock crates, a huge 7-inch stash and memorabilia. It's a 5-min walk from the SAHARA monorail stop, so you can ride from MGM.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=Record+City+300+E+Sahara+Ave+Las+Vegas" target="_blank" rel="noopener">300 E Sahara Ave</a> · ~3.7 mi · Mon–Sat 9 AM–7 PM · <a href="tel:+17027351126">702-735-1126</a></div>
+    <div class="thumbs"><button type="button" onclick="vote('records-recordcity','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('records-recordcity','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+
+  <div class="rec-card" data-feedback-id="records-11thstreet">
+    <div class="name"><a href="https://www.11thstreetrecords.net/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">11th Street Records</a></div>
+    <div class="desc">A clean, well-filed Fremont East indie with first pressings and a back-room stage. ⚠️ <strong>Closed Mon–Tue</strong>, so go Wed or Thu evening.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=11th+Street+Records+1023+Fremont+St+Las+Vegas" target="_blank" rel="noopener">1023 E Fremont St</a> · ~6 mi · Wed–Sat 11 AM–7 PM</div>
+    <div class="thumbs"><button type="button" onclick="vote('records-11thstreet','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('records-11thstreet','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+
+  <div class="rec-card" data-feedback-id="event-vgk">
+    <div class="badge award">THU NIGHT</div>
+    <div class="name"><a href="https://www.t-mobilearena.com/events/detail/minnesota-wild-vs-vegas-golden-knights" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Golden Knights vs Minnesota Wild</a></div>
+    <div class="desc">Thu Jan 7 · 6:30 PM (doors 5:15). The arena is next door to MGM and the pregame show is a full Vegas production. It ends around 9:15, which still leaves a sane bedtime before the 5:45 AM airport run.</div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=T-Mobile+Arena+Las+Vegas" target="_blank" rel="noopener">T-Mobile Arena</a> · 0.6 mi walk · on sale now</div>
+    <div class="thumbs"><button type="button" onclick="vote('event-vgk','up',this)" aria-label="Thumbs up">👍</button><button type="button" onclick="vote('event-vgk','down',this)" aria-label="Thumbs down">👎</button></div>
+  </div>
+
+  <div class="tip"><strong>Concert sweep, Jan 5–8:</strong> no rock or metal in town those nights. Lionel Richie (Wynn) and the Eagles (Sphere) start Jan 8, after you leave. 🤘 <strong>Metallica's Sphere residency resumes Jan 28 and 30</strong>; mentioning it in case you want a second Vegas run.</div>
+</div>
+
+<!-- PLANET FITNESS -->
+<div class="section" id="gym">
+  <h2><span class="icon">🏋️</span> Planet Fitness</h2>
+  <p style="margin:0 0 10px"><strong>None within 2 miles of MGM Grand.</strong> The closest is 2.5 mi in a straight line, a 3.1 mi, ~8-minute drive west. It's open 24/7, so a 6 AM session before the shuttle works.</p>
+  <div class="rec-card">
+    <div class="name"><a href="https://www.planetfitness.com/gyms/las-vegas-decatur-flamingo-nv" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Las Vegas (Decatur &amp; Flamingo)</a></div>
+    <div class="desc"><strong>Open &amp; staffed 24/7</strong></div>
+    <div class="meta">📍 <a href="https://www.google.com/maps/search/?api=1&query=Planet+Fitness+4001+S+Decatur+Blvd+Las+Vegas+NV+89103" target="_blank" rel="noopener">4001 S Decatur Blvd</a> · 3.1 mi, ~8 min · <a href="tel:+17027274906">702-727-4906</a></div>
+  </div>
+  <p class="small" style="margin:4px 2px 0">Next closest: <a href="https://www.google.com/maps/search/?api=1&query=Planet+Fitness+3300+E+Flamingo+Rd+Las+Vegas" target="_blank" rel="noopener">3300 E Flamingo Rd</a> (4.5 mi drive, 24/7) · <a href="https://www.google.com/maps/search/?api=1&query=Planet+Fitness+1221+E+Sahara+Ave+Las+Vegas" target="_blank" rel="noopener">1221 E Sahara Ave</a> (6.8 mi, 24/7).</p>
+</div>
+
+<!-- SAFETY -->
+<div class="section" id="safety">
+  <h2><span class="icon">🛡️</span> Safety &amp; Travel Alerts</h2>
+  <ul>
+    <li><strong>Labor:</strong> the Culinary Union's MGM and Caesars contracts were signed in late 2024 and run for years. The pending MGM sale doesn't reopen them, so there's no strike risk for CES week.</li>
+    <li><strong>Flights:</strong> LAS was on the FAA's shutdown flight-cut list; that's ending now that the shutdown is over. ⚠️ The deal only funds the government <strong>through Jan 30</strong>, so a second shutdown can't hit before your trip. I'll still watch it.</li>
+    <li><strong>Crowds:</strong> CES draws ~140k people. Strip traffic at 6 PM is the real hazard, so use the monorail or shuttle instead of Ubers at rush hour.</li>
+    <li>It's a domestic trip, so there's no State Dept advisory. I'll re-sweep every heartbeat.</li>
+  </ul>
+</div>
+
+<!-- ITINERARY -->
+<div class="section" id="itinerary">
+  <h2><span class="icon">📋</span> Day by Day</h2>
+  <div class="day-block"><div class="day-label">Tue Jan 5 · travel + keynote</div>
+    <div class="day-event"><span class="time">11:50 AM CT</span> WN 428 MCI → LAS, lands 12:55 PM PT</div>
+    <div class="day-event"><span class="time">~2:00 PM</span> MGM check-in · badge pickup (location TBD)</div>
+    <div class="day-event"><span class="time">Afternoon</span> Conference sessions, or a Vesta coffee run</div>
+    <div class="day-event"><span class="time">6:30 PM</span> 🎤 Waymo keynote, Palazzo Ballroom → dinner at Bazaar Meat next door</div></div>
+  <div class="day-block"><div class="day-label">Wed Jan 6 · floor day 1</div>
+    <div class="day-event"><span class="time">8:30 AM</span> 🎤 State of the Industry + Stellantis keynote</div>
+    <div class="day-event"><span class="time">10 AM–6 PM</span> Show floor: LVCC West Hall first (mobility), then Central</div>
+    <div class="day-event"><span class="time">Dinner</span> 🥩 Golden Steer (book direct)</div></div>
+  <div class="day-block"><div class="day-label">Thu Jan 7 · floor day 2</div>
+    <div class="day-event"><span class="time">9 AM–6 PM</span> Show floor: Venetian Expo (Eureka Park startups) + C Space</div>
+    <div class="day-event"><span class="time">6:30 PM</span> 🏒 Golden Knights vs Wild (optional) · or 🎸 11th Street Records</div>
+    <div class="day-event"><span class="time">Night</span> Settle the folio; check in for WN 422 (opened 8:15 AM)</div></div>
+  <div class="day-block"><div class="day-label">Fri Jan 8 · home</div>
+    <div class="day-event"><span class="time">5:45 AM PT</span> Uber to LAS Terminal 1</div>
+    <div class="day-event"><span class="time">8:15 AM PT</span> WN 422 → MCI 1:00 PM CT</div></div>
+</div>
+
+<!-- CALLS -->
+<div class="section" id="calls">
+  <h2><span class="icon">⚠️</span> Your Calls</h2>
+  <ul>
+    <li><strong>Return flight:</strong> keep the 8:15 AM Friday and get Wed + Thu only, or move to Fri evening or Sat and add a hotel night. If you change it, it goes through Maria → Acendas.</li>
+    <li><strong>Dinners:</strong> Golden Steer and Bazaar Meat book up during CES week. Want me to pick nights? I won't book without your OK.</li>
+    <li><strong>Golden Knights Thu:</strong> tickets are on sale, if you're interested.</li>
+  </ul>
+</div>
+
+<div class="footer">
+  Atlas Travel Concierge · built early and filled in on every heartbeat<br>
+  Last updated Thu Nov 12, 2026 · 11:45 PM CST · <a href="./">Refresh</a>
+</div>
+
+<nav class="dock" aria-label="Quick actions">
+  <a class="primary" href="./today.html">📅 Today</a>
+  <a href="#ces">🎟️ CES</a>
+  <a href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bnickname%5D=LVCC%20West%20Hall%20%E2%80%94%20CES&dropoff%5Bformatted_address%5D=3150%20Paradise%20Rd%2C%20Las%20Vegas%2C%20NV%2089109&dropoff%5Blatitude%5D=36.1338265&dropoff%5Blongitude%5D=-115.1572733" target="_blank" rel="noopener">🚗 Uber</a>
+</nav>
+
+<script>
+(function () {
+  var depart = new Date('2027-01-05T11:50:00-06:00');
+  var kick = new Date('2027-01-06T10:00:00-08:00');
+  var home = new Date('2027-01-08T13:00:00-06:00');
+  function days(t, now) { return Math.max(0, Math.ceil((t - now) / 86400000)); }
+  function update() {
+    var now = new Date();
+    var d = document.getElementById('cd-depart'), dl = document.getElementById('cd-depart-lbl');
+    var m = document.getElementById('cd-match'), ml = document.getElementById('cd-match-lbl');
+    if (now >= home) { d.textContent = '✅'; dl.textContent = 'trip complete'; }
+    else if (now >= depart) { d.textContent = '🟢'; dl.textContent = 'trip in progress'; }
+    else { d.textContent = days(depart, now); dl.textContent = 'days to takeoff'; }
+    if (now >= kick) { m.textContent = '🟢'; ml.textContent = 'show floor open'; }
+    else { var h = (kick - now) / 3600000;
+      if (h < 24) { m.textContent = Math.ceil(h) + 'h'; ml.textContent = 'to show floor'; }
+      else { m.textContent = days(kick, now); ml.textContent = 'days to show floor'; } }
+  }
+  update(); setInterval(update, 60000);
+})();
+
+function vote(id, dir, btn) {
+  var key = 'atlas_vote_' + id;
+  var data = JSON.parse(localStorage.getItem(key) || '{"up":0,"down":0,"voted":null}');
+  var box = btn.parentElement, up = box.children[0], down = box.children[1];
+  if (data.voted === dir) {
+    data[dir] = Math.max(0, data[dir] - 1); data.voted = null;
+    up.classList.remove('voted-up'); down.classList.remove('voted-down');
+  } else {
+    if (data.voted) data[data.voted] = Math.max(0, data[data.voted] - 1);
+    data[dir] = (data[dir] || 0) + 1; data.voted = dir;
+    up.classList.toggle('voted-up', dir === 'up'); down.classList.toggle('voted-down', dir === 'down');
+  }
+  localStorage.setItem(key, JSON.stringify(data));
+}
+(function () {
+  document.querySelectorAll('.thumbs').forEach(function (el) {
+    var b = el.querySelector('button'); if (!b) return;
+    var m = b.getAttribute('onclick').match(/vote\('([^']+)'/); if (!m) return;
+    var d = JSON.parse(localStorage.getItem('atlas_vote_' + m[1]) || '{"voted":null}');
+    if (d.voted === 'up') el.children[0].classList.add('voted-up');
+    if (d.voted === 'down') el.children[1].classList.add('voted-down');
+  });
+})();
+</script>
+</body>
+</html>
