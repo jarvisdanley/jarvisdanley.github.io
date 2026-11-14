@@ -109,35 +109,36 @@ var TRIP = {
   days: [
     {
       date: '2026-11-19', label: 'Day 1 · Travel day',
-      weather: { hi: 81, lo: 75, icon: '🌦️', rain: 50 },
+      weather: { hi: 80, lo: 76, icon: '🌦️', rain: 60 },
       pills: [ { text: '✈️ WN 3489 · MCI 6:00 PM CT', cls: 'good' }, { text: '🥜 Pre-board to wipe seats', cls: 'warn' }, { text: '🏠 Check-in from 3 PM', cls: 'good' } ],
       warn: '<strong>Luke:</strong> be at the MCI gate ~1 hr early so he can pre-board and wipe row 14. He is in <strong>14A, an Extra Legroom seat</strong>, and EL rows are served pistachios.',
       timeline: [
         { time: '4:30 PM CT', text: 'At MCI, at the gate early for pre-boarding' },
         { time: '6:00 PM CT', text: '✈️ WN 3489 MCI → FLL · row 14: Luke 14A · Marcie 14B · Jeff 14C · Ben 14D' },
         { time: '9:55 PM ET', text: '🛬 Land FLL' },
-        { time: '~10:30 PM', text: '🚗 Rental pick-up or Uber, ~15 min to the condo' }
+        { time: '~10:30 PM', text: '🚗 Uber XL, ~15 min to the condo · showers, 60%' }
       ],
       transit: [ 'FLL → Broadwalk: ~4.8 mi, ~15 min. Swap in the street address once the host sends it.' ],
       rides: [ { label: 'Uber FLL → condo', url: UBER_CONDO } ],
-      tip: 'A late landing into the tail of a wet, windy week. Thursday is <strong>81°F, NE 25–29 mph, 50% chance of showers and thunderstorms</strong> — expect a flag day and rough surf. Do nothing but get in, unpack, and hear the ocean. The beach is tomorrow.',
+      tip: 'A late landing into the tail of a wet, windy week. Thursday is <strong>80°F, NE 31 mph, 60% chance of showers and thunderstorms</strong> — expect a flag day and rough surf. Do nothing but get in, unpack, and hear the ocean. Rain bands are the plan-maker tomorrow.',
       food: [
         { name: 'The Mermaid Queen', url: 'https://themermaidqueen.us/', meta: '📍 300 S Broadwalk · ~0.3 mi · open to 9:30 PM Thu, so too late tonight. Bookmark it · 🥜 ask about salsas', id: 'restaurant-mermaidqueen' }
       ]
     },
     {
-      date: '2026-11-20', label: 'Day 2 · Beach day',
-      weather: { hi: 81, lo: 68, icon: '📊', rain: null, normal: true },
-      pills: [ { text: '🏖️ Free day', cls: 'good' }, { text: '🦀 Stone crab tonight', cls: 'good' }, { text: '💻 AI Club 1 PM ET (optional)', cls: '' } ],
+      date: '2026-11-20', label: 'Day 2 · Free day',
+      weather: { hi: 81, lo: 76, icon: '🌧️', rain: 60 },
+      pills: [ { text: '🏖️ Free day', cls: 'good' }, { text: '🌧️ 60% rain — flexible', cls: 'warn' }, { text: '🦀 Stone crab tonight', cls: 'good' }, { text: '💻 AI Club 1 PM ET (optional)', cls: '' } ],
       timeline: [
-        { time: 'Morning', text: '🏃 Broadwalk run: 2.5 mi of paved promenade' },
+        { time: 'Morning', text: '🏃 Broadwalk run: 2.5 mi of paved promenade <em>(60% showers — go early or swap it)</em>' },
+        { time: 'Rain plan', text: '🎸 Downtown Hollywood: Superwow + Vinyl Asylum (call first) · Anne Kolb visitor centre + free 68-ft tower' },
         { time: 'Late AM', text: '☕ Cafe Club (walk) or Superwow (downtown)' },
         { time: '1–2 PM ET', text: '💻 Optional: AI Club working session (Zoom, phone only)' },
         { time: 'Dinner', text: '🦀 Billy’s Stone Crab, 400 N Ocean Dr' },
-        { time: '5–9 PM', text: '🎄 Tree lighting + live jazz, ArtsPark at Young Circle (free · tree lit 7 PM · ~1.7 mi)' },
-        { time: '7–9 PM', text: '🎶 Or free live music at the Beach Theatre, 200 Johnson St (walk)' }
+        { time: '5–9 PM', text: '🎄 Tree lighting + live jazz, ArtsPark at Young Circle (free · tree lit 7 PM · ~1.7 mi · outdoor)' },
+        { time: '7–9 PM', text: '🎶 Or free live music at the Beach Theatre, 200 Johnson St (walk · outdoor)' }
       ],
-      tip: 'The forecast isn’t in range yet, so the tile shows the November normal (81°/68°F); live numbers land <strong>Saturday Nov 14</strong>. If the NE wind is still up, the surf will be rough, so swim near a lifeguard tower and watch the flags.',
+      tip: '<strong>Friday is the wettest day of the window — 81°F, NE 26 mph, 60% chance rain showers.</strong> It is not a washout: the NE flow sends showers through in bands, so work around them rather than cancelling. Beach first thing if the radar is clear, downtown record stores and the Anne Kolb centre when it isn’t. The 7 PM tree lighting is outdoors, so check the radar at six.',
       food: [
         { name: 'Cafe Club', url: maps('Cafe Club 311 Johnson St Hollywood FL'), meta: '☕ 311 Johnson St · ~0.6 mi walk', id: 'coffee-cafeclub' },
         { name: 'Ocean Alley', url: 'https://www.oceanalleyrestaurant.com/', meta: '🍤 900 N Broadwalk · lunch with a view · ~0.5 mi', id: 'restaurant-oceanalley' },
