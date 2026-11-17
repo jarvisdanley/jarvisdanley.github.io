@@ -109,36 +109,35 @@ var TRIP = {
   days: [
     {
       date: '2026-11-19', label: 'Day 1 · Travel day',
-      weather: { hi: 80, lo: 76, icon: '🌧️', rain: 84 },
-      pills: [ { text: '✈️ WN 3489 · MCI 6:00 PM CT', cls: 'good' }, { text: '🥜 Pre-board to wipe seats', cls: 'warn' }, { text: '🏠 Check-in from 3 PM', cls: 'good' } ],
+      weather: { hi: 82, lo: 78, icon: '🌧️', rain: 78 },
+      pills: [ { text: '✈️ WN 3489 · MCI 6:00 PM CT', cls: 'good' }, { text: '🥜 Pre-board to wipe seats', cls: 'warn' }, { text: '🚨 Flood Watch thru 7 PM', cls: 'warn' }, { text: '🌊 High surf 7–12 ft', cls: 'warn' } ],
       warn: '<strong>Luke:</strong> be at the MCI gate ~1 hr early so he can pre-board and wipe row 14. He is in <strong>14A, an Extra Legroom seat</strong>, and EL rows are served pistachios.',
       timeline: [
         { time: '4:30 PM CT', text: 'At MCI, at the gate early for pre-boarding' },
         { time: '6:00 PM CT', text: '✈️ WN 3489 MCI → FLL · row 14: Luke 14A · Marcie 14B · Jeff 14C · Ben 14D' },
         { time: '9:55 PM ET', text: '🛬 Land FLL' },
-        { time: '~10:30 PM', text: '🚗 Uber XL, ~15 min to the condo · showers likely, 69% at 9 PM' }
+        { time: '~10:30 PM', text: '🚗 Uber XL, ~15 min to the condo · 58% rain at 9 PM, street flooding at the low points' }
       ],
       transit: [ 'FLL → Broadwalk: ~4.8 mi, ~15 min. Swap in the street address once the host sends it.' ],
       rides: [ { label: 'Uber FLL → condo', url: UBER_CONDO } ],
-      tip: 'A late landing into the <strong>wettest day of the four</strong>. Thursday is <strong>80°F, NE 25–31 mph, 84% chance of showers and thunderstorms</strong> — still 69% at 9 PM when you land, so <strong>the rain shell goes in the carry-on, not the checked bag</strong>. Expect a flag day and rough surf — there is a <strong>rip current statement</strong> on this coast. Do nothing tonight but get in, unpack, and hear the ocean.',
+      tip: 'A late landing into a <strong>Flood Watch that lifted three hours earlier</strong>. Thursday is <strong>82°F, E 23–31 mph, 78% rain showers</strong> — and still <strong>58% at 9 PM</strong> when you land. <strong>The rain shell goes in the carry-on, not the checked bag</strong>, and expect a slow wet ride from FLL with standing water at the Broadwalk low points. <strong>The surf is under a High Surf Advisory — 7–12 ft breaking waves through 7 PM Thursday. No one goes in the water tomorrow.</strong> Do nothing tonight but get in, unpack, and hear the ocean.',
       food: [
         { name: 'The Mermaid Queen', url: 'https://themermaidqueen.us/', meta: '📍 300 S Broadwalk · ~0.3 mi · open to 9:30 PM Thu, so too late tonight. Bookmark it · 🥜 ask about salsas', id: 'restaurant-mermaidqueen' }
       ]
     },
     {
       date: '2026-11-20', label: 'Day 2 · Free day',
-      weather: { hi: 81, lo: 75, icon: '🌦️', rain: 44 },
-      pills: [ { text: '🏖️ Free day', cls: 'good' }, { text: '🌦️ 44% — bands of rain', cls: '' }, { text: '🦀 Stone crab tonight', cls: 'good' }, { text: '💻 AI Club 1 PM ET (optional)', cls: '' } ],
+      weather: { hi: 83, lo: 75, icon: '🌧️', rain: 63 },
+      pills: [ { text: '🏖️ Free day', cls: 'good' }, { text: '🌧️ 63% — indoor day', cls: 'warn' }, { text: '🦀 Stone crab tonight', cls: 'good' }, { text: '💻 AI Club call off the calendar', cls: '' } ],
       timeline: [
-        { time: 'Morning', text: '🏃 Broadwalk run: 2.5 mi of paved promenade <em>(44% showers — go early; radar is your call)</em>' },
+        { time: 'Morning', text: '🏃 Broadwalk run: 2.5 mi of paved promenade <em>(63% showers — go early and watch the radar)</em>' },
         { time: 'Rain plan', text: '🎸 Downtown Hollywood: Superwow + Vinyl Asylum (call first) · Anne Kolb visitor centre + free 68-ft tower' },
         { time: 'Late AM', text: '☕ Cafe Club (walk) or Superwow (downtown)' },
-        { time: '1–2 PM ET', text: '💻 Optional: AI Club working session (Zoom, phone only)' },
         { time: 'Dinner', text: '🦀 Billy’s Stone Crab, 400 N Ocean Dr' },
         { time: '5–9 PM', text: '🎄 Tree lighting + live jazz, ArtsPark at Young Circle (free · tree lit 7 PM · ~1.7 mi · outdoor)' },
         { time: '7–9 PM', text: '🎶 Or free live music at the Beach Theatre, 200 Johnson St (walk · outdoor)' }
       ],
-      tip: '<strong>Friday is the most improved day of the trip: 81°F, 44%, NE 18 mph — down from 30 mph yesterday.</strong> A real beach window in the morning if the radar is clean; the NE flow still sends bands through, so work around them rather than cancelling. Downtown record stores and the Anne Kolb centre are the swap. The 7 PM tree lighting is outdoors — check the radar at six. <strong>And this is the day to collect the rental car if you have not already.</strong>',
+      tip: '<strong>Friday is the day that got worse: 83°F, 63%, up from 44% yesterday — plan it indoors.</strong> The Downtown record run and the Anne Kolb centre are the day; take a beach hour only if the radar is genuinely clear, and remember <strong>the High Surf Advisory runs through 7 PM, so the water is out either way</strong>. The 7 PM tree lighting is outdoors — check the radar at six. <strong>And this is the day to collect the rental car if you have not already.</strong> The AI Club call that used to sit at 1 PM is no longer on the calendar, so the day is yours.',
       food: [
         { name: 'Cafe Club', url: maps('Cafe Club 311 Johnson St Hollywood FL'), meta: '☕ 311 Johnson St · ~0.6 mi walk', id: 'coffee-cafeclub' },
         { name: 'Ocean Alley', url: 'https://www.oceanalleyrestaurant.com/', meta: '🍤 900 N Broadwalk · lunch with a view · ~0.5 mi', id: 'restaurant-oceanalley' },
@@ -147,9 +146,9 @@ var TRIP = {
     },
     {
       date: '2026-11-21', label: 'Day 3 · Match day',
-      weather: { hi: 82, lo: 74, icon: '🌦️', rain: 34 },
-      pills: [ { text: '⚽ Kickoff 6:00 PM ET', cls: 'good' }, { text: '🌦️ 34% · 79°F at kickoff', cls: '' }, { text: '🚪 Gates 4:30 PM', cls: 'warn' }, { text: '🎒 Clear bag · no umbrella', cls: 'warn' } ],
-      warn: '<strong>Driving: Marcie has the parking pass — but the rental car is still unbooked.</strong> Leave the condo <strong>~3:30–3:45 PM</strong>. Lots open 3:00, gates 4:30. Enter the lot the way your pass says (Black/Red via Heron Ln, Yellow via Volley Dr).',
+      weather: { hi: 83, lo: 75, icon: '🌦️', rain: 31 },
+      pills: [ { text: '⚽ Kickoff 6:00 PM ET', cls: 'good' }, { text: '🌦️ 31% · 79°F at kickoff', cls: '' }, { text: '🚪 Gates 4:30 PM', cls: 'warn' }, { text: '🎒 Clear bag · no umbrella', cls: 'warn' } ],
+      warn: '<strong>Driving: Marcie has the parking pass — but the rental car is still unbooked, and FLL rates climb into the 8–14-day window.</strong> Leave the condo <strong>~3:30–3:45 PM</strong>. Lots open 3:00, gates 4:30. Enter the lot the way your pass says (Black/Red via Heron Ln, Yellow via Volley Dr).',
       timeline: [
         { time: '9:00 AM', text: '🏃 Free beach workout, Charnow Park · or 🛶 Anne Kolb kayak rentals (Sat 9–3)' },
         { time: 'Late AM', text: '☕ Superwow → 🎸 Vinyl Asylum, 2028 Hollywood Blvd (call first: 954-251-2943)' },
@@ -168,7 +167,7 @@ var TRIP = {
         'Backup: Tri-Rail Hollywood 3:41 PM → Miami Airport 4:16 PM, last train home 8:52 PM.'
       ],
       rides: [ { label: 'Uber to Nu Stadium', url: UBER_NU } ],
-      tip: '<strong>The best day of the four, and it got better overnight: 82°F, 34%, and the wind has dropped to NW 13 mph.</strong> The hourly grid gives <strong>79°F at the 6:00 PM kickoff and 77°F by 9 PM with the rain chance down to 18%</strong> — a light rain shell is the entire weather kit, and the drive south is easy on a north wind. First playoff match ever at Nu Stadium, with the champs defending. Get in when the gates open and watch warm-ups. Lightning would mean a 30-min hold per strike within 8 mi, and you can’t leave and come back.',
+      tip: '<strong>The best day of the four, and it improved for the third day running: 83°F, 31%, NW 10 mph.</strong> The hourly grid gives <strong>81°F at 4 PM, ~79°F at the 6:00 PM kickoff and an 8–10 mph wind</strong> — the calmest match window this trip has had, and a light rain shell is the entire weather kit. First playoff match ever at Nu Stadium, with the champs defending. Get in when the gates open and watch warm-ups. Lightning would mean a 30-min hold per strike within 8 mi, and you can’t leave and come back.',
       food: [
         { name: 'Cafe Club', url: 'https://www.google.com/maps/search/?api=1&query=Cafe+Club+311+Johnson+St+Hollywood+FL', meta: '☕ 311 Johnson St · ~0.6 mi walk', id: 'coffee-cafeclub' },
         { name: 'Superwow Coffee', url: 'https://www.superwowfactory.com/', meta: '☕ downtown · ~2.0 mi drive · only if you go downtown for Vinyl Asylum · Sat 9–4', id: 'coffee-superwow' },
@@ -177,18 +176,18 @@ var TRIP = {
     },
     {
       date: '2026-11-22', label: 'Day 4 · Home',
-      weather: { hi: 82, lo: 75, icon: '🌤️', rain: 22 },
-      pills: [ { text: '🚗 Leave condo 8:00 AM', cls: 'warn' }, { text: '✈️ WN 4778 · 10:05 AM ET', cls: 'good' }, { text: '🏠 MCI 4:00 PM CT', cls: 'good' } ],
+      weather: { hi: 83, lo: 74, icon: '🌤️', rain: 23 },
+      pills: [ { text: '🚗 Leave condo 7:30 AM', cls: 'warn' }, { text: '✈️ WN 4778 · 10:05 AM ET', cls: 'good' }, { text: '🏠 MCI 4:00 PM CT', cls: 'good' } ],
       timeline: [
-        { time: '8:00 AM ET', text: '🧳 Out of the condo (checkout 11 AM) → FLL Terminal 1' },
+        { time: '7:30 AM ET', text: '🧳 Out of the condo (checkout 11 AM) → return the rental at the RCC → shuttle to FLL Terminal 1' },
         { time: '10:05 AM ET', text: '✈️ WN 4778 FLL → BNA · row 12' },
         { time: '11:30 AM CT', text: '🛬 BNA · 2h45 layover, all four together' },
         { time: '2:15 PM CT', text: '✈️ WN 4485 BNA → MCI · row 24' },
         { time: '4:00 PM CT', text: '🏠 Land MCI' }
       ],
-      transit: [ 'Condo → FLL: ~4.8 mi, ~15 min. Return the rental first if you have one.' ],
+      transit: [ 'Condo → FLL: ~4.8 mi, ~15 min. Return the rental at the off-terminal Rental Car Center first, then shuttle to Terminal 1 — allow 25–30 min end to end.', 'Sunday Nov 22 is Thanksgiving week\'s biggest departure day: leave 7:30 AM, not 8.' ],
       rides: [ { label: 'Uber condo → FLL', url: UBER_FLL } ],
-      tip: '<strong>The best weather of the trip lands on the day you have to leave: 82°F, mostly sunny, N 9 mph, 22%.</strong> It is <strong>74°F at 6 AM</strong> for the run to FLL — the easiest travel morning of the week, which is the one that has to be easy. Luke pre-boards again at FLL and BNA to wipe seats. Coffee before the airport: Margaritaville Coffee Shop opens 6:30 AM, a ~12-min walk, or the Broadwalk Cafe at 7. <strong>Drop the rental at FLL before the terminal and keep the fuel receipt for the return.</strong>',
+      tip: '<strong>The best weather of the trip lands on the day you have to leave: 83°F, mostly sunny, NW 8, 23%.</strong> It is <strong>76°F at 8 AM</strong> with the rain chance in the low teens — the easiest travel morning of the week, which is the one that has to be easy. <strong>Two things to get right: leave at 7:30 AM, not 8</strong> (FLL returns at the off-terminal Rental Car Center and this is the busiest departure day of Thanksgiving week), and <strong>Southwest\'s bag cutoff for the 10:05 AM is 9:20 AM</strong>. Luke pre-boards again at FLL and BNA to wipe seats. Coffee before the airport: Margaritaville Coffee Shop opens 6:30 AM, a ~12-min walk, or the Broadwalk Cafe at 7. <strong>Keep the fuel receipt for the return.</strong>',
       food: [
         { name: 'Hollywood Broadwalk Cafe', url: 'https://riptidehotel.com/wine-dine/hollywood-broadwalk-cafe', meta: '☕ 2300 N Surf Rd · opens 7 AM · one last coffee on the sand', id: 'coffee-riptide' }
       ]
