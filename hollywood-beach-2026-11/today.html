@@ -88,7 +88,7 @@ body.has-dock{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))!import
 <div class="section"><h2><span class="icon">🍽️</span> Eat &amp; Coffee</h2><div id="food-content"></div></div>
 <div class="section"><h2><span class="icon">💡</span> Atlas tip</h2><div class="tip" id="tip-content" style="margin:0"></div></div>
 
-<div class="footer">Atlas · Hollywood Beach Nov 19–22 · last updated Sat Nov 21, 2026 · <a href="./">full briefing</a></div>
+<div class="footer">Atlas · Hollywood Beach Nov 19–22 · last updated Sun Nov 22, 2026 · <a href="./">full briefing</a></div>
 
 <nav class="dock" aria-label="Quick actions">
   <a class="primary" href="./">📖 Briefing</a>
@@ -130,20 +130,11 @@ var TRIP = {
       ]
     },
     {
-      date: '2026-11-21', label: 'Day 3 \u00b7 MATCH DAY',
-      weather: { hi: 82, lo: 76, icon: '\u26c8\ufe0f', rain: 58 },
-      pills: [ { text: '\u26bd Kickoff 6:00 PM ET', cls: 'good' }, { text: '\u26c8\ufe0f 82\u00b0F \u00b7 58% at 3 PM \u00b7 11% at kickoff', cls: 'warn' }, { text: '\ud83d\ude97 Leave 3:15 PM', cls: 'warn' }, { text: '\ud83c\udf92 Clear bag \u00b7 no umbrella', cls: 'warn' }, { text: '\u2705 No coastal warnings', cls: 'good' } ],
-      timeline: [
-        { time: '9:00 AM', text: 'Free city beach workout at Charnow Park (Garfield St & the Broadwalk) \u2014 78\u00b0F, 16%. Best beach window of the trip is this morning' },
-        { time: 'Late AM', text: 'Downtown Hollywood: \u2615 Superwow + \ud83c\udfb8 Vinyl Asylum (call first)' },
-        { time: '1:00\u20132:00 PM', text: '\ud83c\udfb7 <strong>Hollywood REAL Jazz Festival, ArtsPark</strong> \u2014 free. Nicole Yarling 1:00, Warren Wolf 2:00. <strong>Leave by ~3:05</strong>' },
-        { time: 'Early', text: '\ud83e\udd5c Eat before you go \u2014 Luke cannot risk stadium concessions. Cashless stadium' },
-        { time: '3:15 PM', text: '\ud83d\ude97 <strong>Leave for Nu Stadium</strong> \u2014 ~23 mi / 35\u201350 min on I-95. <strong>58% right now is the shower peak; this is the wet part of the day, not the match</strong>' },
-        { time: '4:30 PM', text: '\ud83d\udeaa Gates open \u00b7 clear bag \u226412\u00d76\u00d712, <strong>no umbrellas</strong> \u00b7 ref Allen Chapman' },
-        { time: '6:00 PM ET', text: '\u26bd <strong>Kickoff</strong> \u2014 Inter Miami vs Columbus Crew, Game 1. 80\u00b0F, POP 11%, mostly cloudy. <strong>No extra time \u2014 penalties if level</strong>' },
-        { time: '~8:15 PM ET', text: 'Final whistle \u2192 back to the lot; 20\u201330 min to clear a full house \u00b7 ~9:15\u20139:30 PM back on the Broadwalk' }
-      ],
-      tip: '<strong>The weather did the one thing that helps you: it put the rain on the drive and took it off the match.</strong> NWS Miami now reads <strong>82\u00b0F, POP 58%</strong> for the day \u2014 up from 27% at yesterday\u2019s check, and honestly so, because there is a real afternoon band. The hourly is what matters, all ET: <strong>34% at 1 PM, 43% at 2, 58% at 3, 45% at 4, 36% at 5 \u2014 then 11% and mostly cloudy at the 6:00 PM kickoff, 10% at 7, 5% by 9.</strong> So you drive down through the tail of it and watch the match dry. <strong>Shell in the car, not on your back, and remember no umbrellas get through the gate.</strong> The roof covers the seating bowl. <strong>Lightning means a 30-minute hold per strike within 8 miles and you cannot leave and come back.</strong> <strong>Every coastal warning is off Broward this morning</strong> \u2014 the last rip current statement now names only Palm Beach \u2014 so if anyone wants the water it is this morning, before the band arrives. <strong>And one trade to know: Ron Carter plays ArtsPark at 5:30, which is kickoff. He is what you are giving up for the match.</strong>',
+      date: '2026-11-21', label: 'Day 3 \u00b7 Match day \u2705',
+      weather: { hi: 82, lo: 76, icon: '\u2705', rain: 0 },
+      pills: [ { text: '\u2705 Kickoff played', cls: 'good' }, { text: '\u26bd Final: Columbus 3\u20130 Miami', cls: 'warn' }, { text: '\ud83d\udfe5 Luj\u00e1n sent off 36\u2032', cls: 'warn' }, { text: '\u2705 Jazz Fest at ArtsPark', cls: 'good' } ],
+      timeline: [ { time: '\u2705', text: 'Jazz Fest at ArtsPark (Nicole Yarling, Warren Wolf) \u00b7 left by 3:05 \u00b7 gates 4:30 \u00b7 <strong>kickoff 6:00 PM ET at Nu Stadium</strong> \u00b7 <strong>Tapia 9\u2032 pen &amp; 58\u2032, Habroune 52\u2032, Luj\u00e1n red-carded on 36 \u2014 Miami played 56 minutes a man down</strong> \u00b7 back on the Broadwalk ~9:30 PM' } ],
+      tip: '<strong>Done, and it went the wrong way: Columbus Crew 3\u20130 Inter Miami.</strong> Gonzalo Tapia scored a 9th-minute penalty and added a second on 58; Taha Habroune made it 2\u20130 on 52; Patrick Schulte made five saves. <strong>The match turned on 36 minutes when Gonzalo Luj\u00e1n took a second yellow</strong> and Miami played the rest a man short. <strong>Miami now trail the best-of-three series</strong> \u2014 Game 2 is <strong>Friday Nov 27, 8:00 PM ET at Columbus</strong>, and you will be home for it.',
       food: [
         { name: 'Cafe Club', url: 'https://www.google.com/maps/search/?api=1&query=Cafe+Club+311+Johnson+St+Hollywood+FL', meta: '\u2615 311 Johnson St \u00b7 ~0.6 mi walk \u00b7 one before the drive', id: 'coffee-cafeclub' },
         { name: 'Superwow Coffee', url: 'https://www.superwowfactory.com/', meta: '\u2615 downtown \u00b7 ~2.0 mi drive \u00b7 pairs with Vinyl Asylum \u00b7 Sat 9\u20134', id: 'coffee-superwow' },
@@ -151,22 +142,23 @@ var TRIP = {
       ]
     },
     {
-      date: '2026-11-22', label: 'Day 4 \u00b7 Home',
-      weather: { hi: 84, lo: 72, icon: '\u2600\ufe0f', rain: 23 },
-      pills: [ { text: '\ud83d\ude97 Leave condo 7:15 AM', cls: 'warn' }, { text: '\u2708\ufe0f WN 4778 \u00b7 10:05 AM ET', cls: 'good' }, { text: '\ud83c\udfe0 MCI 4:00 PM CT \u00b7 51\u00b0F', cls: 'good' }, { text: '\u2600\ufe0f Dry morning \u00b7 3% at 7 AM', cls: 'good' } ],
+      date: '2026-11-22', label: 'Day 4 \u00b7 Flying home',
+      weather: { hi: 84, lo: 71, icon: '\u2600\ufe0f', rain: 11 },
+      pills: [ { text: '\ud83d\ude97 Leave condo 7:15 AM', cls: 'warn' }, { text: '\u2708\ufe0f WN 4778 \u00b7 10:05 AM ET \u00b7 Scheduled', cls: 'good' }, { text: '\u2708\ufe0f WN 4485 \u00b7 C23 \u2192 4:00 PM CT', cls: 'good' }, { text: '\ud83e\udd76 MCI 48\u00b0F \u00b7 jacket on', cls: 'good' }, { text: '\u2600\ufe0f 2% at 8 AM \u00b7 dry', cls: 'good' } ],
       timeline: [
-        { time: '~7:00 AM ET', text: '\u2615 Coffee + pack. Checkout is 11 but you are long gone' },
-        { time: '7:15 AM ET', text: '\ud83d\ude97 Leave the condo \u2192 Cypress Garage Level 7, ~6 mi / 15 min. <strong>Refuel to the level you started on first</strong>' },
-        { time: '~7:45 AM ET', text: '\ud83d\udeB6 Park on Level 7, leave the parking ticket in the car, <strong>sky bridge across to Terminal 1</strong> \u2014 no shuttle, no RCC' },
-        { time: '9:20 AM ET', text: '\ud83d\udc5c Southwest bag cutoff for WN 4778' },
-        { time: '10:05 AM ET', text: '\u2708\ufe0f WN 4778 FLL \u2192 BNA \u00b7 row 12 \u00b7 <strong>Terminal 1, Scheduled</strong>' },
-        { time: '11:30 AM CT', text: '\ud83d\udecC BNA \u00b7 2h45 layover, all four together' },
-        { time: '2:15 PM CT', text: '\u2708\ufe0f WN 4485 BNA \u2192 MCI \u00b7 row 24' },
-        { time: '4:00 PM CT', text: '\ud83c\udfe0 Land MCI \u2014 <strong>51\u00b0F and partly sunny</strong>. Jacket in the cabin bag' }
+        { time: '~7:00 AM ET', text: '\u2615 Coffee + final pack. <strong>Checkout is 11 AM but you are long gone</strong>' },
+        { time: '7:15 AM ET', text: '\ud83d\ude97 <strong>Leave the condo</strong> \u2192 Cypress Garage Level 7, ~6 mi / 15 min. <strong>Refuel to the level you started on first</strong>' },
+        { time: '~7:45 AM ET', text: '\ud83c\udd7f\ufe0f Park Level 7, leave the parking ticket in the car, <strong>sky bridge across to Terminal 1</strong> \u2014 no shuttle, no RCC' },
+        { time: '9:20 AM ET', text: '\ud83d\udcbc Southwest bag cutoff for WN 4778 \u00b7 Luke pre-boards to wipe his seat' },
+        { time: '10:05 AM ET', text: '\u2708\ufe0f <strong>WN 4778 FLL \u2192 BNA</strong> \u00b7 Terminal 1, <strong>Scheduled</strong>, row 12 \u00b7 est. arrival 11:19 AM CT, <strong>Gate D2</strong>' },
+        { time: '11:30 AM \u2013 2:15 PM CT', text: '\ud83d\udedb BNA \u00b7 arrive <strong>Concourse D</strong>, depart <strong>Concourse C, Gate C23</strong> \u2014 a short airside walk, 2h45 of slack' },
+        { time: '2:15 PM CT', text: '\u2708\ufe0f <strong>WN 4485 BNA \u2192 MCI</strong> \u00b7 <strong>Scheduled on time</strong>, row 24' },
+        { time: '4:00 PM CT', text: '\ud83c\udfe0 Land MCI <strong>Gate B66</strong> \u2014 <strong>48\u00b0F, sunny, 13 mph NNW</strong>. Jacket goes on here \u00b7 tonight 29\u00b0F' },
+        { time: '7:00 PM CT', text: '\ud83d\udcc5 <strong>Sunday Content Review with Neo</strong> \u2014 three hours of slack after landing' }
       ],
-      transit: [ 'Condo \u2192 FLL: ~6 mi, ~15 min. <strong>The Turo is due back at 8:00 AM</strong> at <strong>Cypress Garage, Level 7</strong> \u2014 that is the Rental Car Center building, joined to <strong>Terminal 1 by a sky bridge</strong>. Park, leave the ticket in the car, walk across. <strong>No shuttle.</strong> Ray: 954-683-5552.', 'Sunday Nov 22 is Thanksgiving week\u2019s biggest departure day \u2014 and the car\u2019s protection ends at 8:00 AM, so leave at 7:15, not 7:45.' ],
+      transit: [ 'Condo \u2192 FLL: ~6 mi, ~15 min. <strong>The Turo is due back at 8:00 AM</strong> at <strong>Cypress Garage, Level 7</strong> \u2014 that is the Rental Car Center building, joined to <strong>Terminal 1 by a sky bridge</strong>. Park, leave the ticket in the car, walk across. <strong>No shuttle.</strong> Ray: 954-683-5552.', 'Southwest bag cutoff for the 10:05 AM is <strong>9:20 AM</strong>. FAA national feed at 12:59Z today: zero ground stops, zero closures, nothing at MCI/FLL/BNA. Southwest: no travel advisories.' ],
       rides: [ { label: 'Uber condo \u2192 FLL', url: UBER_FLL } ],
-      tip: '<strong>The morning you have to execute is clean: 84\u00b0F, and the rain does not arrive until after 1 PM \u2014 three hours after you are wheels-up.</strong> Hourly: <strong>77\u00b0F and 3% at 7 AM, 6% at 8, 1% at 10 AM.</strong> <strong>Two things to get right.</strong> First, the <strong>Turo is contracted only until 8:00 AM</strong> \u2014 leave at <strong>7:15</strong>, refuel to the level you collected it on, and remember the return is easier than it sounds: <strong>Cypress Garage is the Rental Car Center building, connected to Terminal 1 by a sky bridge.</strong> Park Level 7, leave the ticket in the car, walk across. Second, <strong>Southwest\u2019s bag cutoff for the 10:05 AM is 9:20 AM</strong>, and both legs verified Scheduled this morning. <strong>Then pack warm for home: Kansas City is 51\u00b0F and partly sunny when you land at 4:00 PM, with 31\u00b0F overnight.</strong> Coffee before you go: Margaritaville opens 6:30 AM (~12-min walk) or the Broadwalk Cafe at 7.',
+      tip: '<strong>The morning you have to execute is dry, and that is the whole of today\u2019s weather question.</strong> NWS Miami (grid MFL 110,64 for FLL): <strong>84\u00b0F, mostly sunny, POP 11%</strong> \u2014 hourly <strong>73\u00b0F and 2% at 8 AM, 76/1% at 9, 78/1% at 10, then 11% at 11 AM, which is an hour after you are wheels-up.</strong> No umbrella, no rain layer. <strong>Three things decide the day.</strong> First, the <strong>Turo is contracted only until 8:00 AM</strong> \u2014 leave at <strong>7:15</strong>, refuel to the level you collected it on, park Level 7 and <strong>leave the ticket in the car</strong>; Cypress Garage <em>is</em> the Rental Car Center, so the sky bridge to Terminal 1 is the whole walk. Second, <strong>both legs are Scheduled with real gates</strong>: WN 4778 out of <strong>FLL Terminal 1</strong> lands <strong>11:19 AM CT at BNA D2</strong>, and WN 4485 goes from <strong>BNA C23 to MCI B66</strong> \u2014 <strong>D to C is an airside walk, not a security re-clear</strong>, with 2h45 to do it. Third, <strong>pack warm for home: land 48\u00b0F into a 13 mph NNW wind, tonight 29\u00b0F and clear.</strong> One last coffee on the sand: the Broadwalk Cafe opens 7 AM, a 14-minute walk.',
       food: [
         { name: 'Hollywood Broadwalk Cafe', url: 'https://riptidehotel.com/wine-dine/hollywood-broadwalk-cafe', meta: '\u2615 2300 N Surf Rd \u00b7 opens 7 AM \u00b7 one last coffee on the sand', id: 'coffee-riptide' }
       ]
